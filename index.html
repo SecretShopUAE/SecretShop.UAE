@@ -846,9 +846,21 @@ document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',
 /* ══ SEARCH ══ */
 const SI=document.getElementById('search-input'),CB=document.getElementById('clear-btn');
 let ST;
+
+/* Typing: filter results live, but DON'T scroll */
 SI.addEventListener('input',()=>{
   clearTimeout(ST);
   ST=setTimeout(()=>{
+    searchQ=SI.value.trim();
+    CB.classList.toggle('visible',searchQ.length>0);
+    render();
+  },400);
+});
+
+/* Enter key: scroll down to results */
+SI.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    clearTimeout(ST);
     searchQ=SI.value.trim();
     CB.classList.toggle('visible',searchQ.length>0);
     render();
@@ -856,8 +868,9 @@ SI.addEventListener('input',()=>{
       SI.blur();
       document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});
     }
-  },400);
+  }
 });
+
 CB.addEventListener('click',()=>{SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render();});
 
 /* ══ INIT ══ */
