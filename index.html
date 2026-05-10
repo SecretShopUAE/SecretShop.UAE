@@ -52,11 +52,12 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .logo-text span{display:block;font-size:10px;font-weight:400;color:var(--text-3);letter-spacing:0.5px}
 
 .search-bar{position:relative;width:100%;max-width:540px;margin:0 auto}
-.search-bar input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:9px 40px 9px 36px;font-family:var(--font);font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s,background 0.2s}
-.search-bar input:focus{border-color:var(--text);background:#fff}
-.search-bar input::placeholder{color:var(--text-3)}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none;width:15px;height:15px}
-.search-clear{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:16px;line-height:1;padding:2px 4px;background:none;border:none;cursor:pointer}
+.search-bar input{width:100%;background:#2a2a2a;border:1.5px solid #3d3d3d;border-radius:var(--radius);padding:9px 40px 9px 36px;font-family:var(--font);font-size:13px;color:#ffffff;outline:none;transition:border-color 0.2s,background 0.2s}
+.search-bar input:focus{border-color:#555;background:#222}
+.search-bar input::placeholder{color:#888}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#888;pointer-events:none;width:15px;height:15px}
+.search-clear{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#888;font-size:16px;line-height:1;padding:2px 4px;background:none;border:none;cursor:pointer}
+.search-clear:hover{color:#fff}
 .search-clear.visible{display:block}
 
 .header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
@@ -234,6 +235,21 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 
 /* ── TRANSITIONS ── */
 .card{transition:opacity 0.35s ease,transform 0.35s ease,box-shadow 0.25s,border-color 0.25s}
+
+/* ── BRAND PAGE ── */
+.brand-page{position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);scrollbar-width:thin}
+.brand-page.open{transform:translateX(0)}
+.bp-header{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 1.5rem;height:58px}
+.bp-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;border:none;background:none;padding:6px 12px 6px 6px;border-radius:var(--radius);transition:background 0.15s;flex-shrink:0}
+.bp-back:hover{background:var(--bg)}
+.bp-back svg{flex-shrink:0}
+.bp-title{font-size:16px;font-weight:700;letter-spacing:-0.3px;flex:1}
+.bp-count{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px;white-space:nowrap}
+.bp-body{padding:1.5rem}
+.bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:1100px){.bp-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.bp-body{padding:1rem}.bp-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+@media(max-width:480px){.bp-body{padding:0.75rem}.bp-grid{gap:8px}}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){
@@ -430,6 +446,21 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 <div class="footer-bottom">
   <p>© 2025 Secret Shop · Abu Dhabi</p>
   <p>9.4K Followers on Facebook 🔥</p>
+</div>
+
+<!-- BRAND PAGE -->
+<div class="brand-page" id="brand-page">
+  <div class="bp-header">
+    <button class="bp-back" onclick="closeBrandPage()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <span class="bp-title" id="bp-title"></span>
+    <span class="bp-count" id="bp-count"></span>
+  </div>
+  <div class="bp-body">
+    <div class="bp-grid" id="bp-grid"></div>
+  </div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -724,9 +755,7 @@ function render() {
           <span class="section-brand">${g.label}</span>
           <span class="section-meta">${items.length} ITEMS</span>
         </div>
-        ${hasMore
-          ? `<button class="section-see-all" onclick="expandGroup('${g.key}')">See All →</button>`
-          : `<button class="section-see-all" onclick="collapseGroup('${g.key}')">See All →</button>`}
+        <button class="section-see-all" onclick="openBrandPage('${g.key}')">See All →</button>
       </div>
       <div class="hscroll" id="brow-${g.key}">${preview.map((it,i)=>card(it,gi*3+i)).join('')}</div>
     </div>`;
@@ -743,33 +772,33 @@ function render() {
   animate(body);
 }
 
-function expandGroup(key) {
+function openBrandPage(key) {
   const g = GROUPS.find(x=>x.key===key);
   if (!g) return;
   const all = ITEMS.filter(it=>g.brands.includes(it.brand));
-  const row = document.getElementById(`brow-${key}`);
-  const sec = document.getElementById(`bsec-${key}`);
-  if (!row || !sec) return;
-  row.className = 'grid-4';
-  row.innerHTML = all.map((it,i)=>card(it,i)).join('');
-  const btn = sec.querySelector('.section-see-all');
-  if (btn) { btn.textContent='Show Less ↑'; btn.onclick=()=>collapseGroup(key); }
-  animate(row);
+  const page = document.getElementById('brand-page');
+  document.getElementById('bp-title').textContent = g.label;
+  document.getElementById('bp-count').textContent = `${all.length} item${all.length!==1?'s':''}`;
+  const grid = document.getElementById('bp-grid');
+  grid.innerHTML = all.map((it,i)=>card(it,i)).join('');
+  page.classList.add('open');
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>{ page.scrollTop=0; animate(grid); });
+  history.pushState({brandPage:key},'',`#brand-${key}`);
 }
 
-function collapseGroup(key) {
-  const g = GROUPS.find(x=>x.key===key);
-  if (!g) return;
-  const preview = ITEMS.filter(it=>g.brands.includes(it.brand)).slice(0, g.max);
-  const row = document.getElementById(`brow-${key}`);
-  const sec = document.getElementById(`bsec-${key}`);
-  if (!row || !sec) return;
-  row.className = 'hscroll';
-  row.innerHTML = preview.map((it,i)=>card(it,i)).join('');
-  const btn = sec.querySelector('.section-see-all');
-  if (btn) { btn.textContent='See All →'; btn.onclick=()=>expandGroup(key); }
-  animate(row);
+function closeBrandPage() {
+  document.getElementById('brand-page').classList.remove('open');
+  document.body.style.overflow='';
+  if(history.state?.brandPage) history.back();
 }
+
+window.addEventListener('popstate',e=>{
+  if(!e.state?.brandPage){
+    document.getElementById('brand-page').classList.remove('open');
+    document.body.style.overflow='';
+  }
+});
 
 // ── CAT NAV ──
 function setcat(cat) {
