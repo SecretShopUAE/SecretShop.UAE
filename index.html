@@ -122,13 +122,9 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .card-inquire{margin-top:8px;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g);border-bottom:1px solid #ccc;padding-bottom:1px;transition:color 0.2s,border-color 0.2s}
 .card:hover .card-inquire{color:var(--wa);border-color:var(--wa)}
 
-/* ── SIZE SELECTOR (clothing cards) ── */
+/* SIZE SELECTOR */
 .size-row{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
-.sz{
-  font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;
-  border:1px solid #ccc;color:#999;padding:3px 7px;cursor:pointer;
-  transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;
-}
+.sz{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:3px 7px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none}
 .sz:hover{border-color:#333;color:var(--w)}
 .sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
 
@@ -153,15 +149,11 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .lb-info .lb-meta{font-family:var(--mono);font-size:8.5px;letter-spacing:1px;color:var(--g);margin-bottom:4px}
 .lb-info .lb-desc-full{font-size:11px;color:#555;line-height:1.7;margin-top:6px;border-top:1px solid var(--line);padding-top:8px}
 
-/* ── LIGHTBOX SIZE PICKER ── */
+/* LIGHTBOX SIZE PICKER */
 .lb-size-wrap{padding:0 14px 10px}
 .lb-size-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:6px}
 .lb-size-row{display:flex;gap:6px;flex-wrap:wrap}
-.lb-sz{
-  font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-  border:1px solid #ccc;color:#999;padding:5px 12px;cursor:pointer;
-  transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;
-}
+.lb-sz{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:5px 12px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none}
 .lb-sz:hover{border-color:#333;color:var(--w)}
 .lb-sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
 
@@ -359,7 +351,7 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
 <footer role="contentinfo">
   <div class="f-col">
     <div class="f-logo">Secret Shop</div>
-    <p class="f-sub" style="color:#555;font-size:11px;line-height:1.8;margin-bottom:0.75rem">
+    <p style="color:#555;font-size:11px;line-height:1.8;margin-bottom:0.75rem">
       🔥 Hype Items<br>📌 Streetwear<br>📌 Luxury Items<br>📌 Watches<br>📌 Accessories
     </p>
     <div class="f-socials">
@@ -418,7 +410,6 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
 </div>
 
 <script>
-/* clothing categories that get the size picker */
 const CLOTHING_CATS = ['streetwear'];
 const SIZES = ['S','M','L','XL'];
 
@@ -439,7 +430,7 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-09 at 3.24.49 PM (4).jpeg"
     ]
   },
-  /* ── NK MIND 001 ── */
+  /* ── NK MIND 001 — CRIMSON RED ── */
   {
     id:18, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-600", sizes:"Size 36–47.5",
@@ -453,6 +444,22 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.15.10 PM (1).jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.15.10 PM.jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.15.09 PM.jpeg"
+    ]
+  },
+  /* ── NK MIND 001 — BLACK/ORANGE ── */
+  {
+    id:19, name:"NK Mind 001", brand:"Nike",
+    batch:"UA", sku:"HQ4307-001", sizes:"Size 36–47.5",
+    cat:"ua-pairs", badge:"HOT",
+    tags:["nike","mind","mind001","nk mind","slides","slippers","black","orange","dark","hq4307","hq4307-001"],
+    desc:"Black / Orange · UA Pair",
+    longDesc:"UA Nike Mind 001 slides in stealthy Black with bold Orange contrast pods on the outsole. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and embossed Swoosh. Available in EU sizes 36, 37.5, 38.5, 40, 41, 42.5, 44, 45, 46, and 47.5.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.29.37 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.29.37 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.29.36 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.29.36 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.29.35 PM.jpeg"
     ]
   },
   /* ── BAPE TEES — Grey Plaid Series ── */
@@ -613,7 +620,7 @@ const ITEMS = [
   }
 ];
 
-/* ══ FUZZY SEARCH ══ */
+/* FUZZY SEARCH */
 function fuzzyMatch(q, item) {
   if (!q) return true;
   const words = q.toLowerCase().trim().split(/\s+/);
@@ -632,14 +639,10 @@ function lev(a,b){
   return dp[a.length][b.length];
 }
 
-/* ══ STATE ══ */
 let currentCat='all', searchQ='';
-/* per-card selected size: { itemId: 'M' } */
 const cardSizePicked = {};
-/* lightbox selected size */
 let lbSizePicked = '';
 
-/* ══ WA LINK ══ */
 function waLink(item, imgPath, size) {
   const base = window.location.href.replace(/\/[^\/]*$/, '/');
   const imgLine = imgPath ? `\n🖼 Image: ${base}${imgPath}` : '';
@@ -652,10 +655,8 @@ function waLink(item, imgPath, size) {
   return `https://wa.me/971563780062?text=${msg}`;
 }
 
-/* ══ PLACEHOLDER ══ */
 const PH = n => `<div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>${n}</div>`;
 
-/* ══ RENDER ══ */
 function getVisible(){
   return ITEMS.filter(item=>{
     const catOk=currentCat==='all'||item.cat===currentCat;
@@ -727,7 +728,6 @@ function render(){
   grid.querySelectorAll('.card').forEach(c=>io.observe(c));
 }
 
-/* ══ CARD SIZE PICKER ══ */
 function pickCardSize(e, id, size) {
   e.stopPropagation();
   cardSizePicked[id] = cardSizePicked[id] === size ? '' : size;
@@ -740,7 +740,6 @@ function pickCardSize(e, id, size) {
   if (wa && item) wa.href = waLink(item, cover, cardSizePicked[id]);
 }
 
-/* ══ CARD THUMBNAIL SWITCHER ══ */
 function cardThumb(e, id, idx){
   e.stopPropagation();
   const card=document.querySelector(`.card[data-id="${id}"]`);
@@ -753,7 +752,6 @@ function cardThumb(e, id, idx){
   if(wa)wa.href=waLink(item,item.imgs[idx],cardSizePicked[id]);
 }
 
-/* ══ LIGHTBOX ══ */
 let lbItem=null, lbIdx=0;
 
 function openLb(id){
@@ -774,61 +772,37 @@ function paintLb(){
   const imgs=lbItem.imgs||[];
   document.getElementById('lb-img').src=imgs[lbIdx]||'';
   document.getElementById('lb-img').alt=lbItem.name;
-
-  /* name + sku */
   const nameParts=[lbItem.name,lbItem.sku].filter(Boolean);
   document.getElementById('lb-name').textContent=nameParts.join(' — ');
-
-  /* meta line: batch · desc · sizes (non-clothing) */
   const metaParts=[lbItem.batch,lbItem.desc].filter(Boolean);
   if(lbItem.sizes && !CLOTHING_CATS.includes(lbItem.cat)) metaParts.push(lbItem.sizes);
   document.getElementById('lb-meta').textContent=metaParts.join(' · ');
-
-  /* full description */
   const descEl = document.getElementById('lb-desc-full');
-  if(lbItem.longDesc){
-    descEl.textContent = lbItem.longDesc;
-    descEl.style.display = '';
-  } else {
-    descEl.style.display = 'none';
-  }
-
-  /* size picker (clothing only) */
+  if(lbItem.longDesc){descEl.textContent=lbItem.longDesc;descEl.style.display='';}
+  else{descEl.style.display='none';}
   const sizeWrap = document.getElementById('lb-size-wrap');
   const sizeRow  = document.getElementById('lb-size-row');
   if(CLOTHING_CATS.includes(lbItem.cat)){
-    sizeRow.innerHTML = SIZES.map(s=>
-      `<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`
-    ).join('');
+    sizeRow.innerHTML = SIZES.map(s=>`<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`).join('');
     sizeWrap.style.display='';
   } else {
     sizeWrap.style.display='none';
   }
-
-  /* arrows */
   const show=imgs.length>1;
   document.getElementById('lb-prev').style.display=show?'flex':'none';
   document.getElementById('lb-next').style.display=show?'flex':'none';
-
-  /* thumbnails */
   document.getElementById('lb-thumbs').innerHTML=imgs.map((s,i)=>
     `<div class="lb-thumb${i===lbIdx?' active':''}" onclick="lbGo(${i})"><img src="${s}" loading="lazy"/></div>`
   ).join('');
-
-  /* wa link */
   document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSizePicked);
 }
 
 function pickLbSize(size){
   lbSizePicked = lbSizePicked === size ? '' : size;
-  /* sync back to card */
   if(lbItem) cardSizePicked[lbItem.id] = lbSizePicked;
-  /* update buttons */
   document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('picked',b.textContent===lbSizePicked));
-  /* update wa link */
   const imgs=lbItem?lbItem.imgs||[]:[];
   document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSizePicked);
-  /* sync card buttons too */
   if(lbItem){
     const card=document.querySelector(`.card[data-id="${lbItem.id}"]`);
     if(card) card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked',b.textContent===lbSizePicked));
@@ -852,7 +826,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')lbGo(lbIdx+1);
 });
 
-/* ══ CATEGORY ══ */
 function setcat(cat){
   currentCat=cat;
   document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
@@ -861,37 +834,20 @@ function setcat(cat){
 }
 document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>setcat(btn.dataset.cat)));
 
-/* ══ SEARCH ══ */
 const SI=document.getElementById('search-input'),CB=document.getElementById('clear-btn');
 let ST;
-
-/* Typing: filter results live, but DON'T scroll */
 SI.addEventListener('input',()=>{
   clearTimeout(ST);
-  ST=setTimeout(()=>{
-    searchQ=SI.value.trim();
-    CB.classList.toggle('visible',searchQ.length>0);
-    render();
-  },400);
+  ST=setTimeout(()=>{searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();},400);
 });
-
-/* Enter key: scroll down to results */
 SI.addEventListener('keydown',e=>{
   if(e.key==='Enter'){
-    clearTimeout(ST);
-    searchQ=SI.value.trim();
-    CB.classList.toggle('visible',searchQ.length>0);
-    render();
-    if(searchQ.length>0){
-      SI.blur();
-      document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});
-    }
+    clearTimeout(ST);searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();
+    if(searchQ.length>0){SI.blur();document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});}
   }
 });
-
 CB.addEventListener('click',()=>{SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render();});
 
-/* ══ INIT ══ */
 render();
 </script>
 </body>
