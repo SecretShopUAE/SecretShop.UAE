@@ -163,11 +163,29 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .card-cta{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--text-3);border-bottom:1px solid transparent;padding-bottom:1px;transition:color 0.15s,border-color 0.15s;width:fit-content}
 .card:hover .card-cta{color:var(--accent-dark);border-color:var(--accent)}
 
-/* ── FEATURED SECTION ── */
+/* ── FEATURED CAROUSEL ── */
 .featured-section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
 .featured-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px}
 .featured-title{font-size:15px;font-weight:700}
 .featured-badge{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 8px;border-radius:5px}
+
+/* Carousel container */
+.carousel-wrap{position:relative;overflow:hidden;padding:0 0 1.5rem}
+.carousel-track-outer{overflow:hidden;padding:0 1.5rem}
+.carousel-track{display:flex;gap:12px;transition:transform 0.45s cubic-bezier(.4,0,.2,1);will-change:transform}
+.carousel-track .card{flex:0 0 160px;scroll-snap-align:start}
+
+/* Carousel nav buttons */
+.carousel-btn{position:absolute;top:calc(50% - 20px);transform:translateY(-50%);z-index:10;width:34px;height:34px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border-dark);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--text);cursor:pointer;box-shadow:var(--shadow-md);transition:background 0.15s,transform 0.15s,opacity 0.2s}
+.carousel-btn:hover{background:var(--text);color:#fff;transform:translateY(-50%) scale(1.08)}
+.carousel-btn.disabled{opacity:0.25;pointer-events:none}
+.carousel-btn.prev{left:6px}
+.carousel-btn.next{right:6px}
+
+/* Carousel dots */
+.carousel-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 0}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:var(--border-dark);cursor:pointer;transition:background 0.2s,transform 0.2s;border:none;padding:0}
+.carousel-dot.active{background:var(--text);transform:scale(1.3)}
 
 /* ── SEARCH RESULTS ── */
 .search-results-wrap{background:var(--bg)}
@@ -245,6 +263,16 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .bp-back svg{flex-shrink:0}
 .bp-title{font-size:16px;font-weight:700;letter-spacing:-0.3px;flex:1}
 .bp-count{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px;white-space:nowrap}
+.bp-search-bar{display:flex;align-items:center;gap:0;background:var(--bg);border:1.5px solid var(--border-dark);border-radius:var(--radius);overflow:hidden;flex:1;max-width:340px}
+.bp-search-bar svg{flex-shrink:0;color:var(--text-3);margin-left:10px}
+.bp-search-bar input{flex:1;background:none;border:none;padding:8px 10px;font-family:var(--font);font-size:13px;color:var(--text);outline:none}
+.bp-search-bar input::placeholder{color:var(--text-3)}
+.bp-search-bar button{background:none;border:none;padding:0 10px;color:var(--text-3);font-size:15px;cursor:pointer;display:none;line-height:1}
+.bp-search-bar button.visible{display:block}
+.bp-search-bar button:hover{color:var(--text)}
+.bp-empty{grid-column:1/-1;padding:3rem 1rem;text-align:center;color:var(--text-3)}
+.bp-empty p{font-size:14px;font-weight:600;color:var(--text-2);margin-bottom:4px}
+.bp-empty span{font-size:12px}
 .bp-body{padding:1.5rem}
 .bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:1100px){.bp-grid{grid-template-columns:repeat(3,1fr)}}
@@ -277,6 +305,8 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
   .toolbar{padding:10px 1rem}
   .thumb-row{opacity:1;pointer-events:auto}
   .card-wa-overlay{transform:translateY(0)}
+  .carousel-track .card{flex:0 0 145px}
+  .carousel-btn{display:none}
 }
 @media(max-width:480px){
   .header-main{padding:0 0.75rem}
@@ -456,6 +486,11 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
       Back
     </button>
     <span class="bp-title" id="bp-title"></span>
+    <div class="bp-search-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="bp-search-input" placeholder="Search this brand..." aria-label="Search within brand"/>
+      <button id="bp-search-clear" aria-label="Clear brand search">✕</button>
+    </div>
     <span class="bp-count" id="bp-count"></span>
   </div>
   <div class="bp-body">
@@ -560,6 +595,13 @@ const ITEMS = [
 let currentCat = 'all', searchQ = '';
 const pickedSize  = {};
 const pickedColor = {};
+
+// ── CAROUSEL STATE ──
+let carouselIdx = 0;
+let carouselItems = [];
+let carouselTimer = null;
+const CAROUSEL_VISIBLE = 5; // cards visible at once (desktop)
+const CAROUSEL_INTERVAL = 3500;
 
 // ── SEARCH ──
 function fuzzy(q, item) {
@@ -699,6 +741,107 @@ function cardThumb(e, id, idx) {
   card.querySelectorAll('.thumb-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
 }
 
+// ── CAROUSEL LOGIC ──
+function getCarouselVisible() {
+  return window.innerWidth <= 768 ? 2 : (window.innerWidth <= 1100 ? 3 : 5);
+}
+
+function carouselGo(idx) {
+  if (!carouselItems.length) return;
+  const vis = getCarouselVisible();
+  const maxIdx = Math.max(0, carouselItems.length - vis);
+  carouselIdx = Math.max(0, Math.min(idx, maxIdx));
+
+  const track = document.getElementById('feat-track');
+  const cardW = 160 + 12; // card width + gap
+  if (track) track.style.transform = `translateX(-${carouselIdx * cardW}px)`;
+
+  // update dots
+  const dots = document.querySelectorAll('.carousel-dot');
+  dots.forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
+
+  // update buttons
+  const prev = document.getElementById('feat-prev');
+  const next = document.getElementById('feat-next');
+  if (prev) prev.classList.toggle('disabled', carouselIdx === 0);
+  if (next) next.classList.toggle('disabled', carouselIdx >= maxIdx);
+}
+
+function carouselNext() {
+  const vis = getCarouselVisible();
+  const maxIdx = Math.max(0, carouselItems.length - vis);
+  carouselGo(carouselIdx >= maxIdx ? 0 : carouselIdx + 1);
+  resetCarouselTimer();
+}
+
+function carouselPrev() {
+  const vis = getCarouselVisible();
+  const maxIdx = Math.max(0, carouselItems.length - vis);
+  carouselGo(carouselIdx <= 0 ? maxIdx : carouselIdx - 1);
+  resetCarouselTimer();
+}
+
+function startCarouselTimer() {
+  stopCarouselTimer();
+  carouselTimer = setInterval(() => {
+    const vis = getCarouselVisible();
+    const maxIdx = Math.max(0, carouselItems.length - vis);
+    carouselGo(carouselIdx >= maxIdx ? 0 : carouselIdx + 1);
+  }, CAROUSEL_INTERVAL);
+}
+
+function stopCarouselTimer() {
+  if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+}
+
+function resetCarouselTimer() {
+  stopCarouselTimer();
+  startCarouselTimer();
+}
+
+function buildCarousel(items) {
+  carouselItems = items;
+  carouselIdx = 0;
+  const vis = getCarouselVisible();
+  const maxIdx = Math.max(0, items.length - vis);
+  const dotsHtml = Array.from({length: maxIdx + 1}, (_, i) =>
+    `<button class="carousel-dot${i === 0 ? ' active' : ''}" onclick="carouselGo(${i});resetCarouselTimer()" aria-label="Go to slide ${i+1}"></button>`
+  ).join('');
+
+  return `<div class="featured-section">
+    <div class="featured-head">
+      <span class="featured-title">Featured Picks</span>
+      <span class="featured-badge">🔥 HOT</span>
+    </div>
+    <div class="carousel-wrap">
+      <button class="carousel-btn prev disabled" id="feat-prev" onclick="carouselPrev()" aria-label="Previous">&#8249;</button>
+      <button class="carousel-btn next" id="feat-next" onclick="carouselNext()" aria-label="Next">&#8250;</button>
+      <div class="carousel-track-outer"
+        id="feat-outer"
+        onmouseenter="stopCarouselTimer()"
+        onmouseleave="startCarouselTimer()">
+        <div class="carousel-track" id="feat-track">
+          ${items.map((it, i) => card(it, i)).join('')}
+        </div>
+      </div>
+      <div class="carousel-dots">${dotsHtml}</div>
+    </div>
+  </div>`;
+}
+
+// Touch/swipe support for carousel
+let cTouchX = 0;
+function initCarouselSwipe() {
+  const outer = document.getElementById('feat-outer');
+  if (!outer) return;
+  outer.addEventListener('touchstart', e => { cTouchX = e.changedTouches[0].screenX; stopCarouselTimer(); }, {passive:true});
+  outer.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].screenX - cTouchX;
+    if (Math.abs(dx) > 40) dx < 0 ? carouselNext() : carouselPrev();
+    else startCarouselTimer();
+  }, {passive:true});
+}
+
 // ── BRAND / SECTION GROUPS ──
 const FEATURED_IDS = [1,18,22,25,26,29,30,11,43,46];
 const GROUPS = [
@@ -721,6 +864,8 @@ function render() {
   document.getElementById('toolbar-label').textContent = isSrch ? `Results for "${searchQ}"` : catName;
   document.getElementById('toolbar-count').textContent = ` · ${visible.length} item${visible.length!==1?'s':''}`;
 
+  stopCarouselTimer();
+
   if (!visible.length) {
     body.innerHTML = `<div class="section"><div class="grid-4"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;
     return;
@@ -734,13 +879,10 @@ function render() {
 
   let html = '';
 
-  // Featured row
+  // Featured carousel
   const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
   if (featItems.length) {
-    html += `<div class="featured-section">
-      <div class="featured-head"><span class="featured-title">Featured Picks</span><span class="featured-badge">🔥 HOT</span></div>
-      <div class="hscroll">${featItems.map((it,i)=>card(it,i)).join('')}</div>
-    </div>`;
+    html += buildCarousel(featItems);
   }
 
   // Brand groups
@@ -748,7 +890,6 @@ function render() {
     const items = visible.filter(it=>g.brands.includes(it.brand));
     if (!items.length) return;
     const preview = items.slice(0, g.max);
-    const hasMore = items.length > g.max;
     html += `<div class="section" id="bsec-${g.key}">
       <div class="section-head">
         <div style="display:flex;align-items:center;gap:8px">
@@ -770,28 +911,89 @@ function render() {
 
   body.innerHTML = html;
   animate(body);
+
+  // Init carousel after DOM is ready
+  if (featItems.length) {
+    requestAnimationFrame(() => {
+      carouselGo(0);
+      initCarouselSwipe();
+      startCarouselTimer();
+    });
+  }
+}
+
+window.addEventListener('resize', () => {
+  if (currentCat === 'all' && !searchQ) {
+    const vis = getCarouselVisible();
+    const maxIdx = Math.max(0, carouselItems.length - vis);
+    carouselIdx = Math.min(carouselIdx, maxIdx);
+    carouselGo(carouselIdx);
+  }
+});
+
+// ── BRAND PAGE STATE ──
+let bpKey = null;
+let bpAllItems = [];
+let bpSearchQ = '';
+let bpST;
+
+function bpRender() {
+  const grid = document.getElementById('bp-grid');
+  const filtered = bpAllItems.filter(it => fuzzy(bpSearchQ, it));
+  document.getElementById('bp-count').textContent = bpSearchQ
+    ? `${filtered.length} of ${bpAllItems.length} items`
+    : `${bpAllItems.length} item${bpAllItems.length!==1?'s':''}`;
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="bp-empty"><p>No results for "${bpSearchQ}"</p><span>Try a different keyword</span></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map((it,i)=>card(it,i)).join('');
+  animate(grid);
 }
 
 function openBrandPage(key) {
   const g = GROUPS.find(x=>x.key===key);
   if (!g) return;
-  const all = ITEMS.filter(it=>g.brands.includes(it.brand));
-  const page = document.getElementById('brand-page');
+  bpKey = key;
+  bpAllItems = ITEMS.filter(it=>g.brands.includes(it.brand));
+  bpSearchQ = '';
+  const bpInput = document.getElementById('bp-search-input');
+  const bpClear = document.getElementById('bp-search-clear');
+  bpInput.value = '';
+  bpClear.classList.remove('visible');
   document.getElementById('bp-title').textContent = g.label;
-  document.getElementById('bp-count').textContent = `${all.length} item${all.length!==1?'s':''}`;
-  const grid = document.getElementById('bp-grid');
-  grid.innerHTML = all.map((it,i)=>card(it,i)).join('');
+  const page = document.getElementById('brand-page');
   page.classList.add('open');
   document.body.style.overflow='hidden';
-  requestAnimationFrame(()=>{ page.scrollTop=0; animate(grid); });
+  requestAnimationFrame(()=>{ page.scrollTop=0; bpRender(); });
   history.pushState({brandPage:key},'',`#brand-${key}`);
 }
 
 function closeBrandPage() {
   document.getElementById('brand-page').classList.remove('open');
   document.body.style.overflow='';
+  bpKey = null; bpAllItems = []; bpSearchQ = '';
   if(history.state?.brandPage) history.back();
 }
+
+// Brand page search wiring
+const bpInput = document.getElementById('bp-search-input');
+const bpClear = document.getElementById('bp-search-clear');
+bpInput.addEventListener('input', () => {
+  clearTimeout(bpST);
+  bpST = setTimeout(() => {
+    bpSearchQ = bpInput.value.trim();
+    bpClear.classList.toggle('visible', bpSearchQ.length > 0);
+    bpRender();
+  }, 260);
+});
+bpInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { clearTimeout(bpST); bpSearchQ = bpInput.value.trim(); bpClear.classList.toggle('visible', bpSearchQ.length > 0); bpRender(); }
+  if (e.key === 'Escape') { bpClear.click(); }
+});
+bpClear.addEventListener('click', () => {
+  bpInput.value = ''; bpSearchQ = ''; bpClear.classList.remove('visible'); bpInput.focus(); bpRender();
+});
 
 window.addEventListener('popstate',e=>{
   if(!e.state?.brandPage){
@@ -844,12 +1046,10 @@ function paintLb() {
   if (lbItem.longDesc) { descEl.textContent=lbItem.longDesc; descEl.style.display=''; }
   else descEl.style.display='none';
 
-  // dots
   document.getElementById('lb-dots').innerHTML = imgs.map((_,i)=>`<div class="lb-dot${i===lbIdx?' active':''}" onclick="lbGo(${i})"></div>`).join('');
   document.getElementById('lb-prev').style.display = imgs.length>1?'flex':'none';
   document.getElementById('lb-next').style.display = imgs.length>1?'flex':'none';
 
-  // colors
   const csec = document.getElementById('lb-color-section');
   if (lbItem.colorVariants) {
     csec.style.display='';
@@ -857,7 +1057,6 @@ function paintLb() {
     document.getElementById('lb-color-name').textContent = lbItem.colorVariants[lbCi].label;
   } else csec.style.display='none';
 
-  // sizes
   const ssec = document.getElementById('lb-size-section');
   if (CLOTHING.includes(lbItem.cat)) {
     ssec.style.display='';
@@ -905,7 +1104,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')lbGo(lbIdx+1);
 });
 
-// swipe
 let tx=0,ty=0;
 document.querySelector('.lb-photo').addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;},{passive:true});
 document.querySelector('.lb-photo').addEventListener('touchend',e=>{
