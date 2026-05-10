@@ -86,26 +86,27 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .section-count{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:#999}
 
 /* BRAND SECTIONS */
-.grid-outer{padding:0.5rem 0 3rem}
-.brand-section{margin-bottom:0.5rem;border-bottom:1px solid var(--line)}
-.brand-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem 0.6rem}
-.brand-title{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--w)}
+.grid-outer{padding:0.5rem 0 3rem;background:#f2f2f2}
+.brand-section{margin-bottom:0;background:#fff;border-bottom:1px solid var(--line)}
+.brand-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem 0.5rem}
+.brand-title{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--w)}
 .brand-count{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:#999;margin-left:8px}
-.brand-see-all{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g);border-bottom:1px solid #ccc;padding-bottom:1px;cursor:pointer;transition:color 0.2s,border-color 0.2s;background:none;border-top:none;border-left:none;border-right:none}
-.brand-see-all:hover{color:var(--w);border-color:var(--w)}
+.brand-see-all{font-family:var(--sans);font-size:13px;font-weight:600;color:#25D366;background:none;border:none;cursor:pointer;transition:opacity 0.2s;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.brand-see-all:hover{opacity:0.75}
 .brand-scroll-wrap{position:relative}
-.brand-scroll{display:flex;gap:12px;padding:0.5rem 1.25rem 1rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
+.brand-scroll{display:flex;gap:10px;padding:0.5rem 1.25rem 1.25rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .brand-scroll::-webkit-scrollbar{display:none}
-.brand-scroll .card{flex:0 0 200px;min-width:0;scroll-snap-align:start}
-.brand-static{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0.5rem 1.25rem 1rem}
-.featured-section{padding:1rem 1.25rem 0.5rem;border-bottom:1px solid var(--line);margin-bottom:0.5rem}
-.featured-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
-.featured-title{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--w)}
+.brand-scroll .card{flex:0 0 175px;min-width:0;scroll-snap-align:start}
+.brand-static{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0.5rem 1.25rem 1.25rem}
+.featured-section{padding:0;background:#fff;border-bottom:1px solid var(--line);margin-bottom:0}
+.featured-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem 0.5rem}
+.featured-title{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--w)}
 .featured-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#ff2d2d;color:#fff;padding:3px 8px;border-radius:4px}
-.featured-scroll{display:flex;gap:12px;padding-bottom:0.75rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
+.featured-scroll{display:flex;gap:10px;padding:0.5rem 1.25rem 1.25rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .featured-scroll::-webkit-scrollbar{display:none}
-.featured-scroll .card{flex:0 0 220px;min-width:0;scroll-snap-align:start}
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:1rem 1.25rem}
+.featured-scroll .card{flex:0 0 185px;min-width:0;scroll-snap-align:start}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:1rem 1.25rem}
+  
 /* CARD */
 .card{
   border-radius:16px;
@@ -241,11 +242,15 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
   .brand-static{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:780px){
-  .grid-outer{padding:0.85rem 0 2.5rem}
-  .product-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .grid-outer{padding:0 0 2.5rem}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:0.75rem}
   .brand-static{grid-template-columns:repeat(2,1fr)}
-  .brand-scroll .card{flex:0 0 165px}
-  .featured-scroll .card{flex:0 0 175px}
+  .brand-scroll .card{flex:0 0 150px}
+  .featured-scroll .card{flex:0 0 155px}
+  .brand-title{font-size:14px}
+  .brand-header{padding:0.85rem 1rem 0.4rem}
+  .brand-scroll{padding:0.4rem 1rem 1rem;gap:8px}
+  .featured-scroll{padding:0.4rem 1rem 1rem;gap:8px}
   .info-strip{grid-template-columns:1fr}
   .info-cell{border-right:none;border-bottom:1px solid var(--line)}
   .info-cell:last-child{border-bottom:none}
@@ -1227,8 +1232,8 @@ const FEATURED_IDS = [1,18,22,25,26,29,30,11,43,46];
 
 const BRAND_GROUPS = [
   {key:'nike',    label:'Nike / Jordan',  brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], scroll:true,  max:6},
-  {key:'bape',    label:'A Bathing Ape',  brands:['A Bathing Ape'],                                         scroll:false, max:4},
-  {key:'humanmade',label:'Human Made',   brands:['Human Made'],                                             scroll:false, max:4},
+ {key:'bape',    label:'A Bathing Ape',  brands:['A Bathing Ape'],                                         scroll:true,  max:6},
+  {key:'humanmade',label:'Human Made',   brands:['Human Made'],                                             scroll:true,  max:4},
   {key:'ami',     label:'Ami Paris',      brands:['Ami Paris'],                                              scroll:true,  max:6},
   {key:'supreme', label:'Supreme',        brands:['Supreme','Supreme × Thrasher'],                           scroll:true,  max:6},
   {key:'chrome',  label:'Chrome Hearts',  brands:['Chrome Hearts'],                                          scroll:true,  max:5},
@@ -1328,7 +1333,7 @@ function render(){
           <span class="brand-title">${group.label}</span>
           <span class="brand-count">${groupItems.length} item${groupItems.length!==1?'s':''}</span>
         </div>
-        ${hasMore?`<button class="brand-see-all" onclick="expandBrand('${group.key}')">See All →</button>`:''}
+        ${hasMore?`<button class="brand-see-all" onclick="expandBrand('${group.key}')">See All &rarr;</button>`:`<button class="brand-see-all" onclick="setcat('${group.key==='nike'?'ua-pairs':group.key==='bape'||group.key==='humanmade'||group.key==='ami'||group.key==='supreme'?'streetwear':'accessories'}')">See All &rarr;</button>`}
       </div>
       ${group.scroll
         ? `<div class="brand-scroll-wrap"><div class="brand-scroll" id="brow-${group.key}">${preview.map((item,i)=>makeCard(item,i,gi*2)).join('')}</div></div>`
