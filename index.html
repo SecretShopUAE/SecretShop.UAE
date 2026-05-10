@@ -128,6 +128,13 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .sz:hover{border-color:#333;color:var(--w)}
 .sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
 
+/* COLOR VARIANT SWATCHES — CARD */
+.color-row{display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap}
+.color-row-label{font-family:var(--mono);font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:#999;margin-right:2px}
+.csw{width:17px;height:17px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:border-color 0.15s,transform 0.15s;outline:1.5px solid rgba(0,0,0,0.15);flex-shrink:0}
+.csw:hover{transform:scale(1.15)}
+.csw.picked{border-color:var(--w);transform:scale(1.15)}
+
 /* LIGHTBOX */
 .lb-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.93);align-items:center;justify-content:center}
 .lb-overlay.open{display:flex}
@@ -156,6 +163,15 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .lb-sz{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:5px 12px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none}
 .lb-sz:hover{border-color:#333;color:var(--w)}
 .lb-sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
+
+/* LIGHTBOX COLOR PICKER */
+.lb-color-wrap{padding:0 14px 10px}
+.lb-color-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:8px}
+.lb-color-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lb-csw{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.15);transition:border-color 0.15s,transform 0.15s;flex-shrink:0}
+.lb-csw:hover{transform:scale(1.12)}
+.lb-csw.picked{border-color:var(--w);transform:scale(1.12)}
+.lb-color-name{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#777;margin-left:2px}
 
 .lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:12px;margin:10px 14px 14px;text-decoration:none;transition:opacity 0.2s}
 .lb-wa:hover{opacity:0.88}
@@ -395,6 +411,10 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
       <p class="lb-meta" id="lb-meta"></p>
       <p class="lb-desc-full" id="lb-desc-full"></p>
     </div>
+    <div class="lb-color-wrap" id="lb-color-wrap" style="display:none">
+      <p class="lb-color-label">Color</p>
+      <div class="lb-color-row" id="lb-color-row"></div>
+    </div>
     <div class="lb-size-wrap" id="lb-size-wrap" style="display:none">
       <p class="lb-size-label">Select Size</p>
       <div class="lb-size-row" id="lb-size-row"></div>
@@ -430,7 +450,6 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-09 at 3.24.49 PM (4).jpeg"
     ]
   },
-  /* ── NK MIND 001 — CRIMSON RED ── */
   {
     id:18, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-600", sizes:"Size 36–47.5",
@@ -446,12 +465,11 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.15.09 PM.jpeg"
     ]
   },
-  /* ── NK MIND 001 — BLACK/ORANGE ── */
   {
     id:19, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-001", sizes:"Size 36–47.5",
     cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","black","orange","dark","hq4307","hq4307-001"],
+    tags:["nike","mind","mind001","nk mind","slides","slippers","black","orange","hq4307"],
     desc:"Black / Orange · UA Pair",
     longDesc:"UA Nike Mind 001 slides in stealthy Black with bold Orange contrast pods on the outsole. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and embossed Swoosh. Available in EU sizes 36, 37.5, 38.5, 40, 41, 42.5, 44, 45, 46, and 47.5.",
     imgs:[
@@ -462,14 +480,13 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.29.35 PM.jpeg"
     ]
   },
-   /* ── NK MIND 001 — MINERAL TEAL ── */
   {
     id:20, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-300", sizes:"Size 36–48.5",
     cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","teal","green","mineral","jade","hq4307","hq4307-300"],
+    tags:["nike","mind","mind001","nk mind","slides","slippers","teal","green","mineral","hq4307"],
     desc:"Mineral Teal / Orange · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in premium Mineral Teal with vibrant Orange contrast pods on the outsole and matching orange branding on the insole. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and embossed Swoosh. Available in EU sizes 36, 36.5, 37.5, 38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 46, 47.5, and 48.5.",
+    longDesc:"UA Nike Mind 001 slides in premium Mineral Teal with vibrant Orange contrast pods on the outsole and matching orange branding on the insole. Available in EU sizes 36–48.5.",
     imgs:[
       "images/WhatsApp Image 2026-05-10 at 1.31.27 PM (1).jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.31.27 PM.jpeg",
@@ -478,14 +495,13 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.31.26 PM.jpeg"
     ]
   },
-  /* ── NK MIND 001 — WHITE / RED ── */
   {
     id:21, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-101", sizes:"Size 36–47",
     cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","white","red","hq4307","hq4307-101"],
+    tags:["nike","mind","mind001","nk mind","slides","slippers","white","red","hq4307"],
     desc:"White / Red · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in clean White with bold Red contrast pods on the outsole and matching red dot insole print. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and embossed black Swoosh. Available in EU sizes 36, 36.5, 37.5, 38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 45.5, 46, and 47.",
+    longDesc:"UA Nike Mind 001 slides in clean White with bold Red contrast pods on the outsole and matching red dot insole print. Available in EU sizes 36–47.",
     imgs:[
       "images/WhatsApp Image 2026-05-10 at 1.35.58 PM (1).jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.35.58 PM.jpeg",
@@ -494,14 +510,13 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.35.56 PM.jpeg"
     ]
   },
-  /* ── NK MIND 001 × NOCTA — BLACK / BLUE ── */
   {
     id:22, name:"NK Mind 001 × NOCTA", brand:"Nike × NOCTA",
     batch:"UA", sku:"HY5028-200", sizes:"Size 38–47.5",
     cat:"ua-pairs", badge:"HOT",
-    tags:["nike","nocta","mind","mind001","nk mind","drake","collab","slides","slippers","black","blue","nocta mind","hy5028","hy5028-200","mind science department","concepts"],
+    tags:["nike","nocta","mind","mind001","drake","collab","slides","black","blue","hy5028"],
     desc:"Black / Blue · NOCTA Collab · UA Pair",
-    longDesc:"UA Nike Mind 001 × NOCTA special collaboration. Features the iconic three-star NOCTA metal logo badge on the side, blue contrast pods on the outsole, and a premium black/blue 'Mind Science Department – NOCTA × Nike Mind 001 Concepts' printed insole. Chunky sculpted foam construction with signature bumpy outsole and perforated upper. Available in EU sizes 38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 46, and 47.5.",
+    longDesc:"UA Nike Mind 001 × NOCTA special collaboration. Features the iconic three-star NOCTA metal logo badge on the side, blue contrast pods on the outsole, and a premium 'Mind Science Department – NOCTA × Nike Mind 001 Concepts' printed insole. Available in EU sizes 38–47.5.",
     imgs:[
       "images/WhatsApp Image 2026-05-10 at 1.38.02 PM (3).jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.38.02 PM (2).jpeg",
@@ -510,14 +525,13 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.38.00 PM.jpeg"
     ]
   },
-  /* ── NK MIND 001 — BURGUNDY / NAVY ── */
   {
     id:23, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-001", sizes:"Size 36–45",
     cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","burgundy","maroon","dark red","wine","navy","dark navy","gradient","hq4307","hq4307-001"],
+    tags:["nike","mind","mind001","nk mind","slides","burgundy","maroon","navy","hq4307"],
     desc:"Burgundy / Navy · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in a stunning Burgundy-to-Red gradient upper with bold Navy contrast pods on the outsole and matching navy/red 'Mind Science Department' printed insole. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and silver embossed Swoosh. Available in EU sizes 36 to 45.",
+    longDesc:"UA Nike Mind 001 slides in a stunning Burgundy-to-Red gradient upper with bold Navy contrast pods on the outsole. Available in EU sizes 36 to 45.",
     imgs:[
       "images/WhatsApp Image 2026-05-10 at 1.40.44 PM.jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.40.43 PM (3).jpeg",
@@ -526,14 +540,13 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.40.43 PM.jpeg"
     ]
   },
-  /* ── NK MIND 001 — NAVY / ROYAL BLUE / GOLD ── */
   {
     id:24, name:"NK Mind 001", brand:"Nike",
     batch:"UA", sku:"HQ4307-400", sizes:"Size 36–47.5",
     cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","navy","blue","royal blue","gold","swoosh","hq4307","hq4307-400","mind science department"],
+    tags:["nike","mind","mind001","nk mind","slides","navy","blue","royal blue","gold","hq4307"],
     desc:"Navy / Royal Blue / Gold · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in deep Navy with a striking Royal Blue outsole and white contrast pods. Features a premium gold Swoosh and gold 'Nike Mind' heel badge. Vivid blue 'Mind Science Department' insole lining. Chunky sculpted foam construction with signature bumpy outsole and perforated upper. Available in EU sizes 36, 37.5, 38.5, 40, 41, 42.5, 44, 45, 46, and 47.5.",
+    longDesc:"UA Nike Mind 001 slides in deep Navy with a striking Royal Blue outsole and white contrast pods. Features a premium gold Swoosh and gold 'Nike Mind' heel badge. Available in EU sizes 36–47.5.",
     imgs:[
       "images/WhatsApp Image 2026-05-10 at 1.42.45 PM (3).jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.42.45 PM (2).jpeg",
@@ -543,21 +556,21 @@ const ITEMS = [
     ]
   },
   /* ── NK MIND 001 × FRAGMENT DESIGN ── */
-{
-  id:25, name:"NK Mind 001 × Fragment Design", brand:"Nike × Fragment",
-  batch:"UA", sku:"IQ8502-001", sizes:"Size 36–48.5",
-  cat:"ua-pairs", badge:"HOT",
-  tags:["nike","fragment","fragment design","mind","mind001","nk mind","slides","slippers","grey","gray","charcoal","blue","fragment concept testing","iq8502","iq8502-001","mind science","lightning bolt","hiroshi fujiwara"],
-  desc:"Iron Grey / Blue · Fragment Collab · UA Pair",
-  longDesc:"UA Nike Mind 001 × Fragment Design special collaboration. Features the iconic 'FRAGMENT' badge on the heel, blue contrast pods on the outsole, and a premium 'Fragment Concept Testing – Mind 001 SP26-MNSPIN-832' Nike Mind branded insole with blue dot print and lightning bolt logo. Chunky sculpted iron grey foam construction with signature bumpy outsole, perforated footbed strap, and embossed Swoosh. Available in EU sizes 36, 36.5, 37.5, 38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 46, 47.5, and 48.5.",
-  imgs:[
-    "images/WhatsApp Image 2026-05-10 at 1.45.18 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.45.18 PM (1).jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.45.18 PM (2).jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.45.19 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"
-  ]
-},
+  {
+    id:25, name:"NK Mind 001 × Fragment Design", brand:"Nike × Fragment",
+    batch:"UA", sku:"IQ8502-001", sizes:"Size 36–48.5",
+    cat:"ua-pairs", badge:"HOT",
+    tags:["nike","fragment","fragment design","mind","mind001","nk mind","slides","grey","gray","charcoal","blue","fragment concept testing","iq8502","lightning bolt","hiroshi fujiwara"],
+    desc:"Iron Grey / Blue · Fragment Collab · UA Pair",
+    longDesc:"UA Nike Mind 001 × Fragment Design special collaboration. Features the iconic 'FRAGMENT' badge on the heel, blue contrast pods on the outsole, and a premium 'Fragment Concept Testing – Mind 001 SP26-MNSPIN-832' Nike Mind branded insole with blue dot print and lightning bolt logo. Available in EU sizes 36–48.5.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.45.18 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.45.18 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.45.18 PM (2).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.45.19 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"
+    ]
+  },
   /* ── BAPE TEES — Grey Plaid Series ── */
   {
     id:2, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
@@ -684,6 +697,58 @@ const ITEMS = [
     longDesc:"Human Made by NIGO graphic tee in white with the signature duck graphic print. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]
   },
+  /* ── AMI PARIS — DE COEUR CROCHET TEE (3 colorways) ── */
+  {
+    id:26, name:"Ami De Coeur Crochet Patch Tee", brand:"Ami Paris",
+    batch:"", sku:"E21HJ028.7407150", sizes:"",
+    cat:"streetwear", badge:"NEW",
+    tags:["ami","ami paris","ami de coeur","alexandre mattiussi","crochet","patch","raglan","tee","tshirt","navy","black","olive","green","cream","white","26ss","2026"],
+    desc:"Cream / Navy · Crochet Ami De Coeur Patch",
+    longDesc:"Ami Paris 26SS Ami De Coeur Crochet Patch Tee. Cream body with contrast raglan sleeves and collar. Features a tonal crochet Ami De Coeur heart logo patch on the chest. Made from organically sourced cotton. Ami Alexandre Mattiussi woven neck label. Available in Navy, Black, and Olive Green. Sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
+    ],
+    colorVariants:[
+      {
+        label:"Navy",
+        color:"#1b3a6b",
+        desc:"Cream / Navy · Crochet Ami De Coeur Patch",
+        imgs:[
+          "images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
+        ]
+      },
+      {
+        label:"Black",
+        color:"#0a0a0a",
+        desc:"Cream / Black · Crochet Ami De Coeur Patch",
+        imgs:[
+          "images/WhatsApp Image 2026-05-10 at 1.49.48 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
+        ]
+      },
+      {
+        label:"Olive",
+        color:"#6b7c3a",
+        desc:"Cream / Olive Green · Crochet Ami De Coeur Patch",
+        imgs:[
+          "images/WhatsApp Image 2026-05-10 at 1.49.49 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
+        ]
+      }
+    ]
+  },
   /* ── LUXURY ITEMS ── */
   {
     id:15, name:"Coming Soon", brand:"Luxury",
@@ -716,7 +781,7 @@ const ITEMS = [
   }
 ];
 
-/* FUZZY SEARCH */
+/* ── FUZZY SEARCH ── */
 function fuzzyMatch(q, item) {
   if (!q) return true;
   const words = q.toLowerCase().trim().split(/\s+/);
@@ -735,18 +800,21 @@ function lev(a,b){
   return dp[a.length][b.length];
 }
 
+/* ── STATE ── */
 let currentCat='all', searchQ='';
-const cardSizePicked = {};
-let lbSizePicked = '';
+const cardSizePicked  = {};  // id -> size string
+const cardColorPicked = {};  // id -> variantIdx
 
-function waLink(item, imgPath, size) {
+/* ── WA LINK ── */
+function waLink(item, imgPath, size, color) {
   const base = window.location.href.replace(/\/[^\/]*$/, '/');
-  const imgLine = imgPath ? `\n🖼 Image: ${base}${imgPath}` : '';
-  const skuLine = item.sku ? `\nSKU: ${item.sku}` : '';
-  const sizeLine = size ? `\nSize: ${size}` : (item.sizes ? `\n${item.sizes}` : '');
+  const imgLine  = imgPath ? `\n🖼 Image: ${base}${imgPath}` : '';
+  const skuLine  = item.sku ? `\nSKU: ${item.sku}` : '';
+  const sizeLine = size  ? `\nSize: ${size}`   : (item.sizes ? `\n${item.sizes}` : '');
+  const colorLine= color ? `\nColor: ${color}` : '';
   const batchTxt = item.batch ? ` (${item.batch})` : '';
   const msg = encodeURIComponent(
-    `Hi Secret Shop! 👋\nI'm interested in:\n*${item.name}*${batchTxt}\n${item.desc}${skuLine}${sizeLine}${imgLine}\nIs it available?`
+    `Hi Secret Shop! 👋\nI'm interested in:\n*${item.name}*${batchTxt}\n${item.desc}${skuLine}${sizeLine}${colorLine}${imgLine}\nIs it available?`
   );
   return `https://wa.me/971563780062?text=${msg}`;
 }
@@ -755,17 +823,18 @@ const PH = n => `<div class="ph"><svg width="30" height="30" viewBox="0 0 24 24"
 
 function getVisible(){
   return ITEMS.filter(item=>{
-    const catOk=currentCat==='all'||item.cat===currentCat;
-    return catOk && fuzzyMatch(searchQ,item);
+    const catOk = currentCat==='all' || item.cat===currentCat;
+    return catOk && fuzzyMatch(searchQ, item);
   });
 }
 
+/* ── RENDER GRID ── */
 function render(){
-  const visible=getVisible();
-  const grid=document.getElementById('product-grid');
-  document.getElementById('item-count').textContent=`${visible.length} item${visible.length!==1?'s':''}`;
-  const catNames={all:'All Items','ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'};
-  document.getElementById('section-label').textContent=searchQ?`Search: "${searchQ}"`:catNames[currentCat];
+  const visible = getVisible();
+  const grid    = document.getElementById('product-grid');
+  document.getElementById('item-count').textContent = `${visible.length} item${visible.length!==1?'s':''}`;
+  const catNames = {all:'All Items','ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'};
+  document.getElementById('section-label').textContent = searchQ ? `Search: "${searchQ}"` : catNames[currentCat];
 
   if(!visible.length){
     grid.innerHTML=`<div class="empty" role="listitem"><p>No items found</p><span>Try a different search or category</span></div>`;
@@ -774,35 +843,46 @@ function render(){
 
   const isClothing = item => CLOTHING_CATS.includes(item.cat);
 
-  grid.innerHTML=visible.map((item,i)=>{
-    const badge=item.badge?`<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>`:'';
-    const cover=item.imgs&&item.imgs[0];
-    const multi=item.imgs&&item.imgs.length>1;
-    const catLabel={'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
+  grid.innerHTML = visible.map((item,i) => {
+    const badge = item.badge ? `<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>` : '';
+    const catLabel = {'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
 
-    const imgHtml=cover
-      ?`<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+    /* active color variant */
+    const colorIdx = cardColorPicked[item.id] || 0;
+    const activeVariant = item.colorVariants ? item.colorVariants[colorIdx] : null;
+    const activeImgs  = activeVariant ? activeVariant.imgs : (item.imgs || []);
+    const activeDesc  = activeVariant ? activeVariant.desc : item.desc;
+    const cover = activeImgs[0];
+    const multi = activeImgs.length > 1;
+
+    const imgHtml = cover
+      ? `<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
          <div class="ph" style="display:none">${item.name}</div>`
-      :PH(item.name);
+      : PH(item.name);
 
-    const thumbHtml=multi
-      ?`<div class="thumb-strip">
-          ${item.imgs.map((s,ti)=>`<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${item.id},${ti})"><img src="${s}" loading="lazy"/></div>`).join('')}
-        </div>`
-      :'';
+    const thumbHtml = multi
+      ? `<div class="thumb-strip">
+          ${activeImgs.map((s,ti)=>`<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${item.id},${ti})"><img src="${s}" loading="lazy"/></div>`).join('')}
+        </div>` : '';
 
-    const skuHtml=item.sku?`<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>`:(item.batch?`<p class="card-sku">${item.batch}</p>`:'');
-    const sizeHtml=item.sizes&&!isClothing(item)?`<p class="card-sizes">${item.sizes}</p>`:'';
+    const skuHtml  = item.sku   ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch?`<p class="card-sku">${item.batch}</p>`:'');
+    const sizeHtml = item.sizes && !isClothing(item) ? `<p class="card-sizes">${item.sizes}</p>` : '';
 
-    const picked = cardSizePicked[item.id] || '';
+    const pickedSz = cardSizePicked[item.id] || '';
     const sizePickerHtml = isClothing(item)
-      ? `<div class="size-row">${SIZES.map(s=>`<button class="sz${picked===s?' picked':''}" onclick="pickCardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`
+      ? `<div class="size-row">${SIZES.map(s=>`<button class="sz${pickedSz===s?' picked':''}" onclick="pickCardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`
       : '';
+
+    const colorPickerHtml = item.colorVariants
+      ? `<div class="color-row">
+           <span class="color-row-label">Color</span>
+           ${item.colorVariants.map((v,ci)=>`<div class="csw${colorIdx===ci?' picked':''}" style="background:${v.color}" title="${v.label}" onclick="pickCardColor(event,${item.id},${ci})"></div>`).join('')}
+         </div>` : '';
 
     return `<div class="card" role="listitem" data-id="${item.id}" style="transition-delay:${Math.min(i,12)*0.04}s" tabindex="0" aria-label="${item.name}">
       <div class="card-photo" onclick="openLb(${item.id})">
         ${imgHtml}${badge}${thumbHtml}
-        <a class="card-wa" href="${waLink(item,cover,picked)}" target="_blank" onclick="event.stopPropagation()" id="cwa-${item.id}">
+        <a class="card-wa" href="${waLink(item,cover,pickedSz,activeVariant?activeVariant.label:'')}" target="_blank" onclick="event.stopPropagation()" id="cwa-${item.id}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
           Order on WhatsApp
         </a>
@@ -811,8 +891,9 @@ function render(){
         <p class="card-cat">${catLabel}</p>
         <p class="card-name">${item.name}</p>
         ${skuHtml}
-        <p class="card-sub">${item.brand} · ${item.desc}</p>
+        <p class="card-sub" id="csub-${item.id}">${item.brand} · ${activeDesc}</p>
         ${sizeHtml}
+        ${colorPickerHtml}
         ${sizePickerHtml}
         <span class="card-inquire">${multi?'View Gallery':'View'} &amp; Inquire →</span>
       </div>
@@ -820,97 +901,183 @@ function render(){
   }).join('');
 
   requestAnimationFrame(()=>grid.querySelectorAll('.card').forEach(c=>requestAnimationFrame(()=>c.classList.add('in'))));
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
+  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
   grid.querySelectorAll('.card').forEach(c=>io.observe(c));
 }
 
+/* ── CARD: PICK COLOR VARIANT ── */
+function pickCardColor(e, id, idx) {
+  e.stopPropagation();
+  cardColorPicked[id] = idx;
+  const item = ITEMS.find(x=>x.id===id);
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  if (!item || !card || !item.colorVariants) return;
+  const variant = item.colorVariants[idx];
+
+  /* update main image */
+  const mainImg = card.querySelector('.card-photo > img');
+  if (mainImg) mainImg.src = variant.imgs[0];
+
+  /* update thumb strip */
+  const strip = card.querySelector('.thumb-strip');
+  if (strip) {
+    strip.innerHTML = variant.imgs.map((s,ti)=>
+      `<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${id},${ti})"><img src="${s}" loading="lazy"/></div>`
+    ).join('');
+  }
+
+  /* update sub-description */
+  const subEl = document.getElementById(`csub-${id}`);
+  if (subEl) subEl.textContent = `${item.brand} · ${variant.desc}`;
+
+  /* update swatch states */
+  card.querySelectorAll('.csw').forEach((b,i)=>b.classList.toggle('picked', i===idx));
+
+  /* update WA link */
+  const wa = document.getElementById(`cwa-${id}`);
+  if (wa) wa.href = waLink(item, variant.imgs[0], cardSizePicked[id]||'', variant.label);
+}
+
+/* ── CARD: PICK SIZE ── */
 function pickCardSize(e, id, size) {
   e.stopPropagation();
-  cardSizePicked[id] = cardSizePicked[id] === size ? '' : size;
+  cardSizePicked[id] = cardSizePicked[id]===size ? '' : size;
   const card = document.querySelector(`.card[data-id="${id}"]`);
   if (!card) return;
-  card.querySelectorAll('.sz').forEach(b => b.classList.toggle('picked', b.textContent === cardSizePicked[id]));
+  card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked', b.textContent===cardSizePicked[id]));
   const item = ITEMS.find(x=>x.id===id);
-  const cover = item && item.imgs && item.imgs[0];
+  const colorIdx = cardColorPicked[id] || 0;
+  const variant  = item && item.colorVariants ? item.colorVariants[colorIdx] : null;
+  const cover    = variant ? variant.imgs[0] : (item && item.imgs && item.imgs[0]);
   const wa = document.getElementById(`cwa-${id}`);
-  if (wa && item) wa.href = waLink(item, cover, cardSizePicked[id]);
+  if (wa && item) wa.href = waLink(item, cover, cardSizePicked[id], variant?variant.label:'');
 }
 
+/* ── CARD: THUMB NAV ── */
 function cardThumb(e, id, idx){
   e.stopPropagation();
-  const card=document.querySelector(`.card[data-id="${id}"]`);
-  const item=ITEMS.find(x=>x.id===id);
-  if(!card||!item)return;
-  const mainImg=card.querySelector('.card-photo>img');
-  if(mainImg){mainImg.src=item.imgs[idx];}
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  const item = ITEMS.find(x=>x.id===id);
+  if (!card || !item) return;
+  const colorIdx = cardColorPicked[id] || 0;
+  const activeImgs = item.colorVariants ? item.colorVariants[colorIdx].imgs : item.imgs;
+  const mainImg = card.querySelector('.card-photo>img');
+  if (mainImg) mainImg.src = activeImgs[idx];
   card.querySelectorAll('.thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  const wa=document.getElementById(`cwa-${id}`);
-  if(wa)wa.href=waLink(item,item.imgs[idx],cardSizePicked[id]);
+  const wa = document.getElementById(`cwa-${id}`);
+  const variant = item.colorVariants ? item.colorVariants[colorIdx] : null;
+  if (wa) wa.href = waLink(item, activeImgs[idx], cardSizePicked[id]||'', variant?variant.label:'');
 }
 
-let lbItem=null, lbIdx=0;
+/* ── LIGHTBOX STATE ── */
+let lbItem=null, lbIdx=0, lbSizePicked='', lbColorPicked=0;
 
 function openLb(id){
-  lbItem=ITEMS.find(x=>x.id===id);
-  if(!lbItem)return;
-  lbIdx=0;
-  lbSizePicked = cardSizePicked[id] || '';
+  lbItem = ITEMS.find(x=>x.id===id);
+  if (!lbItem) return;
+  lbIdx         = 0;
+  lbSizePicked  = cardSizePicked[id]  || '';
+  lbColorPicked = cardColorPicked[id] || 0;
   paintLb();
   document.getElementById('lb-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 function closeLb(){
   document.getElementById('lb-overlay').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
+
 function paintLb(){
-  if(!lbItem)return;
-  const imgs=lbItem.imgs||[];
-  document.getElementById('lb-img').src=imgs[lbIdx]||'';
-  document.getElementById('lb-img').alt=lbItem.name;
-  const nameParts=[lbItem.name,lbItem.sku].filter(Boolean);
-  document.getElementById('lb-name').textContent=nameParts.join(' — ');
-  const metaParts=[lbItem.batch,lbItem.desc].filter(Boolean);
-  if(lbItem.sizes && !CLOTHING_CATS.includes(lbItem.cat)) metaParts.push(lbItem.sizes);
-  document.getElementById('lb-meta').textContent=metaParts.join(' · ');
+  if (!lbItem) return;
+
+  /* resolve active images for current color */
+  const activeVariant = lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
+  const imgs = activeVariant ? activeVariant.imgs : (lbItem.imgs || []);
+  const activeDesc = activeVariant ? activeVariant.desc : lbItem.desc;
+
+  document.getElementById('lb-img').src = imgs[lbIdx] || '';
+  document.getElementById('lb-img').alt = lbItem.name;
+
+  const nameParts = [lbItem.name, lbItem.sku].filter(Boolean);
+  document.getElementById('lb-name').textContent = nameParts.join(' — ');
+
+  const metaParts = [lbItem.batch, activeDesc].filter(Boolean);
+  if (lbItem.sizes && !CLOTHING_CATS.includes(lbItem.cat)) metaParts.push(lbItem.sizes);
+  document.getElementById('lb-meta').textContent = metaParts.join(' · ');
+
   const descEl = document.getElementById('lb-desc-full');
-  if(lbItem.longDesc){descEl.textContent=lbItem.longDesc;descEl.style.display='';}
-  else{descEl.style.display='none';}
+  if (lbItem.longDesc){ descEl.textContent=lbItem.longDesc; descEl.style.display=''; }
+  else { descEl.style.display='none'; }
+
+  /* COLOR PICKER in lightbox */
+  const colorWrap = document.getElementById('lb-color-wrap');
+  const colorRow  = document.getElementById('lb-color-row');
+  if (lbItem.colorVariants) {
+    colorWrap.style.display = '';
+    colorRow.innerHTML = lbItem.colorVariants.map((v,i)=>
+      `<div class="lb-csw${i===lbColorPicked?' picked':''}" style="background:${v.color}" title="${v.label}" onclick="pickLbColor(${i})"></div>`
+    ).join('') + `<span class="lb-color-name">${lbItem.colorVariants[lbColorPicked].label}</span>`;
+  } else {
+    colorWrap.style.display = 'none';
+  }
+
+  /* SIZE PICKER in lightbox */
   const sizeWrap = document.getElementById('lb-size-wrap');
   const sizeRow  = document.getElementById('lb-size-row');
-  if(CLOTHING_CATS.includes(lbItem.cat)){
+  if (CLOTHING_CATS.includes(lbItem.cat)){
     sizeRow.innerHTML = SIZES.map(s=>`<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`).join('');
-    sizeWrap.style.display='';
+    sizeWrap.style.display = '';
   } else {
-    sizeWrap.style.display='none';
+    sizeWrap.style.display = 'none';
   }
-  const show=imgs.length>1;
-  document.getElementById('lb-prev').style.display=show?'flex':'none';
-  document.getElementById('lb-next').style.display=show?'flex':'none';
-  document.getElementById('lb-thumbs').innerHTML=imgs.map((s,i)=>
+
+  /* arrows / thumbs */
+  const show = imgs.length > 1;
+  document.getElementById('lb-prev').style.display = show ? 'flex' : 'none';
+  document.getElementById('lb-next').style.display = show ? 'flex' : 'none';
+  document.getElementById('lb-thumbs').innerHTML = imgs.map((s,i)=>
     `<div class="lb-thumb${i===lbIdx?' active':''}" onclick="lbGo(${i})"><img src="${s}" loading="lazy"/></div>`
   ).join('');
-  document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSizePicked);
+
+  /* WA link */
+  document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSizePicked, activeVariant?activeVariant.label:'');
+}
+
+function pickLbColor(idx){
+  lbColorPicked = idx;
+  lbIdx = 0;
+  if (lbItem) cardColorPicked[lbItem.id] = idx;
+  paintLb();
+  /* sync card swatches */
+  if (lbItem){
+    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
+    if (card) card.querySelectorAll('.csw').forEach((b,i)=>b.classList.toggle('picked',i===idx));
+  }
 }
 
 function pickLbSize(size){
-  lbSizePicked = lbSizePicked === size ? '' : size;
-  if(lbItem) cardSizePicked[lbItem.id] = lbSizePicked;
-  document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('picked',b.textContent===lbSizePicked));
-  const imgs=lbItem?lbItem.imgs||[]:[];
-  document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSizePicked);
-  if(lbItem){
-    const card=document.querySelector(`.card[data-id="${lbItem.id}"]`);
-    if(card) card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked',b.textContent===lbSizePicked));
+  lbSizePicked = lbSizePicked===size ? '' : size;
+  if (lbItem) cardSizePicked[lbItem.id] = lbSizePicked;
+  document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('picked', b.textContent===lbSizePicked));
+  const activeVariant = lbItem && lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
+  const imgs = activeVariant ? activeVariant.imgs : (lbItem?lbItem.imgs||[]:[]);
+  document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSizePicked, activeVariant?activeVariant.label:'');
+  /* sync card size */
+  if (lbItem){
+    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
+    if (card) card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked', b.textContent===lbSizePicked));
   }
 }
 
 function lbGo(idx){
-  if(!lbItem)return;
-  lbIdx=(idx+lbItem.imgs.length)%lbItem.imgs.length;
+  if (!lbItem) return;
+  const activeVariant = lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
+  const imgs = activeVariant ? activeVariant.imgs : lbItem.imgs;
+  lbIdx = (idx + imgs.length) % imgs.length;
   paintLb();
 }
 
+/* ── LIGHTBOX EVENTS ── */
 document.getElementById('lb-prev').addEventListener('click',()=>lbGo(lbIdx-1));
 document.getElementById('lb-next').addEventListener('click',()=>lbGo(lbIdx+1));
 document.getElementById('lb-close').addEventListener('click',closeLb);
@@ -922,15 +1089,17 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')lbGo(lbIdx+1);
 });
 
+/* ── CATEGORY NAV ── */
 function setcat(cat){
-  currentCat=cat;
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===cat));
   render();
   document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>setcat(btn.dataset.cat)));
 
-const SI=document.getElementById('search-input'),CB=document.getElementById('clear-btn');
+/* ── SEARCH ── */
+const SI=document.getElementById('search-input'), CB=document.getElementById('clear-btn');
 let ST;
 SI.addEventListener('input',()=>{
   clearTimeout(ST);
