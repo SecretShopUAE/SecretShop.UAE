@@ -63,7 +63,7 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .cat-btn.active{color:var(--w);border-bottom-color:var(--w)}
 
 /* COVER */
-.cover{position:relative;height:75svh;min-height:400px;border-bottom:1px solid var(--line);overflow:hidden;background:#111}
+.cover{position:relative;height:45svh;min-height:280px;border-bottom:1px solid var(--line);overflow:hidden;background:#111}
 .cover-img{position:absolute;inset:0}
 .cover-img img{filter:brightness(0.55) grayscale(100%)}
 .cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%,transparent 100%)}
@@ -85,10 +85,27 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .section-name{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--g)}
 .section-count{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:#999}
 
-/* PRODUCT GRID */
-.grid-outer{padding:1rem 0.85rem 3rem}
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-
+/* BRAND SECTIONS */
+.grid-outer{padding:0.5rem 0 3rem}
+.brand-section{margin-bottom:0.5rem;border-bottom:1px solid var(--line)}
+.brand-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem 0.6rem}
+.brand-title{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--w)}
+.brand-count{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:#999;margin-left:8px}
+.brand-see-all{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g);border-bottom:1px solid #ccc;padding-bottom:1px;cursor:pointer;transition:color 0.2s,border-color 0.2s;background:none;border-top:none;border-left:none;border-right:none}
+.brand-see-all:hover{color:var(--w);border-color:var(--w)}
+.brand-scroll-wrap{position:relative}
+.brand-scroll{display:flex;gap:12px;padding:0.5rem 1.25rem 1rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
+.brand-scroll::-webkit-scrollbar{display:none}
+.brand-scroll .card{flex:0 0 200px;min-width:0;scroll-snap-align:start}
+.brand-static{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0.5rem 1.25rem 1rem}
+.featured-section{padding:1rem 1.25rem 0.5rem;border-bottom:1px solid var(--line);margin-bottom:0.5rem}
+.featured-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
+.featured-title{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--w)}
+.featured-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#ff2d2d;color:#fff;padding:3px 8px;border-radius:4px}
+.featured-scroll{display:flex;gap:12px;padding-bottom:0.75rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
+.featured-scroll::-webkit-scrollbar{display:none}
+.featured-scroll .card{flex:0 0 220px;min-width:0;scroll-snap-align:start}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:1rem 1.25rem}
 /* CARD */
 .card{
   border-radius:16px;
@@ -221,10 +238,14 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
 /* RESPONSIVE */
 @media(max-width:1100px){
   .product-grid{grid-template-columns:repeat(3,1fr);gap:12px}
+  .brand-static{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:780px){
-  .grid-outer{padding:0.85rem 0.65rem 2.5rem}
+  .grid-outer{padding:0.85rem 0 2.5rem}
   .product-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .brand-static{grid-template-columns:repeat(2,1fr)}
+  .brand-scroll .card{flex:0 0 165px}
+  .featured-scroll .card{flex:0 0 175px}
   .info-strip{grid-template-columns:1fr}
   .info-cell{border-right:none;border-bottom:1px solid var(--line)}
   .info-cell:last-child{border-bottom:none}
@@ -456,7 +477,8 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
 <script>
 const CLOTHING_CATS = ['streetwear'];
 const SIZES = ['S','M','L','XL'];
-
+const SIZES_BAPE = ['S','M','L','XL','XXL'];
+  
 const ITEMS = [
   /* ── UA PAIRS ── */
   {
@@ -1201,79 +1223,160 @@ function getVisible(){
 }
 
 /* ── RENDER GRID ── */
+const FEATURED_IDS = [1,18,22,25,26,29,30,11,43,46];
+
+const BRAND_GROUPS = [
+  {key:'nike',    label:'Nike / Jordan',  brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], scroll:true,  max:6},
+  {key:'bape',    label:'A Bathing Ape',  brands:['A Bathing Ape'],                                         scroll:false, max:4},
+  {key:'humanmade',label:'Human Made',   brands:['Human Made'],                                             scroll:false, max:4},
+  {key:'ami',     label:'Ami Paris',      brands:['Ami Paris'],                                              scroll:true,  max:6},
+  {key:'supreme', label:'Supreme',        brands:['Supreme','Supreme × Thrasher'],                           scroll:true,  max:6},
+  {key:'chrome',  label:'Chrome Hearts',  brands:['Chrome Hearts'],                                          scroll:true,  max:5},
+];
+
+function makeCard(item, i, delayBase){
+  const isClothing = CLOTHING_CATS.includes(item.cat);
+  const badge = item.badge ? `<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>` : '';
+  const catLabel = {'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
+  const colorIdx = cardColorPicked[item.id] || 0;
+  const activeVariant = item.colorVariants ? item.colorVariants[colorIdx] : null;
+  const activeImgs  = activeVariant ? activeVariant.imgs : (item.imgs || []);
+  const activeDesc  = activeVariant ? activeVariant.desc : item.desc;
+  const cover = activeImgs[0];
+  const multi = activeImgs.length > 1;
+  const imgHtml = cover
+    ? `<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+       <div class="ph" style="display:none">${item.name}</div>`
+    : PH(item.name);
+  const thumbHtml = multi
+    ? `<div class="thumb-strip">${activeImgs.map((s,ti)=>`<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${item.id},${ti})"><img src="${s}" loading="lazy"/></div>`).join('')}</div>` : '';
+  const skuHtml  = item.sku ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch?`<p class="card-sku">${item.batch}</p>`:'');
+  const sizeHtml = item.sizes && !isClothing ? `<p class="card-sizes">${item.sizes}</p>` : '';
+  const pickedSz = cardSizePicked[item.id] || '';
+  const itemSizes = item.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES;
+  const sizePickerHtml = isClothing
+    ? `<div class="size-row">${itemSizes.map(s=>`<button class="sz${pickedSz===s?' picked':''}" onclick="pickCardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`
+    : '';
+  const colorPickerHtml = item.colorVariants
+    ? `<div class="color-row"><span class="color-row-label">Color</span>${item.colorVariants.map((v,ci)=>`<div class="csw${colorIdx===ci?' picked':''}" style="background:${v.color}" title="${v.label}" onclick="pickCardColor(event,${item.id},${ci})"></div>`).join('')}</div>` : '';
+  return `<div class="card" role="listitem" data-id="${item.id}" style="transition-delay:${Math.min((delayBase||0)+i,16)*0.035}s" tabindex="0" aria-label="${item.name}">
+    <div class="card-photo" onclick="openLb(${item.id})">
+      ${imgHtml}${badge}${thumbHtml}
+      <a class="card-wa" href="${waLink(item,cover,pickedSz,activeVariant?activeVariant.label:'')}" target="_blank" onclick="event.stopPropagation()" id="cwa-${item.id}">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+    <div class="card-info" onclick="openLb(${item.id})">
+      <p class="card-cat">${catLabel}</p>
+      <p class="card-name">${item.name}</p>
+      ${skuHtml}
+      <p class="card-sub" id="csub-${item.id}">${item.brand} · ${activeDesc}</p>
+      ${sizeHtml}${colorPickerHtml}${sizePickerHtml}
+      <span class="card-inquire">${multi?'View Gallery':'View'} &amp; Inquire →</span>
+    </div>
+  </div>`;
+}
+
+function animateCards(container){
+  requestAnimationFrame(()=>container.querySelectorAll('.card').forEach(c=>requestAnimationFrame(()=>c.classList.add('in'))));
+  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
+  container.querySelectorAll('.card').forEach(c=>io.observe(c));
+}
+
 function render(){
-  const visible = getVisible();
-  const grid    = document.getElementById('product-grid');
-  document.getElementById('item-count').textContent = `${visible.length} item${visible.length!==1?'s':''}`;
+  const grid = document.getElementById('product-grid');
+  const isSearch = searchQ.length > 0;
+  const isCatAll = currentCat === 'all';
   const catNames = {all:'All Items','ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'};
-  document.getElementById('section-label').textContent = searchQ ? `Search: "${searchQ}"` : catNames[currentCat];
+  const visible = ITEMS.filter(item=>{
+    const catOk = currentCat==='all' || item.cat===currentCat;
+    return catOk && fuzzyMatch(searchQ, item);
+  });
+  document.getElementById('item-count').textContent = `${visible.length} item${visible.length!==1?'s':''}`;
+  document.getElementById('section-label').textContent = isSearch ? `Search: "${searchQ}"` : catNames[currentCat];
 
   if(!visible.length){
-    grid.innerHTML=`<div class="empty" role="listitem"><p>No items found</p><span>Try a different search or category</span></div>`;
+    grid.innerHTML=`<div class="product-grid"><div class="empty" role="listitem"><p>No items found</p><span>Try a different search or category</span></div></div>`;
     return;
   }
 
-  const isClothing = item => CLOTHING_CATS.includes(item.cat);
+  if(isSearch || !isCatAll){
+    grid.innerHTML=`<div class="product-grid">${visible.map((item,i)=>makeCard(item,i,0)).join('')}</div>`;
+    animateCards(grid);
+    return;
+  }
 
-  grid.innerHTML = visible.map((item,i) => {
-    const badge = item.badge ? `<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>` : '';
-    const catLabel = {'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
+  let html='';
 
-    const colorIdx = cardColorPicked[item.id] || 0;
-    const activeVariant = item.colorVariants ? item.colorVariants[colorIdx] : null;
-    const activeImgs  = activeVariant ? activeVariant.imgs : (item.imgs || []);
-    const activeDesc  = activeVariant ? activeVariant.desc : item.desc;
-    const cover = activeImgs[0];
-    const multi = activeImgs.length > 1;
-
-    const imgHtml = cover
-      ? `<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-         <div class="ph" style="display:none">${item.name}</div>`
-      : PH(item.name);
-
-    const thumbHtml = multi
-      ? `<div class="thumb-strip">
-          ${activeImgs.map((s,ti)=>`<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${item.id},${ti})"><img src="${s}" loading="lazy"/></div>`).join('')}
-        </div>` : '';
-
-    const skuHtml  = item.sku   ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch?`<p class="card-sku">${item.batch}</p>`:'');
-    const sizeHtml = item.sizes && !isClothing(item) ? `<p class="card-sizes">${item.sizes}</p>` : '';
-
-    const pickedSz = cardSizePicked[item.id] || '';
-    const sizePickerHtml = isClothing(item)
-      ? `<div class="size-row">${SIZES.map(s=>`<button class="sz${pickedSz===s?' picked':''}" onclick="pickCardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`
-      : '';
-
-    const colorPickerHtml = item.colorVariants
-      ? `<div class="color-row">
-           <span class="color-row-label">Color</span>
-           ${item.colorVariants.map((v,ci)=>`<div class="csw${colorIdx===ci?' picked':''}" style="background:${v.color}" title="${v.label}" onclick="pickCardColor(event,${item.id},${ci})"></div>`).join('')}
-         </div>` : '';
-
-    return `<div class="card" role="listitem" data-id="${item.id}" style="transition-delay:${Math.min(i,12)*0.04}s" tabindex="0" aria-label="${item.name}">
-      <div class="card-photo" onclick="openLb(${item.id})">
-        ${imgHtml}${badge}${thumbHtml}
-        <a class="card-wa" href="${waLink(item,cover,pickedSz,activeVariant?activeVariant.label:'')}" target="_blank" onclick="event.stopPropagation()" id="cwa-${item.id}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-          Order on WhatsApp
-        </a>
-      </div>
-      <div class="card-info" onclick="openLb(${item.id})">
-        <p class="card-cat">${catLabel}</p>
-        <p class="card-name">${item.name}</p>
-        ${skuHtml}
-        <p class="card-sub" id="csub-${item.id}">${item.brand} · ${activeDesc}</p>
-        ${sizeHtml}
-        ${colorPickerHtml}
-        ${sizePickerHtml}
-        <span class="card-inquire">${multi?'View Gallery':'View'} &amp; Inquire →</span>
-      </div>
+  const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
+  if(featItems.length){
+    html+=`<div class="featured-section">
+      <div class="featured-header"><span class="featured-title">Featured Picks</span><span class="featured-badge">🔥 HOT</span></div>
+      <div class="featured-scroll">${featItems.map((item,i)=>makeCard(item,i,0)).join('')}</div>
     </div>`;
-  }).join('');
+  }
 
-  requestAnimationFrame(()=>grid.querySelectorAll('.card').forEach(c=>requestAnimationFrame(()=>c.classList.add('in'))));
-  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
-  grid.querySelectorAll('.card').forEach(c=>io.observe(c));
+  BRAND_GROUPS.forEach((group,gi)=>{
+    const groupItems = visible.filter(item=>group.brands.includes(item.brand));
+    if(!groupItems.length) return;
+    const preview = groupItems.slice(0,group.max);
+    const hasMore = groupItems.length > group.max;
+    html+=`<div class="brand-section" id="bsec-${group.key}">
+      <div class="brand-header">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="brand-title">${group.label}</span>
+          <span class="brand-count">${groupItems.length} item${groupItems.length!==1?'s':''}</span>
+        </div>
+        ${hasMore?`<button class="brand-see-all" onclick="expandBrand('${group.key}')">See All →</button>`:''}
+      </div>
+      ${group.scroll
+        ? `<div class="brand-scroll-wrap"><div class="brand-scroll" id="brow-${group.key}">${preview.map((item,i)=>makeCard(item,i,gi*2)).join('')}</div></div>`
+        : `<div class="brand-static" id="brow-${group.key}">${preview.map((item,i)=>makeCard(item,i,gi*2)).join('')}</div>`
+      }
+    </div>`;
+  });
+
+  const groupedBrands = BRAND_GROUPS.flatMap(g=>g.brands);
+  const rest = visible.filter(item=>!groupedBrands.includes(item.brand));
+  if(rest.length){
+    html+=`<div class="brand-section">
+      <div class="brand-header"><span class="brand-title">Other Items</span><span class="brand-count">${rest.length} item${rest.length!==1?'s':''}</span></div>
+      <div class="brand-static">${rest.map((item,i)=>makeCard(item,i,0)).join('')}</div>
+    </div>`;
+  }
+
+  grid.innerHTML=html;
+  animateCards(grid);
+}
+
+function expandBrand(brandKey){
+  const group=BRAND_GROUPS.find(g=>g.key===brandKey);
+  if(!group)return;
+  const allItems=ITEMS.filter(item=>group.brands.includes(item.brand));
+  const row=document.getElementById(`brow-${brandKey}`);
+  const sec=document.getElementById(`bsec-${brandKey}`);
+  if(!row||!sec)return;
+  row.innerHTML=allItems.map((item,i)=>makeCard(item,i,0)).join('');
+  if(group.scroll){row.className='brand-static';row.style.gridTemplateColumns='repeat(4,1fr)';}
+  const btn=sec.querySelector('.brand-see-all');
+  if(btn){btn.textContent='Show Less ↑';btn.onclick=()=>collapseBrand(brandKey);}
+  animateCards(row);
+}
+
+function collapseBrand(brandKey){
+  const group=BRAND_GROUPS.find(g=>g.key===brandKey);
+  if(!group)return;
+  const preview=ITEMS.filter(item=>group.brands.includes(item.brand)).slice(0,group.max);
+  const row=document.getElementById(`brow-${brandKey}`);
+  const sec=document.getElementById(`bsec-${brandKey}`);
+  if(!row||!sec)return;
+  if(group.scroll){row.className='brand-scroll';row.style.gridTemplateColumns='';}
+  else{row.className='brand-static';row.style.gridTemplateColumns='';}
+  row.innerHTML=preview.map((item,i)=>makeCard(item,i,0)).join('');
+  const btn=sec.querySelector('.brand-see-all');
+  if(btn){btn.textContent='See All →';btn.onclick=()=>expandBrand(brandKey);}
+  animateCards(row);
 }
 
 /* ── CARD: PICK COLOR VARIANT ── */
@@ -1381,8 +1484,9 @@ function paintLb(){
 
   const sizeWrap = document.getElementById('lb-size-wrap');
   const sizeRow  = document.getElementById('lb-size-row');
-  if (CLOTHING_CATS.includes(lbItem.cat)){
-    sizeRow.innerHTML = SIZES.map(s=>`<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`).join('');
+ if (CLOTHING_CATS.includes(lbItem.cat)){
+    const lbItemSizes = lbItem.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES;
+    sizeRow.innerHTML = lbItemSizes.map(s=>`<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`).join('');
     sizeWrap.style.display = '';
   } else {
     sizeWrap.style.display = 'none';
