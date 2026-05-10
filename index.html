@@ -114,9 +114,10 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:1.5rem}
 
 /* ── CARD ── */
-.card{border-radius:var(--radius-lg);background:var(--surface);border:1.5px solid var(--border);overflow:hidden;cursor:pointer;position:relative;transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;opacity:0;transform:translateY(8px)}
+/* BLACK BORDERS on all cards */
+.card{border-radius:var(--radius-lg);background:var(--surface);border:1.5px solid #111;overflow:hidden;cursor:pointer;position:relative;transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;opacity:0;transform:translateY(8px)}
 .card.in{opacity:1;transform:translateY(0)}
-.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--border-dark)}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:#000}
 .card.in:hover{transform:translateY(-3px)}
 
 .card-img{position:relative;aspect-ratio:1/1;background:#f0f0f0;overflow:hidden}
@@ -140,7 +141,7 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .card:hover .card-wa-overlay,.card-wa-overlay.always-show{transform:translateY(0)}
 
 /* info */
-.card-body{padding:10px 11px 13px;border-top:1px solid var(--border)}
+.card-body{padding:10px 11px 13px;border-top:1px solid #111}
 .card-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
 .card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
 .card-sub{font-size:11px;color:var(--text-2);line-height:1.4;margin-bottom:6px}
@@ -163,29 +164,98 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .card-cta{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--text-3);border-bottom:1px solid transparent;padding-bottom:1px;transition:color 0.15s,border-color 0.15s;width:fit-content}
 .card:hover .card-cta{color:var(--accent-dark);border-color:var(--accent)}
 
-/* ── FEATURED CAROUSEL ── */
+/* ── FEATURED CAROUSEL — INFINITE TICKER STYLE ── */
 .featured-section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
 .featured-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px}
 .featured-title{font-size:15px;font-weight:700}
 .featured-badge{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 8px;border-radius:5px}
 
-/* Carousel container */
-.carousel-wrap{position:relative;overflow:hidden;padding:0 0 1.5rem}
-.carousel-track-outer{overflow:hidden;padding:0 1.5rem}
-.carousel-track{display:flex;gap:12px;transition:transform 0.45s cubic-bezier(.4,0,.2,1);will-change:transform}
-.carousel-track .card{flex:0 0 160px;scroll-snap-align:start}
+/* Outer clip */
+.carousel-wrap{overflow:hidden;padding:0 0 1.5rem;position:relative}
 
-/* Carousel nav buttons */
-.carousel-btn{position:absolute;top:calc(50% - 20px);transform:translateY(-50%);z-index:10;width:34px;height:34px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border-dark);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--text);cursor:pointer;box-shadow:var(--shadow-md);transition:background 0.15s,transform 0.15s,opacity 0.2s}
-.carousel-btn:hover{background:var(--text);color:#fff;transform:translateY(-50%) scale(1.08)}
-.carousel-btn.disabled{opacity:0.25;pointer-events:none}
-.carousel-btn.prev{left:6px}
-.carousel-btn.next{right:6px}
+/* Gradient fade edges */
+.carousel-wrap::before,
+.carousel-wrap::after{
+  content:'';
+  position:absolute;
+  top:0;bottom:0;width:60px;
+  z-index:5;
+  pointer-events:none;
+}
+.carousel-wrap::before{
+  left:0;
+  background:linear-gradient(to right, var(--surface) 0%, transparent 100%);
+}
+.carousel-wrap::after{
+  right:0;
+  background:linear-gradient(to left, var(--surface) 0%, transparent 100%);
+}
 
-/* Carousel dots */
-.carousel-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 0}
-.carousel-dot{width:7px;height:7px;border-radius:50%;background:var(--border-dark);cursor:pointer;transition:background 0.2s,transform 0.2s;border:none;padding:0}
-.carousel-dot.active{background:var(--text);transform:scale(1.3)}
+/* The scrolling track — no padding, full width overflow hidden */
+.carousel-track-outer{
+  overflow:hidden;
+  padding:0 0 4px;
+  /* Pause animation on hover so users can interact */
+  cursor:grab;
+}
+.carousel-track-outer:active{cursor:grabbing}
+
+/* Infinite scroll keyframe */
+@keyframes carousel-scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(var(--translate-end,-2000px))}
+}
+
+/* The track itself */
+.carousel-track{
+  display:flex;
+  gap:12px;
+  width:max-content;
+  will-change:transform;
+  padding:4px 0;
+}
+
+/* Infinite motion class */
+.carousel-infinite{
+  animation:carousel-scroll linear infinite;
+  animation-play-state:running;
+}
+
+/* Pause on hover — so user can browse freely */
+.carousel-track-outer:hover .carousel-infinite{
+  animation-play-state:paused;
+}
+
+/* Cards inside carousel get a tiny starting nudge */
+.carousel-track .card{
+  flex:0 0 160px;
+  /* override the initial hidden transform so paused cards are visible */
+}
+
+/* Pause hint label */
+.carousel-hint{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-3);
+  padding:0 1.5rem 8px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.carousel-hint::before{
+  content:'';
+  display:inline-block;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:pulse-dot 1.5s ease-in-out infinite;
+}
+@keyframes pulse-dot{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.4;transform:scale(0.7)}
+}
 
 /* ── SEARCH RESULTS ── */
 .search-results-wrap{background:var(--bg)}
@@ -306,7 +376,6 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
   .thumb-row{opacity:1;pointer-events:auto}
   .card-wa-overlay{transform:translateY(0)}
   .carousel-track .card{flex:0 0 145px}
-  .carousel-btn{display:none}
 }
 @media(max-width:480px){
   .header-main{padding:0 0.75rem}
@@ -596,13 +665,6 @@ let currentCat = 'all', searchQ = '';
 const pickedSize  = {};
 const pickedColor = {};
 
-// ── CAROUSEL STATE ──
-let carouselIdx = 0;
-let carouselItems = [];
-let carouselTimer = null;
-const CAROUSEL_VISIBLE = 5; // cards visible at once (desktop)
-const CAROUSEL_INTERVAL = 3500;
-
 // ── SEARCH ──
 function fuzzy(q, item) {
   if (!q) return true;
@@ -699,32 +761,33 @@ function cardColor(e, id, idx) {
   pickedColor[id] = idx;
   const item = ITEMS.find(x=>x.id===id);
   if (!item?.colorVariants) return;
-  const card = document.querySelector(`.card[data-id="${id}"]`);
-  if (!card) return;
-  const v = item.colorVariants[idx];
-  const img = card.querySelector('.card-img > img');
-  if (img) img.src = v.imgs[0] || '';
-  const dots = card.querySelector('.thumb-row');
-  if (dots) dots.innerHTML = v.imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${id},${i})"></div>`).join('');
-  const sub = document.getElementById(`csub-${id}`);
-  if (sub) sub.textContent = `${item.brand} · ${v.desc}`;
-  card.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
-  const wa = document.getElementById(`cwa-${id}`);
-  if (wa) wa.href = waLink(item, v.imgs[0], pickedSize[id]||'', v.label);
+  // Update ALL cards with this id (including duplicates in carousel)
+  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
+    const v = item.colorVariants[idx];
+    const img = cardEl.querySelector('.card-img > img');
+    if (img) img.src = v.imgs[0] || '';
+    const dots = cardEl.querySelector('.thumb-row');
+    if (dots) dots.innerHTML = v.imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${id},${i})"></div>`).join('');
+    const sub = cardEl.querySelector(`[id="csub-${id}"]`);
+    if (sub) sub.textContent = `${item.brand} · ${v.desc}`;
+    cardEl.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
+    const wa = cardEl.querySelector(`[id="cwa-${id}"]`);
+    if (wa) wa.href = waLink(item, v.imgs[0], pickedSize[id]||'', v.label);
+  });
 }
 
 // ── INTERACTION: CARD SIZE ──
 function cardSize(e, id, size) {
   e.stopPropagation();
   pickedSize[id] = pickedSize[id]===size ? '' : size;
-  const card = document.querySelector(`.card[data-id="${id}"]`);
-  if (!card) return;
-  card.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active', b.textContent===pickedSize[id]));
-  const item = ITEMS.find(x=>x.id===id);
-  const ci = pickedColor[id] || 0;
-  const cv = item?.colorVariants?.[ci];
-  const wa = document.getElementById(`cwa-${id}`);
-  if (wa && item) wa.href = waLink(item, cv?cv.imgs[0]:(item.imgs?.[0]||''), pickedSize[id], cv?.label||'');
+  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
+    cardEl.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active', b.textContent===pickedSize[id]));
+    const item = ITEMS.find(x=>x.id===id);
+    const ci = pickedColor[id] || 0;
+    const cv = item?.colorVariants?.[ci];
+    const wa = cardEl.querySelector(`[id="cwa-${id}"]`);
+    if (wa && item) wa.href = waLink(item, cv?cv.imgs[0]:(item.imgs?.[0]||''), pickedSize[id], cv?.label||'');
+  });
 }
 
 // ── INTERACTION: CARD THUMB ──
@@ -734,112 +797,73 @@ function cardThumb(e, id, idx) {
   if (!item) return;
   const ci = pickedColor[id]||0;
   const imgs = item.colorVariants?.[ci]?.imgs || item.imgs || [];
-  const card = document.querySelector(`.card[data-id="${id}"]`);
-  if (!card) return;
-  const img = card.querySelector('.card-img > img');
-  if (img && imgs[idx]) img.src = imgs[idx];
-  card.querySelectorAll('.thumb-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
+    const img = cardEl.querySelector('.card-img > img');
+    if (img && imgs[idx]) img.src = imgs[idx];
+    cardEl.querySelectorAll('.thumb-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  });
 }
 
-// ── CAROUSEL LOGIC ──
-function getCarouselVisible() {
-  return window.innerWidth <= 768 ? 2 : (window.innerWidth <= 1100 ? 3 : 5);
-}
-
-function carouselGo(idx) {
-  if (!carouselItems.length) return;
-  const vis = getCarouselVisible();
-  const maxIdx = Math.max(0, carouselItems.length - vis);
-  carouselIdx = Math.max(0, Math.min(idx, maxIdx));
-
-  const track = document.getElementById('feat-track');
-  const cardW = 160 + 12; // card width + gap
-  if (track) track.style.transform = `translateX(-${carouselIdx * cardW}px)`;
-
-  // update dots
-  const dots = document.querySelectorAll('.carousel-dot');
-  dots.forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
-
-  // update buttons
-  const prev = document.getElementById('feat-prev');
-  const next = document.getElementById('feat-next');
-  if (prev) prev.classList.toggle('disabled', carouselIdx === 0);
-  if (next) next.classList.toggle('disabled', carouselIdx >= maxIdx);
-}
-
-function carouselNext() {
-  const vis = getCarouselVisible();
-  const maxIdx = Math.max(0, carouselItems.length - vis);
-  carouselGo(carouselIdx >= maxIdx ? 0 : carouselIdx + 1);
-  resetCarouselTimer();
-}
-
-function carouselPrev() {
-  const vis = getCarouselVisible();
-  const maxIdx = Math.max(0, carouselItems.length - vis);
-  carouselGo(carouselIdx <= 0 ? maxIdx : carouselIdx - 1);
-  resetCarouselTimer();
-}
-
-function startCarouselTimer() {
-  stopCarouselTimer();
-  carouselTimer = setInterval(() => {
-    const vis = getCarouselVisible();
-    const maxIdx = Math.max(0, carouselItems.length - vis);
-    carouselGo(carouselIdx >= maxIdx ? 0 : carouselIdx + 1);
-  }, CAROUSEL_INTERVAL);
-}
-
-function stopCarouselTimer() {
-  if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
-}
-
-function resetCarouselTimer() {
-  stopCarouselTimer();
-  startCarouselTimer();
-}
+// ── INFINITE CAROUSEL ──
+// Card width (160) + gap (12) = 172px per card slot
+const CARD_SLOT = 172;
 
 function buildCarousel(items) {
-  carouselItems = items;
-  carouselIdx = 0;
-  const vis = getCarouselVisible();
-  const maxIdx = Math.max(0, items.length - vis);
-  const dotsHtml = Array.from({length: maxIdx + 1}, (_, i) =>
-    `<button class="carousel-dot${i === 0 ? ' active' : ''}" onclick="carouselGo(${i});resetCarouselTimer()" aria-label="Go to slide ${i+1}"></button>`
-  ).join('');
+  // Triple the items so we have plenty of runway before the loop resets
+  const tripled = [...items, ...items, ...items];
+  // The pixel distance to translate = one full set width
+  const singleSetWidth = items.length * CARD_SLOT;
+  // Speed: ~40px per second → duration = singleSetWidth / 40
+  const duration = Math.round(singleSetWidth / 38);
+
+  const cardsHtml = tripled.map((it, i) => card(it, i % items.length)).join('');
 
   return `<div class="featured-section">
     <div class="featured-head">
       <span class="featured-title">Featured Picks</span>
       <span class="featured-badge">🔥 HOT</span>
     </div>
+    <div class="carousel-hint">Hover to pause &amp; browse</div>
     <div class="carousel-wrap">
-      <button class="carousel-btn prev disabled" id="feat-prev" onclick="carouselPrev()" aria-label="Previous">&#8249;</button>
-      <button class="carousel-btn next" id="feat-next" onclick="carouselNext()" aria-label="Next">&#8250;</button>
-      <div class="carousel-track-outer"
-        id="feat-outer"
-        onmouseenter="stopCarouselTimer()"
-        onmouseleave="startCarouselTimer()">
-        <div class="carousel-track" id="feat-track">
-          ${items.map((it, i) => card(it, i)).join('')}
+      <div class="carousel-track-outer" id="feat-outer">
+        <div class="carousel-track carousel-infinite" id="feat-track"
+          style="--translate-end:-${singleSetWidth}px; animation-duration:${duration}s">
+          ${cardsHtml}
         </div>
       </div>
-      <div class="carousel-dots">${dotsHtml}</div>
     </div>
   </div>`;
 }
 
-// Touch/swipe support for carousel
-let cTouchX = 0;
-function initCarouselSwipe() {
+// Touch support: pause on touchstart, resume on touchend
+function initCarouselTouch() {
   const outer = document.getElementById('feat-outer');
   if (!outer) return;
-  outer.addEventListener('touchstart', e => { cTouchX = e.changedTouches[0].screenX; stopCarouselTimer(); }, {passive:true});
+  const track = document.getElementById('feat-track');
+  if (!track) return;
+
+  let touchStartX = 0;
+
+  outer.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+    // Freeze at current position
+    const computed = window.getComputedStyle(track);
+    const matrix = new DOMMatrix(computed.transform);
+    track.style.animationPlayState = 'paused';
+    // Store current translateX so it stays put
+    track.style.transform = `translateX(${matrix.m41}px)`;
+    track.style.animation = 'none';
+  }, {passive: true});
+
   outer.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].screenX - cTouchX;
-    if (Math.abs(dx) > 40) dx < 0 ? carouselNext() : carouselPrev();
-    else startCarouselTimer();
-  }, {passive:true});
+    // Resume animation from current position using JS offset trick
+    track.style.animation = '';
+    track.style.transform = '';
+    track.classList.remove('carousel-infinite');
+    // Force reflow then re-add class
+    void track.offsetWidth;
+    track.classList.add('carousel-infinite');
+  }, {passive: true});
 }
 
 // ── BRAND / SECTION GROUPS ──
@@ -864,8 +888,6 @@ function render() {
   document.getElementById('toolbar-label').textContent = isSrch ? `Results for "${searchQ}"` : catName;
   document.getElementById('toolbar-count').textContent = ` · ${visible.length} item${visible.length!==1?'s':''}`;
 
-  stopCarouselTimer();
-
   if (!visible.length) {
     body.innerHTML = `<div class="section"><div class="grid-4"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;
     return;
@@ -879,7 +901,7 @@ function render() {
 
   let html = '';
 
-  // Featured carousel
+  // Featured infinite carousel
   const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
   if (featItems.length) {
     html += buildCarousel(featItems);
@@ -912,24 +934,15 @@ function render() {
   body.innerHTML = html;
   animate(body);
 
-  // Init carousel after DOM is ready
-  if (featItems.length) {
-    requestAnimationFrame(() => {
-      carouselGo(0);
-      initCarouselSwipe();
-      startCarouselTimer();
-    });
-  }
+  // Ensure carousel cards are immediately visible (not hidden by initial opacity:0)
+  requestAnimationFrame(() => {
+    const track = document.getElementById('feat-track');
+    if (track) {
+      track.querySelectorAll('.card').forEach(c => c.classList.add('in'));
+      initCarouselTouch();
+    }
+  });
 }
-
-window.addEventListener('resize', () => {
-  if (currentCat === 'all' && !searchQ) {
-    const vis = getCarouselVisible();
-    const maxIdx = Math.max(0, carouselItems.length - vis);
-    carouselIdx = Math.min(carouselIdx, maxIdx);
-    carouselGo(carouselIdx);
-  }
-});
 
 // ── BRAND PAGE STATE ──
 let bpKey = null;
@@ -1077,8 +1090,9 @@ function lbColor(idx) {
   if (lbItem) pickedColor[lbItem.id]=idx;
   paintLb();
   if (lbItem) {
-    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
-    if (card) card.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
+    document.querySelectorAll(`.card[data-id="${lbItem.id}"]`).forEach(cardEl => {
+      cardEl.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
+    });
   }
 }
 function lbSzPick(sz) {
@@ -1088,8 +1102,9 @@ function lbSzPick(sz) {
   const cv = lbItem?.colorVariants?.[lbCi];
   document.getElementById('lb-wa').href = waLink(lbItem, cv?cv.imgs[0]:(lbItem?.imgs?.[0]||''), lbSz, cv?.label||'');
   if (lbItem) {
-    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
-    if (card) card.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));
+    document.querySelectorAll(`.card[data-id="${lbItem.id}"]`).forEach(cardEl => {
+      cardEl.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));
+    });
   }
 }
 
