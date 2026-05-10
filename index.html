@@ -114,7 +114,6 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:1.5rem}
 
 /* ── CARD ── */
-/* BLACK BORDERS on all cards */
 .card{border-radius:var(--radius-lg);background:var(--surface);border:1.5px solid #111;overflow:hidden;cursor:pointer;position:relative;transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;opacity:0;transform:translateY(8px)}
 .card.in{opacity:1;transform:translateY(0)}
 .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:#000}
@@ -125,22 +124,18 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .card:hover .card-img img{transform:scale(1.06)}
 .card-img .ph-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#ccc}
 
-/* badge */
 .badge{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:5px;z-index:2}
 .badge.hot{background:var(--red);color:#fff}
 .badge.new-badge{background:var(--text);color:#fff}
 
-/* thumb strip */
 .thumb-row{position:absolute;bottom:8px;left:8px;right:8px;display:flex;gap:4px;opacity:0;transition:opacity 0.2s;pointer-events:none;z-index:3}
 .card:hover .thumb-row,.thumb-row.always-show{opacity:1;pointer-events:auto}
 .thumb-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;flex-shrink:0;transition:background 0.15s}
 .thumb-dot.active{background:#fff}
 
-/* wa overlay */
 .card-wa-overlay{position:absolute;bottom:0;left:0;right:0;background:var(--wa);color:#fff;font-size:11px;font-weight:600;padding:9px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;transform:translateY(100%);transition:transform 0.25s cubic-bezier(.25,.46,.45,.94);z-index:4}
 .card:hover .card-wa-overlay,.card-wa-overlay.always-show{transform:translateY(0)}
 
-/* info */
 .card-body{padding:10px 11px 13px;border-top:1px solid #111}
 .card-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
 .card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
@@ -148,14 +143,12 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .card-sku{font-family:var(--mono);font-size:9.5px;color:var(--text-3);margin-bottom:6px}
 .card-sizes{font-family:var(--mono);font-size:9.5px;color:var(--text-3);margin-bottom:6px}
 
-/* color swatches on card */
 .swatch-row{display:flex;gap:5px;margin-bottom:7px;flex-wrap:wrap;align-items:center}
 .swatch-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-right:2px}
 .sw{width:15px;height:15px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.12);transition:border-color 0.15s,transform 0.15s;flex-shrink:0}
 .sw:hover{transform:scale(1.2)}
 .sw.active{border-color:var(--text);transform:scale(1.2)}
 
-/* size chips on card */
 .size-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
 .sz-chip{font-family:var(--mono);font-size:9px;letter-spacing:0.5px;border:1px solid var(--border-dark);border-radius:5px;padding:3px 7px;color:var(--text-3);cursor:pointer;transition:all 0.15s;background:none}
 .sz-chip:hover{border-color:var(--text);color:var(--text)}
@@ -164,75 +157,37 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .card-cta{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--text-3);border-bottom:1px solid transparent;padding-bottom:1px;transition:color 0.15s,border-color 0.15s;width:fit-content}
 .card:hover .card-cta{color:var(--accent-dark);border-color:var(--accent)}
 
-/* ── FEATURED CAROUSEL — INFINITE TICKER STYLE ── */
+/* ── FEATURED CAROUSEL ── */
 .featured-section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
 .featured-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px}
 .featured-title{font-size:15px;font-weight:700}
 .featured-badge{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 8px;border-radius:5px}
 
-/* Outer clip */
 .carousel-wrap{overflow:hidden;padding:0 0 1.5rem;position:relative}
+.carousel-wrap::before,.carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:5;pointer-events:none}
+.carousel-wrap::before{left:0;background:linear-gradient(to right,var(--surface) 0%,transparent 100%)}
+.carousel-wrap::after{right:0;background:linear-gradient(to left,var(--surface) 0%,transparent 100%)}
 
-/* Gradient fade edges */
-.carousel-wrap::before,
-.carousel-wrap::after{
-  content:'';
-  position:absolute;
-  top:0;bottom:0;width:60px;
-  z-index:5;
-  pointer-events:none;
-}
-.carousel-wrap::before{
-  left:0;
-  background:linear-gradient(to right, var(--surface) 0%, transparent 100%);
-}
-.carousel-wrap::after{
-  right:0;
-  background:linear-gradient(to left, var(--surface) 0%, transparent 100%);
-}
-
-/* The scrolling track — no padding, full width overflow hidden */
+/* No hover pause — drag/touch handled in JS */
 .carousel-track-outer{
   overflow:hidden;
   padding:0 0 4px;
-  /* Pause animation on hover so users can interact */
   cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .carousel-track-outer:active{cursor:grabbing}
 
-/* Infinite scroll keyframe */
-@keyframes carousel-scroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(var(--translate-end,-2000px))}
-}
-
-/* The track itself */
 .carousel-track{
   display:flex;
   gap:12px;
   width:max-content;
   will-change:transform;
-  padding:4px 0;
+  padding:4px 1.5rem 16px;
 }
 
-/* Infinite motion class */
-.carousel-infinite{
-  animation:carousel-scroll linear infinite;
-  animation-play-state:running;
-}
+.carousel-track .card{flex:0 0 160px}
 
-/* Pause on hover — so user can browse freely */
-.carousel-track-outer:hover .carousel-infinite{
-  animation-play-state:paused;
-}
-
-/* Cards inside carousel get a tiny starting nudge */
-.carousel-track .card{
-  flex:0 0 160px;
-  /* override the initial hidden transform so paused cards are visible */
-}
-
-/* Pause hint label */
 .carousel-hint{
   font-family:var(--mono);
   font-size:9px;
@@ -755,13 +710,12 @@ function animate(container) {
   }));
 }
 
-// ── INTERACTION: CARD COLOR ──
+// ── CARD COLOR ──
 function cardColor(e, id, idx) {
   e.stopPropagation();
   pickedColor[id] = idx;
   const item = ITEMS.find(x=>x.id===id);
   if (!item?.colorVariants) return;
-  // Update ALL cards with this id (including duplicates in carousel)
   document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
     const v = item.colorVariants[idx];
     const img = cardEl.querySelector('.card-img > img');
@@ -776,7 +730,7 @@ function cardColor(e, id, idx) {
   });
 }
 
-// ── INTERACTION: CARD SIZE ──
+// ── CARD SIZE ──
 function cardSize(e, id, size) {
   e.stopPropagation();
   pickedSize[id] = pickedSize[id]===size ? '' : size;
@@ -790,7 +744,7 @@ function cardSize(e, id, size) {
   });
 }
 
-// ── INTERACTION: CARD THUMB ──
+// ── CARD THUMB ──
 function cardThumb(e, id, idx) {
   e.stopPropagation();
   const item = ITEMS.find(x=>x.id===id);
@@ -804,18 +758,12 @@ function cardThumb(e, id, idx) {
   });
 }
 
-// ── INFINITE CAROUSEL ──
-// Card width (160) + gap (12) = 172px per card slot
+// ── CAROUSEL: card width + gap ──
 const CARD_SLOT = 172;
 
+// ── BUILD CAROUSEL HTML (no CSS animation — JS drives it) ──
 function buildCarousel(items) {
-  // Triple the items so we have plenty of runway before the loop resets
   const tripled = [...items, ...items, ...items];
-  // The pixel distance to translate = one full set width
-  const singleSetWidth = items.length * CARD_SLOT;
-  // Speed: ~40px per second → duration = singleSetWidth / 40
-  const duration = Math.round(singleSetWidth / 38);
-
   const cardsHtml = tripled.map((it, i) => card(it, i % items.length)).join('');
 
   return `<div class="featured-section">
@@ -823,11 +771,10 @@ function buildCarousel(items) {
       <span class="featured-title">Featured Picks</span>
       <span class="featured-badge">🔥 HOT</span>
     </div>
-    <div class="carousel-hint">Hover to pause &amp; browse</div>
+    <div class="carousel-hint">Swipe or drag to browse</div>
     <div class="carousel-wrap">
       <div class="carousel-track-outer" id="feat-outer">
-        <div class="carousel-track carousel-infinite" id="feat-track"
-          style="--translate-end:-${singleSetWidth}px; animation-duration:${duration}s">
+        <div class="carousel-track" id="feat-track">
           ${cardsHtml}
         </div>
       </div>
@@ -835,46 +782,119 @@ function buildCarousel(items) {
   </div>`;
 }
 
-// Touch support: pause on touchstart, resume on touchend
-function initCarouselTouch() {
+// ── INIT CAROUSEL: rAF loop + drag/touch ──
+function initCarousel() {
   const outer = document.getElementById('feat-outer');
-  if (!outer) return;
   const track = document.getElementById('feat-track');
-  if (!track) return;
+  if (!outer || !track) return;
 
-  let touchStartX = 0;
+  const featItems = FEATURED_IDS.map(id => ITEMS.find(x => x.id === id)).filter(Boolean);
+  const singleSetWidth = featItems.length * CARD_SLOT;
+  const speed = 38; // px/sec
 
+  let offset = 0;
+  let raf = null;
+  let lastTime = null;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartOffset = 0;
+  let touchId = null;
+
+  function clamp(o) {
+    o = o % singleSetWidth;
+    if (o < 0) o += singleSetWidth;
+    return o;
+  }
+
+  function loop(ts) {
+    if (lastTime === null) lastTime = ts;
+    const dt = (ts - lastTime) / 1000;
+    lastTime = ts;
+    offset += speed * dt;
+    if (offset >= singleSetWidth) offset -= singleSetWidth;
+    track.style.transform = `translateX(${-offset}px)`;
+    raf = requestAnimationFrame(loop);
+  }
+
+  function startAnim() {
+    if (raf) return;
+    lastTime = null;
+    raf = requestAnimationFrame(loop);
+  }
+
+  function stopAnim() {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // ── Mouse drag ──
+  outer.addEventListener('mousedown', e => {
+    stopAnim();
+    dragging = true;
+    dragStartX = e.clientX;
+    dragStartOffset = offset;
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    offset = clamp(dragStartOffset + (dragStartX - e.clientX));
+    track.style.transform = `translateX(${-offset}px)`;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    startAnim();
+  });
+
+  // ── Touch drag ──
   outer.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-    // Freeze at current position
-    const computed = window.getComputedStyle(track);
-    const matrix = new DOMMatrix(computed.transform);
-    track.style.animationPlayState = 'paused';
-    // Store current translateX so it stays put
-    track.style.transform = `translateX(${matrix.m41}px)`;
-    track.style.animation = 'none';
-  }, {passive: true});
+    if (touchId !== null) return;
+    const t = e.changedTouches[0];
+    touchId = t.identifier;
+    stopAnim();
+    dragging = true;
+    dragStartX = t.clientX;
+    dragStartOffset = offset;
+  }, { passive: true });
 
-  outer.addEventListener('touchend', e => {
-    // Resume animation from current position using JS offset trick
-    track.style.animation = '';
-    track.style.transform = '';
-    track.classList.remove('carousel-infinite');
-    // Force reflow then re-add class
-    void track.offsetWidth;
-    track.classList.add('carousel-infinite');
-  }, {passive: true});
+  window.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    let t = null;
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      if (e.changedTouches[i].identifier === touchId) { t = e.changedTouches[i]; break; }
+    }
+    if (!t) return;
+    offset = clamp(dragStartOffset + (dragStartX - t.clientX));
+    track.style.transform = `translateX(${-offset}px)`;
+  }, { passive: true });
+
+  window.addEventListener('touchend', e => {
+    let found = false;
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      if (e.changedTouches[i].identifier === touchId) { found = true; break; }
+    }
+    if (!found) return;
+    touchId = null;
+    dragging = false;
+    startAnim();
+  }, { passive: true });
+
+  // Make all carousel cards visible immediately
+  track.querySelectorAll('.card').forEach(c => c.classList.add('in'));
+
+  startAnim();
 }
 
 // ── BRAND / SECTION GROUPS ──
 const FEATURED_IDS = [1,18,22,25,26,29,30,11,43,46];
 const GROUPS = [
-  {key:'nike',    label:'Nike / Jordan',      brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], max:6},
-  {key:'bape',    label:'A Bathing Ape',       brands:['A Bathing Ape'], max:6},
-  {key:'humanmade',label:'Human Made',         brands:['Human Made'], max:4},
-  {key:'ami',     label:'Ami Paris',           brands:['Ami Paris'], max:6},
-  {key:'supreme', label:'Supreme',             brands:['Supreme','Supreme × Thrasher'], max:8},
-  {key:'chrome',  label:'Chrome Hearts',       brands:['Chrome Hearts'], max:5},
+  {key:'nike',      label:'Nike / Jordan',    brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], max:6},
+  {key:'bape',      label:'A Bathing Ape',     brands:['A Bathing Ape'], max:6},
+  {key:'humanmade', label:'Human Made',        brands:['Human Made'], max:4},
+  {key:'ami',       label:'Ami Paris',         brands:['Ami Paris'], max:6},
+  {key:'supreme',   label:'Supreme',           brands:['Supreme','Supreme × Thrasher'], max:8},
+  {key:'chrome',    label:'Chrome Hearts',     brands:['Chrome Hearts'], max:5},
 ];
 
 // ── RENDER ──
@@ -901,7 +921,7 @@ function render() {
 
   let html = '';
 
-  // Featured infinite carousel
+  // Featured carousel
   const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
   if (featItems.length) {
     html += buildCarousel(featItems);
@@ -924,7 +944,7 @@ function render() {
     </div>`;
   });
 
-  // Other items not in groups
+  // Other items
   const grouped = GROUPS.flatMap(g=>g.brands);
   const rest = visible.filter(it=>!grouped.includes(it.brand));
   if (rest.length) {
@@ -934,14 +954,8 @@ function render() {
   body.innerHTML = html;
   animate(body);
 
-  // Ensure carousel cards are immediately visible (not hidden by initial opacity:0)
-  requestAnimationFrame(() => {
-    const track = document.getElementById('feat-track');
-    if (track) {
-      track.querySelectorAll('.card').forEach(c => c.classList.add('in'));
-      initCarouselTouch();
-    }
-  });
+  // Init the JS-driven carousel after DOM is ready
+  requestAnimationFrame(() => initCarousel());
 }
 
 // ── BRAND PAGE STATE ──
@@ -989,7 +1003,6 @@ function closeBrandPage() {
   if(history.state?.brandPage) history.back();
 }
 
-// Brand page search wiring
 const bpInput = document.getElementById('bp-search-input');
 const bpClear = document.getElementById('bp-search-clear');
 bpInput.addEventListener('input', () => {
