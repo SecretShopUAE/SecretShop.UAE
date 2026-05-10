@@ -6,439 +6,425 @@
 <title>Secret Shop — Abu Dhabi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-size:16px}
 :root{
-  --b:#ffffff;
-  --w:#0a0a0a;
-  --g:#777;
-  --line:#e0e0e0;
-  --mono:'Space Mono',monospace;
-  --sans:'Barlow',sans-serif;
+  --bg:#f7f7f7;
+  --surface:#ffffff;
+  --border:#e8e8e8;
+  --border-dark:#d0d0d0;
+  --text:#0d0d0d;
+  --text-2:#555;
+  --text-3:#999;
+  --accent:#00c853;
+  --accent-dark:#00a844;
+  --red:#e53935;
+  --blue:#1565c0;
+  --font:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+  --radius:10px;
+  --radius-lg:16px;
+  --shadow:0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.1);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.14);
   --wa:#25D366;
 }
-body{background:#f2f2f2;color:var(--w);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+button{font-family:var(--font);cursor:pointer;border:none;background:none}
 img{display:block;width:100%;height:100%;object-fit:cover}
-button{font-family:var(--sans);cursor:pointer;border:none;background:none}
 
-/* TICKER */
-.ticker-wrap{background:#0a0a0a;overflow:hidden;padding:7px 0;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 22s linear infinite}
-.ticker-item{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:#fff;padding:0 2.5rem;font-weight:700;text-transform:uppercase}
+/* ── TICKER ── */
+.ticker{background:var(--text);overflow:hidden;padding:8px 0;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker-item{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:#fff;padding:0 3rem;text-transform:uppercase;opacity:0.85}
+.ticker-item .dot{color:var(--accent);margin-right:0.5rem}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* HEADER */
-header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px solid var(--line)}
-.header-top{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:64px;gap:1rem}
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border)}
+.header-main{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:0 1.5rem;height:60px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-img{height:40px;width:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--border)}
+.logo-text{font-size:15px;font-weight:700;letter-spacing:-0.3px;color:var(--text);white-space:nowrap}
+.logo-text span{display:block;font-size:10px;font-weight:400;color:var(--text-3);letter-spacing:0.5px}
 
-/* LOGO */
-.logo{display:flex;align-items:center;gap:0.6rem;flex-shrink:0}
-.logo-img{height:46px;width:auto;object-fit:contain;display:block;flex-shrink:0}
-.logo-fallback{display:none;align-items:center;gap:6px;font-family:var(--mono);text-transform:uppercase}
-.logo-fb-icon{width:32px;height:32px;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
-.logo-fb-text{font-size:11px;letter-spacing:3px;line-height:1.2;color:var(--w)}
-.logo-fb-text span{display:block;font-size:8px;letter-spacing:2px;color:var(--g)}
+.search-bar{position:relative;width:100%;max-width:540px;margin:0 auto}
+.search-bar input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:9px 40px 9px 36px;font-family:var(--font);font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s,background 0.2s}
+.search-bar input:focus{border-color:var(--text);background:#fff}
+.search-bar input::placeholder{color:var(--text-3)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none;width:15px;height:15px}
+.search-clear{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:16px;line-height:1;padding:2px 4px;background:none;border:none;cursor:pointer}
+.search-clear.visible{display:block}
 
-/* SEARCH */
-.search-wrap{flex:1;max-width:480px;position:relative}
-.search-wrap input{width:100%;background:#f5f5f5;border:1px solid #ddd;color:var(--w);font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:9px 38px 9px 14px;outline:none;transition:border-color 0.2s}
-.search-wrap input::placeholder{color:var(--g)}
-.search-wrap input:focus{border-color:#aaa}
-.search-wrap .s-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--g);pointer-events:none}
-.clear-btn{display:none;position:absolute;right:32px;top:50%;transform:translateY(-50%);color:var(--g);font-size:14px;background:none;border:none;cursor:pointer;padding:0 4px}
-.clear-btn.visible{display:block}
+.header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.wa-pill{display:flex;align-items:center;gap:7px;background:var(--wa);color:#fff;border-radius:var(--radius);padding:8px 14px;font-size:12px;font-weight:600;white-space:nowrap;transition:opacity 0.2s}
+.wa-pill:hover{opacity:0.88}
+.wa-pill svg{flex-shrink:0}
 
-/* WA BUTTON */
-.wa-btn{display:flex;align-items:center;gap:0.5rem;background:var(--wa);color:#fff;padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;border-radius:8px}
-.wa-btn:hover{opacity:0.88}
-
-/* NAV */
-.cat-nav{display:flex;border-top:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+/* ── CATEGORY NAV ── */
+.cat-nav{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);background:var(--surface);padding:0 1rem}
 .cat-nav::-webkit-scrollbar{display:none}
-.cat-btn{padding:10px 20px;font-family:var(--mono);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--g);white-space:nowrap;border-right:1px solid var(--line);border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;flex-shrink:0}
-.cat-btn:hover{color:var(--w)}
-.cat-btn.active{color:var(--w);border-bottom-color:var(--w)}
+.cat-btn{padding:12px 16px;font-size:12px;font-weight:500;color:var(--text-3);white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;letter-spacing:0.2px}
+.cat-btn.active{color:var(--text);border-bottom-color:var(--text);font-weight:600}
+.cat-btn:hover:not(.active){color:var(--text-2)}
 
-/* COVER */
-.cover{position:relative;height:45svh;min-height:280px;border-bottom:1px solid var(--line);overflow:hidden;background:#111}
-.cover-img{position:absolute;inset:0}
-.cover-img img{filter:brightness(0.55) grayscale(100%)}
-.cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%,transparent 100%)}
-.cover-content{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 2rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.cover-headline{font-family:var(--mono);font-size:clamp(2.2rem,7vw,5.5rem);font-weight:700;letter-spacing:-1px;line-height:0.95;text-transform:uppercase;color:#fff}
-.cover-headline em{font-style:italic;color:var(--g)}
-.cover-pills{display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end}
-.cover-pill{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:0.7}
+/* ── HERO BANNER ── */
+.hero{background:var(--text);color:#fff;padding:2.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%, rgba(0,200,83,0.12) 0%, transparent 65%)}
+.hero-left{}
+.hero-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.hero-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-1.5px;line-height:1;margin-bottom:12px}
+.hero-title em{font-style:italic;color:rgba(255,255,255,0.4)}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-pill{font-size:11px;font-weight:500;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px;color:rgba(255,255,255,0.75)}
+.hero-right{text-align:right;flex-shrink:0}
+.hero-stat{font-size:11px;color:rgba(255,255,255,0.45);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
+.hero-stat strong{display:block;font-size:2rem;font-weight:700;color:#fff;letter-spacing:-1px;font-family:var(--font)}
+.tabby-badge{display:inline-flex;align-items:center;gap:6px;background:#c2ff1f;border-radius:6px;padding:5px 10px;margin-top:12px}
+.tabby-badge span{font-family:var(--mono);font-size:10px;font-weight:700;color:#000;letter-spacing:1.5px;text-transform:uppercase}
 
-/* TABBY */
-.tabby-strip{background:#f5f5f5;display:flex;align-items:center;justify-content:center;gap:1rem;padding:10px 1.5rem;border-bottom:1px solid #ddd;flex-wrap:wrap}
-.tabby-strip p{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#000;font-weight:700}
-.tabby-logo{display:flex;align-items:center;gap:5px;background:#C2FF1F;padding:4px 12px}
-.tabby-logo span{font-family:var(--mono);font-size:11px;font-weight:700;color:#000;letter-spacing:2px}
-.tabby-logo .t-dot{width:8px;height:8px;border-radius:50%;background:#0a0a0a;display:inline-block}
+/* ── TOOLBAR ── */
+.toolbar{display:flex;align-items:center;justify-content:space-between;padding:12px 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);gap:1rem}
+.toolbar-label{font-size:13px;font-weight:600;color:var(--text)}
+.toolbar-count{font-family:var(--mono);font-size:11px;color:var(--text-3);margin-left:6px}
 
-/* SECTION BAR */
-.section-bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:#fff}
-.section-name{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--g)}
-.section-count{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:#999}
+/* ── MAIN LAYOUT ── */
+.site-body{padding:0 0 4rem}
 
-/* BRAND SECTIONS */
-.grid-outer{padding:0.5rem 0 3rem;background:#f2f2f2}
-.brand-section{margin-bottom:0;background:#fff;border-bottom:1px solid var(--line)}
-.brand-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem 0.5rem}
-.brand-title{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--w)}
-.brand-count{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:#999;margin-left:8px}
-.brand-see-all{font-family:var(--sans);font-size:13px;font-weight:600;color:#25D366;background:none;border:none;cursor:pointer;transition:opacity 0.2s;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.brand-see-all:hover{opacity:0.75}
-.brand-scroll-wrap{position:relative}
-.brand-scroll{display:flex;gap:10px;padding:0.5rem 1.25rem 1.25rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.brand-scroll::-webkit-scrollbar{display:none}
-.brand-scroll .card{flex:0 0 175px;min-width:0;scroll-snap-align:start}
-.brand-static{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0.5rem 1.25rem 1.25rem}
-.featured-section{padding:0;background:#fff;border-bottom:1px solid var(--line);margin-bottom:0}
-.featured-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem 0.5rem}
-.featured-title{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--w)}
-.featured-badge{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#ff2d2d;color:#fff;padding:3px 8px;border-radius:4px}
-.featured-scroll{display:flex;gap:10px;padding:0.5rem 1.25rem 1.25rem;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.featured-scroll::-webkit-scrollbar{display:none}
-.featured-scroll .card{flex:0 0 185px;min-width:0;scroll-snap-align:start}
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:1rem 1.25rem}
-  
-/* CARD */
-.card{
-  border-radius:16px;
-  cursor:pointer;
-  opacity:0;
-  transform:translateY(12px);
-  transition:opacity 0.4s, transform 0.4s, box-shadow 0.3s;
-  background:#fff;
-  box-shadow:0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
-  overflow:hidden;
-  border:1px solid #000;
-}
+/* ── SECTION ── */
+.section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px;gap:1rem}
+.section-brand{font-size:15px;font-weight:700;color:var(--text)}
+.section-meta{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px}
+.section-see-all{font-size:12px;font-weight:600;color:var(--accent-dark);display:flex;align-items:center;gap:3px;white-space:nowrap;border:1.5px solid var(--accent);border-radius:20px;padding:4px 12px;transition:background 0.15s,color 0.15s}
+.section-see-all:hover{background:var(--accent);color:#fff}
+
+/* ── HORIZONTAL SCROLL ROW ── */
+.hscroll{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:0 1.5rem 1.5rem;display:flex;gap:12px}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll .card{flex:0 0 160px;scroll-snap-align:start}
+
+/* ── GRID ── */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 1.5rem 1.5rem}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 1.5rem 1.5rem}
+.search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:1.5rem}
+
+/* ── CARD ── */
+.card{border-radius:var(--radius-lg);background:var(--surface);border:1.5px solid var(--border);overflow:hidden;cursor:pointer;position:relative;transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;opacity:0;transform:translateY(8px)}
 .card.in{opacity:1;transform:translateY(0)}
-.card:hover{
-  box-shadow:0 10px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
-  transform:translateY(-4px);
-}
-.card.in:hover{transform:translateY(-4px)}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--border-dark)}
+.card.in:hover{transform:translateY(-3px)}
 
-.card-photo{position:relative;aspect-ratio:3/4;background:#f0f0f0;overflow:hidden;border-radius:16px 16px 0 0}
-.card-photo>img{width:100%;height:100%;object-fit:cover;transition:transform 0.55s cubic-bezier(.25,.46,.45,.94),filter 0.3s;filter:grayscale(20%)}
-.card:hover .card-photo>img{transform:scale(1.07);filter:grayscale(0%)}
+.card-img{position:relative;aspect-ratio:1/1;background:#f0f0f0;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s cubic-bezier(.25,.46,.45,.94)}
+.card:hover .card-img img{transform:scale(1.06)}
+.card-img .ph-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#ccc}
 
-/* THUMB STRIP */
-.thumb-strip{position:absolute;bottom:44px;left:0;right:0;display:flex;gap:3px;padding:5px 6px;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);opacity:0;transition:opacity 0.25s;pointer-events:none}
-.card:hover .thumb-strip,.thumb-strip.always{opacity:1;pointer-events:auto}
-.thumb{width:34px;height:34px;flex-shrink:0;border:1.5px solid transparent;overflow:hidden;cursor:pointer;transition:border-color 0.15s;border-radius:4px}
-.thumb.active{border-color:#fff}
-.thumb img{width:100%;height:100%;object-fit:cover}
+/* badge */
+.badge{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:5px;z-index:2}
+.badge.hot{background:var(--red);color:#fff}
+.badge.new-badge{background:var(--text);color:#fff}
 
-.ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#f0f0f0;color:#bbb;font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:1rem}
-.ph svg{opacity:0.2}
+/* thumb strip */
+.thumb-row{position:absolute;bottom:8px;left:8px;right:8px;display:flex;gap:4px;opacity:0;transition:opacity 0.2s;pointer-events:none;z-index:3}
+.card:hover .thumb-row,.thumb-row.always-show{opacity:1;pointer-events:auto}
+.thumb-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;flex-shrink:0;transition:background 0.15s}
+.thumb-dot.active{background:#fff}
 
-.card-badge{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:6px}
-.card-badge.hot{background:#ff2d2d;color:#fff}
-.card-badge.new{background:#0a0a0a;color:#fff}
+/* wa overlay */
+.card-wa-overlay{position:absolute;bottom:0;left:0;right:0;background:var(--wa);color:#fff;font-size:11px;font-weight:600;padding:9px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;transform:translateY(100%);transition:transform 0.25s cubic-bezier(.25,.46,.45,.94);z-index:4}
+.card:hover .card-wa-overlay,.card-wa-overlay.always-show{transform:translateY(0)}
 
-.card-wa{position:absolute;bottom:0;left:0;right:0;background:var(--wa);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:9px;text-align:center;transform:translateY(100%);transition:transform 0.28s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:center;gap:6px;z-index:3}
-.card:hover .card-wa{transform:translateY(0)}
+/* info */
+.card-body{padding:10px 11px 13px;border-top:1px solid var(--border)}
+.card-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+.card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
+.card-sub{font-size:11px;color:var(--text-2);line-height:1.4;margin-bottom:6px}
+.card-sku{font-family:var(--mono);font-size:9.5px;color:var(--text-3);margin-bottom:6px}
+.card-sizes{font-family:var(--mono);font-size:9.5px;color:var(--text-3);margin-bottom:6px}
 
-.card-info{padding:0.75rem 0.85rem 1rem;border-top:1px solid rgba(0,0,0,0.06)}
-.card-cat{font-family:var(--mono);font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px}
-.card-name{font-size:13px;font-weight:600;line-height:1.25;letter-spacing:0.2px}
-.card-sku{font-family:var(--mono);font-size:8px;letter-spacing:1px;color:#888;margin-top:3px}
-.card-sub{font-size:10px;color:var(--g);margin-top:3px;letter-spacing:0.3px}
-.card-sizes{font-family:var(--mono);font-size:8.5px;letter-spacing:0.5px;color:#999;margin-top:4px}
-.card-inquire{margin-top:8px;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g);border-bottom:1px solid #ccc;padding-bottom:1px;transition:color 0.2s,border-color 0.2s}
-.card:hover .card-inquire{color:var(--wa);border-color:var(--wa)}
+/* color swatches on card */
+.swatch-row{display:flex;gap:5px;margin-bottom:7px;flex-wrap:wrap;align-items:center}
+.swatch-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-right:2px}
+.sw{width:15px;height:15px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.12);transition:border-color 0.15s,transform 0.15s;flex-shrink:0}
+.sw:hover{transform:scale(1.2)}
+.sw.active{border-color:var(--text);transform:scale(1.2)}
 
-/* SIZE SELECTOR */
-.size-row{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
-.sz{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:3px 7px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;border-radius:4px}
-.sz:hover{border-color:#333;color:var(--w)}
-.sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
+/* size chips on card */
+.size-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
+.sz-chip{font-family:var(--mono);font-size:9px;letter-spacing:0.5px;border:1px solid var(--border-dark);border-radius:5px;padding:3px 7px;color:var(--text-3);cursor:pointer;transition:all 0.15s;background:none}
+.sz-chip:hover{border-color:var(--text);color:var(--text)}
+.sz-chip.active{background:var(--text);border-color:var(--text);color:#fff}
 
-/* COLOR VARIANT SWATCHES — CARD */
-.color-row{display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap}
-.color-row-label{font-family:var(--mono);font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:#999;margin-right:2px}
-.csw{width:17px;height:17px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:border-color 0.15s,transform 0.15s;outline:1.5px solid rgba(0,0,0,0.15);flex-shrink:0}
-.csw:hover{transform:scale(1.15)}
-.csw.picked{border-color:var(--w);transform:scale(1.15)}
+.card-cta{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--text-3);border-bottom:1px solid transparent;padding-bottom:1px;transition:color 0.15s,border-color 0.15s;width:fit-content}
+.card:hover .card-cta{color:var(--accent-dark);border-color:var(--accent)}
 
-/* LIGHTBOX */
-.lb-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.93);align-items:center;justify-content:center}
+/* ── FEATURED SECTION ── */
+.featured-section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
+.featured-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px}
+.featured-title{font-size:15px;font-weight:700}
+.featured-badge{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 8px;border-radius:5px}
+
+/* ── SEARCH RESULTS ── */
+.search-results-wrap{background:var(--bg)}
+
+/* ── EMPTY STATE ── */
+.empty-state{grid-column:1/-1;padding:4rem 2rem;text-align:center;color:var(--text-3)}
+.empty-state p{font-size:15px;font-weight:600;color:var(--text-2);margin-bottom:6px}
+.empty-state span{font-size:12px}
+
+/* ── INFO GRID ── */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border-top:1px solid var(--border)}
+.info-cell{padding:1.75rem 1.5rem;border-right:1px solid var(--border);display:flex;align-items:flex-start;gap:1rem}
+.info-cell:last-child{border-right:none}
+.info-icon{width:38px;height:38px;border-radius:var(--radius);background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-2)}
+.info-cell h4{font-size:12px;font-weight:700;margin-bottom:5px;letter-spacing:-0.2px}
+.info-cell p{font-size:11.5px;color:var(--text-2);line-height:1.6}
+.info-cell a{color:var(--accent-dark);font-weight:500}
+
+/* ── FOOTER ── */
+footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
+.f-brand{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+.f-tagline{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:1.25rem}
+.f-socials{display:flex;gap:8px}
+.f-social{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:6px 14px;border-radius:20px;transition:all 0.2s}
+.f-social:hover{border-color:rgba(255,255,255,0.5);color:#fff}
+.f-col-title{font-family:var(--mono);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px}
+.f-link{display:block;font-size:12.5px;color:rgba(255,255,255,0.6);margin-bottom:8px;transition:color 0.15s}
+.f-link:hover{color:#fff}
+.footer-bottom{background:#050505;padding:14px 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-transform:uppercase}
+
+/* ── LIGHTBOX ── */
+.lb-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);align-items:center;justify-content:center;padding:1rem}
 .lb-overlay.open{display:flex}
-.lb-box{position:relative;max-width:min(92vw,560px);width:100%;background:#fff;border-radius:20px;border:1px solid var(--line);max-height:95svh;overflow-y:auto;scrollbar-width:none}
+.lb-box{position:relative;background:var(--surface);border-radius:20px;width:100%;max-width:500px;max-height:96svh;overflow-y:auto;scrollbar-width:none}
 .lb-box::-webkit-scrollbar{display:none}
-.lb-main{aspect-ratio:3/4;position:relative;overflow:hidden;background:#f5f5f5;border-radius:20px 20px 0 0}
-.lb-main img{width:100%;height:100%;object-fit:contain}
-.lb-close{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,0.9);color:#000;border:1px solid #ddd;font-size:18px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%}
-.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;font-size:22px;width:38px;height:60px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}
-.lb-arrow.prev{left:0;border-radius:0 8px 8px 0}
-.lb-arrow.next{right:0;border-radius:8px 0 0 8px}
-.lb-thumbs{display:flex;gap:4px;padding:8px;background:#f0f0f0;overflow-x:auto;scrollbar-width:none}
-.lb-thumbs::-webkit-scrollbar{display:none}
-.lb-thumb{width:52px;height:52px;flex-shrink:0;border:1.5px solid #ddd;overflow:hidden;cursor:pointer;transition:border-color 0.15s;border-radius:6px}
-.lb-thumb.active{border-color:var(--w)}
-.lb-thumb img{width:100%;height:100%;object-fit:cover}
-.lb-info{padding:12px 14px 8px}
-.lb-info h3{font-size:14px;font-weight:600;margin-bottom:5px}
-.lb-info .lb-meta{font-family:var(--mono);font-size:8.5px;letter-spacing:1px;color:var(--g);margin-bottom:4px}
-.lb-info .lb-desc-full{font-size:11px;color:#555;line-height:1.7;margin-top:6px;border-top:1px solid var(--line);padding-top:8px}
-
-/* LIGHTBOX SIZE PICKER */
-.lb-size-wrap{padding:0 14px 10px}
-.lb-size-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:6px}
-.lb-size-row{display:flex;gap:6px;flex-wrap:wrap}
-.lb-sz{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:5px 12px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;border-radius:6px}
-.lb-sz:hover{border-color:#333;color:var(--w)}
-.lb-sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
-
-/* LIGHTBOX COLOR PICKER */
-.lb-color-wrap{padding:0 14px 10px}
-.lb-color-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:8px}
-.lb-color-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.lb-csw{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.15);transition:border-color 0.15s,transform 0.15s;flex-shrink:0}
-.lb-csw:hover{transform:scale(1.12)}
-.lb-csw.picked{border-color:var(--w);transform:scale(1.12)}
-.lb-color-name{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#777;margin-left:2px}
-
-.lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:12px;margin:10px 14px 14px;text-decoration:none;transition:opacity 0.2s;border-radius:10px}
+.lb-photo{position:relative;aspect-ratio:1/1;background:#f0f0f0;border-radius:20px 20px 0 0;overflow:hidden}
+.lb-photo img{width:100%;height:100%;object-fit:contain}
+.lb-close{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,0.92);border:1px solid var(--border);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:var(--text);transition:background 0.15s}
+.lb-close:hover{background:#fff}
+.lb-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:#fff;border:none;width:36px;height:56px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background 0.15s;z-index:5}
+.lb-arr:hover{background:rgba(0,0,0,0.65)}
+.lb-arr.prev{left:0;border-radius:0 8px 8px 0}
+.lb-arr.next{right:0;border-radius:8px 0 0 8px}
+.lb-dots{display:flex;justify-content:center;gap:6px;padding:10px;background:#f5f5f5}
+.lb-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dark);cursor:pointer;transition:background 0.15s,transform 0.15s}
+.lb-dot.active{background:var(--text);transform:scale(1.25)}
+.lb-info{padding:14px 16px 8px}
+.lb-info h3{font-size:16px;font-weight:700;margin-bottom:4px;letter-spacing:-0.3px}
+.lb-info .lb-meta{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px;margin-bottom:6px}
+.lb-info .lb-desc{font-size:12px;color:var(--text-2);line-height:1.7;border-top:1px solid var(--border);padding-top:10px;margin-top:8px}
+.lb-section{padding:0 16px 10px}
+.lb-section-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.lb-swatches{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lb-sw{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.15);transition:border-color 0.15s,transform 0.15s}
+.lb-sw:hover{transform:scale(1.15)}
+.lb-sw.active{border-color:var(--text);transform:scale(1.15)}
+.lb-color-name{font-size:11px;font-family:var(--mono);color:var(--text-2);letter-spacing:1px;text-transform:uppercase}
+.lb-sizes{display:flex;gap:6px;flex-wrap:wrap}
+.lb-sz{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;border:1.5px solid var(--border-dark);border-radius:7px;padding:6px 13px;color:var(--text-2);cursor:pointer;background:none;transition:all 0.15s}
+.lb-sz:hover{border-color:var(--text);color:var(--text)}
+.lb-sz.active{background:var(--text);border-color:var(--text);color:#fff}
+.lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-size:13px;font-weight:700;padding:14px;margin:12px 16px 16px;border-radius:var(--radius);text-decoration:none;transition:opacity 0.2s;letter-spacing:0.2px}
 .lb-wa:hover{opacity:0.88}
 
-/* EMPTY */
-.empty{grid-column:1/-1;text-align:center;padding:5rem 1rem}
-.empty p{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:#bbb;text-transform:uppercase}
-.empty span{display:block;font-size:9px;color:#ccc;margin-top:0.5rem;letter-spacing:1px}
+/* ── TRANSITIONS ── */
+.card{transition:opacity 0.35s ease,transform 0.35s ease,box-shadow 0.25s,border-color 0.25s}
 
-/* INFO STRIP */
-.info-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.info-cell{padding:2rem 1.5rem;border-right:1px solid var(--line);display:flex;align-items:flex-start;gap:1rem}
-.info-cell:last-child{border-right:none}
-.info-icon{width:36px;height:36px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--g);border-radius:8px}
-.info-cell h4{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
-.info-cell p{font-size:11px;color:var(--g);line-height:1.7}
-.info-cell a{color:var(--wa)}
-
-/* FOOTER */
-footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;border-top:1px solid #e0e0e0}
-.f-col h4{font-family:var(--mono);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:1rem}
-.f-col p,.f-col a{font-size:12px;color:#555;line-height:1.9;display:block;transition:color 0.2s}
-.f-col a:hover{color:var(--w)}
-.f-logo{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--w);margin-bottom:0.5rem}
-.f-socials{display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap}
-.f-social{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#777;border:1px solid #ccc;padding:5px 12px;transition:all 0.2s;border-radius:6px}
-.f-social:hover{border-color:var(--g);color:var(--w)}
-.footer-bottom{border-top:1px solid #e0e0e0;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.footer-bottom p{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:#888;text-transform:uppercase}
-
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:1100px){
-  .product-grid{grid-template-columns:repeat(3,1fr);gap:12px}
-  .brand-static{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(3,1fr)}
+  .search-grid{grid-template-columns:repeat(3,1fr)}
 }
-@media(max-width:780px){
-  .grid-outer{padding:0 0 2.5rem}
-  .product-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:0.75rem}
-  .brand-static{grid-template-columns:repeat(2,1fr)}
-  .brand-scroll .card{flex:0 0 150px}
-  .featured-scroll .card{flex:0 0 155px}
-  .brand-title{font-size:14px}
-  .brand-header{padding:0.85rem 1rem 0.4rem}
-  .brand-scroll{padding:0.4rem 1rem 1rem;gap:8px}
-  .featured-scroll{padding:0.4rem 1rem 1rem;gap:8px}
-  .info-strip{grid-template-columns:1fr}
-  .info-cell{border-right:none;border-bottom:1px solid var(--line)}
+@media(max-width:768px){
+  .header-main{grid-template-columns:auto 1fr auto;gap:0.75rem;padding:0 1rem;height:54px}
+  .logo-text span{display:none}
+  .logo-text{font-size:13px}
+  .logo-img{height:34px;width:34px}
+  .wa-pill span{display:none}
+  .wa-pill{padding:8px 10px}
+  .hero{padding:1.75rem 1.25rem}
+  .hero-right{display:none}
+  .grid-4,.search-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 1rem 1.25rem}
+  .hscroll{padding:0 1rem 1.25rem}
+  .hscroll .card{flex:0 0 145px}
+  .section-head{padding:14px 1rem 10px}
+  .featured-head{padding:14px 1rem 10px}
+  .info-grid{grid-template-columns:1fr}
+  .info-cell{border-right:none;border-bottom:1px solid var(--border)}
   .info-cell:last-child{border-bottom:none}
-  footer{grid-template-columns:1fr}
-  .wa-btn span{display:none}
-  .cover-content{padding:1.5rem}
-  .thumb-strip{opacity:1;pointer-events:auto}
-  .card-wa{transform:translateY(0)}
+  footer{grid-template-columns:1fr;gap:1.75rem;padding:2rem 1.25rem}
+  .toolbar{padding:10px 1rem}
+  .thumb-row{opacity:1;pointer-events:auto}
+  .card-wa-overlay{transform:translateY(0)}
 }
 @media(max-width:480px){
-  .header-top{padding:0 1rem}
-  .search-wrap{max-width:none}
-  .section-bar{padding:0.75rem 1rem}
-  .grid-outer{padding:0.65rem 0.5rem 2rem}
-  .product-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .card{border-radius:12px}
-  .card-photo{border-radius:12px 12px 0 0}
-  .card-info{padding:0.6rem 0.7rem 0.85rem}
+  .header-main{padding:0 0.75rem}
+  .hero-title{font-size:1.85rem}
+  .grid-4,.search-grid{gap:8px;padding:0 0.75rem 1.25rem}
+  .card-body{padding:8px 9px 11px}
   .card-name{font-size:12px}
-  .logo-img{height:36px}
-  .lb-box{border-radius:16px}
-  .lb-main{border-radius:16px 16px 0 0}
+  .lb-box{max-width:none;border-radius:16px}
+  .lb-photo{border-radius:16px 16px 0 0}
 }
 </style>
 </head>
 <body>
 
 <!-- TICKER -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">🔥 Hyped Items · UA Pairs</span>
-    <span class="ticker-item">📌 BAPE Tees</span>
-    <span class="ticker-item">📌 Human Made Tees</span>
-    <span class="ticker-item">📌 Branded Deals</span>
-    <span class="ticker-item">Abu Dhabi 🇦🇪</span>
-    <span class="ticker-item">DM to Order</span>
-    <span class="ticker-item">Tabby Available</span>
-    <span class="ticker-item">🔥 Hyped Items · UA Pairs</span>
-    <span class="ticker-item">📌 BAPE Tees</span>
-    <span class="ticker-item">📌 Human Made Tees</span>
-    <span class="ticker-item">📌 Branded Deals</span>
-    <span class="ticker-item">Abu Dhabi 🇦🇪</span>
-    <span class="ticker-item">DM to Order</span>
-    <span class="ticker-item">Tabby Available</span>
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item"><span class="dot">●</span>UA Pairs Available</span>
+    <span class="ticker-item"><span class="dot">●</span>BAPE Tees</span>
+    <span class="ticker-item"><span class="dot">●</span>Human Made</span>
+    <span class="ticker-item"><span class="dot">●</span>Ami Paris 26SS</span>
+    <span class="ticker-item"><span class="dot">●</span>Supreme</span>
+    <span class="ticker-item"><span class="dot">●</span>Chrome Hearts Caps</span>
+    <span class="ticker-item"><span class="dot">●</span>Abu Dhabi 🇦🇪</span>
+    <span class="ticker-item"><span class="dot">●</span>DM to Order</span>
+    <span class="ticker-item"><span class="dot">●</span>Tabby Available</span>
+    <span class="ticker-item"><span class="dot">●</span>UA Pairs Available</span>
+    <span class="ticker-item"><span class="dot">●</span>BAPE Tees</span>
+    <span class="ticker-item"><span class="dot">●</span>Human Made</span>
+    <span class="ticker-item"><span class="dot">●</span>Ami Paris 26SS</span>
+    <span class="ticker-item"><span class="dot">●</span>Supreme</span>
+    <span class="ticker-item"><span class="dot">●</span>Chrome Hearts Caps</span>
+    <span class="ticker-item"><span class="dot">●</span>Abu Dhabi 🇦🇪</span>
+    <span class="ticker-item"><span class="dot">●</span>DM to Order</span>
+    <span class="ticker-item"><span class="dot">●</span>Tabby Available</span>
   </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-top">
-    <a href="#" class="logo" aria-label="Secret Shop home">
+  <div class="header-main">
+    <a href="#" class="logo" aria-label="Secret Shop">
       <img class="logo-img"
         src="https://scontent.ffjr1-3.fna.fbcdn.net/v/t39.30808-6/689490142_122248500488087649_4927481533974595500_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=_bwHdq7X700Q7kNvwE1SC2h&_nc_oc=Adq6l0gl28vGYVvXBqr9-7f8UpgYMSiNgd-MhPG2MXtz8KKSWYXFYbV9Lasf7UJRviUw4CNYd-29thdFOxdA-JWT&_nc_zt=23&_nc_ht=scontent.ffjr1-3.fna&_nc_gid=4BcP5X7vN8y9IaV6BK7jnA&_nc_ss=7b2a8&oh=00_Af7DOEIctLa3zI8QfUjDR79VtWXH3X98O8IaBsSdF62Yvw&oe=6A051030"
-        alt="Secret Shop"
-        onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='flex'"/>
-      <div class="logo-fallback">
-        <div class="logo-fb-icon">SS</div>
-        <div class="logo-fb-text">Secret Shop<span>Abu Dhabi · UAE</span></div>
-      </div>
+        alt="Secret Shop" onerror="this.src='';this.style.display='none'"/>
+      <div class="logo-text">Secret Shop<span>Abu Dhabi · UAE</span></div>
     </a>
 
-    <div class="search-wrap" role="search">
-      <input type="text" id="search-input" placeholder="Search Jordan, BAPE, Human Made..." aria-label="Search products"/>
-      <button class="clear-btn" id="clear-btn" aria-label="Clear search">✕</button>
-      <svg class="s-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <div class="search-bar" role="search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
+      <input type="text" id="search-input" placeholder="Search Jordan, BAPE, Supreme..." aria-label="Search products"/>
+      <button class="search-clear" id="clear-btn" aria-label="Clear">✕</button>
     </div>
 
-    <a href="https://wa.me/971563780062?text=Hi%20Secret%20Shop!%20I%20found%20you%20on%20your%20website%20and%20I%27m%20interested%20in%20an%20item."
-       target="_blank" class="wa-btn" aria-label="Contact on WhatsApp">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-        <path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/>
-      </svg>
-      <span>Inquire Here</span>
-    </a>
+    <div class="header-actions">
+      <a href="https://wa.me/971563780062?text=Hi%20Secret%20Shop!%20I%27m%20interested%20in%20an%20item." target="_blank" class="wa-pill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/>
+        </svg>
+        <span>Inquire Here</span>
+      </a>
+    </div>
   </div>
 
-  <nav class="cat-nav" role="navigation" aria-label="Product categories">
+  <nav class="cat-nav" role="navigation" aria-label="Categories">
     <button class="cat-btn active" data-cat="all">All Items</button>
     <button class="cat-btn" data-cat="ua-pairs">UA Pairs 👟</button>
-    <button class="cat-btn" data-cat="streetwear">Street Wear 👕</button>
-    <button class="cat-btn" data-cat="luxury">Luxury Items 💎</button>
+    <button class="cat-btn" data-cat="streetwear">Streetwear 👕</button>
+    <button class="cat-btn" data-cat="luxury">Luxury 💎</button>
     <button class="cat-btn" data-cat="watches">Watches ⌚</button>
     <button class="cat-btn" data-cat="accessories">Accessories 🎒</button>
   </nav>
 </header>
 
-<!-- COVER -->
-<section class="cover" aria-label="Cover photo">
-  <div class="cover-img">
-    <img src="images/image-f22509c3-9190-4689-b826-11b0581b5cec.png" alt="Secret Shop Cover"/>
+<!-- HERO -->
+<section class="hero" id="hero-section">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Abu Dhabi · UAE</p>
+    <h1 class="hero-title">Secret<br><em>Shop.</em></h1>
+    <div class="hero-pills">
+      <span class="hero-pill">🔥 UA Sneakers</span>
+      <span class="hero-pill">👕 Streetwear</span>
+      <span class="hero-pill">💬 DM to Order</span>
+    </div>
   </div>
-  <div class="cover-overlay"></div>
-  <div class="cover-content">
-    <h1 class="cover-headline">Secret<br><em>Shop.</em></h1>
-    <div class="cover-pills">
-      <span class="cover-pill">🔥 Hyped UA Pairs</span>
-      <span class="cover-pill">📍 Abu Dhabi, UAE</span>
-      <span class="cover-pill">💬 DM to Order</span>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <strong>9.4K</strong>
+      Facebook Followers
+    </div>
+    <div class="tabby-badge">
+      <span>Tabby · Pay Later</span>
     </div>
   </div>
 </section>
 
-<!-- TABBY -->
-<div class="tabby-strip" role="complementary">
-  <p>Now accepting</p>
-  <div class="tabby-logo"><span class="t-dot"></span><span>TABBY</span></div>
-  <p>— Buy now, pay later. Split into 4 payments.</p>
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div>
+    <span class="toolbar-label" id="toolbar-label">All Items</span>
+    <span class="toolbar-count" id="toolbar-count"></span>
+  </div>
 </div>
 
-<!-- SECTION BAR -->
-<div class="section-bar">
-  <span class="section-name" id="section-label">All Items</span>
-  <span class="section-count" id="item-count">— items</span>
-</div>
+<!-- MAIN CONTENT -->
+<main class="site-body" id="site-body" role="main"></main>
 
-<!-- GRID -->
-<main class="grid-outer">
-  <div class="product-grid" id="product-grid" role="list" aria-label="Products"></div>
-</main>
-
-<!-- INFO STRIP -->
-<div class="info-strip" role="complementary">
+<!-- INFO GRID -->
+<div class="info-grid">
   <div class="info-cell">
-    <div class="info-icon" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-      </svg>
+    <div class="info-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
     </div>
     <div>
       <h4>Order via WhatsApp</h4>
-      <p>DM us on WhatsApp to inquire. Fast replies, easy ordering.<br>
-      <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></p>
+      <p>Fast replies, easy ordering. <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></p>
     </div>
   </div>
   <div class="info-cell">
-    <div class="info-icon" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
-      </svg>
+    <div class="info-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
     </div>
     <div>
-      <h4>Find Us</h4>
-      <p>Abu Dhabi, United Arab Emirates<br>
-      <a href="https://www.bing.com/maps/default.aspx?v=2&where1=Abu+Dhabi,+United+Arab+Emirates" target="_blank">Get Directions →</a></p>
+      <h4>Based in Abu Dhabi</h4>
+      <p>Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank">DM for meetup</a></p>
     </div>
   </div>
   <div class="info-cell">
-    <div class="info-icon" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-      </svg>
+    <div class="info-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
     </div>
     <div>
       <h4>Pay with Tabby</h4>
-      <p>Split into 4 interest-free payments. Available on all orders.</p>
+      <p>Split into 4 interest-free payments on all orders.</p>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer role="contentinfo">
-  <div class="f-col">
-    <div class="f-logo">Secret Shop</div>
-    <p style="color:#555;font-size:11px;line-height:1.8;margin-bottom:0.75rem">
-      🔥 Hype Items<br>📌 Streetwear<br>📌 Luxury Items<br>📌 Watches<br>📌 Accessories
-    </p>
+<footer>
+  <div>
+    <p class="f-brand">Secret Shop</p>
+    <p class="f-tagline">🔥 UA Pairs · Streetwear · Luxury<br>📍 Abu Dhabi, United Arab Emirates</p>
     <div class="f-socials">
       <a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" class="f-social">Facebook</a>
       <a href="https://wa.me/971563780062" target="_blank" class="f-social">WhatsApp</a>
     </div>
   </div>
-  <div class="f-col">
-    <h4>Categories</h4>
-    <a href="#" onclick="setcat('ua-pairs');return false">UA Pairs</a>
-    <a href="#" onclick="setcat('streetwear');return false">Street Wear</a>
-    <a href="#" onclick="setcat('luxury');return false">Luxury Items</a>
-    <a href="#" onclick="setcat('watches');return false">Watches</a>
-    <a href="#" onclick="setcat('accessories');return false">Accessories</a>
+  <div>
+    <p class="f-col-title">Categories</p>
+    <a href="#" onclick="setcat('ua-pairs');return false" class="f-link">UA Pairs</a>
+    <a href="#" onclick="setcat('streetwear');return false" class="f-link">Streetwear</a>
+    <a href="#" onclick="setcat('luxury');return false" class="f-link">Luxury Items</a>
+    <a href="#" onclick="setcat('watches');return false" class="f-link">Watches</a>
+    <a href="#" onclick="setcat('accessories');return false" class="f-link">Accessories</a>
   </div>
-  <div class="f-col">
-    <h4>Contact</h4>
-    <a href="https://wa.me/971563780062" target="_blank">WhatsApp: 056 378 0062</a>
-    <a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank">Facebook Page</a>
-    <p>Abu Dhabi, UAE 🇦🇪</p>
-    <p style="margin-top:0.75rem;color:#555;font-size:10px;letter-spacing:1px">TABBY · Buy Now Pay Later</p>
+  <div>
+    <p class="f-col-title">Contact</p>
+    <a href="https://wa.me/971563780062" target="_blank" class="f-link">WhatsApp: 056 378 0062</a>
+    <a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" class="f-link">Facebook Page</a>
+    <p class="f-link" style="cursor:default">Abu Dhabi, UAE 🇦🇪</p>
+    <p class="f-link" style="cursor:default;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;margin-top:0.5rem">TABBY · BUY NOW PAY LATER</p>
   </div>
 </footer>
 <div class="footer-bottom">
@@ -447,748 +433,109 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lb-overlay" id="lb-overlay" role="dialog" aria-modal="true" aria-label="Product viewer">
+<div class="lb-overlay" id="lb-overlay" role="dialog" aria-modal="true">
   <div class="lb-box">
-    <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
-    <div class="lb-main">
-      <button class="lb-arrow prev" id="lb-prev" aria-label="Previous">‹</button>
+    <button class="lb-close" id="lb-close">✕</button>
+    <div class="lb-photo">
+      <button class="lb-arr prev" id="lb-prev">‹</button>
       <img id="lb-img" src="" alt=""/>
-      <button class="lb-arrow next" id="lb-next" aria-label="Next">›</button>
+      <button class="lb-arr next" id="lb-next">›</button>
     </div>
-    <div class="lb-thumbs" id="lb-thumbs"></div>
+    <div class="lb-dots" id="lb-dots"></div>
     <div class="lb-info">
       <h3 id="lb-name"></h3>
       <p class="lb-meta" id="lb-meta"></p>
-      <p class="lb-desc-full" id="lb-desc-full"></p>
+      <p class="lb-desc" id="lb-desc"></p>
     </div>
-    <div class="lb-color-wrap" id="lb-color-wrap" style="display:none">
-      <p class="lb-color-label">Color</p>
-      <div class="lb-color-row" id="lb-color-row"></div>
+    <div id="lb-color-section" style="display:none" class="lb-section">
+      <p class="lb-section-label">Color</p>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <div class="lb-swatches" id="lb-swatches"></div>
+        <span class="lb-color-name" id="lb-color-name"></span>
+      </div>
     </div>
-    <div class="lb-size-wrap" id="lb-size-wrap" style="display:none">
-      <p class="lb-size-label">Select Size</p>
-      <div class="lb-size-row" id="lb-size-row"></div>
+    <div id="lb-size-section" style="display:none" class="lb-section">
+      <p class="lb-section-label">Select Size</p>
+      <div class="lb-sizes" id="lb-sizes"></div>
     </div>
     <a class="lb-wa" id="lb-wa" href="#" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-        <path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/>
-      </svg>
-      Inquire on WhatsApp
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+      Order on WhatsApp
     </a>
   </div>
 </div>
 
 <script>
-const CLOTHING_CATS = ['streetwear'];
-const SIZES = ['S','M','L','XL'];
-const SIZES_BAPE = ['S','M','L','XL','XXL'];
-  
+const CLOTHING = ['streetwear'];
+const SIZES_DEFAULT = ['S','M','L','XL'];
+const SIZES_BAPE    = ['S','M','L','XL','XXL'];
+
 const ITEMS = [
-  /* ── UA PAIRS ── */
-  {
-    id:1, name:"Air Jordan 1 Retro OG", brand:"Jordan / Nike",
-    batch:"PK Batch", sku:"IW6276-001", sizes:"Size 40–47.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["jordan","aj1","nike","airjordan","sneakers","shoes","kicks","pk batch","iw6276"],
-    desc:"PK Batch · Low Top",
-    longDesc:"Premium quality PK Batch Air Jordan 1 Retro OG. Chicago colourway with iconic red, black and white leather upper. High-top silhouette with Nike Air cushioning. Available in EU sizes 40 to 47.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-09 at 3.24.48 PM (3).jpeg",
-      "images/WhatsApp Image 2026-05-09 at 3.24.48 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-09 at 3.24.48 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-09 at 3.24.48 PM.jpeg",
-      "images/WhatsApp Image 2026-05-09 at 3.24.49 PM (4).jpeg"
-    ]
-  },
-  {
-    id:18, name:"NK Mind 001", brand:"Nike",
-    batch:"UA", sku:"HQ4307-600", sizes:"Size 36–47.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","red","crimson","hq4307"],
-    desc:"Crimson Red · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in bold Crimson Red. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and embossed Swoosh. Available in EU sizes 36, 37.5, 38.5, 40, 41, 42.5, 44, 45, 46, and 47.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.15.10 PM (3).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.15.10 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.15.10 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.15.10 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.15.09 PM.jpeg"
-    ]
-  },
-  {
-    id:19, name:"NK Mind 001", brand:"Nike",
-    batch:"UA", sku:"HQ4307-001", sizes:"Size 36–47.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","black","orange","hq4307"],
-    desc:"Black / Orange · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in stealthy Black with bold Orange contrast pods on the outsole. Chunky sculpted foam construction with signature bumpy outsole, perforated footbed strap, and embossed Swoosh. Available in EU sizes 36, 37.5, 38.5, 40, 41, 42.5, 44, 45, 46, and 47.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.29.37 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.29.37 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.29.36 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.29.36 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.29.35 PM.jpeg"
-    ]
-  },
-  {
-    id:20, name:"NK Mind 001", brand:"Nike",
-    batch:"UA", sku:"HQ4307-300", sizes:"Size 36–48.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","teal","green","mineral","hq4307"],
-    desc:"Mineral Teal / Orange · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in premium Mineral Teal with vibrant Orange contrast pods on the outsole and matching orange branding on the insole. Available in EU sizes 36–48.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.31.27 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.31.27 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.31.26 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.31.26 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.31.26 PM.jpeg"
-    ]
-  },
-  {
-    id:21, name:"NK Mind 001", brand:"Nike",
-    batch:"UA", sku:"HQ4307-101", sizes:"Size 36–47",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","slippers","white","red","hq4307"],
-    desc:"White / Red · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in clean White with bold Red contrast pods on the outsole and matching red dot insole print. Available in EU sizes 36–47.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.35.58 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.35.58 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.35.57 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.35.57 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.35.56 PM.jpeg"
-    ]
-  },
-  {
-    id:22, name:"NK Mind 001 × NOCTA", brand:"Nike × NOCTA",
-    batch:"UA", sku:"HY5028-200", sizes:"Size 38–47.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","nocta","mind","mind001","drake","collab","slides","black","blue","hy5028"],
-    desc:"Black / Blue · NOCTA Collab · UA Pair",
-    longDesc:"UA Nike Mind 001 × NOCTA special collaboration. Features the iconic three-star NOCTA metal logo badge on the side, blue contrast pods on the outsole, and a premium 'Mind Science Department – NOCTA × Nike Mind 001 Concepts' printed insole. Available in EU sizes 38–47.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.38.02 PM (3).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.38.02 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.38.02 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.38.02 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.38.00 PM.jpeg"
-    ]
-  },
-  {
-    id:23, name:"NK Mind 001", brand:"Nike",
-    batch:"UA", sku:"HQ4307-001", sizes:"Size 36–45",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","burgundy","maroon","navy","hq4307"],
-    desc:"Burgundy / Navy · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in a stunning Burgundy-to-Red gradient upper with bold Navy contrast pods on the outsole. Available in EU sizes 36 to 45.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.40.44 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.40.43 PM (3).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.40.43 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.40.43 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.40.43 PM.jpeg"
-    ]
-  },
-  {
-    id:24, name:"NK Mind 001", brand:"Nike",
-    batch:"UA", sku:"HQ4307-400", sizes:"Size 36–47.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","mind","mind001","nk mind","slides","navy","blue","royal blue","gold","hq4307"],
-    desc:"Navy / Royal Blue / Gold · UA Pair",
-    longDesc:"UA Nike Mind 001 slides in deep Navy with a striking Royal Blue outsole and white contrast pods. Features a premium gold Swoosh and gold 'Nike Mind' heel badge. Available in EU sizes 36–47.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.42.45 PM (3).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.42.45 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.42.45 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.42.45 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.42.44 PM.jpeg"
-    ]
-  },
-  {
-    id:25, name:"NK Mind 001 × Fragment Design", brand:"Nike × Fragment",
-    batch:"UA", sku:"IQ8502-001", sizes:"Size 36–48.5",
-    cat:"ua-pairs", badge:"HOT",
-    tags:["nike","fragment","fragment design","mind","mind001","nk mind","slides","grey","gray","charcoal","blue","fragment concept testing","iq8502","lightning bolt","hiroshi fujiwara"],
-    desc:"Iron Grey / Blue · Fragment Collab · UA Pair",
-    longDesc:"UA Nike Mind 001 × Fragment Design special collaboration. Features the iconic 'FRAGMENT' badge on the heel, blue contrast pods on the outsole, and a premium 'Fragment Concept Testing – Mind 001 SP26-MNSPIN-832' Nike Mind branded insole with blue dot print and lightning bolt logo. Available in EU sizes 36–48.5.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.45.18 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.45.18 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.45.18 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.45.19 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"
-    ]
-  },
-  /* ── STREETWEAR ── */
-  {
-    id:27, name:"Ami Paris Logo Tee", brand:"Ami Paris",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"NEW",
-    tags:["ami","ami paris","alexandre mattiussi","logo","tee","tshirt","cream","ivory","off white","ami paris print","back print","26ss","2026","graphic"],
-    desc:"Cream · AMI Front / PARIS Back Print",
-    longDesc:"Ami Paris Logo Tee in cream. Features a large bold outline 'AMI' graphic print on the front chest and matching 'PARIS' outline print on the back. Small Ami De Coeur heart logo embroidered on the left sleeve. Ami Alexandre Mattiussi woven neck label. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.51.45 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.51.45 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.51.44 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.51.45 PM.jpeg"
-    ]
-  },
-  {
-    id:2, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","black","grey plaid"],
-    desc:"Black · Grey Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in black with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.13.14 PM.jpeg"]
-  },
-  {
-    id:3, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","white","grey plaid"],
-    desc:"White · Grey Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in white with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.13.04 PM.jpeg"]
-  },
-  {
-    id:4, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","grey","gray","grey plaid"],
-    desc:"Grey · Grey Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in grey with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.12.48 PM.jpeg"]
-  },
-  {
-    id:5, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","beige","grey plaid"],
-    desc:"Beige · Grey Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in beige with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.12.28 PM.jpeg"]
-  },
-  {
-    id:6, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","navy","grey plaid"],
-    desc:"Navy · Grey Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in navy with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.12.15 PM.jpeg"]
-  },
-  {
-    id:7, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","black","red plaid"],
-    desc:"Black · Red Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in black with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.10.59 PM.jpeg"]
-  },
-  {
-    id:8, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","white","red plaid"],
-    desc:"White · Red Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in white with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.10.46 PM (1).jpeg"]
-  },
-  {
-    id:9, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","grey","gray","red plaid"],
-    desc:"Grey · Red Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in grey with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.10.46 PM.jpeg"]
-  },
-  {
-    id:10, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["bape","bathing ape","ape","tee","tshirt","beige","red plaid"],
-    desc:"Beige · Red Plaid Print",
-    longDesc:"A Bathing Ape graphic tee in beige with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.10.34 PM.jpeg"]
-  },
-  {
-    id:11, name:"Human Made Graphic Tee", brand:"Human Made",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["human made","humanmade","nigo","heart","pocket","tee","black"],
-    desc:"Black · Heart & Pocket Tee",
-    longDesc:"Human Made by NIGO graphic tee in black featuring the iconic heart logo and chest pocket detail. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-09 at 3.07.02 PM.jpeg",
-      "images/WhatsApp Image 2026-05-09 at 3.06.48 PM.jpeg"
-    ]
-  },
-  {
-    id:12, name:"Human Made Graphic Tee", brand:"Human Made",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["human made","humanmade","nigo","heart","pocket","tee","white","red"],
-    desc:"White · Heart & Pocket Tee",
-    longDesc:"Human Made by NIGO graphic tee in white featuring the iconic red heart logo and chest pocket detail. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-09 at 3.06.32 PM.jpeg",
-      "images/WhatsApp Image 2026-05-09 at 3.06.21 PM.jpeg"
-    ]
-  },
-  {
-    id:13, name:"Human Made Graphic Tee", brand:"Human Made",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["human made","humanmade","nigo","duck","tee","black"],
-    desc:"Black · Duck Print",
-    longDesc:"Human Made by NIGO graphic tee in black with the signature duck graphic print. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.06.00 PM.jpeg"]
-  },
-  {
-    id:14, name:"Human Made Graphic Tee", brand:"Human Made",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["human made","humanmade","nigo","duck","tee","white"],
-    desc:"White · Duck Print",
-    longDesc:"Human Made by NIGO graphic tee in white with the signature duck graphic print. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]
-  },
-  {
-    id:42, name:"Ami Paris Originals Heritage Tee", brand:"Ami Paris",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"NEW",
-    tags:["ami","ami paris","alexandre mattiussi","originals","heritage","since 2011","script","box logo","patch","tee","tshirt","cream","ivory","off white","red","26ss","2026"],
-    desc:"Cream · Originals By Ami Paris Since 2011 Patch",
-    longDesc:"Ami Paris Originals Heritage Tee in cream. Features a large centre-chest woven patch with red script 'Originals By Ami Paris Since 2011' inside a red border box. Small Ami De Coeur heart logo at the back neck. Ami Alexandre Mattiussi grey woven neck label. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.58.51 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.58.52 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.58.52 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.58.52 PM (2).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.58.55 PM.jpeg"
-    ]
-  },
-  {
-    id:26, name:"Ami De Coeur Crochet Patch Tee", brand:"Ami Paris",
-    batch:"", sku:"E21HJ028.7407150", sizes:"",
-    cat:"streetwear", badge:"NEW",
-    tags:["ami","ami paris","ami de coeur","alexandre mattiussi","crochet","patch","raglan","tee","tshirt","navy","black","olive","green","cream","white","26ss","2026"],
-    desc:"Cream / Navy · Crochet Ami De Coeur Patch",
-    longDesc:"Ami Paris 26SS Ami De Coeur Crochet Patch Tee. Cream body with contrast raglan sleeves and collar. Features a tonal crochet Ami De Coeur heart logo patch on the chest. Made from organically sourced cotton. Ami Alexandre Mattiussi woven neck label. Available in Navy, Black, and Olive Green. Sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
-    ],
-    colorVariants:[
-      {
-        label:"Navy",
-        color:"#1b3a6b",
-        desc:"Cream / Navy · Crochet Ami De Coeur Patch",
-        imgs:[
-          "images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
-        ]
-      },
-      {
-        label:"Black",
-        color:"#0a0a0a",
-        desc:"Cream / Black · Crochet Ami De Coeur Patch",
-        imgs:[
-          "images/WhatsApp Image 2026-05-10 at 1.49.48 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
-        ]
-      },
-      {
-        label:"Olive",
-        color:"#6b7c3a",
-        desc:"Cream / Olive Green · Crochet Ami De Coeur Patch",
-        imgs:[
-          "images/WhatsApp Image 2026-05-10 at 1.49.49 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
-        ]
-      }
-    ]
-  },
-  {
-    id:29, name:"Ami De Coeur Small Logo Tee", brand:"Ami Paris",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"NEW",
-    tags:["ami","ami paris","ami de coeur","alexandre mattiussi","small logo","heart","tee","tshirt","lavender","cream","ivory","taupe","mocha","dark brown","navy","black","grey","gray","white","sky blue","baby blue","olive","green","caramel","tan","brown","purple","lilac","26ss","2026"],
-    desc:"Lavender · Small Ami De Coeur Logo Tee",
-    longDesc:"Ami Paris De Coeur Small Logo Tee. Clean oversized fit in premium heavyweight cotton with the iconic small Ami De Coeur heart logo embroidered on the left chest. Ami Alexandre Mattiussi woven neck label. Available in 13 colorways: Lavender, Cream, Taupe, Dark Brown, Navy, Black, Grey Marl, White, Sky Blue, Olive, Dark Navy, Mocha, and Caramel. Sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.54.51 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"
-    ],
-    colorVariants:[
-      {label:"Lavender",color:"#c9b8e8",desc:"Lavender · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"]},
-      {label:"Cream",color:"#f0e8d5",desc:"Cream / Ivory · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (2).jpeg"]},
-      {label:"Taupe",color:"#8c7b6b",desc:"Taupe / Mocha · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (1).jpeg"]},
-      {label:"Dark Brown",color:"#3b1a0f",desc:"Dark Brown · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM.jpeg"]},
-      {label:"Navy",color:"#1b2a4a",desc:"Navy Blue · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (3).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (2).jpeg"]},
-      {label:"Grey",color:"#b0b0b0",desc:"Grey Marl · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (1).jpeg"]},
-      {label:"White",color:"#ffffff",desc:"White · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM.jpeg"]},
-      {label:"Sky Blue",color:"#87ceeb",desc:"Sky Blue · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM (1).jpeg"]},
-      {label:"Olive",color:"#6b7c3a",desc:"Olive Green · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM.jpeg"]},
-      {label:"Dark Navy",color:"#0d1b2e",desc:"Dark Navy · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (2).jpeg"]},
-      {label:"Mocha",color:"#9e8b76",desc:"Mocha / Sand · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (1).jpeg"]},
-      {label:"White Tonal",color:"#f8f8f8",desc:"White · Tonal Logo · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM.jpeg"]},
-      {label:"Caramel",color:"#c48a3f",desc:"Caramel / Tan · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM (1).jpeg"]},
-      {label:"Off-White",color:"#ede8df",desc:"Off-White · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM.jpeg"]}
-    ]
-  },
-  {
-    id:40, name:"Ami De Coeur Pixel Knit Tee", brand:"Ami Paris",
-    batch:"", sku:"E21HJ028.CY1250", sizes:"",
-    cat:"streetwear", badge:"NEW",
-    tags:["ami","ami paris","ami de coeur","alexandre mattiussi","pixel","knit","heart","tee","tshirt","khaki","tan","cream","ivory","red","teal","green","26ss","2026"],
-    desc:"Khaki · Teal Pixel Knit Ami De Coeur",
-    longDesc:"Ami Paris 26SS Pixel Knit Ami De Coeur Tee. Features a pixelated knit-jacquard Ami De Coeur heart-A logo on the left chest. Made from organically sourced cotton. Ami Alexandre Mattiussi woven neck label. Available in Khaki with Teal logo and Cream with Red logo. Sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg",
-      "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
-    ],
-    colorVariants:[
-      {
-        label:"Khaki",
-        color:"#b5a06a",
-        desc:"Khaki · Teal Pixel Knit Ami De Coeur",
-        imgs:[
-          "images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
-        ]
-      },
-      {
-        label:"Cream",
-        color:"#f0ebe0",
-        desc:"Cream · Red Pixel Knit Ami De Coeur",
-        imgs:[
-          "images/WhatsApp Image 2026-05-10 at 1.56.36 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.56.38 PM (1).jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
-          "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
-        ]
-      }
-    ]
-  },
-  {
-    id:43, name:"Supreme Est. 1994 Five Boroughs Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","est 1994","five boroughs","box logo","tee","tshirt","black","white","fw21","2021"],
-    desc:"Black · Est. 1994 Five Boroughs Print",
-    longDesc:"Supreme FW21 Est. 1994 Five Boroughs Tee in black. Features the classic Supreme wordmark with accent grave on the 'e' and the five NYC borough names printed below in red. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"],
-    colorVariants:[
-      {label:"Black",color:"#0a0a0a",desc:"Black · Est. 1994 Five Boroughs Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"]},
-      {label:"White",color:"#f5f5f5",desc:"White · Est. 1994 Five Boroughs Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM.jpeg"]}
-    ]
-  },
-  {
-    id:44, name:"Supreme Grinch Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","grinch","christmas","holiday","graphic","tee","tshirt","black","white","fw24","2024"],
-    desc:"Black · Grinch Graphic Tee",
-    longDesc:"Supreme FW24 Grinch Tee. Features an embroidered Grinch graphic on the left chest wearing a red Santa hat with the Supreme box logo. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"],
-    colorVariants:[
-      {label:"Black",color:"#0a0a0a",desc:"Black · Grinch Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"]},
-      {label:"White",color:"#f5f5f5",desc:"White · Grinch Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM.jpeg"]}
-    ]
-  },
-  {
-    id:45, name:"Supreme × Tekken Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","tekken","collab","gaming","fighting game","japanese","kanji","graphic","tee","tshirt","black","white","fw22","2022"],
-    desc:"Black · Supreme × Tekken FW22 Graphic Tee",
-    longDesc:"Supreme FW22 × Tekken Tee. Features a bold chrome-style Supreme and Tekken overlapping kanji graphic print across the chest with 'Fall/Winter 2022' text and Harada's signature embroidered at the bottom right. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"],
-    colorVariants:[
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme × Tekken FW22 Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"]},
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme × Tekken FW22 Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.24 PM.jpeg"]}
-    ]
-  },
-  {
-    id:46, name:"Supreme × Thrasher Cross Tee", brand:"Supreme × Thrasher",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","thrasher","cross","skate","collab","tee","tshirt","black","white"],
-    desc:"Black · Supreme × Thrasher Cross Back Print",
-    longDesc:"Supreme × Thrasher Cross Tee. Reversed Thrasher logo embroidered on the left chest. Large Supreme × Thrasher cross typography graphic printed on the back. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"
-    ],
-    colorVariants:[
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme × Thrasher Cross Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.23 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.23 PM.jpeg"]},
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme × Thrasher Cross Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"]}
-    ]
-  },
-  {
-    id:47, name:"Supreme Spiral Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","spiral","words","text","graphic","box logo","tee","tshirt","black","white","ss21","2021"],
-    desc:"White · Supreme Spiral Word Back Print",
-    longDesc:"Supreme SS21 Spiral Tee. Small black box logo on the left chest. Large spiral word-collage graphic on the back with the Supreme box logo at centre. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:[
-      "images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg",
-      "images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"
-    ],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme Spiral Word Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM (2).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Spiral Word Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"]}
-    ]
-  },
-  {
-    id:48, name:"Supreme Established 1994 Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","established","1994","new york","usa","box logo","tee","tshirt","black","white","fw21","2021"],
-    desc:"White · Supreme Established 1994 New York USA Tee",
-    longDesc:"Supreme FW21 Established 1994 Tee. Bold 'SUPREME' wordmark across the chest with 'Established 1994', Supreme box logo patch, and 'New York USA' printed underneath. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme Established 1994 New York USA Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Established 1994 New York USA Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM.jpeg"]}
-    ]
-  },
-  {
-    id:49, name:"Supreme Pill Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","pill","pills","photo","graphic","tee","tshirt","black","white","fw20","2020"],
-    desc:"White · Supreme Pill Photo Tee",
-    longDesc:"Supreme FW20 Pill Tee. Features a large photo-print of colourful mixed pills and capsules on the chest. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM (1).jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme Pill Photo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM (1).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Pill Photo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM.jpeg"]}
-    ]
-  },
-  {
-    id:50, name:"Supreme Emo Girl Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","emo","girl","anime","graphic","tee","tshirt","black","white","fw24","2024"],
-    desc:"White · Supreme Emo Girl Graphic Tee",
-    longDesc:"Supreme FW24 Emo Girl Tee. Features a centre-chest embroidered graphic of an anime-style girl portrait in a brown and blue frame with 'Supreme' script below. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme Emo Girl Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Emo Girl Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM.jpeg"]}
-    ]
-  },
-  {
-    id:51, name:"Supreme × Wangfujing Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","wangfujing","abstract","art","collage","graphic","tee","tshirt","black","white"],
-    desc:"White · Wangfujing Abstract Art Tee",
-    longDesc:"Supreme Wangfujing Tee. Features a large abstract collage art graphic on the chest with scattered letters, botanical elements, and mixed-media imagery. Artist signature and Supreme red box label at the bottom right. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.32.45 PM.jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Wangfujing Abstract Art Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.45 PM.jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Wangfujing Abstract Art Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (5).jpeg"]}
-    ]
-  },
-  {
-    id:52, name:"Supreme Drugs Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","drugs","usa","flag","stars","stripes","americana","graphic","tee","tshirt","black","white"],
-    desc:"White · DRUGS USA Flag Lettering Tee",
-    longDesc:"Supreme Drugs Tee. Bold 'DRUGS' text across the chest filled with an American flag stars-and-stripes pattern in red, white, and blue. Small 'Supreme' text beneath the lettering. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (4).jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · DRUGS USA Flag Lettering Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (4).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · DRUGS USA Flag Lettering Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (3).jpeg"]}
-    ]
-  },
-  {
-    id:53, name:"Supreme 1994 New York City Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","1994","new york city","nyc","illustrated","character","graphic","tee","tshirt","black","white"],
-    desc:"White · Supreme 1994 New York City Illustrated Tee",
-    longDesc:"Supreme 1994 New York City Tee. Features an elaborate illustrated 'SUPREME 1994' lettering graphic with hand-drawn characters, creatures, and scenes filling each letter, with 'New York City' script below. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme 1994 New York City Illustrated Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme 1994 New York City Illustrated Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (1).jpeg"]}
-    ]
-  },
-  {
-    id:54, name:"Supreme NYC Paris London Tokyo Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","nyc","new york","paris","london","tokyo","cities","worldwide","text","tee","tshirt","black","white"],
-    desc:"White · Supreme NYC Paris London Tokyo Tee",
-    longDesc:"Supreme NYC Paris London Tokyo Tee. Clean left-chest block 'SUPREME' wordmark with 'New York City · 2024 · Fuck The Rest' and 'Paris · London · Tokyo' printed beneath in a compact layout. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM.jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme NYC Paris London Tokyo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM.jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme NYC Paris London Tokyo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (2).jpeg"]}
-    ]
-  },
-  {
-    id:55, name:"Supreme Photo Logo Tee", brand:"Supreme",
-    batch:"", sku:"", sizes:"",
-    cat:"streetwear", badge:"HOT",
-    tags:["supreme","photo","logo","collage","girl","lifestyle","graphic","tee","tshirt","black","white"],
-    desc:"White · Supreme Photo Collage Logo Tee",
-    longDesc:"Supreme Photo Logo Tee. Large centre-chest 'SUPREME' block lettering filled with a collage photo print of lifestyle imagery, faces, and brand references. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (1).jpeg"],
-    colorVariants:[
-      {label:"White",color:"#f5f5f5",desc:"White · Supreme Photo Collage Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (1).jpeg"]},
-      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Photo Collage Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM.jpeg"]}
-    ]
-  },
-  /* ── LUXURY ITEMS ── */
-  {
-    id:15, name:"Coming Soon", brand:"Luxury",
-    batch:"", sku:"", sizes:"",
-    cat:"luxury", badge:"NEW",
-    tags:["luxury","coming soon"],
-    desc:"More items dropping soon",
-    longDesc:"Luxury items coming soon. DM us on WhatsApp to ask about specific items you are looking for.",
-    imgs:[]
-  },
-  /* ── WATCHES ── */
-  {
-    id:16, name:"Coming Soon", brand:"Watches",
-    batch:"", sku:"", sizes:"",
-    cat:"watches", badge:"NEW",
-    tags:["watch","watches","coming soon"],
-    desc:"More items dropping soon",
-    longDesc:"Watch collection coming soon. DM us on WhatsApp to ask about specific pieces you are looking for.",
-    imgs:[]
-  },
-  /* ── ACCESSORIES ── */
-  {
-    id:30, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black"],
-    desc:"All Black · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in all black. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Black mesh back with snapback closure and silver crown keychain clip at the crown.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.57 PM.jpeg"]
-  },
-  {
-    id:31, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","red"],
-    desc:"White / Red Brim · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with a bold red brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Black mesh back with snapback closure and silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (5).jpeg"]
-  },
-  {
-    id:32, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","black","lips","grillz"],
-    desc:"White / Black · Lips & Grillz Patch",
-    longDesc:"Chrome Hearts Hollywood USA trucker cap in white with black brim. Features the iconic embroidered red lips with gold grillz patch flanked by cross motifs and 'Hollywood, USA' gothic script. Black mesh back with snapback closure and silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (4).jpeg"]
-  },
-  {
-    id:33, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","pink","white"],
-    desc:"Pink / White · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in pink and white. Features a tonal pink-on-white embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Pink mesh back with snapback closure and silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (3).jpeg"]
-  },
-  {
-    id:34, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","blue","royal blue"],
-    desc:"White / Royal Blue · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with a royal blue brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text in red. Blue mesh back with snapback closure and silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (2).jpeg"]
-  },
-  {
-    id:35, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black","lips","grillz"],
-    desc:"All Black · Lips & Grillz Patch",
-    longDesc:"Chrome Hearts Hollywood USA trucker cap in all black. Features the iconic embroidered red lips with gold grillz patch flanked by cross motifs and 'Hollywood, USA' gothic script. Black mesh back with snapback closure and silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (1).jpeg"]
-  },
-  {
-    id:36, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black","camo","camouflage"],
-    desc:"Black / Camo Mesh · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap with a black structured front and camo mesh back. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM.jpeg"]
-  },
-  {
-    id:37, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","camo","camouflage","green"],
-    desc:"All Camo · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in full woodland camo throughout — front panel, brim, and mesh back. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (2).jpeg"]
-  },
-  {
-    id:38, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","red","blue","usa colorway","americana"],
-    desc:"White / Red Mesh / Blue Brim · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in a USA-colourway — white structured front, red mesh back, and royal blue brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (1).jpeg"]
-  },
-  {
-    id:39, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-    batch:"", sku:"", sizes:"One Size",
-    cat:"accessories", badge:"HOT",
-    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","black"],
-    desc:"White / Black · CH Hollywood USA Patch",
-    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with black mesh back and black brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM.jpeg"]
-  }
+  {id:1,name:"Air Jordan 1 Retro OG",brand:"Jordan / Nike",batch:"PK Batch",sku:"IW6276-001",sizes:"EU 40–47.5",cat:"ua-pairs",badge:"HOT",tags:["jordan","aj1","nike","sneakers","shoes","kicks","pk batch"],desc:"PK Batch · Chicago Colourway",longDesc:"Premium PK Batch Air Jordan 1 Retro OG in the iconic Chicago colourway — red, black and white leather upper with Nike Air cushioning. EU 40–47.5.",imgs:["images/WhatsApp Image 2026-05-09 at 3.24.48 PM (3).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM (2).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM (1).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM.jpeg","images/WhatsApp Image 2026-05-09 at 3.24.49 PM (4).jpeg"]},
+  {id:18,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-600",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","slippers","red","crimson"],desc:"Crimson Red · UA Pair",longDesc:"UA Nike Mind 001 slides in bold Crimson Red. Chunky sculpted foam, perforated strap, embossed Swoosh. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.15.10 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.15.09 PM.jpeg"]},
+  {id:19,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-001",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","black","orange"],desc:"Black / Orange · UA Pair",longDesc:"UA Nike Mind 001 in stealthy Black with bold Orange outsole pods. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.29.37 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.29.37 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.29.36 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.29.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.29.35 PM.jpeg"]},
+  {id:20,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-300",sizes:"EU 36–48.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","teal","green","mineral"],desc:"Mineral Teal / Orange · UA Pair",longDesc:"UA Nike Mind 001 in Mineral Teal with vibrant Orange pods. EU 36–48.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.31.27 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.27 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM.jpeg"]},
+  {id:21,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-101",sizes:"EU 36–47",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","white","red"],desc:"White / Red · UA Pair",longDesc:"UA Nike Mind 001 in clean White with bold Red pods. EU 36–47.",imgs:["images/WhatsApp Image 2026-05-10 at 1.35.58 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.35.58 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.35.57 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.35.57 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.35.56 PM.jpeg"]},
+  {id:22,name:"NK Mind 001 × NOCTA",brand:"Nike × NOCTA",batch:"UA",sku:"HY5028-200",sizes:"EU 38–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","nocta","mind","drake","slides","black","blue"],desc:"Black / Blue · NOCTA Collab · UA Pair",longDesc:"UA Nike Mind 001 × NOCTA with three-star metal badge, blue outsole pods, and printed NOCTA insole. EU 38–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.38.02 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.38.00 PM.jpeg"]},
+  {id:23,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-001",sizes:"EU 36–45",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","burgundy","maroon","navy"],desc:"Burgundy / Navy · UA Pair",longDesc:"UA Nike Mind 001 in Burgundy-to-Red gradient with Navy pods. EU 36–45.",imgs:["images/WhatsApp Image 2026-05-10 at 1.40.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM.jpeg"]},
+  {id:24,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-400",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","navy","blue","gold"],desc:"Navy / Royal Blue / Gold · UA Pair",longDesc:"UA Nike Mind 001 in deep Navy with Royal Blue outsole and gold Swoosh. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.42.45 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.42.44 PM.jpeg"]},
+  {id:25,name:"NK Mind 001 × Fragment Design",brand:"Nike × Fragment",batch:"UA",sku:"IQ8502-001",sizes:"EU 36–48.5",cat:"ua-pairs",badge:"HOT",tags:["nike","fragment","mind","slides","grey","gray","blue","hiroshi"],desc:"Iron Grey / Blue · Fragment Collab · UA Pair",longDesc:"UA Nike Mind 001 × Fragment Design with FRAGMENT heel badge, blue pods, and branded insole. EU 36–48.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.45.18 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.45.18 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.45.18 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.45.19 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"]},
+  {id:2,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","bathing ape","tee","black","grey plaid"],desc:"Black · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in black with signature grey plaid print. Premium heavyweight cotton. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.13.14 PM.jpeg"]},
+  {id:3,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","white","grey plaid"],desc:"White · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in white with signature grey plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.13.04 PM.jpeg"]},
+  {id:4,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","grey","gray","grey plaid"],desc:"Grey · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in grey with signature grey plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.12.48 PM.jpeg"]},
+  {id:5,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","beige","grey plaid"],desc:"Beige · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in beige with signature grey plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.12.28 PM.jpeg"]},
+  {id:6,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","navy","grey plaid"],desc:"Navy · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in navy with signature grey plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.12.15 PM.jpeg"]},
+  {id:7,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","black","red plaid"],desc:"Black · Red Plaid Print",longDesc:"A Bathing Ape graphic tee in black with signature red plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.10.59 PM.jpeg"]},
+  {id:8,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","white","red plaid"],desc:"White · Red Plaid Print",longDesc:"A Bathing Ape graphic tee in white with signature red plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.10.46 PM (1).jpeg"]},
+  {id:9,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","grey","gray","red plaid"],desc:"Grey · Red Plaid Print",longDesc:"A Bathing Ape graphic tee in grey with signature red plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.10.46 PM.jpeg"]},
+  {id:10,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","beige","red plaid"],desc:"Beige · Red Plaid Print",longDesc:"A Bathing Ape graphic tee in beige with signature red plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.10.34 PM.jpeg"]},
+  {id:11,name:"Human Made Graphic Tee",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","humanmade","nigo","heart","pocket","tee","black"],desc:"Black · Heart & Pocket Tee",longDesc:"Human Made by NIGO in black — iconic heart logo and chest pocket. Premium heavyweight cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.07.02 PM.jpeg","images/WhatsApp Image 2026-05-09 at 3.06.48 PM.jpeg"]},
+  {id:12,name:"Human Made Graphic Tee",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","humanmade","nigo","heart","pocket","tee","white","red"],desc:"White · Heart & Pocket Tee",longDesc:"Human Made by NIGO in white — red heart logo and chest pocket. S–XL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.06.32 PM.jpeg","images/WhatsApp Image 2026-05-09 at 3.06.21 PM.jpeg"]},
+  {id:13,name:"Human Made Graphic Tee",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","humanmade","nigo","duck","tee","black"],desc:"Black · Duck Print",longDesc:"Human Made by NIGO in black with signature duck graphic. S–XL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.06.00 PM.jpeg"]},
+  {id:14,name:"Human Made Graphic Tee",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","humanmade","nigo","duck","tee","white"],desc:"White · Duck Print",longDesc:"Human Made by NIGO in white with signature duck graphic. S–XL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]},
+  {id:27,name:"Ami Paris Logo Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","logo","tee","cream","ivory"],desc:"Cream · AMI Front / PARIS Back Print",longDesc:"Ami Paris Logo Tee in cream — bold outline AMI chest print, PARIS back print, heart sleeve embroidery. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.51.45 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.51.45 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.51.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.51.45 PM.jpeg"]},
+  {id:42,name:"Ami Paris Originals Heritage Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","originals","heritage","since 2011","patch","tee","cream"],desc:"Cream · Originals By Ami Paris Since 2011 Patch",longDesc:"Ami Paris Originals Heritage Tee — woven centre-chest patch 'Originals By Ami Paris Since 2011'. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.58.51 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.58.55 PM.jpeg"]},
+  {id:26,name:"Ami De Coeur Crochet Patch Tee",brand:"Ami Paris",sku:"E21HJ028.7407150",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","crochet","patch","raglan","tee","navy","black","olive","cream"],desc:"Cream / Navy · Crochet Ami De Coeur Patch",longDesc:"Ami Paris 26SS Ami De Coeur Crochet Patch Tee — cream body with contrast raglan. Crochet heart logo patch. Organic cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"],colorVariants:[{label:"Navy",color:"#1b3a6b",desc:"Cream / Navy · Crochet Ami De Coeur Patch",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Cream / Black · Crochet Ami De Coeur Patch",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.48 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"]},{label:"Olive",color:"#6b7c3a",desc:"Cream / Olive · Crochet Ami De Coeur Patch",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"]}]},
+  {id:29,name:"Ami De Coeur Small Logo Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","ami de coeur","small logo","heart","tee","lavender","cream","navy","black","white"],desc:"Lavender · Small Ami De Coeur Logo Tee",longDesc:"Ami Paris De Coeur Small Logo Tee — embroidered heart logo on left chest. 13 colorways available. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.51 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"],colorVariants:[{label:"Lavender",color:"#c9b8e8",desc:"Lavender",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"]},{label:"Cream",color:"#f0e8d5",desc:"Cream",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (2).jpeg"]},{label:"Taupe",color:"#8c7b6b",desc:"Taupe",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (1).jpeg"]},{label:"Dark Brown",color:"#3b1a0f",desc:"Dark Brown",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM.jpeg"]},{label:"Navy",color:"#1b2a4a",desc:"Navy Blue",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (3).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (2).jpeg"]},{label:"Grey",color:"#b0b0b0",desc:"Grey Marl",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (1).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM.jpeg"]},{label:"Sky Blue",color:"#87ceeb",desc:"Sky Blue",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM (1).jpeg"]},{label:"Olive",color:"#6b7c3a",desc:"Olive Green",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM.jpeg"]},{label:"Dark Navy",color:"#0d1b2e",desc:"Dark Navy",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (2).jpeg"]},{label:"Mocha",color:"#9e8b76",desc:"Mocha",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (1).jpeg"]},{label:"Caramel",color:"#c48a3f",desc:"Caramel",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM (1).jpeg"]}]},
+  {id:40,name:"Ami De Coeur Pixel Knit Tee",brand:"Ami Paris",sku:"E21HJ028.CY1250",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","pixel","knit","heart","tee","khaki","cream"],desc:"Khaki · Teal Pixel Knit Ami De Coeur",longDesc:"Ami Paris 26SS Pixel Knit Ami De Coeur Tee — pixelated knit-jacquard logo. Organic cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"],colorVariants:[{label:"Khaki",color:"#b5a06a",desc:"Khaki · Teal Logo",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"]},{label:"Cream",color:"#f0ebe0",desc:"Cream · Red Logo",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"]}]},
+  {id:43,name:"Supreme Est. 1994 Five Boroughs Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","est 1994","five boroughs","tee","black","white"],desc:"Black · Est. 1994 Five Boroughs Print",longDesc:"Supreme FW21 Est. 1994 Five Boroughs Tee. Classic wordmark with NYC borough names. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM.jpeg"]}]},
+  {id:44,name:"Supreme Grinch Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","grinch","christmas","graphic","tee","black","white"],desc:"Black · Grinch Graphic Tee",longDesc:"Supreme FW24 Grinch Tee. Embroidered Grinch in Santa hat with Supreme box logo. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM.jpeg"]}]},
+  {id:45,name:"Supreme × Tekken Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","tekken","gaming","kanji","graphic","tee","black","white"],desc:"Black · Supreme × Tekken FW22 Tee",longDesc:"Supreme FW22 × Tekken Tee. Chrome-style kanji graphic with 'Fall/Winter 2022' text. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.24 PM.jpeg"]}]},
+  {id:46,name:"Supreme × Thrasher Cross Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","thrasher","cross","skate","collab","tee","black","white"],desc:"Black · Supreme × Thrasher Cross Back",longDesc:"Supreme × Thrasher Cross Tee. Reversed Thrasher logo chest, large cross back print. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.23 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.23 PM.jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"]}]},
+  {id:47,name:"Supreme Spiral Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","spiral","graphic","tee","black","white"],desc:"White · Supreme Spiral Word Back Print",longDesc:"Supreme SS21 Spiral Tee. Small box logo chest, large spiral word-collage back. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"]}]},
+  {id:48,name:"Supreme Established 1994 Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","established","1994","new york","tee","black","white"],desc:"White · Supreme Established 1994 New York USA Tee",longDesc:"Supreme FW21 Established 1994 Tee. Bold SUPREME wordmark + New York USA text. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM.jpeg"]}]},
+  {id:49,name:"Supreme Pill Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","pill","pills","photo","graphic","tee","black","white"],desc:"White · Supreme Pill Photo Tee",longDesc:"Supreme FW20 Pill Tee. Large photo-print of colourful mixed pills and capsules. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM.jpeg"]}]},
+  {id:50,name:"Supreme Emo Girl Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","emo","girl","anime","graphic","tee","black","white"],desc:"White · Supreme Emo Girl Graphic Tee",longDesc:"Supreme FW24 Emo Girl Tee. Embroidered anime-style girl portrait with Supreme script. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM.jpeg"]}]},
+  {id:51,name:"Supreme × Wangfujing Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","wangfujing","abstract","art","collage","tee","black","white"],desc:"White · Wangfujing Abstract Art Tee",longDesc:"Supreme Wangfujing Tee. Abstract collage art graphic with botanical elements and mixed media. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.45 PM.jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.45 PM.jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (5).jpeg"]}]},
+  {id:52,name:"Supreme Drugs Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","drugs","usa","flag","americana","tee","black","white"],desc:"White · DRUGS USA Flag Lettering Tee",longDesc:"Supreme Drugs Tee. Bold DRUGS text filled with American flag pattern. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (4).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (4).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (3).jpeg"]}]},
+  {id:53,name:"Supreme 1994 New York City Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","1994","new york city","illustrated","character","tee","black","white"],desc:"White · Supreme 1994 NYC Illustrated Tee",longDesc:"Supreme 1994 NYC Tee. Elaborate illustrated SUPREME 1994 lettering with hand-drawn characters. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (1).jpeg"]}]},
+  {id:54,name:"Supreme NYC Paris London Tokyo Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","nyc","paris","london","tokyo","cities","tee","black","white"],desc:"White · Supreme NYC Paris London Tokyo Tee",longDesc:"Supreme NYC Paris London Tokyo Tee. Clean SUPREME block print with city names. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM.jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM.jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (2).jpeg"]}]},
+  {id:55,name:"Supreme Photo Logo Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","photo","logo","collage","tee","black","white"],desc:"White · Supreme Photo Collage Logo Tee",longDesc:"Supreme Photo Logo Tee. Large SUPREME lettering filled with collage photo print. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM.jpeg"]}]},
+  {id:15,name:"Coming Soon",brand:"Luxury",cat:"luxury",badge:"NEW",tags:["luxury","coming soon"],desc:"More items dropping soon",longDesc:"Luxury items coming soon. DM us to ask about specific items.",imgs:[]},
+  {id:16,name:"Coming Soon",brand:"Watches",cat:"watches",badge:"NEW",tags:["watch","watches","coming soon"],desc:"More items dropping soon",longDesc:"Watch collection coming soon. DM us about specific pieces.",imgs:[]},
+  {id:30,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","hat","hollywood","cross","black"],desc:"All Black · CH Hollywood USA Patch",longDesc:"Chrome Hearts CH Hollywood USA trucker cap in all black. Embroidered CH patch, gothic script, dual crosses. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.57 PM.jpeg"]},
+  {id:31,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","white","red"],desc:"White / Red Brim · CH Hollywood USA Patch",longDesc:"Chrome Hearts cap in white with bold red brim. CH patch, gothic script, crosses. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (5).jpeg"]},
+  {id:32,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","white","black","lips","grillz"],desc:"White / Black · Lips & Grillz Patch",longDesc:"Chrome Hearts cap in white/black with lips and grillz patch. Gothic crosses and Hollywood USA script. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (4).jpeg"]},
+  {id:33,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","pink","white"],desc:"Pink / White · CH Hollywood USA Patch",longDesc:"Chrome Hearts cap in pink and white. Tonal embroidered CH patch. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (3).jpeg"]},
+  {id:34,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","white","blue","royal blue"],desc:"White / Royal Blue · CH Hollywood USA Patch",longDesc:"Chrome Hearts cap in white with royal blue brim. CH patch in red. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (2).jpeg"]},
+  {id:35,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","black","lips","grillz"],desc:"All Black · Lips & Grillz Patch",longDesc:"Chrome Hearts all-black cap with lips and grillz embroidery. Hollywood USA gothic script. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (1).jpeg"]},
+  {id:36,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","black","camo","camouflage"],desc:"Black / Camo Mesh · CH Hollywood USA Patch",longDesc:"Chrome Hearts cap — black structured front, camo mesh back. CH patch. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM.jpeg"]},
+  {id:37,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","camo","camouflage","green"],desc:"All Camo · CH Hollywood USA Patch",longDesc:"Chrome Hearts full camo cap — front, brim, and mesh back. CH patch. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (2).jpeg"]},
+  {id:38,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","white","red","blue","usa"],desc:"USA Colourway · White / Red / Blue",longDesc:"Chrome Hearts cap — white front, red mesh, blue brim. USA colourway. CH patch. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (1).jpeg"]},
+  {id:39,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","white","black"],desc:"White / Black · CH Hollywood USA Patch",longDesc:"Chrome Hearts cap in white with black mesh and brim. CH patch. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM.jpeg"]}
 ];
 
-/* ── FUZZY SEARCH ── */
-function fuzzyMatch(q, item) {
+// ── STATE ──
+let currentCat = 'all', searchQ = '';
+const pickedSize  = {};
+const pickedColor = {};
+
+// ── SEARCH ──
+function fuzzy(q, item) {
   if (!q) return true;
   const words = q.toLowerCase().trim().split(/\s+/);
-  const hay = [item.name,item.brand,item.desc,item.batch,item.sku,...(item.tags||[])].join(' ').toLowerCase();
-  return words.every(w => {
-    if (hay.includes(w)) return true;
-    return hay.split(/\s+/).some(t => lev(w,t) <= Math.floor(w.length/4));
-  });
+  const hay = [item.name,item.brand,item.desc||'',item.batch||'',item.sku||'',...(item.tags||[])].join(' ').toLowerCase();
+  return words.every(w => hay.includes(w) || hay.split(/\s+/).some(t => lev(w,t) <= Math.floor(w.length/4)));
 }
 function lev(a,b){
   if(!a.length)return b.length; if(!b.length)return a.length;
@@ -1199,351 +546,329 @@ function lev(a,b){
   return dp[a.length][b.length];
 }
 
-/* ── STATE ── */
-let currentCat='all', searchQ='';
-const cardSizePicked  = {};
-const cardColorPicked = {};
-
-/* ── WA LINK ── */
-function waLink(item, imgPath, size, color) {
-  const base = window.location.href.replace(/\/[^\/]*$/, '/');
-  const imgLine  = imgPath ? `\n🖼 Image: ${base}${imgPath}` : '';
-  const skuLine  = item.sku ? `\nSKU: ${item.sku}` : '';
-  const sizeLine = size  ? `\nSize: ${size}`   : (item.sizes ? `\n${item.sizes}` : '');
-  const colorLine= color ? `\nColor: ${color}` : '';
-  const batchTxt = item.batch ? ` (${item.batch})` : '';
-  const msg = encodeURIComponent(
-    `Hi Secret Shop! 👋\nI'm interested in:\n*${item.name}*${batchTxt}\n${item.desc}${skuLine}${sizeLine}${colorLine}${imgLine}\nIs it available?`
-  );
-  return `https://wa.me/971563780062?text=${msg}`;
+// ── WA LINK ──
+function waLink(item, img, size, color) {
+  const p = [
+    `Hi Secret Shop! 👋`,
+    `I'm interested in: *${item.name}*${item.batch ? ` (${item.batch})` : ''}`,
+    item.desc ? item.desc : '',
+    item.sku ? `SKU: ${item.sku}` : '',
+    size  ? `Size: ${size}`  : (item.sizes ? item.sizes : ''),
+    color ? `Color: ${color}` : '',
+    `Is it available?`
+  ].filter(Boolean).join('\n');
+  return `https://wa.me/971563780062?text=${encodeURIComponent(p)}`;
 }
 
-const PH = n => `<div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>${n}</div>`;
+// ── CARD BUILDER ──
+function card(item, delay) {
+  const isClo = CLOTHING.includes(item.cat);
+  const ci = pickedColor[item.id] || 0;
+  const cv = item.colorVariants?.[ci];
+  const imgs = cv ? cv.imgs : (item.imgs || []);
+  const desc = cv ? cv.desc : (item.desc || '');
+  const cover = imgs[0] || '';
+  const sizes = item.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES_DEFAULT;
+  const psz = pickedSize[item.id] || '';
+  const catLabel = {streetwear:'Streetwear','ua-pairs':'UA Pairs',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat] || item.cat;
 
-function getVisible(){
-  return ITEMS.filter(item=>{
-    const catOk = currentCat==='all' || item.cat===currentCat;
-    return catOk && fuzzyMatch(searchQ, item);
-  });
-}
+  const badgeHtml = item.badge
+    ? `<span class="badge ${item.badge==='HOT'?'hot':'new-badge'}">${item.badge}</span>` : '';
 
-/* ── RENDER GRID ── */
-const FEATURED_IDS = [1,18,22,25,26,29,30,11,43,46];
-
-const BRAND_GROUPS = [
-  {key:'nike',    label:'Nike / Jordan',  brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], scroll:true,  max:6},
- {key:'bape',    label:'A Bathing Ape',  brands:['A Bathing Ape'],                                         scroll:true,  max:6},
-  {key:'humanmade',label:'Human Made',   brands:['Human Made'],                                             scroll:true,  max:4},
-  {key:'ami',     label:'Ami Paris',      brands:['Ami Paris'],                                              scroll:true,  max:6},
-  {key:'supreme', label:'Supreme',        brands:['Supreme','Supreme × Thrasher'],                           scroll:true,  max:6},
-  {key:'chrome',  label:'Chrome Hearts',  brands:['Chrome Hearts'],                                          scroll:true,  max:5},
-];
-
-function makeCard(item, i, delayBase){
-  const isClothing = CLOTHING_CATS.includes(item.cat);
-  const badge = item.badge ? `<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>` : '';
-  const catLabel = {'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
-  const colorIdx = cardColorPicked[item.id] || 0;
-  const activeVariant = item.colorVariants ? item.colorVariants[colorIdx] : null;
-  const activeImgs  = activeVariant ? activeVariant.imgs : (item.imgs || []);
-  const activeDesc  = activeVariant ? activeVariant.desc : item.desc;
-  const cover = activeImgs[0];
-  const multi = activeImgs.length > 1;
   const imgHtml = cover
-    ? `<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-       <div class="ph" style="display:none">${item.name}</div>`
-    : PH(item.name);
-  const thumbHtml = multi
-    ? `<div class="thumb-strip">${activeImgs.map((s,ti)=>`<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${item.id},${ti})"><img src="${s}" loading="lazy"/></div>`).join('')}</div>` : '';
-  const skuHtml  = item.sku ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch?`<p class="card-sku">${item.batch}</p>`:'');
-  const sizeHtml = item.sizes && !isClothing ? `<p class="card-sizes">${item.sizes}</p>` : '';
-  const pickedSz = cardSizePicked[item.id] || '';
-  const itemSizes = item.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES;
-  const sizePickerHtml = isClothing
-    ? `<div class="size-row">${itemSizes.map(s=>`<button class="sz${pickedSz===s?' picked':''}" onclick="pickCardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`
-    : '';
-  const colorPickerHtml = item.colorVariants
-    ? `<div class="color-row"><span class="color-row-label">Color</span>${item.colorVariants.map((v,ci)=>`<div class="csw${colorIdx===ci?' picked':''}" style="background:${v.color}" title="${v.label}" onclick="pickCardColor(event,${item.id},${ci})"></div>`).join('')}</div>` : '';
-  return `<div class="card" role="listitem" data-id="${item.id}" style="transition-delay:${Math.min((delayBase||0)+i,16)*0.035}s" tabindex="0" aria-label="${item.name}">
-    <div class="card-photo" onclick="openLb(${item.id})">
-      ${imgHtml}${badge}${thumbHtml}
-      <a class="card-wa" href="${waLink(item,cover,pickedSz,activeVariant?activeVariant.label:'')}" target="_blank" onclick="event.stopPropagation()" id="cwa-${item.id}">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        Order on WhatsApp
-      </a>
+    ? `<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.opacity=0"/>`
+    : `<div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>`;
+
+  const thumbsHtml = imgs.length > 1
+    ? `<div class="thumb-row">${imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${item.id},${i})"></div>`).join('')}</div>` : '';
+
+  const skuHtml = item.sku ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch ? `<p class="card-sku">${item.batch}</p>` : '');
+  const sizesHtml = item.sizes && !isClo ? `<p class="card-sizes">${item.sizes}</p>` : '';
+
+  const swatchHtml = item.colorVariants
+    ? `<div class="swatch-row"><span class="swatch-label">Color</span>${item.colorVariants.map((v,i)=>`<div class="sw${ci===i?' active':''}" style="background:${v.color}" title="${v.label}" onclick="cardColor(event,${item.id},${i})"></div>`).join('')}</div>` : '';
+
+  const sizePickerHtml = isClo
+    ? `<div class="size-row">${sizes.map(s=>`<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>` : '';
+
+  return `<div class="card" data-id="${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
+    <div class="card-img" onclick="openLb(${item.id})">
+      ${imgHtml}${badgeHtml}${thumbsHtml}
+      <div class="card-wa-overlay" onclick="event.stopPropagation()">
+        <a href="${waLink(item,cover,psz,cv?cv.label:'')}" target="_blank" id="cwa-${item.id}" style="display:flex;align-items:center;gap:6px;color:#fff;font-size:11px;font-weight:600;width:100%;justify-content:center;text-decoration:none">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
     </div>
-    <div class="card-info" onclick="openLb(${item.id})">
-      <p class="card-cat">${catLabel}</p>
+    <div class="card-body" onclick="openLb(${item.id})">
+      <p class="card-label">${catLabel}</p>
       <p class="card-name">${item.name}</p>
       ${skuHtml}
-      <p class="card-sub" id="csub-${item.id}">${item.brand} · ${activeDesc}</p>
-      ${sizeHtml}${colorPickerHtml}${sizePickerHtml}
-      <span class="card-inquire">${multi?'View Gallery':'View'} &amp; Inquire →</span>
+      <p class="card-sub" id="csub-${item.id}">${item.brand}${desc?' · '+desc:''}</p>
+      ${sizesHtml}${swatchHtml}${sizePickerHtml}
+      <span class="card-cta">View &amp; Inquire →</span>
     </div>
   </div>`;
 }
 
-function animateCards(container){
-  requestAnimationFrame(()=>container.querySelectorAll('.card').forEach(c=>requestAnimationFrame(()=>c.classList.add('in'))));
+function animate(container) {
   const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
-  container.querySelectorAll('.card').forEach(c=>io.observe(c));
+  requestAnimationFrame(()=>container.querySelectorAll('.card').forEach(c=>{
+    requestAnimationFrame(()=>c.classList.add('in'));
+    io.observe(c);
+  }));
 }
 
-function render(){
-  const grid = document.getElementById('product-grid');
-  const isSearch = searchQ.length > 0;
-  const isCatAll = currentCat === 'all';
-  const catNames = {all:'All Items','ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'};
-  const visible = ITEMS.filter(item=>{
-    const catOk = currentCat==='all' || item.cat===currentCat;
-    return catOk && fuzzyMatch(searchQ, item);
-  });
-  document.getElementById('item-count').textContent = `${visible.length} item${visible.length!==1?'s':''}`;
-  document.getElementById('section-label').textContent = isSearch ? `Search: "${searchQ}"` : catNames[currentCat];
-
-  if(!visible.length){
-    grid.innerHTML=`<div class="product-grid"><div class="empty" role="listitem"><p>No items found</p><span>Try a different search or category</span></div></div>`;
-    return;
-  }
-
-  if(isSearch || !isCatAll){
-    grid.innerHTML=`<div class="product-grid">${visible.map((item,i)=>makeCard(item,i,0)).join('')}</div>`;
-    animateCards(grid);
-    return;
-  }
-
-  let html='';
-
-  const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
-  if(featItems.length){
-    html+=`<div class="featured-section">
-      <div class="featured-header"><span class="featured-title">Featured Picks</span><span class="featured-badge">🔥 HOT</span></div>
-      <div class="featured-scroll">${featItems.map((item,i)=>makeCard(item,i,0)).join('')}</div>
-    </div>`;
-  }
-
-  BRAND_GROUPS.forEach((group,gi)=>{
-    const groupItems = visible.filter(item=>group.brands.includes(item.brand));
-    if(!groupItems.length) return;
-    const preview = groupItems.slice(0,group.max);
-    const hasMore = groupItems.length > group.max;
-    html+=`<div class="brand-section" id="bsec-${group.key}">
-      <div class="brand-header">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="brand-title">${group.label}</span>
-          <span class="brand-count">${groupItems.length} item${groupItems.length!==1?'s':''}</span>
-        </div>
-        ${hasMore?`<button class="brand-see-all" onclick="expandBrand('${group.key}')">See All &rarr;</button>`:`<button class="brand-see-all" onclick="setcat('${group.key==='nike'?'ua-pairs':group.key==='bape'||group.key==='humanmade'||group.key==='ami'||group.key==='supreme'?'streetwear':'accessories'}')">See All &rarr;</button>`}
-      </div>
-      ${group.scroll
-        ? `<div class="brand-scroll-wrap"><div class="brand-scroll" id="brow-${group.key}">${preview.map((item,i)=>makeCard(item,i,gi*2)).join('')}</div></div>`
-        : `<div class="brand-static" id="brow-${group.key}">${preview.map((item,i)=>makeCard(item,i,gi*2)).join('')}</div>`
-      }
-    </div>`;
-  });
-
-  const groupedBrands = BRAND_GROUPS.flatMap(g=>g.brands);
-  const rest = visible.filter(item=>!groupedBrands.includes(item.brand));
-  if(rest.length){
-    html+=`<div class="brand-section">
-      <div class="brand-header"><span class="brand-title">Other Items</span><span class="brand-count">${rest.length} item${rest.length!==1?'s':''}</span></div>
-      <div class="brand-static">${rest.map((item,i)=>makeCard(item,i,0)).join('')}</div>
-    </div>`;
-  }
-
-  grid.innerHTML=html;
-  animateCards(grid);
-}
-
-function expandBrand(brandKey){
-  const group=BRAND_GROUPS.find(g=>g.key===brandKey);
-  if(!group)return;
-  const allItems=ITEMS.filter(item=>group.brands.includes(item.brand));
-  const row=document.getElementById(`brow-${brandKey}`);
-  const sec=document.getElementById(`bsec-${brandKey}`);
-  if(!row||!sec)return;
-  row.innerHTML=allItems.map((item,i)=>makeCard(item,i,0)).join('');
-  if(group.scroll){row.className='brand-static';row.style.gridTemplateColumns='repeat(4,1fr)';}
-  const btn=sec.querySelector('.brand-see-all');
-  if(btn){btn.textContent='Show Less ↑';btn.onclick=()=>collapseBrand(brandKey);}
-  animateCards(row);
-}
-
-function collapseBrand(brandKey){
-  const group=BRAND_GROUPS.find(g=>g.key===brandKey);
-  if(!group)return;
-  const preview=ITEMS.filter(item=>group.brands.includes(item.brand)).slice(0,group.max);
-  const row=document.getElementById(`brow-${brandKey}`);
-  const sec=document.getElementById(`bsec-${brandKey}`);
-  if(!row||!sec)return;
-  if(group.scroll){row.className='brand-scroll';row.style.gridTemplateColumns='';}
-  else{row.className='brand-static';row.style.gridTemplateColumns='';}
-  row.innerHTML=preview.map((item,i)=>makeCard(item,i,0)).join('');
-  const btn=sec.querySelector('.brand-see-all');
-  if(btn){btn.textContent='See All →';btn.onclick=()=>expandBrand(brandKey);}
-  animateCards(row);
-}
-
-/* ── CARD: PICK COLOR VARIANT ── */
-function pickCardColor(e, id, idx) {
+// ── INTERACTION: CARD COLOR ──
+function cardColor(e, id, idx) {
   e.stopPropagation();
-  cardColorPicked[id] = idx;
+  pickedColor[id] = idx;
   const item = ITEMS.find(x=>x.id===id);
-  const card = document.querySelector(`.card[data-id="${id}"]`);
-  if (!item || !card || !item.colorVariants) return;
-  const variant = item.colorVariants[idx];
-  const mainImg = card.querySelector('.card-photo > img');
-  if (mainImg) mainImg.src = variant.imgs[0];
-  const strip = card.querySelector('.thumb-strip');
-  if (strip) {
-    strip.innerHTML = variant.imgs.map((s,ti)=>
-      `<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${id},${ti})"><img src="${s}" loading="lazy"/></div>`
-    ).join('');
-  }
-  const subEl = document.getElementById(`csub-${id}`);
-  if (subEl) subEl.textContent = `${item.brand} · ${variant.desc}`;
-  card.querySelectorAll('.csw').forEach((b,i)=>b.classList.toggle('picked', i===idx));
-  const wa = document.getElementById(`cwa-${id}`);
-  if (wa) wa.href = waLink(item, variant.imgs[0], cardSizePicked[id]||'', variant.label);
-}
-
-/* ── CARD: PICK SIZE ── */
-function pickCardSize(e, id, size) {
-  e.stopPropagation();
-  cardSizePicked[id] = cardSizePicked[id]===size ? '' : size;
+  if (!item?.colorVariants) return;
   const card = document.querySelector(`.card[data-id="${id}"]`);
   if (!card) return;
-  card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked', b.textContent===cardSizePicked[id]));
-  const item = ITEMS.find(x=>x.id===id);
-  const colorIdx = cardColorPicked[id] || 0;
-  const variant  = item && item.colorVariants ? item.colorVariants[colorIdx] : null;
-  const cover    = variant ? variant.imgs[0] : (item && item.imgs && item.imgs[0]);
+  const v = item.colorVariants[idx];
+  const img = card.querySelector('.card-img > img');
+  if (img) img.src = v.imgs[0] || '';
+  const dots = card.querySelector('.thumb-row');
+  if (dots) dots.innerHTML = v.imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${id},${i})"></div>`).join('');
+  const sub = document.getElementById(`csub-${id}`);
+  if (sub) sub.textContent = `${item.brand} · ${v.desc}`;
+  card.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
   const wa = document.getElementById(`cwa-${id}`);
-  if (wa && item) wa.href = waLink(item, cover, cardSizePicked[id], variant?variant.label:'');
+  if (wa) wa.href = waLink(item, v.imgs[0], pickedSize[id]||'', v.label);
 }
 
-/* ── CARD: THUMB NAV ── */
-function cardThumb(e, id, idx){
+// ── INTERACTION: CARD SIZE ──
+function cardSize(e, id, size) {
   e.stopPropagation();
+  pickedSize[id] = pickedSize[id]===size ? '' : size;
   const card = document.querySelector(`.card[data-id="${id}"]`);
+  if (!card) return;
+  card.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active', b.textContent===pickedSize[id]));
   const item = ITEMS.find(x=>x.id===id);
-  if (!card || !item) return;
-  const colorIdx = cardColorPicked[id] || 0;
-  const activeImgs = item.colorVariants ? item.colorVariants[colorIdx].imgs : item.imgs;
-  const mainImg = card.querySelector('.card-photo>img');
-  if (mainImg) mainImg.src = activeImgs[idx];
-  card.querySelectorAll('.thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  const ci = pickedColor[id] || 0;
+  const cv = item?.colorVariants?.[ci];
   const wa = document.getElementById(`cwa-${id}`);
-  const variant = item.colorVariants ? item.colorVariants[colorIdx] : null;
-  if (wa) wa.href = waLink(item, activeImgs[idx], cardSizePicked[id]||'', variant?variant.label:'');
+  if (wa && item) wa.href = waLink(item, cv?cv.imgs[0]:(item.imgs?.[0]||''), pickedSize[id], cv?.label||'');
 }
 
-/* ── LIGHTBOX STATE ── */
-let lbItem=null, lbIdx=0, lbSizePicked='', lbColorPicked=0;
+// ── INTERACTION: CARD THUMB ──
+function cardThumb(e, id, idx) {
+  e.stopPropagation();
+  const item = ITEMS.find(x=>x.id===id);
+  if (!item) return;
+  const ci = pickedColor[id]||0;
+  const imgs = item.colorVariants?.[ci]?.imgs || item.imgs || [];
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  if (!card) return;
+  const img = card.querySelector('.card-img > img');
+  if (img && imgs[idx]) img.src = imgs[idx];
+  card.querySelectorAll('.thumb-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
 
-function openLb(id){
+// ── BRAND / SECTION GROUPS ──
+const FEATURED_IDS = [1,18,22,25,26,29,30,11,43,46];
+const GROUPS = [
+  {key:'nike',    label:'Nike / Jordan',      brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], max:6},
+  {key:'bape',    label:'A Bathing Ape',       brands:['A Bathing Ape'], max:6},
+  {key:'humanmade',label:'Human Made',         brands:['Human Made'], max:4},
+  {key:'ami',     label:'Ami Paris',           brands:['Ami Paris'], max:6},
+  {key:'supreme', label:'Supreme',             brands:['Supreme','Supreme × Thrasher'], max:8},
+  {key:'chrome',  label:'Chrome Hearts',       brands:['Chrome Hearts'], max:5},
+];
+
+// ── RENDER ──
+function render() {
+  const body   = document.getElementById('site-body');
+  const isSrch = searchQ.length > 0;
+  const isAll  = currentCat === 'all';
+  const catName = {all:'All Items','ua-pairs':'UA Pairs',streetwear:'Streetwear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'}[currentCat] || currentCat;
+
+  const visible = ITEMS.filter(item => (currentCat==='all'||item.cat===currentCat) && fuzzy(searchQ, item));
+  document.getElementById('toolbar-label').textContent = isSrch ? `Results for "${searchQ}"` : catName;
+  document.getElementById('toolbar-count').textContent = ` · ${visible.length} item${visible.length!==1?'s':''}`;
+
+  if (!visible.length) {
+    body.innerHTML = `<div class="section"><div class="grid-4"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;
+    return;
+  }
+
+  if (isSrch || !isAll) {
+    body.innerHTML = `<div class="section"><div class="search-grid">${visible.map((it,i)=>card(it,i)).join('')}</div></div>`;
+    animate(body);
+    return;
+  }
+
+  let html = '';
+
+  // Featured row
+  const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
+  if (featItems.length) {
+    html += `<div class="featured-section">
+      <div class="featured-head"><span class="featured-title">Featured Picks</span><span class="featured-badge">🔥 HOT</span></div>
+      <div class="hscroll">${featItems.map((it,i)=>card(it,i)).join('')}</div>
+    </div>`;
+  }
+
+  // Brand groups
+  GROUPS.forEach((g, gi) => {
+    const items = visible.filter(it=>g.brands.includes(it.brand));
+    if (!items.length) return;
+    const preview = items.slice(0, g.max);
+    const hasMore = items.length > g.max;
+    html += `<div class="section" id="bsec-${g.key}">
+      <div class="section-head">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="section-brand">${g.label}</span>
+          <span class="section-meta">${items.length} ITEMS</span>
+        </div>
+        ${hasMore
+          ? `<button class="section-see-all" onclick="expandGroup('${g.key}')">See All →</button>`
+          : `<button class="section-see-all" onclick="collapseGroup('${g.key}')">See All →</button>`}
+      </div>
+      <div class="hscroll" id="brow-${g.key}">${preview.map((it,i)=>card(it,gi*3+i)).join('')}</div>
+    </div>`;
+  });
+
+  // Other items not in groups
+  const grouped = GROUPS.flatMap(g=>g.brands);
+  const rest = visible.filter(it=>!grouped.includes(it.brand));
+  if (rest.length) {
+    html += `<div class="section"><div class="section-head"><span class="section-brand">Other Items</span><span class="section-meta">${rest.length} ITEMS</span></div><div class="hscroll">${rest.map((it,i)=>card(it,i)).join('')}</div></div>`;
+  }
+
+  body.innerHTML = html;
+  animate(body);
+}
+
+function expandGroup(key) {
+  const g = GROUPS.find(x=>x.key===key);
+  if (!g) return;
+  const all = ITEMS.filter(it=>g.brands.includes(it.brand));
+  const row = document.getElementById(`brow-${key}`);
+  const sec = document.getElementById(`bsec-${key}`);
+  if (!row || !sec) return;
+  row.className = 'grid-4';
+  row.innerHTML = all.map((it,i)=>card(it,i)).join('');
+  const btn = sec.querySelector('.section-see-all');
+  if (btn) { btn.textContent='Show Less ↑'; btn.onclick=()=>collapseGroup(key); }
+  animate(row);
+}
+
+function collapseGroup(key) {
+  const g = GROUPS.find(x=>x.key===key);
+  if (!g) return;
+  const preview = ITEMS.filter(it=>g.brands.includes(it.brand)).slice(0, g.max);
+  const row = document.getElementById(`brow-${key}`);
+  const sec = document.getElementById(`bsec-${key}`);
+  if (!row || !sec) return;
+  row.className = 'hscroll';
+  row.innerHTML = preview.map((it,i)=>card(it,i)).join('');
+  const btn = sec.querySelector('.section-see-all');
+  if (btn) { btn.textContent='See All →'; btn.onclick=()=>expandGroup(key); }
+  animate(row);
+}
+
+// ── CAT NAV ──
+function setcat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
+  render();
+  document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',()=>setcat(b.dataset.cat)));
+
+// ── SEARCH ──
+const SI = document.getElementById('search-input');
+const CB = document.getElementById('clear-btn');
+let ST;
+SI.addEventListener('input',()=>{ clearTimeout(ST); ST=setTimeout(()=>{ searchQ=SI.value.trim(); CB.classList.toggle('visible',searchQ.length>0); render(); },320); });
+SI.addEventListener('keydown',e=>{ if(e.key==='Enter'){clearTimeout(ST);searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();if(searchQ.length>0){SI.blur();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});}} });
+CB.addEventListener('click',()=>{ SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render(); });
+
+// ── LIGHTBOX ──
+let lbItem=null, lbIdx=0, lbSz='', lbCi=0;
+
+function openLb(id) {
   lbItem = ITEMS.find(x=>x.id===id);
   if (!lbItem) return;
-  lbIdx         = 0;
-  lbSizePicked  = cardSizePicked[id]  || '';
-  lbColorPicked = cardColorPicked[id] || 0;
+  lbIdx = 0; lbSz = pickedSize[id]||''; lbCi = pickedColor[id]||0;
   paintLb();
   document.getElementById('lb-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-function closeLb(){
+function closeLb() {
   document.getElementById('lb-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
 }
-
-function paintLb(){
+function paintLb() {
   if (!lbItem) return;
-  const activeVariant = lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
-  const imgs = activeVariant ? activeVariant.imgs : (lbItem.imgs || []);
-  const activeDesc = activeVariant ? activeVariant.desc : lbItem.desc;
+  const cv = lbItem.colorVariants?.[lbCi];
+  const imgs = cv ? cv.imgs : (lbItem.imgs||[]);
+  const desc = cv ? cv.desc : lbItem.desc;
+  document.getElementById('lb-img').src = imgs[lbIdx]||'';
+  document.getElementById('lb-name').textContent = lbItem.name + (lbItem.sku ? ' — '+lbItem.sku : '');
+  document.getElementById('lb-meta').textContent = [lbItem.batch, desc, lbItem.sizes&&!CLOTHING.includes(lbItem.cat)?lbItem.sizes:''].filter(Boolean).join(' · ');
+  const descEl = document.getElementById('lb-desc');
+  if (lbItem.longDesc) { descEl.textContent=lbItem.longDesc; descEl.style.display=''; }
+  else descEl.style.display='none';
 
-  document.getElementById('lb-img').src = imgs[lbIdx] || '';
-  document.getElementById('lb-img').alt = lbItem.name;
+  // dots
+  document.getElementById('lb-dots').innerHTML = imgs.map((_,i)=>`<div class="lb-dot${i===lbIdx?' active':''}" onclick="lbGo(${i})"></div>`).join('');
+  document.getElementById('lb-prev').style.display = imgs.length>1?'flex':'none';
+  document.getElementById('lb-next').style.display = imgs.length>1?'flex':'none';
 
-  const nameParts = [lbItem.name, lbItem.sku].filter(Boolean);
-  document.getElementById('lb-name').textContent = nameParts.join(' — ');
-
-  const metaParts = [lbItem.batch, activeDesc].filter(Boolean);
-  if (lbItem.sizes && !CLOTHING_CATS.includes(lbItem.cat)) metaParts.push(lbItem.sizes);
-  document.getElementById('lb-meta').textContent = metaParts.join(' · ');
-
-  const descEl = document.getElementById('lb-desc-full');
-  if (lbItem.longDesc){ descEl.textContent=lbItem.longDesc; descEl.style.display=''; }
-  else { descEl.style.display='none'; }
-
-  const colorWrap = document.getElementById('lb-color-wrap');
-  const colorRow  = document.getElementById('lb-color-row');
+  // colors
+  const csec = document.getElementById('lb-color-section');
   if (lbItem.colorVariants) {
-    colorWrap.style.display = '';
-    colorRow.innerHTML = lbItem.colorVariants.map((v,i)=>
-      `<div class="lb-csw${i===lbColorPicked?' picked':''}" style="background:${v.color}" title="${v.label}" onclick="pickLbColor(${i})"></div>`
-    ).join('') + `<span class="lb-color-name">${lbItem.colorVariants[lbColorPicked].label}</span>`;
-  } else {
-    colorWrap.style.display = 'none';
-  }
+    csec.style.display='';
+    document.getElementById('lb-swatches').innerHTML = lbItem.colorVariants.map((v,i)=>`<div class="lb-sw${i===lbCi?' active':''}" style="background:${v.color}" title="${v.label}" onclick="lbColor(${i})"></div>`).join('');
+    document.getElementById('lb-color-name').textContent = lbItem.colorVariants[lbCi].label;
+  } else csec.style.display='none';
 
-  const sizeWrap = document.getElementById('lb-size-wrap');
-  const sizeRow  = document.getElementById('lb-size-row');
- if (CLOTHING_CATS.includes(lbItem.cat)){
-    const lbItemSizes = lbItem.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES;
-    sizeRow.innerHTML = lbItemSizes.map(s=>`<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`).join('');
-    sizeWrap.style.display = '';
-  } else {
-    sizeWrap.style.display = 'none';
-  }
+  // sizes
+  const ssec = document.getElementById('lb-size-section');
+  if (CLOTHING.includes(lbItem.cat)) {
+    ssec.style.display='';
+    const szs = lbItem.brand==='A Bathing Ape' ? SIZES_BAPE : SIZES_DEFAULT;
+    document.getElementById('lb-sizes').innerHTML = szs.map(s=>`<button class="lb-sz${lbSz===s?' active':''}" onclick="lbSzPick('${s}')">${s}</button>`).join('');
+  } else ssec.style.display='none';
 
-  const show = imgs.length > 1;
-  document.getElementById('lb-prev').style.display = show ? 'flex' : 'none';
-  document.getElementById('lb-next').style.display = show ? 'flex' : 'none';
-  document.getElementById('lb-thumbs').innerHTML = imgs.map((s,i)=>
-    `<div class="lb-thumb${i===lbIdx?' active':''}" onclick="lbGo(${i})"><img src="${s}" loading="lazy"/></div>`
-  ).join('');
-
-  document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSizePicked, activeVariant?activeVariant.label:'');
+  document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSz, cv?.label||'');
 }
-
-function pickLbColor(idx){
-  lbColorPicked = idx;
-  lbIdx = 0;
-  if (lbItem) cardColorPicked[lbItem.id] = idx;
-  paintLb();
-  if (lbItem){
-    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
-    if (card) card.querySelectorAll('.csw').forEach((b,i)=>b.classList.toggle('picked',i===idx));
-  }
-}
-
-function pickLbSize(size){
-  lbSizePicked = lbSizePicked===size ? '' : size;
-  if (lbItem) cardSizePicked[lbItem.id] = lbSizePicked;
-  document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('picked', b.textContent===lbSizePicked));
-  const activeVariant = lbItem && lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
-  const imgs = activeVariant ? activeVariant.imgs : (lbItem?lbItem.imgs||[]:[]);
-  document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSizePicked, activeVariant?activeVariant.label:'');
-  if (lbItem){
-    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
-    if (card) card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked', b.textContent===lbSizePicked));
-  }
-}
-
-function lbGo(idx){
-  if (!lbItem) return;
-  const activeVariant = lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
-  const imgs = activeVariant ? activeVariant.imgs : lbItem.imgs;
-  lbIdx = (idx + imgs.length) % imgs.length;
+function lbGo(idx) {
+  const cv = lbItem?.colorVariants?.[lbCi];
+  const imgs = cv ? cv.imgs : (lbItem?.imgs||[]);
+  lbIdx = (idx+imgs.length)%imgs.length;
   paintLb();
 }
+function lbColor(idx) {
+  lbCi=idx; lbIdx=0;
+  if (lbItem) pickedColor[lbItem.id]=idx;
+  paintLb();
+  if (lbItem) {
+    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
+    if (card) card.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
+  }
+}
+function lbSzPick(sz) {
+  lbSz = lbSz===sz?'':sz;
+  if (lbItem) pickedSize[lbItem.id]=lbSz;
+  document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));
+  const cv = lbItem?.colorVariants?.[lbCi];
+  document.getElementById('lb-wa').href = waLink(lbItem, cv?cv.imgs[0]:(lbItem?.imgs?.[0]||''), lbSz, cv?.label||'');
+  if (lbItem) {
+    const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
+    if (card) card.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));
+  }
+}
 
-/* ── LIGHTBOX EVENTS ── */
 document.getElementById('lb-prev').addEventListener('click',()=>lbGo(lbIdx-1));
 document.getElementById('lb-next').addEventListener('click',()=>lbGo(lbIdx+1));
 document.getElementById('lb-close').addEventListener('click',closeLb);
-document.getElementById('lb-overlay').addEventListener('click',e=>{if(e.target.id==='lb-overlay')closeLb()});
+document.getElementById('lb-overlay').addEventListener('click',e=>{if(e.target.id==='lb-overlay')closeLb();});
 document.addEventListener('keydown',e=>{
   if(!lbItem)return;
   if(e.key==='Escape')closeLb();
@@ -1551,44 +876,13 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')lbGo(lbIdx+1);
 });
 
-/* ── LIGHTBOX SWIPE ── */
-let lbTouchStartX = 0, lbTouchStartY = 0;
-const lbMain = document.querySelector('.lb-main');
-lbMain.addEventListener('touchstart', e => {
-  lbTouchStartX = e.changedTouches[0].screenX;
-  lbTouchStartY = e.changedTouches[0].screenY;
-}, {passive: true});
-lbMain.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].screenX - lbTouchStartX;
-  const dy = e.changedTouches[0].screenY - lbTouchStartY;
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-    dx < 0 ? lbGo(lbIdx + 1) : lbGo(lbIdx - 1);
-  }
-}, {passive: true});
-
-/* ── CATEGORY NAV ── */
-function setcat(cat){
-  currentCat = cat;
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===cat));
-  render();
-  document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});
-}
-document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>setcat(btn.dataset.cat)));
-
-/* ── SEARCH ── */
-const SI=document.getElementById('search-input'), CB=document.getElementById('clear-btn');
-let ST;
-SI.addEventListener('input',()=>{
-  clearTimeout(ST);
-  ST=setTimeout(()=>{searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();},400);
-});
-SI.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){
-    clearTimeout(ST);searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();
-    if(searchQ.length>0){SI.blur();document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});}
-  }
-});
-CB.addEventListener('click',()=>{SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render();});
+// swipe
+let tx=0,ty=0;
+document.querySelector('.lb-photo').addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;},{passive:true});
+document.querySelector('.lb-photo').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].screenX-tx, dy=e.changedTouches[0].screenY-ty;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40) dx<0?lbGo(lbIdx+1):lbGo(lbIdx-1);
+},{passive:true});
 
 render();
 </script>
