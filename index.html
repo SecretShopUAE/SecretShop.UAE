@@ -99,7 +99,6 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 /* THUMB STRIP */
 .thumb-strip{position:absolute;bottom:44px;left:0;right:0;display:flex;gap:3px;padding:5px 6px;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);opacity:0;transition:opacity 0.25s;pointer-events:none}
 .card:hover .thumb-strip,.thumb-strip.always{opacity:1;pointer-events:auto}
-
 .thumb{width:34px;height:34px;flex-shrink:0;border:1.5px solid transparent;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
 .thumb.active{border-color:#fff}
 .thumb img{width:100%;height:100%;object-fit:cover}
@@ -111,7 +110,6 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .card-badge.hot{background:#ff2d2d;color:#fff}
 .card-badge.new{background:var(--w);color:var(--b)}
 
-/* WA hover bar — sits at bottom of photo */
 .card-wa{position:absolute;bottom:0;left:0;right:0;background:var(--wa);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:9px;text-align:center;transform:translateY(100%);transition:transform 0.28s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:center;gap:6px;z-index:3}
 .card:hover .card-wa{transform:translateY(0)}
 
@@ -124,10 +122,21 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .card-inquire{margin-top:8px;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g);border-bottom:1px solid #333;padding-bottom:1px;transition:color 0.2s,border-color 0.2s}
 .card:hover .card-inquire{color:var(--wa);border-color:var(--wa)}
 
+/* ── SIZE SELECTOR (clothing cards) ── */
+.size-row{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.sz{
+  font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid #333;color:#666;padding:3px 7px;cursor:pointer;
+  transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;
+}
+.sz:hover{border-color:#666;color:var(--w)}
+.sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
+
 /* LIGHTBOX */
 .lb-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.93);align-items:center;justify-content:center}
 .lb-overlay.open{display:flex}
-.lb-box{position:relative;max-width:min(92vw,560px);width:100%;background:#111;border:1px solid var(--line)}
+.lb-box{position:relative;max-width:min(92vw,560px);width:100%;background:#111;border:1px solid var(--line);max-height:95svh;overflow-y:auto;scrollbar-width:none}
+.lb-box::-webkit-scrollbar{display:none}
 .lb-main{aspect-ratio:3/4;position:relative;overflow:hidden;background:#0d0d0d}
 .lb-main img{width:100%;height:100%;object-fit:contain}
 .lb-close{position:absolute;top:10px;right:10px;z-index:10;background:rgba(0,0,0,0.65);color:#fff;border:none;font-size:18px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -139,9 +148,23 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .lb-thumb{width:52px;height:52px;flex-shrink:0;border:1.5px solid #333;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
 .lb-thumb.active{border-color:var(--w)}
 .lb-thumb img{width:100%;height:100%;object-fit:cover}
-.lb-info{padding:10px 14px 6px}
-.lb-info h3{font-size:14px;font-weight:600;margin-bottom:3px}
-.lb-info p{font-family:var(--mono);font-size:8.5px;letter-spacing:1px;color:var(--g)}
+.lb-info{padding:12px 14px 8px}
+.lb-info h3{font-size:14px;font-weight:600;margin-bottom:5px}
+.lb-info .lb-meta{font-family:var(--mono);font-size:8.5px;letter-spacing:1px;color:var(--g);margin-bottom:4px}
+.lb-info .lb-desc-full{font-size:11px;color:#bbb;line-height:1.7;margin-top:6px;border-top:1px solid var(--line);padding-top:8px}
+
+/* ── LIGHTBOX SIZE PICKER ── */
+.lb-size-wrap{padding:0 14px 10px}
+.lb-size-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:6px}
+.lb-size-row{display:flex;gap:6px;flex-wrap:wrap}
+.lb-sz{
+  font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  border:1px solid #333;color:#666;padding:5px 12px;cursor:pointer;
+  transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;
+}
+.lb-sz:hover{border-color:#666;color:var(--w)}
+.lb-sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
+
 .lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:12px;margin:10px 14px 14px;text-decoration:none;transition:opacity 0.2s}
 .lb-wa:hover{opacity:0.88}
 
@@ -375,7 +398,12 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
     <div class="lb-thumbs" id="lb-thumbs"></div>
     <div class="lb-info">
       <h3 id="lb-name"></h3>
-      <p id="lb-meta"></p>
+      <p class="lb-meta" id="lb-meta"></p>
+      <p class="lb-desc-full" id="lb-desc-full"></p>
+    </div>
+    <div class="lb-size-wrap" id="lb-size-wrap" style="display:none">
+      <p class="lb-size-label">Select Size</p>
+      <div class="lb-size-row" id="lb-size-row"></div>
     </div>
     <a class="lb-wa" id="lb-wa" href="#" target="_blank">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -388,6 +416,10 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
 </div>
 
 <script>
+/* clothing categories that get the size picker */
+const CLOTHING_CATS = ['streetwear'];
+const SIZES = ['S','M','L','XL'];
+
 const ITEMS = [
   /* ── UA PAIRS ── */
   {
@@ -396,6 +428,7 @@ const ITEMS = [
     cat:"ua-pairs", badge:"HOT",
     tags:["jordan","aj1","nike","airjordan","sneakers","shoes","kicks","pk batch","iw6276"],
     desc:"PK Batch · Low Top",
+    longDesc:"Premium quality PK Batch Air Jordan 1 Retro OG. Chicago colourway with iconic red, black and white leather upper. High-top silhouette with Nike Air cushioning. Available in EU sizes 40 to 47.5.",
     imgs:[
       "images/WhatsApp Image 2026-05-09 at 3.24.48 PM (3).jpeg",
       "images/WhatsApp Image 2026-05-09 at 3.24.48 PM (2).jpeg",
@@ -411,6 +444,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","black","grey plaid"],
     desc:"Black · Grey Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in black with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.13.14 PM.jpeg"]
   },
   {
@@ -419,6 +453,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","white","grey plaid"],
     desc:"White · Grey Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in white with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.13.04 PM.jpeg"]
   },
   {
@@ -427,6 +462,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","grey","gray","grey plaid"],
     desc:"Grey · Grey Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in grey with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.12.48 PM.jpeg"]
   },
   {
@@ -435,6 +471,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","beige","grey plaid"],
     desc:"Beige · Grey Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in beige with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.12.28 PM.jpeg"]
   },
   {
@@ -443,6 +480,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","navy","grey plaid"],
     desc:"Navy · Grey Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in navy with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.12.15 PM.jpeg"]
   },
   /* ── BAPE TEES — Red Plaid Series ── */
@@ -452,6 +490,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","black","red plaid"],
     desc:"Black · Red Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in black with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.10.59 PM.jpeg"]
   },
   {
@@ -460,6 +499,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","white","red plaid"],
     desc:"White · Red Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in white with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.10.46 PM (1).jpeg"]
   },
   {
@@ -468,6 +508,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","grey","gray","red plaid"],
     desc:"Grey · Red Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in grey with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.10.46 PM.jpeg"]
   },
   {
@@ -476,6 +517,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["bape","bathing ape","ape","tee","tshirt","beige","red plaid"],
     desc:"Beige · Red Plaid Print",
+    longDesc:"A Bathing Ape graphic tee in beige with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.10.34 PM.jpeg"]
   },
   /* ── HUMAN MADE TEES ── */
@@ -485,6 +527,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["human made","humanmade","nigo","heart","pocket","tee","black"],
     desc:"Black · Heart & Pocket Tee",
+    longDesc:"Human Made by NIGO graphic tee in black featuring the iconic heart logo and chest pocket detail. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
     imgs:[
       "images/WhatsApp Image 2026-05-09 at 3.07.02 PM.jpeg",
       "images/WhatsApp Image 2026-05-09 at 3.06.48 PM.jpeg"
@@ -496,6 +539,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["human made","humanmade","nigo","heart","pocket","tee","white","red"],
     desc:"White · Heart & Pocket Tee",
+    longDesc:"Human Made by NIGO graphic tee in white featuring the iconic red heart logo and chest pocket detail. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
     imgs:[
       "images/WhatsApp Image 2026-05-09 at 3.06.32 PM.jpeg",
       "images/WhatsApp Image 2026-05-09 at 3.06.21 PM.jpeg"
@@ -507,6 +551,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["human made","humanmade","nigo","duck","tee","black"],
     desc:"Black · Duck Print",
+    longDesc:"Human Made by NIGO graphic tee in black with the signature duck graphic print. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.06.00 PM.jpeg"]
   },
   {
@@ -515,6 +560,7 @@ const ITEMS = [
     cat:"streetwear", badge:"HOT",
     tags:["human made","humanmade","nigo","duck","tee","white"],
     desc:"White · Duck Print",
+    longDesc:"Human Made by NIGO graphic tee in white with the signature duck graphic print. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]
   },
   /* ── LUXURY ITEMS ── */
@@ -524,6 +570,7 @@ const ITEMS = [
     cat:"luxury", badge:"NEW",
     tags:["luxury","coming soon"],
     desc:"More items dropping soon",
+    longDesc:"Luxury items coming soon. DM us on WhatsApp to ask about specific items you are looking for.",
     imgs:[]
   },
   /* ── WATCHES ── */
@@ -533,6 +580,7 @@ const ITEMS = [
     cat:"watches", badge:"NEW",
     tags:["watch","watches","coming soon"],
     desc:"More items dropping soon",
+    longDesc:"Watch collection coming soon. DM us on WhatsApp to ask about specific pieces you are looking for.",
     imgs:[]
   },
   /* ── ACCESSORIES ── */
@@ -542,6 +590,7 @@ const ITEMS = [
     cat:"accessories", badge:"NEW",
     tags:["accessories","bags","coming soon"],
     desc:"More items dropping soon",
+    longDesc:"Accessories collection coming soon. DM us on WhatsApp to ask about specific items you are looking for.",
     imgs:[]
   }
 ];
@@ -567,13 +616,17 @@ function lev(a,b){
 
 /* ══ STATE ══ */
 let currentCat='all', searchQ='';
+/* per-card selected size: { itemId: 'M' } */
+const cardSizePicked = {};
+/* lightbox selected size */
+let lbSizePicked = '';
 
 /* ══ WA LINK ══ */
-function waLink(item, imgPath) {
+function waLink(item, imgPath, size) {
   const base = window.location.href.replace(/\/[^\/]*$/, '/');
   const imgLine = imgPath ? `\n🖼 Image: ${base}${imgPath}` : '';
   const skuLine = item.sku ? `\nSKU: ${item.sku}` : '';
-  const sizeLine = item.sizes ? `\n${item.sizes}` : '';
+  const sizeLine = size ? `\nSize: ${size}` : (item.sizes ? `\n${item.sizes}` : '');
   const batchTxt = item.batch ? ` (${item.batch})` : '';
   const msg = encodeURIComponent(
     `Hi Secret Shop! 👋\nI'm interested in:\n*${item.name}*${batchTxt}\n${item.desc}${skuLine}${sizeLine}${imgLine}\nIs it available?`
@@ -604,6 +657,8 @@ function render(){
     return;
   }
 
+  const isClothing = item => CLOTHING_CATS.includes(item.cat);
+
   grid.innerHTML=visible.map((item,i)=>{
     const badge=item.badge?`<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>`:'';
     const cover=item.imgs&&item.imgs[0];
@@ -622,12 +677,17 @@ function render(){
       :'';
 
     const skuHtml=item.sku?`<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>`:(item.batch?`<p class="card-sku">${item.batch}</p>`:'');
-    const sizeHtml=item.sizes?`<p class="card-sizes">${item.sizes}</p>`:'';
+    const sizeHtml=item.sizes&&!isClothing(item)?`<p class="card-sizes">${item.sizes}</p>`:'';
+
+    const picked = cardSizePicked[item.id] || '';
+    const sizePickerHtml = isClothing(item)
+      ? `<div class="size-row">${SIZES.map(s=>`<button class="sz${picked===s?' picked':''}" onclick="pickCardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`
+      : '';
 
     return `<div class="card" role="listitem" data-id="${item.id}" style="transition-delay:${Math.min(i,12)*0.04}s" tabindex="0" aria-label="${item.name}">
       <div class="card-photo" onclick="openLb(${item.id})">
         ${imgHtml}${badge}${thumbHtml}
-        <a class="card-wa" href="${waLink(item,cover)}" target="_blank" onclick="event.stopPropagation()">
+        <a class="card-wa" href="${waLink(item,cover,picked)}" target="_blank" onclick="event.stopPropagation()" id="cwa-${item.id}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
           Order on WhatsApp
         </a>
@@ -638,6 +698,7 @@ function render(){
         ${skuHtml}
         <p class="card-sub">${item.brand} · ${item.desc}</p>
         ${sizeHtml}
+        ${sizePickerHtml}
         <span class="card-inquire">${multi?'View Gallery':'View'} &amp; Inquire →</span>
       </div>
     </div>`;
@@ -646,6 +707,19 @@ function render(){
   requestAnimationFrame(()=>grid.querySelectorAll('.card').forEach(c=>requestAnimationFrame(()=>c.classList.add('in'))));
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
   grid.querySelectorAll('.card').forEach(c=>io.observe(c));
+}
+
+/* ══ CARD SIZE PICKER ══ */
+function pickCardSize(e, id, size) {
+  e.stopPropagation();
+  cardSizePicked[id] = cardSizePicked[id] === size ? '' : size;
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  if (!card) return;
+  card.querySelectorAll('.sz').forEach(b => b.classList.toggle('picked', b.textContent === cardSizePicked[id]));
+  const item = ITEMS.find(x=>x.id===id);
+  const cover = item && item.imgs && item.imgs[0];
+  const wa = document.getElementById(`cwa-${id}`);
+  if (wa && item) wa.href = waLink(item, cover, cardSizePicked[id]);
 }
 
 /* ══ CARD THUMBNAIL SWITCHER ══ */
@@ -657,8 +731,8 @@ function cardThumb(e, id, idx){
   const mainImg=card.querySelector('.card-photo>img');
   if(mainImg){mainImg.src=item.imgs[idx];}
   card.querySelectorAll('.thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  const wa=card.querySelector('.card-wa');
-  if(wa)wa.href=waLink(item,item.imgs[idx]);
+  const wa=document.getElementById(`cwa-${id}`);
+  if(wa)wa.href=waLink(item,item.imgs[idx],cardSizePicked[id]);
 }
 
 /* ══ LIGHTBOX ══ */
@@ -668,6 +742,7 @@ function openLb(id){
   lbItem=ITEMS.find(x=>x.id===id);
   if(!lbItem)return;
   lbIdx=0;
+  lbSizePicked = cardSizePicked[id] || '';
   paintLb();
   document.getElementById('lb-overlay').classList.add('open');
   document.body.style.overflow='hidden';
@@ -681,18 +756,67 @@ function paintLb(){
   const imgs=lbItem.imgs||[];
   document.getElementById('lb-img').src=imgs[lbIdx]||'';
   document.getElementById('lb-img').alt=lbItem.name;
+
+  /* name + sku */
   const nameParts=[lbItem.name,lbItem.sku].filter(Boolean);
   document.getElementById('lb-name').textContent=nameParts.join(' — ');
-  const metaParts=[lbItem.batch,lbItem.desc,lbItem.sizes].filter(Boolean);
+
+  /* meta line: batch · desc · sizes (non-clothing) */
+  const metaParts=[lbItem.batch,lbItem.desc].filter(Boolean);
+  if(lbItem.sizes && !CLOTHING_CATS.includes(lbItem.cat)) metaParts.push(lbItem.sizes);
   document.getElementById('lb-meta').textContent=metaParts.join(' · ');
-  document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx]);
+
+  /* full description */
+  const descEl = document.getElementById('lb-desc-full');
+  if(lbItem.longDesc){
+    descEl.textContent = lbItem.longDesc;
+    descEl.style.display = '';
+  } else {
+    descEl.style.display = 'none';
+  }
+
+  /* size picker (clothing only) */
+  const sizeWrap = document.getElementById('lb-size-wrap');
+  const sizeRow  = document.getElementById('lb-size-row');
+  if(CLOTHING_CATS.includes(lbItem.cat)){
+    sizeRow.innerHTML = SIZES.map(s=>
+      `<button class="lb-sz${lbSizePicked===s?' picked':''}" onclick="pickLbSize('${s}')">${s}</button>`
+    ).join('');
+    sizeWrap.style.display='';
+  } else {
+    sizeWrap.style.display='none';
+  }
+
+  /* arrows */
   const show=imgs.length>1;
   document.getElementById('lb-prev').style.display=show?'flex':'none';
   document.getElementById('lb-next').style.display=show?'flex':'none';
+
+  /* thumbnails */
   document.getElementById('lb-thumbs').innerHTML=imgs.map((s,i)=>
     `<div class="lb-thumb${i===lbIdx?' active':''}" onclick="lbGo(${i})"><img src="${s}" loading="lazy"/></div>`
   ).join('');
+
+  /* wa link */
+  document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSizePicked);
 }
+
+function pickLbSize(size){
+  lbSizePicked = lbSizePicked === size ? '' : size;
+  /* sync back to card */
+  if(lbItem) cardSizePicked[lbItem.id] = lbSizePicked;
+  /* update buttons */
+  document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('picked',b.textContent===lbSizePicked));
+  /* update wa link */
+  const imgs=lbItem?lbItem.imgs||[]:[];
+  document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSizePicked);
+  /* sync card buttons too */
+  if(lbItem){
+    const card=document.querySelector(`.card[data-id="${lbItem.id}"]`);
+    if(card) card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked',b.textContent===lbSizePicked));
+  }
+}
+
 function lbGo(idx){
   if(!lbItem)return;
   lbIdx=(idx+lbItem.imgs.length)%lbItem.imgs.length;
@@ -719,7 +843,7 @@ function setcat(cat){
 }
 document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>setcat(btn.dataset.cat)));
 
-/* ══ SEARCH — dismiss keyboard + auto-scroll to results ══ */
+/* ══ SEARCH ══ */
 const SI=document.getElementById('search-input'),CB=document.getElementById('clear-btn');
 let ST;
 SI.addEventListener('input',()=>{
@@ -729,9 +853,7 @@ SI.addEventListener('input',()=>{
     CB.classList.toggle('visible',searchQ.length>0);
     render();
     if(searchQ.length>0){
-      /* dismiss mobile keyboard */
       SI.blur();
-      /* scroll to the grid so results are visible */
       document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});
     }
   },400);
