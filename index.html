@@ -243,7 +243,7 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
         <path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/>
       </svg>
-      <span>Order Now</span>
+      <span>Inquire Here</span>
     </a>
   </div>
 
@@ -251,17 +251,16 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
     <button class="cat-btn active" data-cat="all">All Items</button>
     <button class="cat-btn" data-cat="ua-pairs">UA Pairs 👟</button>
     <button class="cat-btn" data-cat="streetwear">Street Wear 👕</button>
+    <button class="cat-btn" data-cat="luxury">Luxury Items 💎</button>
+    <button class="cat-btn" data-cat="watches">Watches ⌚</button>
+    <button class="cat-btn" data-cat="accessories">Accessories 🎒</button>
   </nav>
 </header>
 
 <!-- COVER -->
 <section class="cover" aria-label="Cover photo">
   <div class="cover-img">
-    <div class="cover-img">
-    <div class="cover-img">
     <img src="images/Cover photo.jpeg" alt="Secret Shop Cover"/>
-  </div>
-  </div>
   </div>
   <div class="cover-overlay"></div>
   <div class="cover-content">
@@ -336,7 +335,7 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
   <div class="f-col">
     <div class="f-logo">Secret Shop</div>
     <p class="f-sub" style="color:#555;font-size:11px;line-height:1.8;margin-bottom:0.75rem">
-      🔥 Hype Items Supplier<br>📌 UA Pairs · PK Batch<br>📌 BAPE · Human Made
+      🔥 Hype Items<br>📌 Streetwear<br>📌 Luxury Items<br>📌 Watches<br>📌 Accessories
     </p>
     <div class="f-socials">
       <a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" class="f-social">Facebook</a>
@@ -347,6 +346,9 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
     <h4>Categories</h4>
     <a href="#" onclick="setcat('ua-pairs');return false">UA Pairs</a>
     <a href="#" onclick="setcat('streetwear');return false">Street Wear</a>
+    <a href="#" onclick="setcat('luxury');return false">Luxury Items</a>
+    <a href="#" onclick="setcat('watches');return false">Watches</a>
+    <a href="#" onclick="setcat('accessories');return false">Accessories</a>
   </div>
   <div class="f-col">
     <h4>Contact</h4>
@@ -386,12 +388,6 @@ footer{background:var(--line);padding:2rem 1.5rem;display:grid;grid-template-col
 </div>
 
 <script>
-/* ══════════════════════════════════════════
-   PRODUCTS
-   imgs[] — first image is the card cover.
-   All images appear in the gallery lightbox.
-   WhatsApp message includes the item image filename.
-══════════════════════════════════════════ */
 const ITEMS = [
   /* ── UA PAIRS ── */
   {
@@ -520,6 +516,33 @@ const ITEMS = [
     tags:["human made","humanmade","nigo","duck","tee","white"],
     desc:"White · Duck Print",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]
+  },
+  /* ── LUXURY ITEMS ── */
+  {
+    id:15, name:"Coming Soon", brand:"Luxury",
+    batch:"", sku:"", sizes:"",
+    cat:"luxury", badge:"NEW",
+    tags:["luxury","coming soon"],
+    desc:"More items dropping soon",
+    imgs:[]
+  },
+  /* ── WATCHES ── */
+  {
+    id:16, name:"Coming Soon", brand:"Watches",
+    batch:"", sku:"", sizes:"",
+    cat:"watches", badge:"NEW",
+    tags:["watch","watches","coming soon"],
+    desc:"More items dropping soon",
+    imgs:[]
+  },
+  /* ── ACCESSORIES ── */
+  {
+    id:17, name:"Coming Soon", brand:"Accessories",
+    batch:"", sku:"", sizes:"",
+    cat:"accessories", badge:"NEW",
+    tags:["accessories","bags","coming soon"],
+    desc:"More items dropping soon",
+    imgs:[]
   }
 ];
 
@@ -545,7 +568,7 @@ function lev(a,b){
 /* ══ STATE ══ */
 let currentCat='all', searchQ='';
 
-/* ══ WA LINK — includes image path ══ */
+/* ══ WA LINK ══ */
 function waLink(item, imgPath) {
   const base = window.location.href.replace(/\/[^\/]*$/, '/');
   const imgLine = imgPath ? `\n🖼 Image: ${base}${imgPath}` : '';
@@ -573,7 +596,7 @@ function render(){
   const visible=getVisible();
   const grid=document.getElementById('product-grid');
   document.getElementById('item-count').textContent=`${visible.length} item${visible.length!==1?'s':''}`;
-  const catNames={all:'All Items','ua-pairs':'UA Pairs',streetwear:'Street Wear'};
+  const catNames={all:'All Items','ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'};
   document.getElementById('section-label').textContent=searchQ?`Search: "${searchQ}"`:catNames[currentCat];
 
   if(!visible.length){
@@ -585,7 +608,7 @@ function render(){
     const badge=item.badge?`<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>`:'';
     const cover=item.imgs&&item.imgs[0];
     const multi=item.imgs&&item.imgs.length>1;
-    const catLabel={'ua-pairs':'UA Pairs',streetwear:'Street Wear'}[item.cat]||item.cat;
+    const catLabel={'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
 
     const imgHtml=cover
       ?`<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
@@ -696,12 +719,22 @@ function setcat(cat){
 }
 document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>setcat(btn.dataset.cat)));
 
-/* ══ SEARCH ══ */
+/* ══ SEARCH — dismiss keyboard + auto-scroll to results ══ */
 const SI=document.getElementById('search-input'),CB=document.getElementById('clear-btn');
 let ST;
 SI.addEventListener('input',()=>{
   clearTimeout(ST);
-  ST=setTimeout(()=>{searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();},220);
+  ST=setTimeout(()=>{
+    searchQ=SI.value.trim();
+    CB.classList.toggle('visible',searchQ.length>0);
+    render();
+    if(searchQ.length>0){
+      /* dismiss mobile keyboard */
+      SI.blur();
+      /* scroll to the grid so results are visible */
+      document.querySelector('.grid-outer').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  },400);
 });
 CB.addEventListener('click',()=>{SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render();});
 
