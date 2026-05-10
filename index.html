@@ -19,7 +19,7 @@ html{scroll-behavior:smooth}
   --sans:'Barlow',sans-serif;
   --wa:#25D366;
 }
-body{background:var(--b);color:var(--w);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:#f2f2f2;color:var(--w);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;width:100%;height:100%;object-fit:cover}
 button{font-family:var(--sans);cursor:pointer;border:none;background:none}
@@ -52,7 +52,7 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .clear-btn.visible{display:block}
 
 /* WA BUTTON */
-.wa-btn{display:flex;align-items:center;gap:0.5rem;background:var(--wa);color:#fff;padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s}
+.wa-btn{display:flex;align-items:center;gap:0.5rem;background:var(--wa);color:#fff;padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;border-radius:8px}
 .wa-btn:hover{opacity:0.88}
 
 /* NAV */
@@ -81,39 +81,55 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .tabby-logo .t-dot{width:8px;height:8px;border-radius:50%;background:#0a0a0a;display:inline-block}
 
 /* SECTION BAR */
-.section-bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--line)}
+.section-bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:#fff}
 .section-name{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--g)}
 .section-count{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:#999}
 
 /* PRODUCT GRID */
-.grid-outer{padding:0 0 2rem}
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line)}
+.grid-outer{padding:1rem 0.85rem 3rem}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 
 /* CARD */
-.card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer;opacity:0;transform:translateY(12px);transition:opacity 0.4s,transform 0.4s}
+.card{
+  border-radius:16px;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity 0.4s, transform 0.4s, box-shadow 0.3s;
+  background:#fff;
+  box-shadow:0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.06);
+}
 .card.in{opacity:1;transform:translateY(0)}
-.card-photo{position:relative;aspect-ratio:3/4;background:#f0f0f0;overflow:hidden}
+.card:hover{
+  box-shadow:0 10px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
+  transform:translateY(-4px);
+}
+.card.in:hover{transform:translateY(-4px)}
+
+.card-photo{position:relative;aspect-ratio:3/4;background:#f0f0f0;overflow:hidden;border-radius:16px 16px 0 0}
 .card-photo>img{width:100%;height:100%;object-fit:cover;transition:transform 0.55s cubic-bezier(.25,.46,.45,.94),filter 0.3s;filter:grayscale(20%)}
 .card:hover .card-photo>img{transform:scale(1.07);filter:grayscale(0%)}
 
 /* THUMB STRIP */
 .thumb-strip{position:absolute;bottom:44px;left:0;right:0;display:flex;gap:3px;padding:5px 6px;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);opacity:0;transition:opacity 0.25s;pointer-events:none}
 .card:hover .thumb-strip,.thumb-strip.always{opacity:1;pointer-events:auto}
-.thumb{width:34px;height:34px;flex-shrink:0;border:1.5px solid transparent;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
+.thumb{width:34px;height:34px;flex-shrink:0;border:1.5px solid transparent;overflow:hidden;cursor:pointer;transition:border-color 0.15s;border-radius:4px}
 .thumb.active{border-color:#fff}
 .thumb img{width:100%;height:100%;object-fit:cover}
 
 .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#f0f0f0;color:#bbb;font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:1rem}
 .ph svg{opacity:0.2}
 
-.card-badge{position:absolute;top:0;left:0;font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px}
+.card-badge{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:6px}
 .card-badge.hot{background:#ff2d2d;color:#fff}
 .card-badge.new{background:#0a0a0a;color:#fff}
 
 .card-wa{position:absolute;bottom:0;left:0;right:0;background:var(--wa);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:9px;text-align:center;transform:translateY(100%);transition:transform 0.28s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:center;gap:6px;z-index:3}
 .card:hover .card-wa{transform:translateY(0)}
 
-.card-info{padding:0.75rem 0.85rem 1rem;border-top:1px solid var(--line)}
+.card-info{padding:0.75rem 0.85rem 1rem;border-top:1px solid rgba(0,0,0,0.06)}
 .card-cat{font-family:var(--mono);font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px}
 .card-name{font-size:13px;font-weight:600;line-height:1.25;letter-spacing:0.2px}
 .card-sku{font-family:var(--mono);font-size:8px;letter-spacing:1px;color:#888;margin-top:3px}
@@ -124,7 +140,7 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 
 /* SIZE SELECTOR */
 .size-row{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
-.sz{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:3px 7px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none}
+.sz{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:3px 7px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;border-radius:4px}
 .sz:hover{border-color:#333;color:var(--w)}
 .sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
 
@@ -138,17 +154,17 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 /* LIGHTBOX */
 .lb-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.93);align-items:center;justify-content:center}
 .lb-overlay.open{display:flex}
-.lb-box{position:relative;max-width:min(92vw,560px);width:100%;background:#fff;border:1px solid var(--line);max-height:95svh;overflow-y:auto;scrollbar-width:none}
+.lb-box{position:relative;max-width:min(92vw,560px);width:100%;background:#fff;border-radius:20px;border:1px solid var(--line);max-height:95svh;overflow-y:auto;scrollbar-width:none}
 .lb-box::-webkit-scrollbar{display:none}
-.lb-main{aspect-ratio:3/4;position:relative;overflow:hidden;background:#f5f5f5}
+.lb-main{aspect-ratio:3/4;position:relative;overflow:hidden;background:#f5f5f5;border-radius:20px 20px 0 0}
 .lb-main img{width:100%;height:100%;object-fit:contain}
-.lb-close{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,0.9);color:#000;border:1px solid #ddd;font-size:18px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb-close{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,0.9);color:#000;border:1px solid #ddd;font-size:18px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%}
 .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;font-size:22px;width:38px;height:60px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}
-.lb-arrow.prev{left:0}
-.lb-arrow.next{right:0}
+.lb-arrow.prev{left:0;border-radius:0 8px 8px 0}
+.lb-arrow.next{right:0;border-radius:8px 0 0 8px}
 .lb-thumbs{display:flex;gap:4px;padding:8px;background:#f0f0f0;overflow-x:auto;scrollbar-width:none}
 .lb-thumbs::-webkit-scrollbar{display:none}
-.lb-thumb{width:52px;height:52px;flex-shrink:0;border:1.5px solid #ddd;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
+.lb-thumb{width:52px;height:52px;flex-shrink:0;border:1.5px solid #ddd;overflow:hidden;cursor:pointer;transition:border-color 0.15s;border-radius:6px}
 .lb-thumb.active{border-color:var(--w)}
 .lb-thumb img{width:100%;height:100%;object-fit:cover}
 .lb-info{padding:12px 14px 8px}
@@ -160,7 +176,7 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .lb-size-wrap{padding:0 14px 10px}
 .lb-size-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:6px}
 .lb-size-row{display:flex;gap:6px;flex-wrap:wrap}
-.lb-sz{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:5px 12px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none}
+.lb-sz{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #ccc;color:#999;padding:5px 12px;cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;background:none;border-radius:6px}
 .lb-sz:hover{border-color:#333;color:var(--w)}
 .lb-sz.picked{border-color:var(--w);color:var(--b);background:var(--w)}
 
@@ -173,11 +189,11 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .lb-csw.picked{border-color:var(--w);transform:scale(1.12)}
 .lb-color-name{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#777;margin-left:2px}
 
-.lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:12px;margin:10px 14px 14px;text-decoration:none;transition:opacity 0.2s}
+.lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:12px;margin:10px 14px 14px;text-decoration:none;transition:opacity 0.2s;border-radius:10px}
 .lb-wa:hover{opacity:0.88}
 
 /* EMPTY */
-.empty{grid-column:1/-1;text-align:center;padding:5rem 1rem;border-right:1px solid var(--line)}
+.empty{grid-column:1/-1;text-align:center;padding:5rem 1rem}
 .empty p{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:#bbb;text-transform:uppercase}
 .empty span{display:block;font-size:9px;color:#ccc;margin-top:0.5rem;letter-spacing:1px}
 
@@ -185,7 +201,7 @@ header{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px s
 .info-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .info-cell{padding:2rem 1.5rem;border-right:1px solid var(--line);display:flex;align-items:flex-start;gap:1rem}
 .info-cell:last-child{border-right:none}
-.info-icon{width:36px;height:36px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--g)}
+.info-icon{width:36px;height:36px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--g);border-radius:8px}
 .info-cell h4{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
 .info-cell p{font-size:11px;color:var(--g);line-height:1.7}
 .info-cell a{color:var(--wa)}
@@ -197,15 +213,18 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
 .f-col a:hover{color:var(--w)}
 .f-logo{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--w);margin-bottom:0.5rem}
 .f-socials{display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap}
-.f-social{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#777;border:1px solid #ccc;padding:5px 12px;transition:all 0.2s}
+.f-social{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#777;border:1px solid #ccc;padding:5px 12px;transition:all 0.2s;border-radius:6px}
 .f-social:hover{border-color:var(--g);color:var(--w)}
 .footer-bottom{border-top:1px solid #e0e0e0;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-bottom p{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:#888;text-transform:uppercase}
 
 /* RESPONSIVE */
-@media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1100px){
+  .product-grid{grid-template-columns:repeat(3,1fr);gap:12px}
+}
 @media(max-width:780px){
-  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-outer{padding:0.85rem 0.65rem 2.5rem}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .info-strip{grid-template-columns:1fr}
   .info-cell{border-right:none;border-bottom:1px solid var(--line)}
   .info-cell:last-child{border-bottom:none}
@@ -219,10 +238,15 @@ footer{background:#f5f5f5;padding:2rem 1.5rem;display:grid;grid-template-columns
   .header-top{padding:0 1rem}
   .search-wrap{max-width:none}
   .section-bar{padding:0.75rem 1rem}
-  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-outer{padding:0.65rem 0.5rem 2rem}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .card{border-radius:12px}
+  .card-photo{border-radius:12px 12px 0 0}
   .card-info{padding:0.6rem 0.7rem 0.85rem}
   .card-name{font-size:12px}
   .logo-img{height:36px}
+  .lb-box{border-radius:16px}
+  .lb-main{border-radius:16px 16px 0 0}
 }
 </style>
 </head>
@@ -555,7 +579,6 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.42.44 PM.jpeg"
     ]
   },
-  /* ── NK MIND 001 × FRAGMENT DESIGN ── */
   {
     id:25, name:"NK Mind 001 × Fragment Design", brand:"Nike × Fragment",
     batch:"UA", sku:"IQ8502-001", sizes:"Size 36–48.5",
@@ -571,22 +594,21 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"
     ]
   },
-  /* ── AMI PARIS — AMI PARIS LOGO TEE ── */
-{
-  id:27, name:"Ami Paris Logo Tee", brand:"Ami Paris",
-  batch:"", sku:"", sizes:"",
-  cat:"streetwear", badge:"NEW",
-  tags:["ami","ami paris","alexandre mattiussi","logo","tee","tshirt","cream","ivory","off white","ami paris print","back print","26ss","2026","graphic"],
-  desc:"Cream · AMI Front / PARIS Back Print",
-  longDesc:"Ami Paris Logo Tee in cream. Features a large bold outline 'AMI' graphic print on the front chest and matching 'PARIS' outline print on the back. Small Ami De Coeur heart logo embroidered on the left sleeve. Ami Alexandre Mattiussi woven neck label. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-  imgs:[
-    "images/WhatsApp Image 2026-05-10 at 1.51.45 PM (2).jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.51.45 PM (1).jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.51.44 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.51.45 PM.jpeg"
-  ]
-},
-  /* ── BAPE TEES — Grey Plaid Series ── */
+  /* ── STREETWEAR ── */
+  {
+    id:27, name:"Ami Paris Logo Tee", brand:"Ami Paris",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"NEW",
+    tags:["ami","ami paris","alexandre mattiussi","logo","tee","tshirt","cream","ivory","off white","ami paris print","back print","26ss","2026","graphic"],
+    desc:"Cream · AMI Front / PARIS Back Print",
+    longDesc:"Ami Paris Logo Tee in cream. Features a large bold outline 'AMI' graphic print on the front chest and matching 'PARIS' outline print on the back. Small Ami De Coeur heart logo embroidered on the left sleeve. Ami Alexandre Mattiussi woven neck label. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.51.45 PM (2).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.51.45 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.51.44 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.51.45 PM.jpeg"
+    ]
+  },
   {
     id:2, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
     batch:"", sku:"", sizes:"",
@@ -632,7 +654,6 @@ const ITEMS = [
     longDesc:"A Bathing Ape graphic tee in navy with signature grey plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.12.15 PM.jpeg"]
   },
-  /* ── BAPE TEES — Red Plaid Series ── */
   {
     id:7, name:"BAPE Graphic Tee", brand:"A Bathing Ape",
     batch:"", sku:"", sizes:"",
@@ -669,7 +690,6 @@ const ITEMS = [
     longDesc:"A Bathing Ape graphic tee in beige with signature red plaid print. Classic BAPE heavyweight cotton. Available in sizes S, M, L, and XL.",
     imgs:["images/WhatsApp Image 2026-05-09 at 3.10.34 PM.jpeg"]
   },
-  /* ── HUMAN MADE TEES ── */
   {
     id:11, name:"Human Made Graphic Tee", brand:"Human Made",
     batch:"", sku:"", sizes:"",
@@ -713,21 +733,20 @@ const ITEMS = [
     imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]
   },
   {
-  id:42, name:"Ami Paris Originals Heritage Tee", brand:"Ami Paris",
-  batch:"", sku:"", sizes:"",
-  cat:"streetwear", badge:"NEW",
-  tags:["ami","ami paris","alexandre mattiussi","originals","heritage","since 2011","script","box logo","patch","tee","tshirt","cream","ivory","off white","red","26ss","2026"],
-  desc:"Cream · Originals By Ami Paris Since 2011 Patch",
-  longDesc:"Ami Paris Originals Heritage Tee in cream. Features a large centre-chest woven patch with red script 'Originals By Ami Paris Since 2011' inside a red border box. Small Ami De Coeur heart logo at the back neck. Ami Alexandre Mattiussi grey woven neck label. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
-  imgs:[
-    "images/WhatsApp Image 2026-05-10 at 1.58.51 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.58.52 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.58.52 PM (1).jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.58.52 PM (2).jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.58.55 PM.jpeg"
-  ]
-},
-  /* ── AMI PARIS — DE COEUR CROCHET TEE (3 colorways) ── */
+    id:42, name:"Ami Paris Originals Heritage Tee", brand:"Ami Paris",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"NEW",
+    tags:["ami","ami paris","alexandre mattiussi","originals","heritage","since 2011","script","box logo","patch","tee","tshirt","cream","ivory","off white","red","26ss","2026"],
+    desc:"Cream · Originals By Ami Paris Since 2011 Patch",
+    longDesc:"Ami Paris Originals Heritage Tee in cream. Features a large centre-chest woven patch with red script 'Originals By Ami Paris Since 2011' inside a red border box. Small Ami De Coeur heart logo at the back neck. Ami Alexandre Mattiussi grey woven neck label. Premium heavyweight cotton construction. Available in sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.58.51 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.58.52 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.58.52 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.58.52 PM (2).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.58.55 PM.jpeg"
+    ]
+  },
   {
     id:26, name:"Ami De Coeur Crochet Patch Tee", brand:"Ami Paris",
     batch:"", sku:"E21HJ028.7407150", sizes:"",
@@ -742,7 +761,6 @@ const ITEMS = [
       "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg",
       "images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"
     ],
-    
     colorVariants:[
       {
         label:"Navy",
@@ -780,218 +798,183 @@ const ITEMS = [
       }
     ]
   },
-  /* ── AMI PARIS — DE COEUR SMALL LOGO TEE (13 colorways) ── */
-{
-  id:29, name:"Ami De Coeur Small Logo Tee", brand:"Ami Paris",
-  batch:"", sku:"", sizes:"",
-  cat:"streetwear", badge:"NEW",
-  tags:["ami","ami paris","ami de coeur","alexandre mattiussi","small logo","heart","tee","tshirt","lavender","cream","ivory","taupe","mocha","dark brown","navy","black","grey","gray","white","sky blue","baby blue","olive","green","caramel","tan","brown","purple","lilac","26ss","2026"],
-  desc:"Lavender · Small Ami De Coeur Logo Tee",
-  longDesc:"Ami Paris De Coeur Small Logo Tee. Clean oversized fit in premium heavyweight cotton with the iconic small Ami De Coeur heart logo embroidered on the left chest. Ami Alexandre Mattiussi woven neck label. Available in 13 colorways: Lavender, Cream, Taupe, Dark Brown, Navy, Black, Grey Marl, White, Sky Blue, Olive, Dark Navy, Mocha, and Caramel. Sizes S, M, L, and XL.",
-  imgs:[
-    "images/WhatsApp Image 2026-05-10 at 1.54.51 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"
-  ],
-  colorVariants:[
-    {
-      label:"Lavender",
-      color:"#c9b8e8",
-      desc:"Lavender · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"]
-    },
-    {
-      label:"Cream",
-      color:"#f0e8d5",
-      desc:"Cream / Ivory · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (2).jpeg"]
-    },
-    {
-      label:"Taupe",
-      color:"#8c7b6b",
-      desc:"Taupe / Mocha · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (1).jpeg"]
-    },
-    {
-      label:"Dark Brown",
-      color:"#3b1a0f",
-      desc:"Dark Brown · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM.jpeg"]
-    },
-    {
-      label:"Navy",
-      color:"#1b2a4a",
-      desc:"Navy Blue · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (3).jpeg"]
-    },
-    {
-      label:"Black",
-      color:"#0a0a0a",
-      desc:"Black · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (2).jpeg"]
-    },
-    {
-      label:"Grey",
-      color:"#b0b0b0",
-      desc:"Grey Marl · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (1).jpeg"]
-    },
-    {
-      label:"White",
-      color:"#ffffff",
-      desc:"White · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM.jpeg"]
-    },
-    {
-      label:"Sky Blue",
-      color:"#87ceeb",
-      desc:"Sky Blue · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM (1).jpeg"]
-    },
-    {
-      label:"Olive",
-      color:"#6b7c3a",
-      desc:"Olive Green · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM.jpeg"]
-    },
-    {
-      label:"Dark Navy",
-      color:"#0d1b2e",
-      desc:"Dark Navy · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (2).jpeg"]
-    },
-    {
-      label:"Mocha",
-      color:"#9e8b76",
-      desc:"Mocha / Sand · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (1).jpeg"]
-    },
-    {
-      label:"White Tonal",
-      color:"#f8f8f8",
-      desc:"White · Tonal Logo · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM.jpeg"]
-    },
-    {
-      label:"Caramel",
-      color:"#c48a3f",
-      desc:"Caramel / Tan · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM (1).jpeg"]
-    },
-    {
-      label:"Off-White",
-      color:"#ede8df",
-      desc:"Off-White · Small Ami De Coeur Logo Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM.jpeg"]
-    }
-  ]
-},
   {
-  id:40, name:"Ami De Coeur Pixel Knit Tee", brand:"Ami Paris",
-  batch:"", sku:"E21HJ028.CY1250", sizes:"",
-  cat:"streetwear", badge:"NEW",
-  tags:["ami","ami paris","ami de coeur","alexandre mattiussi","pixel","knit","heart","tee","tshirt","khaki","tan","cream","ivory","red","teal","green","26ss","2026"],
-  desc:"Khaki · Teal Pixel Knit Ami De Coeur",
-  longDesc:"Ami Paris 26SS Pixel Knit Ami De Coeur Tee. Features a pixelated knit-jacquard Ami De Coeur heart-A logo on the left chest. Made from organically sourced cotton. Ami Alexandre Mattiussi woven neck label. Available in Khaki with Teal logo and Cream with Red logo. Sizes S, M, L, and XL.",
-  imgs:[
-    "images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg",
-    "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
-  ],
-  colorVariants:[
-    {
-      label:"Khaki",
-      color:"#b5a06a",
-      desc:"Khaki · Teal Pixel Knit Ami De Coeur",
-      imgs:[
-        "images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg",
-        "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
-        "images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg",
-        "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
-      ]
-    },
-    {
-      label:"Cream",
-      color:"#f0ebe0",
-      desc:"Cream · Red Pixel Knit Ami De Coeur",
-      imgs:[
-        "images/WhatsApp Image 2026-05-10 at 1.56.36 PM (1).jpeg",
-        "images/WhatsApp Image 2026-05-10 at 1.56.38 PM (1).jpeg",
-        "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
-        "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
-      ]
-    }
-  ]
-},
-{
-  id:43, name:"Supreme Est. 1994 Five Boroughs Tee", brand:"Supreme",
-  batch:"", sku:"", sizes:"",
-  cat:"streetwear", badge:"HOT",
-  tags:["supreme","est 1994","five boroughs","box logo","tee","tshirt","black","white","fw21","2021"],
-  desc:"Black · Est. 1994 Five Boroughs Print",
-  longDesc:"Supreme FW21 Est. 1994 Five Boroughs Tee in black. Features the classic Supreme wordmark with accent grave on the 'e' and the five NYC borough names printed below in red. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"],
-  colorVariants:[
-    {
-      label:"Black",
-      color:"#0a0a0a",
-      desc:"Black · Est. 1994 Five Boroughs Print",
-      imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"]
-    },
-    {
-      label:"White",
-      color:"#f5f5f5",
-      desc:"White · Est. 1994 Five Boroughs Print",
-      imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM.jpeg"]
-    }
-  ]
-},
-{
-  id:44, name:"Supreme Grinch Tee", brand:"Supreme",
-  batch:"", sku:"", sizes:"",
-  cat:"streetwear", badge:"HOT",
-  tags:["supreme","grinch","christmas","holiday","graphic","tee","tshirt","black","white","fw24","2024"],
-  desc:"Black · Grinch Graphic Tee",
-  longDesc:"Supreme FW24 Grinch Tee. Features an embroidered Grinch graphic on the left chest wearing a red Santa hat with the Supreme box logo. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"],
-  colorVariants:[
-    {
-      label:"Black",
-      color:"#0a0a0a",
-      desc:"Black · Grinch Graphic Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"]
-    },
-    {
-      label:"White",
-      color:"#f5f5f5",
-      desc:"White · Grinch Graphic Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM.jpeg"]
-    }
-  ]
-},
-{
-  id:45, name:"Supreme × Tekken Tee", brand:"Supreme",
-  batch:"", sku:"", sizes:"",
-  cat:"streetwear", badge:"HOT",
-  tags:["supreme","tekken","collab","gaming","fighting game","japanese","kanji","graphic","tee","tshirt","black","white","fw22","2022"],
-  desc:"Black · Supreme × Tekken FW22 Graphic Tee",
-  longDesc:"Supreme FW22 × Tekken Tee. Features a bold chrome-style Supreme and Tekken overlapping kanji graphic print across the chest with 'Fall/Winter 2022' text and Harada's signature embroidered at the bottom right. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"],
-  colorVariants:[
-    {
-      label:"Black",
-      color:"#0a0a0a",
-      desc:"Black · Supreme × Tekken FW22 Graphic Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"]
-    },
-    {
-      label:"White",
-      color:"#f5f5f5",
-      desc:"White · Supreme × Tekken FW22 Graphic Tee",
-      imgs:["images/WhatsApp Image 2026-05-10 at 4.46.24 PM.jpeg"]
-    }
-  ]
-},
+    id:29, name:"Ami De Coeur Small Logo Tee", brand:"Ami Paris",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"NEW",
+    tags:["ami","ami paris","ami de coeur","alexandre mattiussi","small logo","heart","tee","tshirt","lavender","cream","ivory","taupe","mocha","dark brown","navy","black","grey","gray","white","sky blue","baby blue","olive","green","caramel","tan","brown","purple","lilac","26ss","2026"],
+    desc:"Lavender · Small Ami De Coeur Logo Tee",
+    longDesc:"Ami Paris De Coeur Small Logo Tee. Clean oversized fit in premium heavyweight cotton with the iconic small Ami De Coeur heart logo embroidered on the left chest. Ami Alexandre Mattiussi woven neck label. Available in 13 colorways: Lavender, Cream, Taupe, Dark Brown, Navy, Black, Grey Marl, White, Sky Blue, Olive, Dark Navy, Mocha, and Caramel. Sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.54.51 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"
+    ],
+    colorVariants:[
+      {label:"Lavender",color:"#c9b8e8",desc:"Lavender · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"]},
+      {label:"Cream",color:"#f0e8d5",desc:"Cream / Ivory · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (2).jpeg"]},
+      {label:"Taupe",color:"#8c7b6b",desc:"Taupe / Mocha · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (1).jpeg"]},
+      {label:"Dark Brown",color:"#3b1a0f",desc:"Dark Brown · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM.jpeg"]},
+      {label:"Navy",color:"#1b2a4a",desc:"Navy Blue · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (3).jpeg"]},
+      {label:"Black",color:"#0a0a0a",desc:"Black · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (2).jpeg"]},
+      {label:"Grey",color:"#b0b0b0",desc:"Grey Marl · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (1).jpeg"]},
+      {label:"White",color:"#ffffff",desc:"White · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM.jpeg"]},
+      {label:"Sky Blue",color:"#87ceeb",desc:"Sky Blue · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM (1).jpeg"]},
+      {label:"Olive",color:"#6b7c3a",desc:"Olive Green · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM.jpeg"]},
+      {label:"Dark Navy",color:"#0d1b2e",desc:"Dark Navy · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (2).jpeg"]},
+      {label:"Mocha",color:"#9e8b76",desc:"Mocha / Sand · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (1).jpeg"]},
+      {label:"White Tonal",color:"#f8f8f8",desc:"White · Tonal Logo · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM.jpeg"]},
+      {label:"Caramel",color:"#c48a3f",desc:"Caramel / Tan · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM (1).jpeg"]},
+      {label:"Off-White",color:"#ede8df",desc:"Off-White · Small Ami De Coeur Logo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM.jpeg"]}
+    ]
+  },
+  {
+    id:40, name:"Ami De Coeur Pixel Knit Tee", brand:"Ami Paris",
+    batch:"", sku:"E21HJ028.CY1250", sizes:"",
+    cat:"streetwear", badge:"NEW",
+    tags:["ami","ami paris","ami de coeur","alexandre mattiussi","pixel","knit","heart","tee","tshirt","khaki","tan","cream","ivory","red","teal","green","26ss","2026"],
+    desc:"Khaki · Teal Pixel Knit Ami De Coeur",
+    longDesc:"Ami Paris 26SS Pixel Knit Ami De Coeur Tee. Features a pixelated knit-jacquard Ami De Coeur heart-A logo on the left chest. Made from organically sourced cotton. Ami Alexandre Mattiussi woven neck label. Available in Khaki with Teal logo and Cream with Red logo. Sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg",
+      "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
+    ],
+    colorVariants:[
+      {
+        label:"Khaki",
+        color:"#b5a06a",
+        desc:"Khaki · Teal Pixel Knit Ami De Coeur",
+        imgs:[
+          "images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
+        ]
+      },
+      {
+        label:"Cream",
+        color:"#f0ebe0",
+        desc:"Cream · Red Pixel Knit Ami De Coeur",
+        imgs:[
+          "images/WhatsApp Image 2026-05-10 at 1.56.36 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.56.38 PM (1).jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg",
+          "images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    id:43, name:"Supreme Est. 1994 Five Boroughs Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","est 1994","five boroughs","box logo","tee","tshirt","black","white","fw21","2021"],
+    desc:"Black · Est. 1994 Five Boroughs Print",
+    longDesc:"Supreme FW21 Est. 1994 Five Boroughs Tee in black. Features the classic Supreme wordmark with accent grave on the 'e' and the five NYC borough names printed below in red. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"],
+    colorVariants:[
+      {label:"Black",color:"#0a0a0a",desc:"Black · Est. 1994 Five Boroughs Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"]},
+      {label:"White",color:"#f5f5f5",desc:"White · Est. 1994 Five Boroughs Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM.jpeg"]}
+    ]
+  },
+  {
+    id:44, name:"Supreme Grinch Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","grinch","christmas","holiday","graphic","tee","tshirt","black","white","fw24","2024"],
+    desc:"Black · Grinch Graphic Tee",
+    longDesc:"Supreme FW24 Grinch Tee. Features an embroidered Grinch graphic on the left chest wearing a red Santa hat with the Supreme box logo. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"],
+    colorVariants:[
+      {label:"Black",color:"#0a0a0a",desc:"Black · Grinch Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"]},
+      {label:"White",color:"#f5f5f5",desc:"White · Grinch Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM.jpeg"]}
+    ]
+  },
+  {
+    id:45, name:"Supreme × Tekken Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","tekken","collab","gaming","fighting game","japanese","kanji","graphic","tee","tshirt","black","white","fw22","2022"],
+    desc:"Black · Supreme × Tekken FW22 Graphic Tee",
+    longDesc:"Supreme FW22 × Tekken Tee. Features a bold chrome-style Supreme and Tekken overlapping kanji graphic print across the chest with 'Fall/Winter 2022' text and Harada's signature embroidered at the bottom right. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"],
+    colorVariants:[
+      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme × Tekken FW22 Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"]},
+      {label:"White",color:"#f5f5f5",desc:"White · Supreme × Tekken FW22 Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.24 PM.jpeg"]}
+    ]
+  },
+  {
+    id:46, name:"Supreme × Thrasher Cross Tee", brand:"Supreme × Thrasher",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","thrasher","cross","skate","collab","tee","tshirt","black","white"],
+    desc:"Black · Supreme × Thrasher Cross Back Print",
+    longDesc:"Supreme × Thrasher Cross Tee. Reversed Thrasher logo embroidered on the left chest. Large Supreme × Thrasher cross typography graphic printed on the back. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"
+    ],
+    colorVariants:[
+      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme × Thrasher Cross Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"]},
+      {label:"White",color:"#f5f5f5",desc:"White · Supreme × Thrasher Cross Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.23 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.23 PM.jpeg"]}
+    ]
+  },
+  {
+    id:47, name:"Supreme Spiral Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","spiral","words","text","graphic","box logo","tee","tshirt","black","white","ss21","2021"],
+    desc:"White · Supreme Spiral Word Back Print",
+    longDesc:"Supreme SS21 Spiral Tee. Small black box logo on the left chest. Large spiral word-collage graphic on the back with the Supreme box logo at centre. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:[
+      "images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg",
+      "images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"
+    ],
+    colorVariants:[
+      {label:"White",color:"#f5f5f5",desc:"White · Supreme Spiral Word Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"]},
+      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Spiral Word Back Print",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM (2).jpeg"]}
+    ]
+  },
+  {
+    id:48, name:"Supreme Established 1994 Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","established","1994","new york","usa","box logo","tee","tshirt","black","white","fw21","2021"],
+    desc:"White · Supreme Established 1994 New York USA Tee",
+    longDesc:"Supreme FW21 Established 1994 Tee. Bold 'SUPREME' wordmark across the chest with 'Established 1994', Supreme box logo patch, and 'New York USA' printed underneath. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"],
+    colorVariants:[
+      {label:"White",color:"#f5f5f5",desc:"White · Supreme Established 1994 New York USA Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"]},
+      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Established 1994 New York USA Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM.jpeg"]}
+    ]
+  },
+  {
+    id:49, name:"Supreme Pill Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","pill","pills","photo","graphic","tee","tshirt","black","white","fw20","2020"],
+    desc:"White · Supreme Pill Photo Tee",
+    longDesc:"Supreme FW20 Pill Tee. Features a large photo-print of colourful mixed pills and capsules on the chest. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM (1).jpeg"],
+    colorVariants:[
+      {label:"White",color:"#f5f5f5",desc:"White · Supreme Pill Photo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM (1).jpeg"]},
+      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Pill Photo Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.38.18 PM.jpeg"]}
+    ]
+  },
+  {
+    id:50, name:"Supreme Emo Girl Tee", brand:"Supreme",
+    batch:"", sku:"", sizes:"",
+    cat:"streetwear", badge:"HOT",
+    tags:["supreme","emo","girl","anime","graphic","tee","tshirt","black","white","fw24","2024"],
+    desc:"White · Supreme Emo Girl Graphic Tee",
+    longDesc:"Supreme FW24 Emo Girl Tee. Features a centre-chest embroidered graphic of an anime-style girl portrait in a brown and blue frame with 'Supreme' script below. Supreme red box label at the neck. Premium heavyweight cotton. Available in sizes S, M, L, and XL.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"],
+    colorVariants:[
+      {label:"White",color:"#f5f5f5",desc:"White · Supreme Emo Girl Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"]},
+      {label:"Black",color:"#0a0a0a",desc:"Black · Supreme Emo Girl Graphic Tee",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM.jpeg"]}
+    ]
+  },
   /* ── LUXURY ITEMS ── */
   {
     id:15, name:"Coming Soon", brand:"Luxury",
@@ -1013,97 +996,96 @@ const ITEMS = [
     imgs:[]
   },
   /* ── ACCESSORIES ── */
-{
-  id:30, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black"],
-  desc:"All Black · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in all black. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Black mesh back with snapback closure and silver crown keychain clip at the crown.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.57 PM.jpeg"]
-},
-  /* ── CHROME HEARTS TRUCKER CAPS ── */
-{
-  id:31, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","red"],
-  desc:"White / Red Brim · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with a bold red brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Black mesh back with snapback closure and silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (5).jpeg"]
-},
-{
-  id:32, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","black","lips","grillz"],
-  desc:"White / Black · Lips & Grillz Patch",
-  longDesc:"Chrome Hearts Hollywood USA trucker cap in white with black brim. Features the iconic embroidered red lips with gold grillz patch flanked by cross motifs and 'Hollywood, USA' gothic script. Black mesh back with snapback closure and silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (4).jpeg"]
-},
-{
-  id:33, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","pink","white"],
-  desc:"Pink / White · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in pink and white. Features a tonal pink-on-white embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Pink mesh back with snapback closure and silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (3).jpeg"]
-},
-{
-  id:34, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","blue","royal blue"],
-  desc:"White / Royal Blue · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with a royal blue brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text in red. Blue mesh back with snapback closure and silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (2).jpeg"]
-},
-{
-  id:35, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black","lips","grillz"],
-  desc:"All Black · Lips & Grillz Patch",
-  longDesc:"Chrome Hearts Hollywood USA trucker cap in all black. Features the iconic embroidered red lips with gold grillz patch flanked by cross motifs and 'Hollywood, USA' gothic script. Black mesh back with snapback closure and silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (1).jpeg"]
-},
-{
-  id:36, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black","camo","camouflage"],
-  desc:"Black / Camo Mesh · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap with a black structured front and camo mesh back. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM.jpeg"]
-},
-{
-  id:37, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","camo","camouflage","green"],
-  desc:"All Camo · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in full woodland camo throughout — front panel, brim, and mesh back. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (2).jpeg"]
-},
-{
-  id:38, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","red","blue","usa colorway","americana"],
-  desc:"White / Red Mesh / Blue Brim · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in a USA-colourway — white structured front, red mesh back, and royal blue brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (1).jpeg"]
-},
-{
-  id:39, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
-  batch:"", sku:"", sizes:"One Size",
-  cat:"accessories", badge:"HOT",
-  tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","black"],
-  desc:"White / Black · CH Hollywood USA Patch",
-  longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with black mesh back and black brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
-  imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM.jpeg"]
-},
+  {
+    id:30, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black"],
+    desc:"All Black · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in all black. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Black mesh back with snapback closure and silver crown keychain clip at the crown.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.57 PM.jpeg"]
+  },
+  {
+    id:31, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","red"],
+    desc:"White / Red Brim · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with a bold red brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Black mesh back with snapback closure and silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (5).jpeg"]
+  },
+  {
+    id:32, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","black","lips","grillz"],
+    desc:"White / Black · Lips & Grillz Patch",
+    longDesc:"Chrome Hearts Hollywood USA trucker cap in white with black brim. Features the iconic embroidered red lips with gold grillz patch flanked by cross motifs and 'Hollywood, USA' gothic script. Black mesh back with snapback closure and silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (4).jpeg"]
+  },
+  {
+    id:33, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","pink","white"],
+    desc:"Pink / White · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in pink and white. Features a tonal pink-on-white embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Pink mesh back with snapback closure and silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (3).jpeg"]
+  },
+  {
+    id:34, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","blue","royal blue"],
+    desc:"White / Royal Blue · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with a royal blue brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text in red. Blue mesh back with snapback closure and silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (2).jpeg"]
+  },
+  {
+    id:35, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black","lips","grillz"],
+    desc:"All Black · Lips & Grillz Patch",
+    longDesc:"Chrome Hearts Hollywood USA trucker cap in all black. Features the iconic embroidered red lips with gold grillz patch flanked by cross motifs and 'Hollywood, USA' gothic script. Black mesh back with snapback closure and silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM (1).jpeg"]
+  },
+  {
+    id:36, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","black","camo","camouflage"],
+    desc:"Black / Camo Mesh · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap with a black structured front and camo mesh back. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.56 PM.jpeg"]
+  },
+  {
+    id:37, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","camo","camouflage","green"],
+    desc:"All Camo · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in full woodland camo throughout — front panel, brim, and mesh back. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (2).jpeg"]
+  },
+  {
+    id:38, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","red","blue","usa colorway","americana"],
+    desc:"White / Red Mesh / Blue Brim · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in a USA-colourway — white structured front, red mesh back, and royal blue brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM (1).jpeg"]
+  },
+  {
+    id:39, name:"Chrome Hearts Trucker Cap", brand:"Chrome Hearts",
+    batch:"", sku:"", sizes:"One Size",
+    cat:"accessories", badge:"HOT",
+    tags:["chrome hearts","ch","trucker","cap","hat","snapback","hollywood","usa","cross","gothic","white","black"],
+    desc:"White / Black · CH Hollywood USA Patch",
+    longDesc:"Chrome Hearts CH Hollywood USA trucker cap in white with black mesh back and black brim. Large embroidered CH patch with gothic 'Chrome Hearts' script, dual cross motifs, and 'Hollywood, USA' text. Snapback closure with silver crown keychain clip.",
+    imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM.jpeg"]
+  }
 ];
 
 /* ── FUZZY SEARCH ── */
@@ -1127,8 +1109,8 @@ function lev(a,b){
 
 /* ── STATE ── */
 let currentCat='all', searchQ='';
-const cardSizePicked  = {};  // id -> size string
-const cardColorPicked = {};  // id -> variantIdx
+const cardSizePicked  = {};
+const cardColorPicked = {};
 
 /* ── WA LINK ── */
 function waLink(item, imgPath, size, color) {
@@ -1172,7 +1154,6 @@ function render(){
     const badge = item.badge ? `<span class="card-badge ${item.badge==='HOT'?'hot':'new'}">${item.badge}</span>` : '';
     const catLabel = {'ua-pairs':'UA Pairs',streetwear:'Street Wear',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
 
-    /* active color variant */
     const colorIdx = cardColorPicked[item.id] || 0;
     const activeVariant = item.colorVariants ? item.colorVariants[colorIdx] : null;
     const activeImgs  = activeVariant ? activeVariant.imgs : (item.imgs || []);
@@ -1238,27 +1219,17 @@ function pickCardColor(e, id, idx) {
   const card = document.querySelector(`.card[data-id="${id}"]`);
   if (!item || !card || !item.colorVariants) return;
   const variant = item.colorVariants[idx];
-
-  /* update main image */
   const mainImg = card.querySelector('.card-photo > img');
   if (mainImg) mainImg.src = variant.imgs[0];
-
-  /* update thumb strip */
   const strip = card.querySelector('.thumb-strip');
   if (strip) {
     strip.innerHTML = variant.imgs.map((s,ti)=>
       `<div class="thumb${ti===0?' active':''}" onclick="cardThumb(event,${id},${ti})"><img src="${s}" loading="lazy"/></div>`
     ).join('');
   }
-
-  /* update sub-description */
   const subEl = document.getElementById(`csub-${id}`);
   if (subEl) subEl.textContent = `${item.brand} · ${variant.desc}`;
-
-  /* update swatch states */
   card.querySelectorAll('.csw').forEach((b,i)=>b.classList.toggle('picked', i===idx));
-
-  /* update WA link */
   const wa = document.getElementById(`cwa-${id}`);
   if (wa) wa.href = waLink(item, variant.imgs[0], cardSizePicked[id]||'', variant.label);
 }
@@ -1314,8 +1285,6 @@ function closeLb(){
 
 function paintLb(){
   if (!lbItem) return;
-
-  /* resolve active images for current color */
   const activeVariant = lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
   const imgs = activeVariant ? activeVariant.imgs : (lbItem.imgs || []);
   const activeDesc = activeVariant ? activeVariant.desc : lbItem.desc;
@@ -1334,7 +1303,6 @@ function paintLb(){
   if (lbItem.longDesc){ descEl.textContent=lbItem.longDesc; descEl.style.display=''; }
   else { descEl.style.display='none'; }
 
-  /* COLOR PICKER in lightbox */
   const colorWrap = document.getElementById('lb-color-wrap');
   const colorRow  = document.getElementById('lb-color-row');
   if (lbItem.colorVariants) {
@@ -1346,7 +1314,6 @@ function paintLb(){
     colorWrap.style.display = 'none';
   }
 
-  /* SIZE PICKER in lightbox */
   const sizeWrap = document.getElementById('lb-size-wrap');
   const sizeRow  = document.getElementById('lb-size-row');
   if (CLOTHING_CATS.includes(lbItem.cat)){
@@ -1356,7 +1323,6 @@ function paintLb(){
     sizeWrap.style.display = 'none';
   }
 
-  /* arrows / thumbs */
   const show = imgs.length > 1;
   document.getElementById('lb-prev').style.display = show ? 'flex' : 'none';
   document.getElementById('lb-next').style.display = show ? 'flex' : 'none';
@@ -1364,7 +1330,6 @@ function paintLb(){
     `<div class="lb-thumb${i===lbIdx?' active':''}" onclick="lbGo(${i})"><img src="${s}" loading="lazy"/></div>`
   ).join('');
 
-  /* WA link */
   document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSizePicked, activeVariant?activeVariant.label:'');
 }
 
@@ -1373,7 +1338,6 @@ function pickLbColor(idx){
   lbIdx = 0;
   if (lbItem) cardColorPicked[lbItem.id] = idx;
   paintLb();
-  /* sync card swatches */
   if (lbItem){
     const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
     if (card) card.querySelectorAll('.csw').forEach((b,i)=>b.classList.toggle('picked',i===idx));
@@ -1387,7 +1351,6 @@ function pickLbSize(size){
   const activeVariant = lbItem && lbItem.colorVariants ? lbItem.colorVariants[lbColorPicked] : null;
   const imgs = activeVariant ? activeVariant.imgs : (lbItem?lbItem.imgs||[]:[]);
   document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSizePicked, activeVariant?activeVariant.label:'');
-  /* sync card size */
   if (lbItem){
     const card = document.querySelector(`.card[data-id="${lbItem.id}"]`);
     if (card) card.querySelectorAll('.sz').forEach(b=>b.classList.toggle('picked', b.textContent===lbSizePicked));
