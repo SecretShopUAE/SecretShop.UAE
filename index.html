@@ -1183,18 +1183,17 @@ window.addEventListener('load', () => {
       currentCat = 'all';
       searchQ = '';
       render();
-      setTimeout(() => {
-        const el = document.getElementById(`item-${id}`);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.style.outline = '3px solid #00c853';
-          el.style.outlineOffset = '3px';
-          setTimeout(() => { el.style.outline = ''; el.style.outlineOffset = ''; }, 3000);
-        }
-        setTimeout(() => {
-          openLb(id);
-        }, 600);
-      }, 800);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            openLb(id);
+            const el = document.getElementById(`item-${id}`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 500);
+        });
+      });
     }
   }
 });
