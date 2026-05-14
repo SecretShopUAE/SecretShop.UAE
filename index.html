@@ -663,15 +663,16 @@ function lev(a,b){
 
 // ── WA LINK ──
 function waLink(item, img, size, color) {
-  const productUrl = `${window.location.href.split('#')[0]}#product-${item.id}`;
+  const base = window.location.href.split('#')[0];
+  const productUrl = `${base}#item-${item.id}`;
   const p = [
     `Hi Secret Shop! 👋`,
     `I'm interested in: *${item.name}*${item.batch ? ` (${item.batch})` : ''}`,
     item.desc ? item.desc : '',
     item.sku ? `SKU: ${item.sku}` : '',
-    size  ? `Size: ${size}`  : (item.sizes ? item.sizes : ''),
+    size  ? `Size: ${size}` : (item.sizes ? item.sizes : ''),
     color ? `Color: ${color}` : '',
-    `Product link: ${productUrl}`,
+    `🔗 Product: ${productUrl}`,
     `Is it available?`
   ].filter(Boolean).join('\n');
   return `https://wa.me/971563780062?text=${encodeURIComponent(p)}`;
@@ -708,7 +709,7 @@ function card(item, delay) {
   const sizePickerHtml = isClo
     ? `<div class="size-row">${sizes.map(s=>`<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>` : '';
 
-  return `<div class="card" data-id="${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
+ return `<div class="card" data-id="${item.id}" id="item-${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
     <div class="card-img" onclick="openLb(${item.id})">
       ${imgHtml}${badgeHtml}${thumbsHtml}
       <div class="card-wa-overlay" onclick="event.stopPropagation()">
@@ -1172,6 +1173,29 @@ document.querySelector('.lb-photo').addEventListener('touchend',e=>{
 },{passive:true});
 
 render();
+
+window.addEventListener('load', () => {
+  const hash = window.location.hash;
+  if (hash && hash.startsWith('#item-')) {
+    const id = parseInt(hash.replace('#item-', ''));
+    const item = ITEMS.find(x => x.id === id);
+    if (item) {
+      currentCat = 'all';
+      searchQ = '';
+      render();
+      setTimeout(() => {
+        const el = document.getElementById(`item-${id}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.style.outline = '3px solid #00c853';
+          el.style.outlineOffset = '3px';
+          setTimeout(() => { el.style.outline = ''; el.style.outlineOffset = ''; }, 3000);
+        }
+        openLb(id);
+      }, 400);
+    }
+  }
+});
 </script>
 </body>
 </html>
