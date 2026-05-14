@@ -1191,8 +1191,10 @@ window.addEventListener('load', () => {
           el.style.outlineOffset = '3px';
           setTimeout(() => { el.style.outline = ''; el.style.outlineOffset = ''; }, 3000);
         }
-        openLb(id);
-      }, 400);
+        setTimeout(() => {
+          openLb(id);
+        }, 600);
+      }, 800);
     }
   }
 });
