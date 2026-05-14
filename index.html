@@ -1180,24 +1180,7 @@ window.addEventListener('load', () => {
     const id = parseInt(hash.replace('#item-', ''));
     const item = ITEMS.find(x => x.id === id);
     if (item) {
-      // Set state and render first
-      currentCat = 'all';
-      searchQ = '';
-      render();
-
-      // Use MutationObserver to detect when render is done
-      const observer = new MutationObserver(() => {
-        observer.disconnect();
-        // Small delay to let images and DOM settle
-        setTimeout(() => {
-          openLb(id);
-        }, 100);
-      });
-
-      observer.observe(document.getElementById('site-body'), {
-        childList: true,
-        subtree: true
-      });
+      openLb(id);
     }
   }
 });
