@@ -219,7 +219,7 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .pdp-back:hover{background:var(--bg)}
 .pdp-body{max-width:800px;margin:0 auto;padding:2rem 1.5rem 4rem}
 .pdp-gallery{display:grid;grid-template-columns:1fr 80px;gap:10px;margin-bottom:2rem}
-.pdp-main-img{aspect-ratio:1/1;background:#f0f0f0;border-radius:var(--radius-lg);overflow:hidden;border:1.5px solid var(--border)}
+.pdp-main-img{aspect-ratio:1/1;background:#f0f0f0;border-radius:var(--radius-lg);overflow:hidden;border:1.5px solid var(--border);position:relative}
 .pdp-main-img img{width:100%;height:100%;object-fit:cover}
 .pdp-thumbs{display:flex;flex-direction:column;gap:8px}
 .pdp-thumb{aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);cursor:pointer;opacity:0.6;transition:opacity 0.2s,border-color 0.2s}
@@ -241,12 +241,13 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .pdp-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--wa);color:#fff;font-size:14px;font-weight:700;padding:16px;border-radius:var(--radius);text-decoration:none;transition:opacity 0.2s;margin-bottom:32px}
 .pdp-wa:hover{opacity:0.88}
 .pdp-related-title{font-size:16px;font-weight:700;margin-bottom:1rem;padding-top:2rem;border-top:1px solid var(--border)}
-.pdp-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:3rem}
-.pdp-store{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1rem}
-.pdp-store-title{font-size:14px;font-weight:700;margin-bottom:12px}
-.pdp-store-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:12.5px;color:var(--text-2);line-height:1.6}
-.pdp-store-row svg{flex-shrink:0;margin-top:2px;color:var(--text-3)}
-.pdp-store-row a{color:var(--accent-dark);font-weight:500}
+.pdp-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:2rem}
+
+/* PDP NAV ARROWS */
+.pdp-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.42);border:none;color:#fff;width:36px;height:56px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:background 0.15s}
+.pdp-arr:hover{background:rgba(0,0,0,0.65)}
+.pdp-arr.prev{left:0;border-radius:0 8px 8px 0}
+.pdp-arr.next{right:0;border-radius:8px 0 0 8px}
 
 /* BRAND PAGE */
 .brand-page{position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);scrollbar-width:thin}
@@ -440,11 +441,11 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
   </div>
   <div class="pdp-body">
     <div class="pdp-gallery">
-     <div class="pdp-main-img" style="position:relative">
-  <img id="pdp-main-img" src="" alt="" style="width:100%;height:100%;object-fit:cover"/>
-  <button onclick="(function(){if(!pdpItem)return;const cv=pdpItem.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem.imgs||[]);if(imgs.length<2)return;pdpSlideReset();pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length);})()" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.42);border:none;color:#fff;width:36px;height:56px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:0 8px 8px 0;z-index:5;transition:background 0.15s" onmouseover="this.style.background='rgba(0,0,0,0.65)'" onmouseout="this.style.background='rgba(0,0,0,0.42)'" id="pdp-arr-prev">&#8249;</button>
-  <button onclick="(function(){if(!pdpItem)return;const cv=pdpItem.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem.imgs||[]);if(imgs.length<2)return;pdpSlideReset();pdpThumb((pdpImgIdx+1)%imgs.length);})()" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.42);border:none;color:#fff;width:36px;height:56px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:8px 0 0 8px;z-index:5;transition:background 0.15s" onmouseover="this.style.background='rgba(0,0,0,0.65)'" onmouseout="this.style.background='rgba(0,0,0,0.42)'" id="pdp-arr-next">&#8250;</button>
-</div>
+      <div class="pdp-main-img">
+        <img id="pdp-main-img" src="" alt=""/>
+        <button class="pdp-arr prev" id="pdp-arr-prev">&#8249;</button>
+        <button class="pdp-arr next" id="pdp-arr-next">&#8250;</button>
+      </div>
       <div class="pdp-thumbs" id="pdp-thumbs"></div>
     </div>
     <div class="pdp-info">
@@ -467,74 +468,60 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
     </div>
     <p class="pdp-related-title" id="pdp-related-title"></p>
     <div class="pdp-related-grid" id="pdp-related-grid"></div>
-    <div style="background:#0d0d0d;color:#fff;border-radius:16px;padding:2rem 1.5rem;margin-top:1.5rem;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,200,83,0.08) 0%,transparent 65%);pointer-events:none"></div>
-  <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00c853;margin-bottom:8px;position:relative">Abu Dhabi · UAE 🇦🇪</p>
-  <h2 style="font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;letter-spacing:-1.2px;margin-bottom:10px;line-height:1.1;position:relative">About <em style="font-style:italic;color:rgba(255,255,255,0.3)">Secret Shop.</em></h2>
-  <p style="font-size:12.5px;color:rgba(255,255,255,0.5);line-height:1.9;margin-bottom:1.5rem;position:relative">We're a trusted streetwear and sneaker destination based in Abu Dhabi, UAE. We specialise in UA pairs, premium streetwear, and luxury accessories — sourcing the most sought-after pieces from brands like Jordan, BAPE, Supreme, Ami Paris, Chrome Hearts, and more. Order by WhatsApp, pay with Tabby, and meet us locally.</p>
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;position:relative">
-    <div style="background:rgba(255,255,255,0.04);padding:1rem">
-      <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">9.4K</p>
-      <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">Facebook Followers</p>
-    </div>
-    <div style="background:rgba(255,255,255,0.04);padding:1rem;border-left:1px solid rgba(255,255,255,0.08)">
-      <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">UA</p>
-      <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">Sneaker Specialists</p>
-    </div>
-    <div style="background:rgba(255,255,255,0.04);padding:1rem;border-top:1px solid rgba(255,255,255,0.08)">
-      <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">4×</p>
-      <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">Tabby · Pay Later</p>
-    </div>
-    <div style="background:rgba(255,255,255,0.04);padding:1rem;border-top:1px solid rgba(255,255,255,0.08);border-left:1px solid rgba(255,255,255,0.08)">
-      <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">DM</p>
-      <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">WhatsApp Orders</p>
-    </div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;position:relative">
-    <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      <span>Based in Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank" style="color:#00c853;font-weight:500">DM for meetup</a></span>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
-      <span>WhatsApp: <a href="https://wa.me/971563780062" target="_blank" style="color:#00c853;font-weight:500">+971 56 378 0062</a></span>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      <span>Pay with <strong style="color:rgba(255,255,255,0.75)">Tabby</strong> — split into 4 interest-free payments</span>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      <span><a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" style="color:#00c853;font-weight:500">Follow us on Facebook</a> — 9.4K followers 🔥</span>
-    </div>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:10px;position:relative">
-    <a href="https://wa.me/971563780062?text=Hi%20Secret%20Shop!%20Tell%20me%20more%20about%20your%20store." target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-size:12px;font-weight:700;padding:12px 20px;border-radius:10px;text-decoration:none">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
-      Chat on WhatsApp
-    </a>
-    <a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.65);font-size:12px;font-weight:600;padding:12px 20px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.12)">Follow on Facebook</a>
-  </div>
-</div>
-      <div class="pdp-store-row">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        <span>Based in Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank">DM for meetup</a></span>
+
+    <!-- ABOUT SECRET SHOP — black card inside PDP -->
+    <div style="background:#0d0d0d;color:#fff;border-radius:16px;padding:2rem 1.5rem;margin-top:0.5rem;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,200,83,0.08) 0%,transparent 65%);pointer-events:none"></div>
+      <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00c853;margin-bottom:8px;position:relative">Abu Dhabi · UAE 🇦🇪</p>
+      <h2 style="font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;letter-spacing:-1.2px;margin-bottom:10px;line-height:1.1;position:relative">About <em style="font-style:italic;color:rgba(255,255,255,0.3)">Secret Shop.</em></h2>
+      <p style="font-size:12.5px;color:rgba(255,255,255,0.5);line-height:1.9;margin-bottom:1.5rem;position:relative">We're a trusted streetwear and sneaker destination based in Abu Dhabi, UAE. We specialise in UA pairs, premium streetwear, and luxury accessories — sourcing the most sought-after pieces from brands like Jordan, BAPE, Supreme, Ami Paris, Chrome Hearts, and more. Order by WhatsApp, pay with Tabby, and meet us locally.</p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;position:relative">
+        <div style="background:rgba(255,255,255,0.04);padding:1rem">
+          <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">9.4K</p>
+          <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">Facebook Followers</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);padding:1rem;border-left:1px solid rgba(255,255,255,0.08)">
+          <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">UA</p>
+          <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">Sneaker Specialists</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);padding:1rem;border-top:1px solid rgba(255,255,255,0.08)">
+          <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">4×</p>
+          <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">Tabby · Pay Later</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);padding:1rem;border-top:1px solid rgba(255,255,255,0.08);border-left:1px solid rgba(255,255,255,0.08)">
+          <p style="font-size:1.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:3px;color:#fff">DM</p>
+          <p style="font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase">WhatsApp Orders</p>
+        </div>
       </div>
-      <div class="pdp-store-row">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        <span>WhatsApp: <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></span>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;position:relative">
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>Based in Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank" style="color:#00c853;font-weight:500">DM for meetup</a></span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+          <span>WhatsApp: <a href="https://wa.me/971563780062" target="_blank" style="color:#00c853;font-weight:500">+971 56 378 0062</a></span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span>Pay with <strong style="color:rgba(255,255,255,0.75)">Tabby</strong> — split into 4 interest-free payments</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <span><a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" style="color:#00c853;font-weight:500">Follow us on Facebook</a> — 9.4K followers 🔥</span>
+        </div>
       </div>
-      <div class="pdp-store-row">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <span>Pay with <strong>Tabby</strong> — split into 4 interest-free payments</span>
-      </div>
-      <div class="pdp-store-row">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        <span><a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank">Follow us on Facebook</a> — 9.4K followers 🔥</span>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;position:relative">
+        <a href="https://wa.me/971563780062?text=Hi%20Secret%20Shop!%20Tell%20me%20more%20about%20your%20store." target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-size:12px;font-weight:700;padding:12px 20px;border-radius:10px;text-decoration:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.65);font-size:12px;font-weight:600;padding:12px 20px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.12)">Follow on Facebook</a>
       </div>
     </div>
-  </div>
-</div>
+
+  </div><!-- end pdp-body -->
+</div><!-- end pdp-overlay -->
 
 <!-- BRAND PAGE -->
 <div class="brand-page" id="brand-page">
@@ -683,8 +670,8 @@ const ITEMS=[
 ];
 
 // STATE
-let currentCat='all', searchQ='';
-const pickedSize={}, pickedColor={};
+let currentCat='all',searchQ='';
+const pickedSize={},pickedColor={};
 
 // SEARCH
 function fuzzy(q,item){
@@ -782,10 +769,8 @@ function cardThumb(e,id,idx){
   });
 }
 
-// CAROUSEL CONSTANTS
 const CARD_SLOT=172;
 
-// FEATURED CAROUSEL
 function buildCarousel(items){
   const tripled=[...items,...items,...items];
   return `<div class="featured-section">
@@ -821,7 +806,6 @@ function initCarousel(){
   startAnim();
 }
 
-// SECTION CAROUSEL (e.g. Supreme)
 function initSectionCarousel(key,items){
   const outer=document.getElementById(`sec-outer-${key}`);
   const track=document.getElementById(`sec-track-${key}`);
@@ -843,7 +827,6 @@ function initSectionCarousel(key,items){
   startAnim();
 }
 
-// GROUPS
 const FEATURED_IDS=[58,56,1,18,22,25,26,57,30,11,46];
 const GROUPS=[
   {key:'nike',      label:'Nike / Jordan',  brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'],max:6},
@@ -858,7 +841,6 @@ const GROUPS=[
   {key:'vans',      label:'Vans',           brands:['Vans'],max:6},
 ];
 
-// RENDER
 function render(){
   const body=document.getElementById('site-body');
   const isSrch=searchQ.length>0;
@@ -867,20 +849,11 @@ function render(){
   const visible=ITEMS.filter(item=>(currentCat==='all'||item.cat===currentCat)&&fuzzy(searchQ,item));
   document.getElementById('toolbar-label').textContent=isSrch?`Results for "${searchQ}"`:catName;
   document.getElementById('toolbar-count').textContent=` · ${visible.length} item${visible.length!==1?'s':''}`;
-
-  if(!visible.length){
-    body.innerHTML=`<div class="section"><div class="search-grid"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;
-    return;
-  }
-  if(isSrch||!isAll){
-    body.innerHTML=`<div class="section"><div class="search-grid">${visible.map((it,i)=>card(it,i)).join('')}</div></div>`;
-    animate(body);return;
-  }
-
+  if(!visible.length){body.innerHTML=`<div class="section"><div class="search-grid"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;return;}
+  if(isSrch||!isAll){body.innerHTML=`<div class="section"><div class="search-grid">${visible.map((it,i)=>card(it,i)).join('')}</div></div>`;animate(body);return;}
   let html='';
   const featItems=FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
   if(featItems.length)html+=buildCarousel(featItems);
-
   GROUPS.forEach((g,gi)=>{
     const items=visible.filter(it=>g.brands.includes(it.brand));
     if(!items.length)return;
@@ -900,14 +873,11 @@ function render(){
       ${rowHtml}
     </div>`;
   });
-
   const grouped=GROUPS.flatMap(g=>g.brands);
   const rest=visible.filter(it=>!grouped.includes(it.brand));
   if(rest.length)html+=`<div class="section"><div class="section-head"><span class="section-brand">Other Items</span><span class="section-meta">${rest.length} ITEMS</span></div><div class="hscroll">${rest.map((it,i)=>card(it,i)).join('')}</div></div>`;
-
   body.innerHTML=html;
   animate(body);
-
   requestAnimationFrame(()=>{
     initCarousel();
     GROUPS.filter(g=>g.carousel).forEach(g=>{
@@ -918,7 +888,6 @@ function render(){
 
 // BRAND PAGE
 let bpKey=null,bpAllItems=[],bpSearchQ='',bpST;
-
 function bpRender(){
   const grid=document.getElementById('bp-grid');
   const filtered=bpAllItems.filter(it=>fuzzy(bpSearchQ,it));
@@ -927,7 +896,6 @@ function bpRender(){
   grid.innerHTML=filtered.map((it,i)=>card(it,i)).join('');
   animate(grid);
 }
-
 function openBrandPage(key){
   const g=GROUPS.find(x=>x.key===key);if(!g)return;
   bpKey=key;bpAllItems=ITEMS.filter(it=>g.brands.includes(it.brand));bpSearchQ='';
@@ -940,13 +908,11 @@ function openBrandPage(key){
   requestAnimationFrame(()=>{page.scrollTop=0;bpRender();});
   history.pushState({brandPage:key},'',`#brand-${key}`);
 }
-
 function closeBrandPage(){
   document.getElementById('brand-page').classList.remove('open');
   document.body.style.overflow='';bpKey=null;bpAllItems=[];bpSearchQ='';
   if(history.state?.brandPage)history.back();
 }
-
 const bpInput=document.getElementById('bp-search-input');
 const bpClear=document.getElementById('bp-search-clear');
 bpInput.addEventListener('input',()=>{clearTimeout(bpST);bpST=setTimeout(()=>{bpSearchQ=bpInput.value.trim();bpClear.classList.toggle('visible',bpSearchQ.length>0);bpRender();},260);});
@@ -1000,17 +966,25 @@ document.getElementById('lb-prev').addEventListener('click',()=>lbGo(lbIdx-1));
 document.getElementById('lb-next').addEventListener('click',()=>lbGo(lbIdx+1));
 document.getElementById('lb-close').addEventListener('click',closeLb);
 document.getElementById('lb-overlay').addEventListener('click',e=>{if(e.target.id==='lb-overlay')closeLb();});
-document.addEventListener('keydown',e=>{if(!lbItem)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbGo(lbIdx-1);if(e.key==='ArrowRight')lbGo(lbIdx+1);});
-let tx=0,ty=0;
-document.querySelector('.lb-photo').addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;},{passive:true});
-document.querySelector('.lb-photo').addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-tx,dy=e.changedTouches[0].screenY-ty;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40)dx<0?lbGo(lbIdx+1):lbGo(lbIdx-1);},{passive:true});
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('lb-overlay').classList.contains('open')){
+    if(e.key==='Escape')closeLb();
+    if(e.key==='ArrowLeft')lbGo(lbIdx-1);
+    if(e.key==='ArrowRight')lbGo(lbIdx+1);
+    return;
+  }
+});
+let lbTx=0,lbTy=0;
+document.querySelector('.lb-photo').addEventListener('touchstart',e=>{lbTx=e.changedTouches[0].screenX;lbTy=e.changedTouches[0].screenY;},{passive:true});
+document.querySelector('.lb-photo').addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-lbTx,dy=e.changedTouches[0].screenY-lbTy;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40)dx<0?lbGo(lbIdx+1):lbGo(lbIdx-1);},{passive:true});
 
-// PDP IMAGE SLIDESHOW + KEYBOARD + SWIPE
-let pdpSlideRaf=null, pdpSlideLastTime=null, pdpSlideInterval=3200;
+// PDP
+let pdpItem=null,pdpImgIdx=0,pdpCi=0,pdpSz='';
+let pdpSlideRaf=null,pdpSlideLastTime=null;
+const pdpSlideInterval=3200;
 
 function pdpSlideStart(){
-  pdpSlideStop();
-  pdpSlideLastTime=null;
+  pdpSlideStop();pdpSlideLastTime=null;
   function tick(ts){
     if(!pdpItem){pdpSlideStop();return;}
     if(pdpSlideLastTime===null)pdpSlideLastTime=ts;
@@ -1024,89 +998,118 @@ function pdpSlideStart(){
   }
   pdpSlideRaf=requestAnimationFrame(tick);
 }
+function pdpSlideStop(){if(pdpSlideRaf){cancelAnimationFrame(pdpSlideRaf);pdpSlideRaf=null;}}
+function pdpSlideReset(){pdpSlideLastTime=null;}
 
-function pdpSlideStop(){
-  if(pdpSlideRaf){cancelAnimationFrame(pdpSlideRaf);pdpSlideRaf=null;}
+function openPdp(id){
+  const item=ITEMS.find(x=>x.id===id);if(!item)return;
+  pdpItem=item;pdpImgIdx=0;pdpCi=pickedColor[id]||0;pdpSz=pickedSize[id]||'';
+  paintPdp();
+  const overlay=document.getElementById('pdp-overlay');
+  overlay.classList.add('open');overlay.scrollTop=0;document.body.style.overflow='hidden';
+  history.pushState({pdp:id},'',`#pdp-${id}`);
+  setTimeout(pdpSlideStart,400);
+}
+function closePdp(){
+  pdpSlideStop();
+  document.getElementById('pdp-overlay').classList.remove('open');
+  document.body.style.overflow='';pdpItem=null;
+  if(history.state?.pdp)history.back();
 }
 
-function pdpSlideReset(){
-  pdpSlideLastTime=null;
+function paintPdp(){
+  if(!pdpItem)return;
+  const item=pdpItem;
+  const cv=item.colorVariants?.[pdpCi];
+  const imgs=cv?cv.imgs:(item.imgs||[]);
+  const desc=cv?cv.desc:(item.desc||'');
+  document.getElementById('pdp-header-name').textContent=item.name;
+  document.getElementById('pdp-brand').textContent=item.brand;
+  document.getElementById('pdp-name').textContent=item.name;
+  document.getElementById('pdp-meta').textContent=[item.batch,item.sku,desc,item.sizes&&!CLOTHING.includes(item.cat)?item.sizes:''].filter(Boolean).join(' · ');
+  document.getElementById('pdp-desc').textContent=item.longDesc||item.desc||'';
+  document.getElementById('pdp-main-img').src=imgs[pdpImgIdx]||'';
+  document.getElementById('pdp-main-img').alt=item.name;
+  const prevBtn=document.getElementById('pdp-arr-prev');
+  const nextBtn=document.getElementById('pdp-arr-next');
+  if(prevBtn)prevBtn.style.display=imgs.length>1?'flex':'none';
+  if(nextBtn)nextBtn.style.display=imgs.length>1?'flex':'none';
+  document.getElementById('pdp-thumbs').innerHTML=imgs.slice(0,6).map((src,i)=>
+    `<div class="pdp-thumb${i===pdpImgIdx?' active':''}" onclick="pdpThumb(${i})"><img src="${src}" alt="" loading="lazy"/></div>`
+  ).join('');
+  const csec=document.getElementById('pdp-color-section');
+  if(item.colorVariants){
+    csec.style.display='';
+    document.getElementById('pdp-swatches').innerHTML=item.colorVariants.map((v,i)=>
+      `<div class="pdp-sw${i===pdpCi?' active':''}" style="background:${v.color}" title="${v.label}" onclick="pdpColor(${i})"></div>`
+    ).join('');
+    document.getElementById('pdp-color-name').textContent=item.colorVariants[pdpCi].label;
+  }else csec.style.display='none';
+  const ssec=document.getElementById('pdp-size-section');
+  if(CLOTHING.includes(item.cat)){
+    ssec.style.display='';
+    const szs=item.brand==='A Bathing Ape'?SIZES_BAPE:SIZES_DEFAULT;
+    document.getElementById('pdp-sizes').innerHTML=szs.map(s=>
+      `<button class="pdp-sz${pdpSz===s?' active':''}" onclick="pdpSzPick('${s}')">${s}</button>`
+    ).join('');
+  }else ssec.style.display='none';
+  document.getElementById('pdp-wa').href=waLink(item,imgs[pdpImgIdx],pdpSz,cv?.label||'');
+  const related=ITEMS.filter(x=>x.id!==item.id&&(x.brand===item.brand||x.cat===item.cat)&&(x.imgs||[]).length>0).slice(0,6);
+  const relTitle=document.getElementById('pdp-related-title');
+  const relGrid=document.getElementById('pdp-related-grid');
+  if(related.length){relTitle.textContent=`More from ${item.brand}`;relGrid.innerHTML=related.map((it,i)=>card(it,i)).join('');animate(relGrid);}
+  else{relTitle.textContent='';relGrid.innerHTML='';}
 }
 
-// Keyboard arrows for PDP
+function pdpThumb(idx){
+  pdpImgIdx=idx;
+  const cv=pdpItem?.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem?.imgs||[]);
+  document.getElementById('pdp-main-img').src=imgs[idx]||'';
+  document.querySelectorAll('.pdp-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('pdp-wa').href=waLink(pdpItem,imgs[idx],pdpSz,cv?.label||'');
+}
+function pdpColor(idx){pdpCi=idx;pdpImgIdx=0;if(pdpItem)pickedColor[pdpItem.id]=idx;paintPdp();}
+function pdpSzPick(sz){
+  pdpSz=pdpSz===sz?'':sz;if(pdpItem)pickedSize[pdpItem.id]=pdpSz;
+  document.querySelectorAll('.pdp-sz').forEach(b=>b.classList.toggle('active',b.textContent===pdpSz));
+  const cv=pdpItem?.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem?.imgs||[]);
+  document.getElementById('pdp-wa').href=waLink(pdpItem,imgs[pdpImgIdx],pdpSz,cv?.label||'');
+}
+
+// PDP arrow buttons
+document.getElementById('pdp-arr-prev').addEventListener('click',()=>{
+  if(!pdpItem)return;
+  const cv=pdpItem.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
+  if(imgs.length<2)return;pdpSlideReset();pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length);
+});
+document.getElementById('pdp-arr-next').addEventListener('click',()=>{
+  if(!pdpItem)return;
+  const cv=pdpItem.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
+  if(imgs.length<2)return;pdpSlideReset();pdpThumb((pdpImgIdx+1)%imgs.length);
+});
+
+// PDP keyboard
 document.addEventListener('keydown',e=>{
   const overlay=document.getElementById('pdp-overlay');
   if(!overlay.classList.contains('open')||!pdpItem)return;
-  const cv=pdpItem.colorVariants?.[pdpCi];
-  const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
+  const cv=pdpItem.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
   if(imgs.length<2)return;
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){
-    pdpSlideReset();
-    pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length);
-  }
-  if(e.key==='ArrowRight'||e.key==='ArrowDown'){
-    pdpSlideReset();
-    pdpThumb((pdpImgIdx+1)%imgs.length);
-  }
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){pdpSlideReset();pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length);}
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){pdpSlideReset();pdpThumb((pdpImgIdx+1)%imgs.length);}
 });
 
-// Touch swipe for PDP
+// PDP touch swipe
 (function(){
   let tx=0,ty=0,moved=false;
   const overlay=document.getElementById('pdp-overlay');
-  overlay.addEventListener('touchstart',e=>{
-    tx=e.changedTouches[0].screenX;
-    ty=e.changedTouches[0].screenY;
-    moved=false;
-  },{passive:true});
-  overlay.addEventListener('touchmove',e=>{
-    moved=true;
-  },{passive:true});
+  overlay.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;moved=false;},{passive:true});
+  overlay.addEventListener('touchmove',()=>{moved=true;},{passive:true});
   overlay.addEventListener('touchend',e=>{
     if(!pdpItem||!moved)return;
-    const dx=e.changedTouches[0].screenX-tx;
-    const dy=e.changedTouches[0].screenY-ty;
+    const dx=e.changedTouches[0].screenX-tx;const dy=e.changedTouches[0].screenY-ty;
     if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>45){
-      const cv=pdpItem.colorVariants?.[pdpCi];
-      const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
-      if(imgs.length<2)return;
-      pdpSlideReset();
-      pdpThumb((pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length);
-    }
-  },{passive:true});
-})();
-
-// Hook slideshow into openPdp / closePdp
-const _origOpenPdp=openPdp;
-window.openPdp=function(id){
-  _origOpenPdp(id);
-  setTimeout(pdpSlideStart,400);
-};
-const _origClosePdp=closePdp;
-window.closePdp=function(){
-  pdpSlideStop();
-  _origClosePdp();
-};
-
-// PDP swipe gesture
-(function(){
-  let tx=0,ty=0;
-  const overlay=document.getElementById('pdp-overlay');
-  overlay.addEventListener('touchstart',e=>{
-    const t=e.changedTouches[0];
-    tx=t.screenX;ty=t.screenY;
-  },{passive:true});
-  overlay.addEventListener('touchend',e=>{
-    const t=e.changedTouches[0];
-    const dx=t.screenX-tx;
-    const dy=t.screenY-ty;
-    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
-      if(!pdpItem)return;
-      const cv=pdpItem.colorVariants?.[pdpCi];
-      const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
-      if(imgs.length<2)return;
-      const next=(pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length;
-      pdpThumb(next);
+      const cv=pdpItem.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
+      if(imgs.length<2)return;pdpSlideReset();pdpThumb((pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length);
     }
   },{passive:true});
 })();
