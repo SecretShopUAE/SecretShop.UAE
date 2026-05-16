@@ -276,9 +276,117 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-size:13px;font-weight:700;padding:14px;margin:12px 16px 16px;border-radius:var(--radius);text-decoration:none;transition:opacity 0.2s;letter-spacing:0.2px}
 .lb-wa:hover{opacity:0.88}
 
+/* ── PRODUCT DETAIL PAGE ── */
+.pdp-overlay{position:fixed;inset:0;z-index:400;background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);scrollbar-width:thin}
+.pdp-overlay.open{transform:translateX(0)}
+.pdp-header{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 1.5rem;height:58px}
+.pdp-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;border:none;background:none;padding:6px 12px 6px 6px;border-radius:var(--radius);transition:background 0.15s;flex-shrink:0}
+.pdp-back:hover{background:var(--bg)}
+.pdp-body{max-width:800px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.pdp-gallery{display:grid;grid-template-columns:1fr 80px;gap:10px;margin-bottom:2rem}
+.pdp-main-img{aspect-ratio:1/1;background:#f0f0f0;border-radius:var(--radius-lg);overflow:hidden;border:1.5px solid var(--border)}
+.pdp-main-img img{width:100%;height:100%;object-fit:cover}
+.pdp-thumbs{display:flex;flex-direction:column;gap:8px}
+.pdp-thumb{aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);cursor:pointer;opacity:0.6;transition:opacity 0.2s,border-color 0.2s}
+.pdp-thumb.active{opacity:1;border-color:var(--text)}
+.pdp-thumb img{width:100%;height:100%;object-fit:cover}
+.pdp-info{}
+.pdp-brand{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.pdp-name{font-size:22px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;line-height:1.2}
+.pdp-meta{font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:1px;margin-bottom:16px}
+.pdp-desc{font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:24px;border-left:3px solid var(--border);padding-left:14px}
+.pdp-section-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.pdp-swatches{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.pdp-sw{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.15);transition:border-color 0.15s,transform 0.15s}
+.pdp-sw:hover{transform:scale(1.15)}
+.pdp-sw.active{border-color:var(--text);transform:scale(1.15)}
+.pdp-sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.pdp-sz{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1.5px solid var(--border-dark);border-radius:7px;padding:8px 16px;color:var(--text-2);cursor:pointer;background:none;transition:all 0.15s}
+.pdp-sz:hover{border-color:var(--text);color:var(--text)}
+.pdp-sz.active{background:var(--text);border-color:var(--text);color:#fff}
+.pdp-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--wa);color:#fff;font-size:14px;font-weight:700;padding:16px;border-radius:var(--radius);text-decoration:none;transition:opacity 0.2s;margin-bottom:32px}
+.pdp-wa:hover{opacity:0.88}
+.pdp-related-title{font-size:16px;font-weight:700;margin-bottom:1rem;padding-top:2rem;border-top:1px solid var(--border)}
+.pdp-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:3rem}
+.pdp-store{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1rem}
+.pdp-store-title{font-size:14px;font-weight:700;margin-bottom:12px}
+.pdp-store-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:12.5px;color:var(--text-2);line-height:1.6}
+.pdp-store-row svg{flex-shrink:0;margin-top:2px;color:var(--text-3)}
+.pdp-store-row a{color:var(--accent-dark);font-weight:500}
+@media(max-width:600px){
+  .pdp-gallery{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .pdp-thumbs{flex-direction:row;overflow-x:auto;grid-row:2}
+  .pdp-thumb{flex:0 0 64px}
+  .pdp-related-grid{grid-template-columns:repeat(2,1fr)}
+  .pdp-name{font-size:18px}
+}
+  
 /* ── TRANSITIONS ── */
 .card{transition:opacity 0.35s ease,transform 0.35s ease,box-shadow 0.25s,border-color 0.25s}
 
+/* --PRODUCT DETAIL PAGE -- */
+<div class="pdp-overlay" id="pdp-overlay">
+  <div class="pdp-header">
+    <button class="pdp-back" onclick="closePdp()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <span id="pdp-header-name" style="font-size:14px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+  </div>
+  <div class="pdp-body">
+    /* -- Gallery -- */
+    <div class="pdp-gallery">
+      <div class="pdp-main-img"><img id="pdp-main-img" src="" alt=""/></div>
+      <div class="pdp-thumbs" id="pdp-thumbs"></div>
+    </div>
+    /* -- Info -- */
+    <div class="pdp-info">
+      <p class="pdp-brand" id="pdp-brand"></p>
+      <h1 class="pdp-name" id="pdp-name"></h1>
+      <p class="pdp-meta" id="pdp-meta"></p>
+      <p class="pdp-desc" id="pdp-desc"></p>
+      /* -- Color -- */
+      <div id="pdp-color-section" style="display:none;margin-bottom:20px">
+        <p class="pdp-section-label">Color — <span id="pdp-color-name" style="text-transform:none;letter-spacing:0;font-family:var(--font)"></span></p>
+        <div class="pdp-swatches" id="pdp-swatches"></div>
+      </div>
+      /* -- Size -- */
+      <div id="pdp-size-section" style="display:none;margin-bottom:24px">
+        <p class="pdp-section-label">Select Size</p>
+        <div class="pdp-sizes" id="pdp-sizes"></div>
+      </div>
+      /* -- CTA -- */
+      <a class="pdp-wa" id="pdp-wa" href="#" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+    /* -- Related Items -- */
+    <p class="pdp-related-title" id="pdp-related-title"></p>
+    <div class="pdp-related-grid" id="pdp-related-grid"></div>
+    /* -- Store Details -- */
+    <div class="pdp-store">
+      <p class="pdp-store-title">About Secret Shop</p>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span>Based in Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank">DM for meetup</a></span>
+      </div>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        <span>WhatsApp: <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></span>
+      </div>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span>Pay with <strong>Tabby</strong> — split into 4 interest-free payments</span>
+      </div>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <span><a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank">Follow us on Facebook</a> — 9.4K followers 🔥</span>
+      </div>
+    </div>
+  </div>
+</div>
+  
 /* ── BRAND PAGE ── */
 .brand-page{position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);scrollbar-width:thin}
 .brand-page.open{transform:translateX(0)}
@@ -718,7 +826,7 @@ function card(item, delay) {
     ? `<div class="size-row">${sizes.map(s=>`<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>` : '';
 
  return `<div class="card" data-id="${item.id}" id="item-${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
-    <div class="card-img" onclick="openLb(${item.id})">
+    <div class="card-img" onclick="openPdp(${item.id})">
       ${imgHtml}${badgeHtml}${thumbsHtml}
       <div class="card-wa-overlay" onclick="event.stopPropagation()">
         <a href="${waLink(item,cover,psz,cv?cv.label:'')}" target="_blank" id="cwa-${item.id}" style="display:flex;align-items:center;gap:6px;color:#fff;font-size:11px;font-weight:600;width:100%;justify-content:center;text-decoration:none">
@@ -727,7 +835,7 @@ function card(item, delay) {
         </a>
       </div>
     </div>
-    <div class="card-body" onclick="openLb(${item.id})">
+    <div class="card-body" onclick="openPdp(${item.id})">
       <p class="card-label">${catLabel}</p>
       <p class="card-name">${item.name}</p>
       ${skuHtml}
@@ -933,7 +1041,7 @@ const GROUPS = [
   {key:'humanmade', label:'Human Made',        brands:['Human Made'], max:4},
   {key:'ami',       label:'Ami Paris',         brands:['Ami Paris'], max:6},
   {key:'represent', label:'Represent', brands:['Represent'], max:6},
-  {key:'supreme',   label:'Supreme',           brands:['Supreme','Supreme × Thrasher'], max:8},
+  {key:'supreme', label:'Supreme', brands:['Supreme','Supreme × Thrasher'], max:8, carousel:true},
   {key:'chrome',    label:'Chrome Hearts',     brands:['Chrome Hearts'], max:5},
   {key:'vans', label:'Vans', brands:['Vans'], max:6},
 ];
@@ -973,7 +1081,11 @@ function render() {
     const items = visible.filter(it=>g.brands.includes(it.brand));
     if (!items.length) return;
     const preview = items.slice(0, g.max);
-    html += `<div class="section" id="bsec-${g.key}">
+    const rowHtml = g.carousel
+  ? `<div class="carousel-wrap"><div class="carousel-track-outer" id="sec-outer-${g.key}"><div class="carousel-track" id="sec-track-${g.key}">${[...preview,...preview,...preview].map((it,i)=>card(it,i%preview.length)).join('')}</div></div></div>`
+  : `<div class="hscroll" id="brow-${g.key}">${preview.map((it,i)=>card(it,gi*3+i)).join('')}</div>`;
+
+html += `<div class="section" id="bsec-${g.key}">
       <div class="section-head">
         <div style="display:flex;align-items:center;gap:8px">
           <span class="section-brand">${g.label}</span>
@@ -981,7 +1093,8 @@ function render() {
         </div>
         <button class="section-see-all" onclick="openBrandPage('${g.key}')">See All →</button>
       </div>
-      <div class="hscroll" id="brow-${g.key}">${preview.map((it,i)=>card(it,gi*3+i)).join('')}</div>
+      ${g.carousel ? '<div class="carousel-hint">Swipe or drag to browse</div>' : ''}
+      ${rowHtml}
     </div>`;
   });
 
@@ -992,11 +1105,37 @@ function render() {
     html += `<div class="section"><div class="section-head"><span class="section-brand">Other Items</span><span class="section-meta">${rest.length} ITEMS</span></div><div class="hscroll">${rest.map((it,i)=>card(it,i)).join('')}</div></div>`;
   }
 
+  function initSectionCarousel(key, items) {
+  const outer = document.getElementById(`sec-outer-${key}`);
+  const track = document.getElementById(`sec-track-${key}`);
+  if (!outer || !track) return;
+  const singleWidth = items.length * CARD_SLOT;
+  const speed = 35;
+  let offset = 0, raf = null, lastTime = null, dragging = false, dragStartX = 0, dragStartOffset = 0, touchId = null;
+  function clamp(o){o=o%singleWidth;if(o<0)o+=singleWidth;return o;}
+  function loop(ts){if(lastTime===null)lastTime=ts;const dt=(ts-lastTime)/1000;lastTime=ts;offset+=speed*dt;if(offset>=singleWidth)offset-=singleWidth;track.style.transform=`translateX(${-offset}px)`;raf=requestAnimationFrame(loop);}
+  function startAnim(){if(raf)return;lastTime=null;raf=requestAnimationFrame(loop);}
+  function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  outer.addEventListener('mousedown',e=>{stopAnim();dragging=true;dragStartX=e.clientX;dragStartOffset=offset;e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;offset=clamp(dragStartOffset+(dragStartX-e.clientX));track.style.transform=`translateX(${-offset}px)`;});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;startAnim();});
+  outer.addEventListener('touchstart',e=>{if(touchId!==null)return;const t=e.changedTouches[0];touchId=t.identifier;stopAnim();dragging=true;dragStartX=t.clientX;dragStartOffset=offset;},{passive:true});
+  window.addEventListener('touchmove',e=>{if(!dragging)return;let t=null;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;}}if(!t)return;offset=clamp(dragStartOffset+(dragStartX-t.clientX));track.style.transform=`translateX(${-offset}px)`;},{passive:true});
+  window.addEventListener('touchend',e=>{let found=false;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}}if(!found)return;touchId=null;dragging=false;startAnim();},{passive:true});
+  track.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
+  startAnim();
+}    
+
   body.innerHTML = html;
   animate(body);
 
   // Init the JS-driven carousel after DOM is ready
-  requestAnimationFrame(() => initCarousel());
+  requestAnimationFrame(() => {
+  initCarousel();
+  GROUPS.filter(g => g.carousel).forEach(g => {
+    initSectionCarousel(g.key, ITEMS.filter(it => g.brands.includes(it.brand)).slice(0, g.max));
+  });
+});
 }
 
 // ── BRAND PAGE STATE ──
@@ -1180,6 +1319,132 @@ document.querySelector('.lb-photo').addEventListener('touchend',e=>{
   if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40) dx<0?lbGo(lbIdx+1):lbGo(lbIdx-1);
 },{passive:true});
 
+// ── PRODUCT DETAIL PAGE ──
+let pdpItem = null, pdpImgIdx = 0, pdpCi = 0, pdpSz = '';
+
+function openPdp(id) {
+  const item = ITEMS.find(x => x.id === id);
+  if (!item) return;
+  pdpItem = item;
+  pdpImgIdx = 0;
+  pdpCi = pickedColor[id] || 0;
+  pdpSz = pickedSize[id] || '';
+  paintPdp();
+  document.getElementById('pdp-overlay').classList.add('open');
+  document.getElementById('pdp-overlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  history.pushState({pdp: id}, '', `#pdp-${id}`);
+}
+
+function closePdp() {
+  document.getElementById('pdp-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  pdpItem = null;
+  if (history.state?.pdp) history.back();
+}
+
+function paintPdp() {
+  if (!pdpItem) return;
+  const item = pdpItem;
+  const cv = item.colorVariants?.[pdpCi];
+  const imgs = cv ? cv.imgs : (item.imgs || []);
+  const desc = cv ? cv.desc : (item.desc || '');
+
+  document.getElementById('pdp-header-name').textContent = item.name;
+  document.getElementById('pdp-brand').textContent = item.brand;
+  document.getElementById('pdp-name').textContent = item.name;
+  document.getElementById('pdp-meta').textContent = [item.batch, item.sku, desc, item.sizes && !CLOTHING.includes(item.cat) ? item.sizes : ''].filter(Boolean).join(' · ');
+  document.getElementById('pdp-desc').textContent = item.longDesc || item.desc || '';
+
+  // Main image
+  const mainImg = document.getElementById('pdp-main-img');
+  mainImg.src = imgs[pdpImgIdx] || '';
+  mainImg.alt = item.name;
+
+  // Thumbnails
+  const thumbsEl = document.getElementById('pdp-thumbs');
+  thumbsEl.innerHTML = imgs.slice(0, 6).map((src, i) =>
+    `<div class="pdp-thumb${i === pdpImgIdx ? ' active' : ''}" onclick="pdpThumb(${i})"><img src="${src}" alt="" loading="lazy"/></div>`
+  ).join('');
+
+  // Color
+  const csec = document.getElementById('pdp-color-section');
+  if (item.colorVariants) {
+    csec.style.display = '';
+    document.getElementById('pdp-swatches').innerHTML = item.colorVariants.map((v, i) =>
+      `<div class="pdp-sw${i === pdpCi ? ' active' : ''}" style="background:${v.color}" title="${v.label}" onclick="pdpColor(${i})"></div>`
+    ).join('');
+    document.getElementById('pdp-color-name').textContent = item.colorVariants[pdpCi].label;
+  } else {
+    csec.style.display = 'none';
+  }
+
+  // Size
+  const ssec = document.getElementById('pdp-size-section');
+  if (CLOTHING.includes(item.cat)) {
+    ssec.style.display = '';
+    const szs = item.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES_DEFAULT;
+    document.getElementById('pdp-sizes').innerHTML = szs.map(s =>
+      `<button class="pdp-sz${pdpSz === s ? ' active' : ''}" onclick="pdpSzPick('${s}')">${s}</button>`
+    ).join('');
+  } else {
+    ssec.style.display = 'none';
+  }
+
+  // WA link
+  document.getElementById('pdp-wa').href = waLink(item, imgs[pdpImgIdx], pdpSz, cv?.label || '');
+
+  // Related items — same brand or same category, not the same item
+  const related = ITEMS.filter(x =>
+    x.id !== item.id &&
+    (x.brand === item.brand || x.cat === item.cat) &&
+    (x.imgs || []).length > 0
+  ).slice(0, 6);
+  const relTitle = document.getElementById('pdp-related-title');
+  const relGrid = document.getElementById('pdp-related-grid');
+  if (related.length) {
+    relTitle.textContent = `More from ${item.brand}`;
+    relGrid.innerHTML = related.map((it, i) => card(it, i)).join('');
+    animate(relGrid);
+  } else {
+    relTitle.textContent = '';
+    relGrid.innerHTML = '';
+  }
+}
+
+function pdpThumb(idx) {
+  pdpImgIdx = idx;
+  const cv = pdpItem?.colorVariants?.[pdpCi];
+  const imgs = cv ? cv.imgs : (pdpItem?.imgs || []);
+  document.getElementById('pdp-main-img').src = imgs[idx] || '';
+  document.querySelectorAll('.pdp-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.getElementById('pdp-wa').href = waLink(pdpItem, imgs[idx], pdpSz, cv?.label || '');
+}
+
+function pdpColor(idx) {
+  pdpCi = idx;
+  pdpImgIdx = 0;
+  if (pdpItem) pickedColor[pdpItem.id] = idx;
+  paintPdp();
+}
+
+function pdpSzPick(sz) {
+  pdpSz = pdpSz === sz ? '' : sz;
+  if (pdpItem) pickedSize[pdpItem.id] = pdpSz;
+  document.querySelectorAll('.pdp-sz').forEach(b => b.classList.toggle('active', b.textContent === pdpSz));
+  const cv = pdpItem?.colorVariants?.[pdpCi];
+  const imgs = cv ? cv.imgs : (pdpItem?.imgs || []);
+  document.getElementById('pdp-wa').href = waLink(pdpItem, imgs[pdpImgIdx], pdpSz, cv?.label || '');
+}
+
+window.addEventListener('popstate', e => {
+  if (!e.state?.pdp) {
+    document.getElementById('pdp-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    pdpItem = null;
+  }
+});
+    
 render();
 
 window.addEventListener('load', () => {
