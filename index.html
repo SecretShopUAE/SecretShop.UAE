@@ -11,24 +11,12 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 :root{
-  --bg:#f7f7f7;
-  --surface:#ffffff;
-  --border:#e8e8e8;
-  --border-dark:#d0d0d0;
-  --text:#0d0d0d;
-  --text-2:#555;
-  --text-3:#999;
-  --accent:#00c853;
-  --accent-dark:#00a844;
-  --red:#e53935;
-  --blue:#1565c0;
-  --font:'DM Sans',sans-serif;
-  --mono:'DM Mono',monospace;
-  --radius:10px;
-  --radius-lg:16px;
-  --shadow:0 1px 4px rgba(0,0,0,0.08);
-  --shadow-md:0 4px 16px rgba(0,0,0,0.1);
-  --shadow-lg:0 12px 40px rgba(0,0,0,0.14);
+  --bg:#f7f7f7;--surface:#ffffff;--border:#e8e8e8;--border-dark:#d0d0d0;
+  --text:#0d0d0d;--text-2:#555;--text-3:#999;
+  --accent:#00c853;--accent-dark:#00a844;--red:#e53935;--blue:#1565c0;
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+  --radius:10px;--radius-lg:16px;
+  --shadow:0 1px 4px rgba(0,0,0,0.08);--shadow-md:0 4px 16px rgba(0,0,0,0.1);--shadow-lg:0 12px 40px rgba(0,0,0,0.14);
   --wa:#25D366;
 }
 body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -36,21 +24,20 @@ a{color:inherit;text-decoration:none}
 button{font-family:var(--font);cursor:pointer;border:none;background:none}
 img{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ── TICKER ── */
+/* TICKER */
 .ticker{background:var(--text);overflow:hidden;padding:8px 0;white-space:nowrap}
 .ticker-track{display:inline-flex;animation:tick 28s linear infinite}
 .ticker-item{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:#fff;padding:0 3rem;text-transform:uppercase;opacity:0.85}
 .ticker-item .dot{color:var(--accent);margin-right:0.5rem}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── HEADER ── */
+/* HEADER */
 header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border)}
 .header-main{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:0 1.5rem;height:60px}
 .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .logo-img{height:40px;width:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--border)}
 .logo-text{font-size:15px;font-weight:700;letter-spacing:-0.3px;color:var(--text);white-space:nowrap}
 .logo-text span{display:block;font-size:10px;font-weight:400;color:var(--text-3);letter-spacing:0.5px}
-
 .search-bar{position:relative;width:100%;max-width:540px;margin:0 auto}
 .search-bar input{width:100%;background:#2a2a2a;border:1.5px solid #3d3d3d;border-radius:var(--radius);padding:9px 40px 9px 36px;font-family:var(--font);font-size:13px;color:#ffffff;outline:none;transition:border-color 0.2s,background 0.2s}
 .search-bar input:focus{border-color:#555;background:#222}
@@ -59,23 +46,21 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .search-clear{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#888;font-size:16px;line-height:1;padding:2px 4px;background:none;border:none;cursor:pointer}
 .search-clear:hover{color:#fff}
 .search-clear.visible{display:block}
-
 .header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .wa-pill{display:flex;align-items:center;gap:7px;background:var(--wa);color:#fff;border-radius:var(--radius);padding:8px 14px;font-size:12px;font-weight:600;white-space:nowrap;transition:opacity 0.2s}
 .wa-pill:hover{opacity:0.88}
 .wa-pill svg{flex-shrink:0}
 
-/* ── CATEGORY NAV ── */
+/* CATEGORY NAV */
 .cat-nav{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);background:var(--surface);padding:0 1rem}
 .cat-nav::-webkit-scrollbar{display:none}
 .cat-btn{padding:12px 16px;font-size:12px;font-weight:500;color:var(--text-3);white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;letter-spacing:0.2px}
 .cat-btn.active{color:var(--text);border-bottom-color:var(--text);font-weight:600}
 .cat-btn:hover:not(.active){color:var(--text-2)}
 
-/* ── HERO BANNER ── */
+/* HERO */
 .hero{background:var(--text);color:#fff;padding:2.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative;overflow:hidden;background-image:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),url('images/image-f22509c3-9190-4689-b826-11b0581b5cec.png');background-size:cover;background-position:center;background-repeat:no-repeat}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%, rgba(0,200,83,0.12) 0%, transparent 65%)}
-.hero-left{}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,200,83,0.12) 0%,transparent 65%)}
 .hero-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
 .hero-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-1.5px;line-height:1;margin-bottom:12px}
 .hero-title em{font-style:italic;color:rgba(255,255,255,0.4)}
@@ -87,15 +72,15 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .tabby-badge{display:inline-flex;align-items:center;gap:6px;background:#c2ff1f;border-radius:6px;padding:5px 10px;margin-top:12px}
 .tabby-badge span{font-family:var(--mono);font-size:10px;font-weight:700;color:#000;letter-spacing:1.5px;text-transform:uppercase}
 
-/* ── TOOLBAR ── */
+/* TOOLBAR */
 .toolbar{display:flex;align-items:center;justify-content:space-between;padding:12px 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);gap:1rem}
 .toolbar-label{font-size:13px;font-weight:600;color:var(--text)}
 .toolbar-count{font-family:var(--mono);font-size:11px;color:var(--text-3);margin-left:6px}
 
-/* ── MAIN LAYOUT ── */
+/* MAIN */
 .site-body{padding:0 0 4rem}
 
-/* ── SECTION ── */
+/* SECTION */
 .section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
 .section-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px;gap:1rem}
 .section-brand{font-size:15px;font-weight:700;color:var(--text)}
@@ -103,124 +88,74 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .section-see-all{font-size:12px;font-weight:600;color:var(--accent-dark);display:flex;align-items:center;gap:3px;white-space:nowrap;border:1.5px solid var(--accent);border-radius:20px;padding:4px 12px;transition:background 0.15s,color 0.15s}
 .section-see-all:hover{background:var(--accent);color:#fff}
 
-/* ── HORIZONTAL SCROLL ROW ── */
+/* HSCROLL */
 .hscroll{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:0 1.5rem 1.5rem;display:flex;gap:12px}
 .hscroll::-webkit-scrollbar{display:none}
 .hscroll .card{flex:0 0 160px;scroll-snap-align:start}
 
-/* ── GRID ── */
+/* GRIDS */
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 1.5rem 1.5rem}
-.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 1.5rem 1.5rem}
 .search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:1.5rem}
 
-/* ── CARD ── */
-.card{border-radius:var(--radius-lg);background:var(--surface);border:1.5px solid #111;overflow:hidden;cursor:pointer;position:relative;transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;opacity:0;transform:translateY(8px)}
+/* CARD */
+.card{border-radius:var(--radius-lg);background:var(--surface);border:1.5px solid #111;overflow:hidden;cursor:pointer;position:relative;transition:opacity 0.35s ease,transform 0.35s ease,box-shadow 0.25s,border-color 0.25s;opacity:0;transform:translateY(8px)}
 .card.in{opacity:1;transform:translateY(0)}
 .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:#000}
 .card.in:hover{transform:translateY(-3px)}
-
 .card-img{position:relative;aspect-ratio:1/1;background:#f0f0f0;overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s cubic-bezier(.25,.46,.45,.94)}
 .card:hover .card-img img{transform:scale(1.06)}
 .card-img .ph-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#ccc}
-
 .badge{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:5px;z-index:2}
 .badge.hot{background:var(--red);color:#fff}
 .badge.new-badge{background:var(--text);color:#fff}
-
 .thumb-row{position:absolute;bottom:8px;left:8px;right:8px;display:flex;gap:4px;opacity:0;transition:opacity 0.2s;pointer-events:none;z-index:3}
-.card:hover .thumb-row,.thumb-row.always-show{opacity:1;pointer-events:auto}
+.card:hover .thumb-row{opacity:1;pointer-events:auto}
 .thumb-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;flex-shrink:0;transition:background 0.15s}
 .thumb-dot.active{background:#fff}
-
 .card-wa-overlay{position:absolute;bottom:0;left:0;right:0;background:var(--wa);color:#fff;font-size:11px;font-weight:600;padding:9px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;transform:translateY(100%);transition:transform 0.25s cubic-bezier(.25,.46,.45,.94);z-index:4}
-.card:hover .card-wa-overlay,.card-wa-overlay.always-show{transform:translateY(0)}
-
+.card:hover .card-wa-overlay{transform:translateY(0)}
 .card-body{padding:10px 11px 13px;border-top:1px solid #111}
 .card-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
 .card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
 .card-sub{font-size:11px;color:var(--text-2);line-height:1.4;margin-bottom:6px}
 .card-sku{font-family:var(--mono);font-size:9.5px;color:var(--text-3);margin-bottom:6px}
 .card-sizes{font-family:var(--mono);font-size:9.5px;color:var(--text-3);margin-bottom:6px}
-
 .swatch-row{display:flex;gap:5px;margin-bottom:7px;flex-wrap:wrap;align-items:center}
 .swatch-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-right:2px}
 .sw{width:15px;height:15px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.12);transition:border-color 0.15s,transform 0.15s;flex-shrink:0}
 .sw:hover{transform:scale(1.2)}
 .sw.active{border-color:var(--text);transform:scale(1.2)}
-
 .size-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
 .sz-chip{font-family:var(--mono);font-size:9px;letter-spacing:0.5px;border:1px solid var(--border-dark);border-radius:5px;padding:3px 7px;color:var(--text-3);cursor:pointer;transition:all 0.15s;background:none}
 .sz-chip:hover{border-color:var(--text);color:var(--text)}
 .sz-chip.active{background:var(--text);border-color:var(--text);color:#fff}
-
 .card-cta{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--text-3);border-bottom:1px solid transparent;padding-bottom:1px;transition:color 0.15s,border-color 0.15s;width:fit-content}
 .card:hover .card-cta{color:var(--accent-dark);border-color:var(--accent)}
 
-/* ── FEATURED CAROUSEL ── */
+/* FEATURED CAROUSEL */
 .featured-section{background:var(--surface);border-bottom:1px solid var(--border);margin-bottom:1px}
 .featured-head{display:flex;align-items:center;justify-content:space-between;padding:16px 1.5rem 12px}
 .featured-title{font-size:15px;font-weight:700}
 .featured-badge{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 8px;border-radius:5px}
-
 .carousel-wrap{overflow:hidden;padding:0 0 1.5rem;position:relative}
 .carousel-wrap::before,.carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:5;pointer-events:none}
 .carousel-wrap::before{left:0;background:linear-gradient(to right,var(--surface) 0%,transparent 100%)}
 .carousel-wrap::after{right:0;background:linear-gradient(to left,var(--surface) 0%,transparent 100%)}
-
-/* No hover pause — drag/touch handled in JS */
-.carousel-track-outer{
-  overflow:hidden;
-  padding:0 0 4px;
-  cursor:grab;
-  user-select:none;
-  -webkit-user-select:none;
-}
+.carousel-track-outer{overflow:hidden;padding:0 0 4px;cursor:grab;user-select:none;-webkit-user-select:none}
 .carousel-track-outer:active{cursor:grabbing}
-
-.carousel-track{
-  display:flex;
-  gap:12px;
-  width:max-content;
-  will-change:transform;
-  padding:4px 1.5rem 16px;
-}
-
+.carousel-track{display:flex;gap:12px;width:max-content;will-change:transform;padding:4px 1.5rem 16px}
 .carousel-track .card{flex:0 0 160px}
+.carousel-hint{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);padding:0 1.5rem 8px;display:flex;align-items:center;gap:6px}
+.carousel-hint::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 1.5s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
 
-.carousel-hint{
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:var(--text-3);
-  padding:0 1.5rem 8px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.carousel-hint::before{
-  content:'';
-  display:inline-block;
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--accent);
-  animation:pulse-dot 1.5s ease-in-out infinite;
-}
-@keyframes pulse-dot{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:0.4;transform:scale(0.7)}
-}
-
-/* ── SEARCH RESULTS ── */
-.search-results-wrap{background:var(--bg)}
-
-/* ── EMPTY STATE ── */
+/* EMPTY */
 .empty-state{grid-column:1/-1;padding:4rem 2rem;text-align:center;color:var(--text-3)}
 .empty-state p{font-size:15px;font-weight:600;color:var(--text-2);margin-bottom:6px}
 .empty-state span{font-size:12px}
 
-/* ── INFO GRID ── */
+/* INFO GRID */
 .info-grid{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border-top:1px solid var(--border)}
 .info-cell{padding:1.75rem 1.5rem;border-right:1px solid var(--border);display:flex;align-items:flex-start;gap:1rem}
 .info-cell:last-child{border-right:none}
@@ -229,7 +164,7 @@ header{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom
 .info-cell p{font-size:11.5px;color:var(--text-2);line-height:1.6}
 .info-cell a{color:var(--accent-dark);font-weight:500}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
 .f-brand{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
 .f-tagline{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:1.25rem}
@@ -242,7 +177,7 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .footer-bottom{background:#050505;padding:14px 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-bottom p{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-transform:uppercase}
 
-/* ── LIGHTBOX ── */
+/* LIGHTBOX */
 .lb-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);align-items:center;justify-content:center;padding:1rem}
 .lb-overlay.open{display:flex}
 .lb-box{position:relative;background:var(--surface);border-radius:20px;width:100%;max-width:500px;max-height:96svh;overflow-y:auto;scrollbar-width:none}
@@ -276,10 +211,44 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;font-size:13px;font-weight:700;padding:14px;margin:12px 16px 16px;border-radius:var(--radius);text-decoration:none;transition:opacity 0.2s;letter-spacing:0.2px}
 .lb-wa:hover{opacity:0.88}
 
-/* ── TRANSITIONS ── */
-.card{transition:opacity 0.35s ease,transform 0.35s ease,box-shadow 0.25s,border-color 0.25s}
+/* PRODUCT DETAIL PAGE */
+.pdp-overlay{position:fixed;inset:0;z-index:400;background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);scrollbar-width:thin}
+.pdp-overlay.open{transform:translateX(0)}
+.pdp-header{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 1.5rem;height:58px}
+.pdp-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;border:none;background:none;padding:6px 12px 6px 6px;border-radius:var(--radius);transition:background 0.15s;flex-shrink:0}
+.pdp-back:hover{background:var(--bg)}
+.pdp-body{max-width:800px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.pdp-gallery{display:grid;grid-template-columns:1fr 80px;gap:10px;margin-bottom:2rem}
+.pdp-main-img{aspect-ratio:1/1;background:#f0f0f0;border-radius:var(--radius-lg);overflow:hidden;border:1.5px solid var(--border)}
+.pdp-main-img img{width:100%;height:100%;object-fit:cover}
+.pdp-thumbs{display:flex;flex-direction:column;gap:8px}
+.pdp-thumb{aspect-ratio:1/1;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);cursor:pointer;opacity:0.6;transition:opacity 0.2s,border-color 0.2s}
+.pdp-thumb.active{opacity:1;border-color:var(--text)}
+.pdp-thumb img{width:100%;height:100%;object-fit:cover}
+.pdp-brand{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.pdp-name{font-size:22px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;line-height:1.2}
+.pdp-meta{font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:1px;margin-bottom:16px}
+.pdp-desc{font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:24px;border-left:3px solid var(--border);padding-left:14px}
+.pdp-section-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.pdp-swatches{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.pdp-sw{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1.5px solid rgba(0,0,0,0.15);transition:border-color 0.15s,transform 0.15s}
+.pdp-sw:hover{transform:scale(1.15)}
+.pdp-sw.active{border-color:var(--text);transform:scale(1.15)}
+.pdp-sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.pdp-sz{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1.5px solid var(--border-dark);border-radius:7px;padding:8px 16px;color:var(--text-2);cursor:pointer;background:none;transition:all 0.15s}
+.pdp-sz:hover{border-color:var(--text);color:var(--text)}
+.pdp-sz.active{background:var(--text);border-color:var(--text);color:#fff}
+.pdp-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--wa);color:#fff;font-size:14px;font-weight:700;padding:16px;border-radius:var(--radius);text-decoration:none;transition:opacity 0.2s;margin-bottom:32px}
+.pdp-wa:hover{opacity:0.88}
+.pdp-related-title{font-size:16px;font-weight:700;margin-bottom:1rem;padding-top:2rem;border-top:1px solid var(--border)}
+.pdp-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:3rem}
+.pdp-store{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1rem}
+.pdp-store-title{font-size:14px;font-weight:700;margin-bottom:12px}
+.pdp-store-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:12.5px;color:var(--text-2);line-height:1.6}
+.pdp-store-row svg{flex-shrink:0;margin-top:2px;color:var(--text-3)}
+.pdp-store-row a{color:var(--accent-dark);font-weight:500}
 
-/* ── BRAND PAGE ── */
+/* BRAND PAGE */
 .brand-page{position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);scrollbar-width:thin}
 .brand-page.open{transform:translateX(0)}
 .bp-header{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 1.5rem;height:58px}
@@ -288,7 +257,7 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .bp-back svg{flex-shrink:0}
 .bp-title{font-size:16px;font-weight:700;letter-spacing:-0.3px;flex:1}
 .bp-count{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px;white-space:nowrap}
-.bp-search-bar{display:flex;align-items:center;gap:0;background:var(--bg);border:1.5px solid var(--border-dark);border-radius:var(--radius);overflow:hidden;flex:1;max-width:340px}
+.bp-search-bar{display:flex;align-items:center;background:var(--bg);border:1.5px solid var(--border-dark);border-radius:var(--radius);overflow:hidden;flex:1;max-width:340px}
 .bp-search-bar svg{flex-shrink:0;color:var(--text-3);margin-left:10px}
 .bp-search-bar input{flex:1;background:none;border:none;padding:8px 10px;font-family:var(--font);font-size:13px;color:var(--text);outline:none}
 .bp-search-bar input::placeholder{color:var(--text-3)}
@@ -300,46 +269,33 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 .bp-empty span{font-size:12px}
 .bp-body{padding:1.5rem}
 .bp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-@media(max-width:1100px){.bp-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:768px){.bp-body{padding:1rem}.bp-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
-@media(max-width:480px){.bp-body{padding:0.75rem}.bp-grid{gap:8px}}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1100px){
-  .grid-4{grid-template-columns:repeat(3,1fr)}
-  .search-grid{grid-template-columns:repeat(3,1fr)}
-}
+/* RESPONSIVE */
+@media(max-width:1100px){.grid-4{grid-template-columns:repeat(3,1fr)}.search-grid{grid-template-columns:repeat(3,1fr)}.bp-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:768px){
   .header-main{grid-template-columns:auto 1fr auto;gap:0.75rem;padding:0 1rem;height:54px}
-  .logo-text span{display:none}
-  .logo-text{font-size:13px}
-  .logo-img{height:34px;width:34px}
-  .wa-pill span{display:none}
-  .wa-pill{padding:8px 10px}
-  .hero{padding:1.75rem 1.25rem}
-  .hero-right{display:none}
+  .logo-text span{display:none}.logo-text{font-size:13px}.logo-img{height:34px;width:34px}
+  .wa-pill span{display:none}.wa-pill{padding:8px 10px}
+  .hero{padding:1.75rem 1.25rem}.hero-right{display:none}
   .grid-4,.search-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 1rem 1.25rem}
-  .hscroll{padding:0 1rem 1.25rem}
-  .hscroll .card{flex:0 0 145px}
-  .section-head{padding:14px 1rem 10px}
-  .featured-head{padding:14px 1rem 10px}
+  .hscroll{padding:0 1rem 1.25rem}.hscroll .card{flex:0 0 145px}
+  .section-head{padding:14px 1rem 10px}.featured-head{padding:14px 1rem 10px}
   .info-grid{grid-template-columns:1fr}
-  .info-cell{border-right:none;border-bottom:1px solid var(--border)}
-  .info-cell:last-child{border-bottom:none}
+  .info-cell{border-right:none;border-bottom:1px solid var(--border)}.info-cell:last-child{border-bottom:none}
   footer{grid-template-columns:1fr;gap:1.75rem;padding:2rem 1.25rem}
   .toolbar{padding:10px 1rem}
-  .thumb-row{opacity:1;pointer-events:auto}
-  .card-wa-overlay{transform:translateY(0)}
+  .thumb-row{opacity:1;pointer-events:auto}.card-wa-overlay{transform:translateY(0)}
   .carousel-track .card{flex:0 0 145px}
+  .bp-grid{grid-template-columns:repeat(2,1fr);gap:10px}.bp-body{padding:1rem}
+  .pdp-gallery{grid-template-columns:1fr}.pdp-thumbs{flex-direction:row;overflow-x:auto}
+  .pdp-thumb{flex:0 0 64px}.pdp-related-grid{grid-template-columns:repeat(2,1fr)}.pdp-name{font-size:18px}
 }
 @media(max-width:480px){
-  .header-main{padding:0 0.75rem}
-  .hero-title{font-size:1.85rem}
+  .header-main{padding:0 0.75rem}.hero-title{font-size:1.85rem}
   .grid-4,.search-grid{gap:8px;padding:0 0.75rem 1.25rem}
-  .card-body{padding:8px 9px 11px}
-  .card-name{font-size:12px}
-  .lb-box{max-width:none;border-radius:16px}
-  .lb-photo{border-radius:16px 16px 0 0}
+  .card-body{padding:8px 9px 11px}.card-name{font-size:12px}
+  .lb-box{max-width:none;border-radius:16px}.lb-photo{border-radius:16px 16px 0 0}
+  .bp-body{padding:0.75rem}.bp-grid{gap:8px}
 }
 </style>
 </head>
@@ -347,7 +303,7 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
-  <div class="ticker-track" id="ticker-track">
+  <div class="ticker-track">
     <span class="ticker-item"><span class="dot">●</span>UA Pairs Available</span>
     <span class="ticker-item"><span class="dot">●</span>BAPE Tees</span>
     <span class="ticker-item"><span class="dot">●</span>Human Made</span>
@@ -373,30 +329,21 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 <header>
   <div class="header-main">
     <a href="#" class="logo" aria-label="Secret Shop">
-      <img class="logo-img"
-        src="https://scontent.ffjr1-3.fna.fbcdn.net/v/t39.30808-6/689490142_122248500488087649_4927481533974595500_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EXGrsr4lLDoQ7kNvwGgXlCG&_nc_oc=Adq6qrz79UcT5ETBe4CTbbfxOsre1-XxdlJFiWsPi16s4SXNHowQuELzijpPwcO4zq88c9Tjc_58eYLwJRXyOS7W&_nc_zt=23&_nc_ht=scontent.ffjr1-3.fna&_nc_gid=oEUKXewMNZp3Iyc47agmVQ&_nc_ss=7b2a8&oh=00_Af6jdYkmkb8I1p6UMm-Tc5zdtk-SkGUUYGn4BksLL3rQvw&oe=6A0BDFF0"
-        alt="Secret Shop" onerror="this.src='';this.style.display='none'"/>
+      <img class="logo-img" src="https://scontent.ffjr1-3.fna.fbcdn.net/v/t39.30808-6/689490142_122248500488087649_4927481533974595500_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EXGrsr4lLDoQ7kNvwGgXlCG&_nc_oc=Adq6qrz79UcT5ETBe4CTbbfxOsre1-XxdlJFiWsPi16s4SXNHowQuELzijpPwcO4zq88c9Tjc_58eYLwJRXyOS7W&_nc_zt=23&_nc_ht=scontent.ffjr1-3.fna&_nc_gid=oEUKXewMNZp3Iyc47agmVQ&_nc_ss=7b2a8&oh=00_Af6jdYkmkb8I1p6UMm-Tc5zdtk-SkGUUYGn4BksLL3rQvw&oe=6A0BDFF0" alt="Secret Shop" onerror="this.src='';this.style.display='none'"/>
       <div class="logo-text">Secret Shop<span>Abu Dhabi · UAE</span></div>
     </a>
-
     <div class="search-bar" role="search">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="search-input" placeholder="Search Jordan, BAPE, Supreme..." aria-label="Search products"/>
       <button class="search-clear" id="clear-btn" aria-label="Clear">✕</button>
     </div>
-
     <div class="header-actions">
       <a href="https://wa.me/971563780062?text=Hi%20Secret%20Shop!%20I%27m%20interested%20in%20an%20item." target="_blank" class="wa-pill">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/>
-        </svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
         <span>Inquire Here</span>
       </a>
     </div>
   </div>
-
   <nav class="cat-nav" role="navigation" aria-label="Categories">
     <button class="cat-btn active" data-cat="all">All Items</button>
     <button class="cat-btn" data-cat="ua-pairs">UA Pairs 👟</button>
@@ -408,7 +355,7 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 </header>
 
 <!-- HERO -->
-<section class="hero" id="hero-section">
+<section class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">Abu Dhabi · UAE</p>
     <h1 class="hero-title">Secret<br><em>Shop.</em></h1>
@@ -419,13 +366,8 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-stat">
-      <strong>9.4K</strong>
-      Facebook Followers
-    </div>
-    <div class="tabby-badge">
-      <span>Tabby · Pay Later</span>
-    </div>
+    <div class="hero-stat"><strong>9.4K</strong>Facebook Followers</div>
+    <div class="tabby-badge"><span>Tabby · Pay Later</span></div>
   </div>
 </section>
 
@@ -437,37 +379,22 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <main class="site-body" id="site-body" role="main"></main>
 
 <!-- INFO GRID -->
 <div class="info-grid">
   <div class="info-cell">
-    <div class="info-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-    </div>
-    <div>
-      <h4>Order via WhatsApp</h4>
-      <p>Fast replies, easy ordering. <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></p>
-    </div>
+    <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg></div>
+    <div><h4>Order via WhatsApp</h4><p>Fast replies, easy ordering. <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></p></div>
   </div>
   <div class="info-cell">
-    <div class="info-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-    </div>
-    <div>
-      <h4>Based in Abu Dhabi</h4>
-      <p>Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank">DM for meetup</a></p>
-    </div>
+    <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+    <div><h4>Based in Abu Dhabi</h4><p>Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank">DM for meetup</a></p></div>
   </div>
   <div class="info-cell">
-    <div class="info-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-    </div>
-    <div>
-      <h4>Pay with Tabby</h4>
-      <p>Split into 4 interest-free payments on all orders.</p>
-    </div>
+    <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+    <div><h4>Pay with Tabby</h4><p>Split into 4 interest-free payments on all orders.</p></div>
   </div>
 </div>
 
@@ -500,6 +427,62 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 <div class="footer-bottom">
   <p>© 2025 Secret Shop · Abu Dhabi</p>
   <p>9.4K Followers on Facebook 🔥</p>
+</div>
+
+<!-- PRODUCT DETAIL PAGE -->
+<div class="pdp-overlay" id="pdp-overlay">
+  <div class="pdp-header">
+    <button class="pdp-back" onclick="closePdp()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <span id="pdp-header-name" style="font-size:14px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+  </div>
+  <div class="pdp-body">
+    <div class="pdp-gallery">
+      <div class="pdp-main-img"><img id="pdp-main-img" src="" alt=""/></div>
+      <div class="pdp-thumbs" id="pdp-thumbs"></div>
+    </div>
+    <div class="pdp-info">
+      <p class="pdp-brand" id="pdp-brand"></p>
+      <h1 class="pdp-name" id="pdp-name"></h1>
+      <p class="pdp-meta" id="pdp-meta"></p>
+      <p class="pdp-desc" id="pdp-desc"></p>
+      <div id="pdp-color-section" style="display:none;margin-bottom:20px">
+        <p class="pdp-section-label">Color — <span id="pdp-color-name" style="text-transform:none;letter-spacing:0;font-family:var(--font)"></span></p>
+        <div class="pdp-swatches" id="pdp-swatches"></div>
+      </div>
+      <div id="pdp-size-section" style="display:none;margin-bottom:24px">
+        <p class="pdp-section-label">Select Size</p>
+        <div class="pdp-sizes" id="pdp-sizes"></div>
+      </div>
+      <a class="pdp-wa" id="pdp-wa" href="#" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+    <p class="pdp-related-title" id="pdp-related-title"></p>
+    <div class="pdp-related-grid" id="pdp-related-grid"></div>
+    <div class="pdp-store">
+      <p class="pdp-store-title">About Secret Shop</p>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span>Based in Abu Dhabi, UAE 🇦🇪 — <a href="https://wa.me/971563780062" target="_blank">DM for meetup</a></span>
+      </div>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        <span>WhatsApp: <a href="https://wa.me/971563780062" target="_blank">+971 56 378 0062</a></span>
+      </div>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span>Pay with <strong>Tabby</strong> — split into 4 interest-free payments</span>
+      </div>
+      <div class="pdp-store-row">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <span><a href="https://www.facebook.com/profile.php?id=61552629475156" target="_blank">Follow us on Facebook</a> — 9.4K followers 🔥</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- BRAND PAGE -->
@@ -556,46 +539,46 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 </div>
 
 <script>
-const CLOTHING = ['streetwear'];
-const SIZES_DEFAULT = ['S','M','L','XL'];
-const SIZES_BAPE    = ['S','M','L','XL','XXL'];
+const CLOTHING=['streetwear'];
+const SIZES_DEFAULT=['S','M','L','XL'];
+const SIZES_BAPE=['S','M','L','XL','XXL'];
 
-const ITEMS = [
-  {id:87,name:"Ami Paris SS26 Patch Logo Tee Black",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris ss26","patch logo tee","ami de coeur","luxury streetwear","designer tee","logo patch shirt","paris fashion","cotton tee","casual wear","minimalist fashion","premium clothing","streetwear fashion","designer apparel","ss26 collection"],desc:"Black / Patch Logo · Ami Paris SS26",longDesc:"The Ami Paris SS26 Patch Logo Tee is a clean and modern luxury streetwear t-shirt featuring Ami Paris signature minimalist Parisian aesthetic. Crafted from premium cotton fabric, the tee offers a soft texture, relaxed fit, and comfortable everyday wear. The standout patch logo detail adds subtle branding while maintaining the refined and understated style that defines the brand. Part of the SS26 collection, this tee blends timeless casual fashion with elevated designer craftsmanship, making it a versatile staple for both streetwear and smart-casual outfits.",imgs:["images/WhatsApp Image 2026-05-10 at 3.11.01 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.11.00 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.11.00 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.11.01 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.11.02 PM.jpeg"]},
-  {id:86,name:"AMI Paris 2026 Tee Black",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris 2026 tee","black tee","ami de coeur","luxury streetwear","designer tee","red heart logo","paris fashion","cotton tee","casual wear","minimalist fashion","premium clothing","streetwear fashion","designer apparel","ss26 collection"],desc:"Black / White Heart Logo · AMI Paris",longDesc:"The AMI Paris 2026 Tee Black is a luxury minimalist t-shirt that combines clean Parisian styling with modern streetwear aesthetics. Crafted from premium cotton fabric, the tee offers a soft feel, relaxed fit, and comfortable everyday wear. The black colorway is accented by AMI Paris’ signature red heart logo branding, creating a timeless and recognizable designer look. With its understated design and premium construction, this piece is perfect for versatile casual outfits while maintaining the refined identity AMI Paris is known for.",imgs:["images/WhatsApp Image 2026-05-10 at 3.12.58 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.12.58 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.12.59 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.12.59 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.12.58 PM (2).jpeg"]},
-  {id:83,name:"Ami Paris Panda Tee",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris panda tee","panda graphic tee","ami de coeur","luxury streetwear","designer tee","graphic tee","paris fashion","cotton tee","casual wear","minimalist fashion","ami shirt","streetwear fashion","premium clothing","designer apparel"],desc:"White / Panda Graphic · Ami Paris",longDesc:"The Ami Paris Panda Tee is a playful luxury streetwear t-shirt that combines Ami Paris’ minimalist Parisian aesthetic with a unique panda-inspired graphic design. Crafted from premium cotton fabric, the tee offers a soft feel, relaxed fit, and comfortable everyday wear. The standout panda artwork adds a fun and artistic touch while maintaining the clean and refined style the brand is known for. Finished with subtle Ami Paris branding, this tee blends casual fashion with designer-level craftsmanship, making it a versatile piece for modern streetwear wardrobes.",imgs:["images/WhatsApp Image 2026-05-10 at 3.19.38 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.19.38 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.19.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.19.39 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.19.39 PM.jpeg"]},
-  {id:84,name:"Ami Paris Oversize Logo Tshirt",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris oversize logo t-shirt","oversized tee","ami de coeur","luxury streetwear","designer tee","logo shirt","paris fashion","cotton tee","casual wear","minimalist fashion","streetwear fashion","premium clothing","ami shirt","designer apparel"],desc:"Oversized Logo · Ami Paris",longDesc:"The Ami Paris Oversize Logo T-Shirt is a modern luxury streetwear essential featuring Ami Paris’ signature oversized silhouette and bold logo styling. Crafted from premium cotton fabric, the tee delivers a soft heavyweight feel with a relaxed oversized fit designed for everyday comfort and effortless styling. The large Ami Paris logo branding adds a standout visual element while maintaining the clean Parisian aesthetic the brand is known for. Versatile and easy to style, this t-shirt pairs well with both casual and elevated streetwear outfits.",imgs:["images/WhatsApp Image 2026-05-10 at 3.18.04 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.18.03 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.18.03 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.18.04 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.18.03 PM.jpeg"]},
-  {id:85,name:"AMI Paris Place des Victoires graphic T-shirt",brand:"Ami Paris",cat:"streetwear",tags:["ami paris","place des victoires","graphic t-shirt","black almond tee","ami de coeur","luxury streetwear","designer tee","paris fashion","cotton tee","casual wear","minimalist fashion","premium clothing","streetwear fashion","graphic shirt","designer apparel"],desc:"Black / Almond Graphic · Ami Paris",longDesc:"The AMI Paris Place des Victoires Graphic T-Shirt is a premium designer tee inspired by the iconic Place des Victoires location in Paris. Featuring a clean black base with almond-toned graphic detailing, the shirt combines minimalist luxury with contemporary streetwear aesthetics. Made from high-quality cotton fabric, it offers a soft texture, relaxed fit, and comfortable everyday wear. The refined graphic print and subtle branding reflect AMI Paris’ signature blend of casual sophistication and modern Parisian fashion, making it a versatile staple for both casual and elevated outfits.",imgs:["images/WhatsApp Image 2026-05-10 at 3.16.05 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM.jpeg"],colorVariants:[{label:"Black",color:"#000000",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 3.16.05 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM.jpeg"]},{label:"Almond",color:"#edaa35",desc:"Almond",imgs:["images/WhatsApp Image 2026-05-10 at 3.16.05 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.16.06 PM.jpeg"]}]},
-  {id:80,name:"Ami Paris WDC Tee",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris wdc tee","ami de coeur","luxury streetwear","designer tee","graphic tee","paris fashion","cotton tee","casual wear","minimalist fashion","ami shirt","streetwear","fashion tee","premium clothing","designer apparel"],desc:"Ami Paris",longDesc:"The Ami Paris WDC Tee is a minimalist luxury streetwear t-shirt featuring Ami Paris’ signature clean aesthetic and premium craftsmanship. Made from soft high-quality cotton, the tee delivers a comfortable relaxed fit with subtle branding details inspired by the brand’s iconic Parisian style. The WDC design adds a modern graphic touch while maintaining the understated look that Ami Paris is known for. Perfect for casual everyday wear, the tee blends contemporary fashion with timeless simplicity, making it a versatile staple for any wardrobe.",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM.jpeg"],colorVariants:[{label:"Black",color:"#000000",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM.jpeg"]},{label:"Green",color:"#18902c",desc:"Green",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM (1).jpeg"]},{label:"Almond",color:"#bfb545",desc:"Almond",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.44 PM.jpeg"]},{label:"Grey",color:"#817e7e",desc:"Grey",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM (2).jpeg"]},{label:"White",color:"#ffffff",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.44 PM (1).jpeg"]}]},
-  {id:81,name:"Ami  Paris Blue Knitted Crochet Patch",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris knitwear","blue knitted sweater","crochet patch","ami de coeur","luxury streetwear","designer sweater","knit sweater","paris fashion","casual luxury","premium knitwear","ami sweater","streetwear fashion","winter wear","designer clothing"],desc:"Blue / Crochet Patch · Ami Paris",longDesc:"The Ami Paris Blue Knitted Crochet Patch Sweater is a premium knitwear piece that combines classic Parisian styling with modern luxury streetwear aesthetics. Crafted from soft high-quality knitted fabric, the sweater features a rich blue colorway accented by a distinctive crochet-style patch detail that adds texture and character to the design. With its relaxed fit, ribbed trims, and refined construction, the piece delivers both comfort and elevated everyday style. The minimalist branding and handcrafted-inspired patchwork reflect Ami Paris’ signature blend of sophistication and casual wearability.",imgs:["images/WhatsApp Image 2026-05-10 at 3.24.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.24.45 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.24.46 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.24.46 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.24.45 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 3.24.45 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.24.45 PM (1).jpeg"]},
-  {id:82,name:"Ami Paris ADC Topstiching Tee",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ami paris tee","adc topstitching tee","ami de coeur","luxury streetwear","designer tee","topstitch tee","paris fashion","cotton tee","minimalist fashion","casual wear","premium clothing","ami shirt","streetwear fashion","designer apparel"],desc:"White / Blue / Black / Topstitch Detail · Ami Paris",longDesc:"The Ami Paris ADC Topstitching Tee is a refined minimalist t-shirt that showcases Ami Paris’ signature blend of luxury and casual streetwear aesthetics. Made from premium cotton fabric, the tee features clean construction with contrast topstitch detailing that adds subtle texture and elevated craftsmanship to the design. Finished with the iconic ADC or Ami de Coeur branding, the shirt delivers a relaxed fit, soft feel, and versatile everyday styling. Its understated design makes it easy to pair with both casual and smart streetwear outfits while maintaining the timeless Parisian look Ami Paris is known for.",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.41 PM.jpeg"],colorVariants:[{label:"Black",color:"#080808",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.41 PM.jpeg"]},{label:"Blue",color:"#00129e",desc:"Blue",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.40 PM.jpeg"]},{label:"White",color:"#ffffff",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.40 PM (1).jpeg"]}]},
-  {id:79,name:"Supreme SS25 Supremes Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss25","supremes tee","supreme graphic tee","streetwear","supreme shirt","ss25 collection","back graphic tee","hypebeast","skatewear","cotton tee","limited release","fashion","casual wear","supreme apparel","multicolor graphic"],desc:"White / Black · SS25",longDesc:"The Supreme SS25 Supremes Tee features a clean minimal front design paired with a bold oversized back graphic spelling out SUPREME using colorful collage-style artwork and star accents. Made from premium cotton fabric, the tee offers a soft feel, relaxed fit, and durable everyday comfort. The contrast between the subtle chest logo and vibrant back print gives the piece a standout streetwear aesthetic while keeping Supreme’s classic style identity intact. Part of the Spring/Summer 2025 collection, this tee quickly became popular among collectors and fans for its artistic visual design and wearable versatility.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.32 PM.jpeg","images/WhatsApp Image 2026-05-10 at 4.32.33 PM.jpeg"],colorVariants:[{label:"Black",color:"#000000",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.32 PM.jpeg","images/WhatsApp Image 2026-05-10 at 4.32.33 PM.jpeg"]},{label:"White",color:"#ffffff",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.32 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 4.32.32 PM (1).jpeg"]}]},
-  {id:72,name:"Supreme SS25 Announcing Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss25","supreme announcing tee","streetwear","graphic tee","supreme shirt","ss25 collection","hypebeast","skatewear","cotton tee","supreme apparel","limited release","fashion","casual wear","box logo style"],desc:"Black / White · SS25",longDesc:"The Supreme Announcing Tee is a standout graphic tee from the Spring/Summer 2025 collection, featuring Supreme’s signature mix of abstract artwork and layered typography. Crafted from premium all-cotton fabric, the tee delivers a comfortable classic fit with bold front graphics, including the Announcing script, layered Supreme branding, and artistic visual elements that give the piece a unique streetwear aesthetic. Released during Week 1 of the SS25 season, the tee quickly became a sought-after item among collectors and Supreme fans for its clean design and versatile styling.",imgs:["images/WhatsApp Image 2026-05-11 at 6.45.54 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.45.54 AM.jpeg"]},{label:"White",color:"#FFFFFF",imgs:["images/WhatsApp Image 2026-05-11 at 6.45.54 AM (1).jpeg"]}]},
-  {id:69,name:"Nike Kobe 5 Protro Caitlin Clark Indian Fever",brand:"Nike",batch:"S2 Batch",sku:"IM3207-400",cat:"ua-pairs",badge:"HOT",tags:["nike kobe 5 protro","caitlin clark","indiana fever","im3207-400","s2 batch","kobe bryant","basketball shoes","blue sneakers","nike basketball","protro sneakers","low top basketball shoes","performance sneakers","athletic footwear","kobe shoes","women basketball inspired","hype sneakers","court shoes","limited edition sneakers","caitlin clark pe"],desc:"Blue / Red · Caitlin Clark Indiana Fever · S2 Batch",longDesc:"The Nike Nike Kobe 5 Protro Caitlin Clark Indiana Fever (Code: IM3207-400) in S2 Batch combines elite basketball performance with a colorway inspired by Caitlin Clark and the Indiana Fever. Featuring a lightweight low-top build, responsive Protro cushioning, and durable traction for explosive speed and quick movements on the court. The vibrant Blue upper with Red and Yellow accents delivers a bold and energetic design while honoring one of basketball’s rising stars and the legacy of Kobe Bryant.",imgs:["images/WhatsApp Image 2026-05-11 at 6.55.24 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 6.55.25 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.55.26 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.55.24 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 6.55.24 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.55.24 AM.jpeg"]},
-  {id:70,name:"Nike Kobe 8 Protro Year of the Horse",brand:"Nike",batch:"S2 Batch",sku:"IM0594-600",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 8 protro","year of the horse","im0594-600","s2 batch","kobe bryant","basketball shoes","red gold sneakers","protro","sneaker collection","nike kobe","performance basketball","limited edition"],desc:"Red / Gold · S2 Batch",longDesc:"The Nike Kobe 8 Protro Year of the Horse in the S2 Batch edition features a bold red upper inspired by the Chinese Zodiac Year of the Horse theme, combined with metallic gold detailing and premium craftsmanship. Built with lightweight engineered mesh and responsive cushioning, this sneaker delivers both performance and collector appeal. The S2 Batch version is known for its accurate shape, clean stitching, vibrant color matching, and detailed Kobe branding, making it a strong choice for basketball players and sneaker enthusiasts alike.",imgs:["images/WhatsApp Image 2026-05-11 at 6.51.11 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 6.51.10 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.51.11 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 6.51.11 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.51.11 AM.jpeg"]},
-  {id:71,name:"Nike Kobe 5 Protro Caitlin Clark Rookie of the Year",brand:"Nike",batch:"S2 Batch",sku:"IV2712-001",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 5 protro","caitlin clark","rookie of the year","iv2712-001","s2 batch","kobe bryant","basketball shoes","black silver sneakers","nike basketball","protro","limited edition","sneaker collection","performance sneakers"],desc:"Black / Silver · S2 Batch",longDesc:"The Nike Kobe 5 Protro Caitlin Clark Rookie of the Year S2 Batch edition combines sleek performance design with a special colorway inspired by Caitlin Clark’s Rookie of the Year theme. Featuring a black-based upper with silver and premium accent details, this pair delivers a lightweight feel, low-cut support, and responsive cushioning ideal for both on-court performance and casual wear. The S2 Batch version is praised for its accurate silhouette, refined material quality, detailed stitching, and strong overall resemblance to the retail release, making it a standout addition for Kobe collectors and basketball sneaker fans.",imgs:["images/WhatsApp Image 2026-05-11 at 6.48.44 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.45 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.45 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.48.44 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.44 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.44 AM.jpeg"]},
-  {id:68,name:"Vans Era 95 DX × Fear of God",brand:"Vans",batch:"Top Batch",sku:"VN0A3MQ5PZP",cat:"ua-pairs",badge:"HOT",tags:["vans","era 95","era95","fear of god","fog","jerry lorenzo","collab","black","cream","white","slip on","canvas","gothic","monogram","skate","lifestyle","low top"],desc:"Cream / Black · Fear of God Monogram · Top Batch",longDesc:"The Vans Era 95 DX × Fear of God (Code: VN0A3MQ5PZP) in Top Batch features the iconic Fear of God gothic monogram print covering the black canvas panels, contrasted by a clean cream canvas toe box and collar. Built on the classic Era 95 silhouette with Vans signature waffle outsole, padded collar, and metal eyelets. A grail collab between Vans and Jerry Lorenzo's Fear of God.",imgs:["images/WhatsApp Image 2026-05-11 at 7.04.15 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM (3).jpeg"]},
-  {id:64,name:"Nike Kobe 4  Philly",brand:"Nike",batch:"GX batch",sku:"FQ3545-400",cat:"ua-pairs",badge:"HOT",tags:["nike kobe 4","philly","fq3545-400","gx batch","kobe bryant","basketball shoes","blue sneakers","nike basketball","low top basketball shoes","performance sneakers","athletic footwear","kobe shoes","hype sneakers","court shoes","philadelphia inspired","limited edition sneakers","casual basketball shoes"],desc:"Blue / Red · Philly · GX Batch",longDesc:"The Nike Nike Kobe 4 “Philly” (Code: FQ3545-400) in GX Batch pays tribute to the hometown roots of Kobe Bryant with a clean Blue colorway accented by Red and White details inspired by Philadelphia sports culture. Built with a lightweight low-top basketball silhouette, responsive cushioning, and durable traction for quick cuts and smooth court movement. The sleek design combines classic Kobe performance with a bold yet versatile aesthetic perfect for both basketball and everyday wear.",imgs:["images/WhatsApp Image 2026-05-11 at 7.21.21 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.21.22 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.21.22 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.21.21 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.21.21 AM.jpeg"]},
-  {id:65,name:"Nike Kobe 4 Protro Girl Dad",brand:"Nike",batch:"GX Batch",sku:"FQ3545-300",cat:"ua-pairs",badge:"HOT",tags:["nike kobe 4 protro","girl dad","fq3545-300","gx batch","kobe bryant","basketball shoes","green sneakers","nike basketball","protro sneakers","low top basketball shoes","performance sneakers","athletic footwear","kobe shoes","hype sneakers","court shoes","tribute sneakers","limited edition sneakers","lifestyle basketball shoes"],desc:"Green / Black · Girl Dad · GX Batch",longDesc:"The Nike Nike Kobe 4 Protro Girl Dad (Code: FQ3545-300) in GX Batch honors the legacy of Kobe Bryant and his well-known “Girl Dad” identity. Featuring a premium Green upper with Black accents, lightweight low-top construction, and responsive Protro cushioning for enhanced comfort and performance on the court. The sleek design blends modern basketball technology with a meaningful tribute colorway, making it ideal for both hooping and lifestyle wear.",imgs:["images/WhatsApp Image 2026-05-11 at 7.17.43 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.17.44 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.17.44 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.17.43 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.17.43 AM.jpeg"]},
-  {id:66,name:"Nike Kobe 4 Protro Gold Medal",brand:"Nike",batch:"GX Batch",sku:"FQ3544 100",cat:"ua-pairs",badge:"HOT",tags:["nike kobe 4 protro","gold medal","fq3544-100","gx batch","kobe bryant","basketball shoes","white sneakers","gold sneakers","nike basketball","protro sneakers","low top basketball shoes","performance sneakers","athletic footwear","kobe shoes","hype sneakers","court shoes","olympic inspired sneakers","limited edition sneakers"],desc:"White / Gold · Gold Medal · GX Batch",longDesc:"The Nike Nike Kobe 4 Protro Gold Medal (Code: FQ3544-100) in GX Batch celebrates the championship legacy of Kobe Bryant with a clean White upper highlighted by luxurious Gold accents inspired by Olympic gold medals. Built with lightweight low-top performance construction, responsive Protro cushioning, and durable traction for explosive movement and all-day comfort. The premium colorway delivers a classy and iconic basketball aesthetic perfect for both on-court performance and casual styling.",imgs:["images/WhatsApp Image 2026-05-11 at 7.13.20 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.13.21 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.13.21 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.13.20 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.13.20 AM.jpeg"]},
-  {id:67,name:"Nike Kobe 8 Protro EYBL",brand:"Nike",batch:"GX Batch",sku:"HJ7265-500",cat:"ua-pairs",badge:"NEW",tags:["nike kobe 8 protro","eybl","hj7265-500","gx batch","kobe bryant","basketball shoes","purple sneakers","volt sneakers","nike basketball","protro sneakers","low top basketball shoes","performance sneakers","athletic footwear","kobe shoes","hype sneakers","court shoes","eybl sneakers","limited edition sneakers","engineered mesh sneakers"],desc:"Purple / Volt · EYBL · GX Batch",longDesc:"The Nike Nike Kobe 8 Protro EYBL (Code: HJ7265-500) in GX Batch brings a vibrant performance design inspired by the Elite Youth Basketball League. Featuring a lightweight engineered mesh upper, responsive Protro cushioning, and a low-profile silhouette built for speed, agility, and court control. The bold Purple upper paired with striking Volt accents creates an energetic and eye-catching look that stands out both on and off the court while honoring the legacy of Kobe Bryant.",imgs:["images/WhatsApp Image 2026-05-11 at 7.07.44 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.07.45 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.07.45 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.07.44 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.07.44 AM.jpeg"]},
-  {id:60,name:"On Cloud X4  Year of the Snake",brand:"On Cloud",sku:"3MF10752734",cat:"ua-pairs",badge:"HOT",tags:["on cloud x4","year of the snake","3mf10752734","on running","white sneakers","red accents","gold details","gum sole","running shoes","training shoes","lifestyle sneakers","cloudtec","lightweight sneakers","breathable mesh","athletic footwear","limited edition sneakers","casual shoes"],desc:"White / Red · Year of the Snake · Cloud X4",longDesc:"The On Cloud X4 Year of the Snake (Code: 3MF10752734) combines lightweight performance with a premium festive-inspired design. Featuring breathable engineered mesh, responsive CloudTec cushioning, and a flexible outsole for smooth comfort during training or daily wear. The elegant White upper is accented with Gold detailing, Red highlights, and a gum outsole, giving the sneaker a clean luxury aesthetic inspired by the Year of the Snake collection.",imgs:["images/WhatsApp Image 2026-05-11 at 8.04.12 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 8.04.12 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.04.12 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.04.12 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.04.11 AM.jpeg"]},
-  {id:61,name:"On Cloud X4 Black Exlipse",brand:"On Cloud",sku:"3ME30041446",cat:"ua-pairs",badge:"HOT",tags:["on cloud x4","black eclipse","3me30041446","on running","black sneakers","all black shoes","running shoes","training shoes","lifestyle sneakers","cloudtec","lightweight sneakers","breathable mesh","athletic footwear","gym shoes","casual sneakers","performance shoes"],desc:"Black Eclipse · Cloud X4",longDesc:"The On Cloud X4 “Black Eclipse” (Code: 3ME30041446) delivers a sleek all-black performance design built for training, running, and everyday comfort. Engineered with breathable mesh uppers, responsive CloudTec cushioning, and a durable flexible outsole for smooth movement and support throughout the day. The monochrome Black Eclipse colorway gives the sneaker a clean, modern, and versatile aesthetic that pairs easily with any outfit.",imgs:["images/WhatsApp Image 2026-05-11 at 8.01.36 AM (4).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM.jpeg"]},
-  {id:62,name:"Nike Kobe 6 Protro Grinch",brand:"Nike",batch:"Max Batch",sku:"CW2190-300",cat:"ua-pairs",badge:"HOT",tags:["nike kobe 6 protro","grinch","cw2190-300","max batch","kobe bryant","basketball shoes","green sneakers","nike basketball","snakeskin texture","performance sneakers","low top basketball shoes","kobe shoes","athletic footwear","limited edition sneakers","hype sneakers","court shoes","green apple","iconic sneakers"],desc:"Green Apple / Black · Grinch · Max Batch",longDesc:"The Nike Nike Kobe 6 Protro Grinch (Code: CW2190-300) in Max Batch features the iconic bright Green Apple upper inspired by the legendary holiday colorway worn by Kobe Bryant. Built with a textured snakeskin-inspired upper, responsive cushioning, and low-cut performance design for speed, comfort, and court control. The bold neon green finish with Black and Red accents makes this one of the most recognizable basketball sneakers ever released.",imgs:["images/WhatsApp Image 2026-05-11 at 7.34.00 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.34.01 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.34.01 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.34.00 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.34.00 AM.jpeg"]},
-  {id:63,name:"Nike Kobe 6 Protro Devin Booker Player Exclusive",brand:"Nike",batch:"Star Batch",cat:"ua-pairs",badge:"HOT",tags:["nike kobe 6 protro","devin booker pe","star batch","devin booker","kobe bryant","basketball shoes","orange sneakers","nike basketball","kobe shoes","player exclusive","pe sneakers","low top basketball shoes","performance sneakers","athletic footwear","hype sneakers","court shoes","snakeskin texture","limited edition sneakers"],desc:"Orange / White · Devin Booker PE · Star Batch",longDesc:"The Nike Nike Kobe 6 Protro Devin Booker Player Exclusive in Star Batch delivers a bold basketball performance design inspired by Devin Booker. Featuring the iconic Kobe 6 snakeskin-textured upper, lightweight low-top construction, and responsive cushioning for explosive movement and court feel. The vibrant Orange colorway paired with clean White accents gives this PE edition a standout on-court and lifestyle look while maintaining elite comfort and traction.",imgs:["images/WhatsApp Image 2026-05-11 at 7.28.41 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 7.28.42 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.28.41 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.28.41 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.28.41 AM.jpeg"]},
-  {id:59,name:"On CLoud X4 Ivory",brand:"On Cloud",cat:"ua-pairs",tags:["on cloud x4","on running","ivory","white","black","running shoes","training shoes","lifestyle sneakers","cloudtec","lightweight sneakers","breathable mesh","athletic footwear","men sneakers","women sneakers","gym shoes","casual shoes"],desc:"Ivory / Black · Cloud X4",longDesc:"The On Cloud X4 in Ivory delivers lightweight comfort, responsive cushioning, and a sleek modern design built for training, walking, and everyday wear. Featuring breathable mesh uppers, CloudTec cushioning, and a flexible outsole for smooth movement and all-day support. The clean Ivory and Black colorway gives a minimal and premium look perfect for both active and casual outfits.",imgs:["images/WhatsApp Image 2026-05-11 at 8.08.42 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 8.08.43 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.08.42 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.08.42 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.08.42 AM.jpeg"]},
-  {id:1,name:"Air Jordan 1 Retro OG",brand:"Jordan / Nike",batch:"PK Batch",sku:"IW6276-001",sizes:"EU 40–47.5",cat:"ua-pairs",badge:"HOT",tags:["jordan","aj1","nike","sneakers","shoes","kicks","pk batch"],desc:"PK Batch · Chicago Colourway",longDesc:"Premium PK Batch Air Jordan 1 Retro OG in the iconic Chicago colourway — red, black and white leather upper with Nike Air cushioning. EU 40–47.5.",imgs:["images/WhatsApp Image 2026-05-09 at 3.24.48 PM (3).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM (2).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM (1).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM.jpeg","images/WhatsApp Image 2026-05-09 at 3.24.49 PM (4).jpeg"]},
-  {id:56,name:"Air Jordan 1 Retro Low OG SP × Travis Scott",brand:"Jordan / Nike",batch:"PK Batch",sku:"IQ7604-100",sizes:"EU 40–48.5",cat:"ua-pairs",badge:"HOT",tags:["jordan","aj1","travis scott","cactus jack","low","pink","shy pink","cream","vanilla","collab","pk batch"],desc:"PK Batch · Shy Pink · Travis Scott Collab",longDesc:"PK Batch Air Jordan 1 Retro Low OG SP × Travis Scott in Shy Pink. Cream/vanilla tumbled leather upper, pink Swoosh, pink outsole, embroidered Air Jordan wings on heel, Cactus Jack hit on tongue. EU 40–48.5.",imgs:["images/WhatsApp Image 2026-05-11 at 9.37.54 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 9.37.54 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 9.37.54 AM.jpeg","images/WhatsApp Image 2026-05-11 at 9.37.53 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 9.37.53 AM.jpeg"]},
-  {id:57,name:"Adidas Adizero Evo SL",brand:"Adidas",batch:"UA",sku:"KI6927",sizes:"EU 36–48",cat:"ua-pairs",badge:"NEW",tags:["adidas","adizero","evo sl","running","grey","green","screaming green","lightstrike","lightstrike pro","ua"],desc:"Grey / Screaming Green · UA Pair",longDesc:"UA Adidas Adizero Evo SL in Grey Three / Screaming Green. Lightweight ripstop upper, Lightstrike Pro midsole, perforated heel panel, ADIZERO EVO SL tongue print. EU 36–48.",imgs:["images/WhatsApp Image 2026-05-11 at 9.24.08 AM.jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM.jpeg"]},
-  {id:58,name:"On Cloud X 4",brand:"On Cloud",batch:"UA",sku:"3MF10752734",sizes:"EU 36–48",cat:"ua-pairs",badge:"NEW",tags:["on","on running","cloud x","cloud x4","cloudx","cloudtec","swiss engineering","running","black","grey","gray","chamber","heather"],desc:"Black / Chamber Gray · UA Pair",longDesc:"UA On Cloud X 4 in Black / Chamber Gray. Knitted mesh upper with blue dot accent pattern, CloudTec phase midsole with signature pod cutouts, Swiss Engineering badge, CLOUD X tongue pull tab, and On logo on heel. Available EU 36–48.",imgs:["images/WhatsApp Image 2026-05-11 at 8.10.46 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM (3).jpeg"]},
-  {id:18,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-600",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","slippers","red","crimson"],desc:"Crimson Red · UA Pair",longDesc:"UA Nike Mind 001 slides in bold Crimson Red. Chunky sculpted foam, perforated strap, embossed Swoosh. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.15.10 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.15.09 PM.jpeg"]},
-  {id:19,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-001",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","black","orange"],desc:"Black / Orange · UA Pair",longDesc:"UA Nike Mind 001 in stealthy Black with bold Orange outsole pods. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.29.37 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.29.37 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.29.36 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.29.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.29.35 PM.jpeg"]},
-  {id:20,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-300",sizes:"EU 36–48.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","teal","green","mineral"],desc:"Mineral Teal / Orange · UA Pair",longDesc:"UA Nike Mind 001 in Mineral Teal with vibrant Orange pods. EU 36–48.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.31.27 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.27 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM.jpeg"]},
-  {id:21,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-101",sizes:"EU 36–47",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","white","red"],desc:"White / Red · UA Pair",longDesc:"UA Nike Mind 001 in clean White with bold Red pods. EU 36–47.",imgs:["images/WhatsApp Image 2026-05-10 at 1.35.58 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.35.58 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.35.57 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.35.57 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.35.56 PM.jpeg"]},
-  {id:22,name:"NK Mind 001 × NOCTA",brand:"Nike × NOCTA",batch:"UA",sku:"HY5028-200",sizes:"EU 38–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","nocta","mind","drake","slides","black","blue"],desc:"Black / Blue · NOCTA Collab · UA Pair",longDesc:"UA Nike Mind 001 × NOCTA with three-star metal badge, blue outsole pods, and printed NOCTA insole. EU 38–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.38.02 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.38.00 PM.jpeg"]},
-  {id:23,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-001",sizes:"EU 36–45",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","burgundy","maroon","navy"],desc:"Burgundy / Navy · UA Pair",longDesc:"UA Nike Mind 001 in Burgundy-to-Red gradient with Navy pods. EU 36–45.",imgs:["images/WhatsApp Image 2026-05-10 at 1.40.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM.jpeg"]},
-  {id:24,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-400",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind","slides","navy","blue","gold"],desc:"Navy / Royal Blue / Gold · UA Pair",longDesc:"UA Nike Mind 001 in deep Navy with Royal Blue outsole and gold Swoosh. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.42.45 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.42.44 PM.jpeg"]},
-  {id:25,name:"NK Mind 001 × Fragment Design",brand:"Nike × Fragment",batch:"UA",sku:"IQ8502-001",sizes:"EU 36–48.5",cat:"ua-pairs",badge:"HOT",tags:["nike","fragment","mind","slides","grey","gray","blue","hiroshi"],desc:"Iron Grey / Blue · Fragment Collab · UA Pair",longDesc:"UA Nike Mind 001 × Fragment Design with FRAGMENT heel badge, blue pods, and branded insole. EU 36–48.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.45.18 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.45.18 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.45.18 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.45.19 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"]},
+const ITEMS=[
+  {id:87,name:"Ami Paris SS26 Patch Logo Tee Black",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","ss26","patch logo tee","ami de coeur","luxury streetwear","designer tee"],desc:"Black / Patch Logo · Ami Paris SS26",longDesc:"The Ami Paris SS26 Patch Logo Tee is a clean and modern luxury streetwear t-shirt featuring Ami Paris signature minimalist Parisian aesthetic. Crafted from premium cotton fabric, the tee offers a soft texture, relaxed fit, and comfortable everyday wear. The standout patch logo detail adds subtle branding while maintaining the refined and understated style that defines the brand.",imgs:["images/WhatsApp Image 2026-05-10 at 3.11.01 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.11.00 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.11.00 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.11.01 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.11.02 PM.jpeg"]},
+  {id:86,name:"AMI Paris 2026 Tee Black",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","2026 tee","black tee","ami de coeur","luxury streetwear","red heart logo"],desc:"Black / White Heart Logo · AMI Paris",longDesc:"The AMI Paris 2026 Tee Black is a luxury minimalist t-shirt combining clean Parisian styling with modern streetwear aesthetics. Crafted from premium cotton, the black colorway is accented by AMI Paris signature red heart logo branding.",imgs:["images/WhatsApp Image 2026-05-10 at 3.12.58 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.12.58 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.12.59 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.12.59 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.12.58 PM (2).jpeg"]},
+  {id:83,name:"Ami Paris Panda Tee",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","panda tee","graphic tee","ami de coeur","luxury streetwear"],desc:"White / Panda Graphic · Ami Paris",longDesc:"The Ami Paris Panda Tee is a playful luxury streetwear t-shirt combining Ami Paris minimalist Parisian aesthetic with a unique panda-inspired graphic design.",imgs:["images/WhatsApp Image 2026-05-10 at 3.19.38 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.19.38 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.19.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.19.39 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.19.39 PM.jpeg"]},
+  {id:84,name:"Ami Paris Oversize Logo Tshirt",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","oversize logo","oversized tee","ami de coeur","luxury streetwear"],desc:"Oversized Logo · Ami Paris",longDesc:"The Ami Paris Oversize Logo T-Shirt is a modern luxury streetwear essential featuring Ami Paris signature oversized silhouette and bold logo styling.",imgs:["images/WhatsApp Image 2026-05-10 at 3.18.04 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.18.03 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.18.03 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.18.04 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.18.03 PM.jpeg"]},
+  {id:85,name:"AMI Paris Place des Victoires graphic T-shirt",brand:"Ami Paris",cat:"streetwear",tags:["ami paris","place des victoires","graphic t-shirt","luxury streetwear"],desc:"Black / Almond Graphic · Ami Paris",longDesc:"The AMI Paris Place des Victoires Graphic T-Shirt is a premium designer tee inspired by the iconic Place des Victoires location in Paris.",imgs:["images/WhatsApp Image 2026-05-10 at 3.16.05 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM.jpeg"],colorVariants:[{label:"Black",color:"#000000",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 3.16.05 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM.jpeg"]},{label:"Almond",color:"#edaa35",desc:"Almond",imgs:["images/WhatsApp Image 2026-05-10 at 3.16.05 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.16.05 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.16.06 PM.jpeg"]}]},
+  {id:80,name:"Ami Paris WDC Tee",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","wdc tee","ami de coeur","luxury streetwear"],desc:"Ami Paris",longDesc:"The Ami Paris WDC Tee is a minimalist luxury streetwear t-shirt featuring Ami Paris signature clean aesthetic and premium craftsmanship.",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM.jpeg"],colorVariants:[{label:"Black",color:"#000000",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM.jpeg"]},{label:"Green",color:"#18902c",desc:"Green",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM (1).jpeg"]},{label:"Almond",color:"#bfb545",desc:"Almond",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.44 PM.jpeg"]},{label:"Grey",color:"#817e7e",desc:"Grey",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.43 PM (2).jpeg"]},{label:"White",color:"#ffffff",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 3.35.44 PM (1).jpeg"]}]},
+  {id:81,name:"Ami Paris Blue Knitted Crochet Patch",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","knitwear","blue knitted","crochet patch","ami de coeur","luxury streetwear"],desc:"Blue / Crochet Patch · Ami Paris",longDesc:"The Ami Paris Blue Knitted Crochet Patch Sweater combines classic Parisian styling with modern luxury streetwear aesthetics.",imgs:["images/WhatsApp Image 2026-05-10 at 3.24.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.24.45 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.24.46 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 3.24.46 PM.jpeg","images/WhatsApp Image 2026-05-10 at 3.24.45 PM (3).jpeg"]},
+  {id:82,name:"Ami Paris ADC Topstitching Tee",brand:"Ami Paris",cat:"streetwear",badge:"HOT",tags:["ami paris","adc topstitching","ami de coeur","luxury streetwear"],desc:"White / Blue / Black / Topstitch Detail · Ami Paris",longDesc:"The Ami Paris ADC Topstitching Tee showcases Ami Paris signature blend of luxury and casual streetwear aesthetics with contrast topstitch detailing.",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.41 PM.jpeg"],colorVariants:[{label:"Black",color:"#080808",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.41 PM.jpeg"]},{label:"Blue",color:"#00129e",desc:"Blue",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.40 PM.jpeg"]},{label:"White",color:"#ffffff",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 3.22.40 PM (1).jpeg"]}]},
+  {id:79,name:"Supreme SS25 Supremes Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss25","supremes tee","graphic tee","streetwear","hypebeast"],desc:"White / Black · SS25",longDesc:"The Supreme SS25 Supremes Tee features a clean minimal front with a bold oversized back graphic spelling out SUPREME using colorful collage-style artwork.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.32 PM.jpeg","images/WhatsApp Image 2026-05-10 at 4.32.33 PM.jpeg"],colorVariants:[{label:"Black",color:"#000000",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.32 PM.jpeg","images/WhatsApp Image 2026-05-10 at 4.32.33 PM.jpeg"]},{label:"White",color:"#ffffff",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.32 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 4.32.32 PM (1).jpeg"]}]},
+  {id:72,name:"Supreme SS25 Announcing Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss25","announcing tee","streetwear","graphic tee","hypebeast"],desc:"Black / White · SS25",longDesc:"The Supreme Announcing Tee features Supreme signature mix of abstract artwork and layered typography from the SS25 collection.",imgs:["images/WhatsApp Image 2026-05-11 at 6.45.54 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.45.54 AM.jpeg"]},{label:"White",color:"#FFFFFF",imgs:["images/WhatsApp Image 2026-05-11 at 6.45.54 AM (1).jpeg"]}]},
+  {id:69,name:"Nike Kobe 5 Protro Caitlin Clark Indiana Fever",brand:"Nike",batch:"S2 Batch",sku:"IM3207-400",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 5 protro","caitlin clark","indiana fever","s2 batch","basketball shoes"],desc:"Blue / Red · Caitlin Clark Indiana Fever · S2 Batch",longDesc:"The Nike Kobe 5 Protro Caitlin Clark Indiana Fever in S2 Batch combines elite basketball performance with a colorway inspired by Caitlin Clark and the Indiana Fever.",imgs:["images/WhatsApp Image 2026-05-11 at 6.55.24 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 6.55.25 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.55.26 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.55.24 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 6.55.24 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.55.24 AM.jpeg"]},
+  {id:70,name:"Nike Kobe 8 Protro Year of the Horse",brand:"Nike",batch:"S2 Batch",sku:"IM0594-600",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 8 protro","year of the horse","s2 batch","basketball shoes"],desc:"Red / Gold · S2 Batch",longDesc:"The Nike Kobe 8 Protro Year of the Horse S2 Batch features a bold red upper inspired by the Chinese Zodiac Year of the Horse, with metallic gold detailing.",imgs:["images/WhatsApp Image 2026-05-11 at 6.51.11 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 6.51.10 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.51.11 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 6.51.11 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.51.11 AM.jpeg"]},
+  {id:71,name:"Nike Kobe 5 Protro Caitlin Clark Rookie of the Year",brand:"Nike",batch:"S2 Batch",sku:"IV2712-001",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 5 protro","caitlin clark","rookie of the year","s2 batch","basketball shoes"],desc:"Black / Silver · S2 Batch",longDesc:"The Nike Kobe 5 Protro Caitlin Clark Rookie of the Year S2 Batch features a sleek black upper with silver accent details.",imgs:["images/WhatsApp Image 2026-05-11 at 6.48.44 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.45 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.45 AM.jpeg","images/WhatsApp Image 2026-05-11 at 6.48.44 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.44 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 6.48.44 AM.jpeg"]},
+  {id:68,name:"Vans Era 95 DX × Fear of God",brand:"Vans",batch:"Top Batch",sku:"VN0A3MQ5PZP",cat:"ua-pairs",badge:"HOT",tags:["vans","era 95","fear of god","fog","jerry lorenzo","collab","gothic monogram"],desc:"Cream / Black · Fear of God Monogram · Top Batch",longDesc:"The Vans Era 95 DX × Fear of God features the iconic Fear of God gothic monogram print on black canvas with a cream toe box.",imgs:["images/WhatsApp Image 2026-05-11 at 7.04.15 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.04.16 AM (3).jpeg"]},
+  {id:64,name:"Nike Kobe 4 Philly",brand:"Nike",batch:"GX batch",sku:"FQ3545-400",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 4","philly","gx batch","basketball shoes","philadelphia"],desc:"Blue / Red · Philly · GX Batch",longDesc:"The Nike Kobe 4 Philly in GX Batch pays tribute to Kobe Bryant's hometown roots with a Blue colorway accented by Red and White details.",imgs:["images/WhatsApp Image 2026-05-11 at 7.21.21 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.21.22 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.21.22 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.21.21 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.21.21 AM.jpeg"]},
+  {id:65,name:"Nike Kobe 4 Protro Girl Dad",brand:"Nike",batch:"GX Batch",sku:"FQ3545-300",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 4 protro","girl dad","gx batch","basketball shoes"],desc:"Green / Black · Girl Dad · GX Batch",longDesc:"The Nike Kobe 4 Protro Girl Dad in GX Batch honors Kobe Bryant and his Girl Dad identity with a premium Green upper and Black accents.",imgs:["images/WhatsApp Image 2026-05-11 at 7.17.43 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.17.44 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.17.44 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.17.43 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.17.43 AM.jpeg"]},
+  {id:66,name:"Nike Kobe 4 Protro Gold Medal",brand:"Nike",batch:"GX Batch",sku:"FQ3544-100",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 4 protro","gold medal","gx batch","basketball shoes","olympic"],desc:"White / Gold · Gold Medal · GX Batch",longDesc:"The Nike Kobe 4 Protro Gold Medal in GX Batch celebrates the championship legacy of Kobe Bryant with a White upper and Gold accents.",imgs:["images/WhatsApp Image 2026-05-11 at 7.13.20 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.13.21 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.13.21 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.13.20 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.13.20 AM.jpeg"]},
+  {id:67,name:"Nike Kobe 8 Protro EYBL",brand:"Nike",batch:"GX Batch",sku:"HJ7265-500",cat:"ua-pairs",badge:"NEW",tags:["nike","kobe 8 protro","eybl","gx batch","basketball shoes","purple volt"],desc:"Purple / Volt · EYBL · GX Batch",longDesc:"The Nike Kobe 8 Protro EYBL in GX Batch features a vibrant performance design inspired by the Elite Youth Basketball League.",imgs:["images/WhatsApp Image 2026-05-11 at 7.07.44 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.07.45 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.07.45 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.07.44 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.07.44 AM.jpeg"]},
+  {id:60,name:"On Cloud X4 Year of the Snake",brand:"On Cloud",sku:"3MF10752734",cat:"ua-pairs",badge:"HOT",tags:["on cloud x4","year of the snake","on running","white sneakers","cloudtec","limited edition"],desc:"White / Red · Year of the Snake · Cloud X4",longDesc:"The On Cloud X4 Year of the Snake combines lightweight performance with a premium festive-inspired design with Gold detailing and Red highlights.",imgs:["images/WhatsApp Image 2026-05-11 at 8.04.12 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 8.04.12 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.04.12 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.04.12 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.04.11 AM.jpeg"]},
+  {id:61,name:"On Cloud X4 Black Eclipse",brand:"On Cloud",sku:"3ME30041446",cat:"ua-pairs",badge:"HOT",tags:["on cloud x4","black eclipse","on running","all black shoes","cloudtec","training shoes"],desc:"Black Eclipse · Cloud X4",longDesc:"The On Cloud X4 Black Eclipse delivers a sleek all-black performance design built for training, running, and everyday comfort.",imgs:["images/WhatsApp Image 2026-05-11 at 8.01.36 AM (4).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.01.36 AM.jpeg"]},
+  {id:62,name:"Nike Kobe 6 Protro Grinch",brand:"Nike",batch:"Max Batch",sku:"CW2190-300",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 6 protro","grinch","max batch","basketball shoes","green apple"],desc:"Green Apple / Black · Grinch · Max Batch",longDesc:"The Nike Kobe 6 Protro Grinch in Max Batch features the iconic bright Green Apple upper inspired by the legendary holiday colorway worn by Kobe Bryant.",imgs:["images/WhatsApp Image 2026-05-11 at 7.34.00 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.34.01 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.34.01 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.34.00 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.34.00 AM.jpeg"]},
+  {id:63,name:"Nike Kobe 6 Protro Devin Booker PE",brand:"Nike",batch:"Star Batch",cat:"ua-pairs",badge:"HOT",tags:["nike","kobe 6 protro","devin booker","star batch","basketball shoes","orange"],desc:"Orange / White · Devin Booker PE · Star Batch",longDesc:"The Nike Kobe 6 Protro Devin Booker Player Exclusive in Star Batch delivers bold basketball performance with vibrant Orange and White accents.",imgs:["images/WhatsApp Image 2026-05-11 at 7.28.41 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 7.28.42 AM.jpeg","images/WhatsApp Image 2026-05-11 at 7.28.41 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 7.28.41 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 7.28.41 AM.jpeg"]},
+  {id:59,name:"On Cloud X4 Ivory",brand:"On Cloud",cat:"ua-pairs",tags:["on cloud x4","on running","ivory","white","cloudtec","training shoes"],desc:"Ivory / Black · Cloud X4",longDesc:"The On Cloud X4 in Ivory delivers lightweight comfort, responsive cushioning, and a sleek modern design built for training and everyday wear.",imgs:["images/WhatsApp Image 2026-05-11 at 8.08.42 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 8.08.43 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.08.42 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.08.42 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.08.42 AM.jpeg"]},
+  {id:1,name:"Air Jordan 1 Retro OG",brand:"Jordan / Nike",batch:"PK Batch",sku:"IW6276-001",sizes:"EU 40–47.5",cat:"ua-pairs",badge:"HOT",tags:["jordan","aj1","nike","sneakers","pk batch","chicago"],desc:"PK Batch · Chicago Colourway",longDesc:"Premium PK Batch Air Jordan 1 Retro OG in the iconic Chicago colourway — red, black and white leather upper with Nike Air cushioning. EU 40–47.5.",imgs:["images/WhatsApp Image 2026-05-09 at 3.24.48 PM (3).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM (2).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM (1).jpeg","images/WhatsApp Image 2026-05-09 at 3.24.48 PM.jpeg","images/WhatsApp Image 2026-05-09 at 3.24.49 PM (4).jpeg"]},
+  {id:56,name:"Air Jordan 1 Retro Low OG SP × Travis Scott",brand:"Jordan / Nike",batch:"PK Batch",sku:"IQ7604-100",sizes:"EU 40–48.5",cat:"ua-pairs",badge:"HOT",tags:["jordan","aj1","travis scott","cactus jack","low","shy pink","cream","collab","pk batch"],desc:"PK Batch · Shy Pink · Travis Scott Collab",longDesc:"PK Batch Air Jordan 1 Retro Low OG SP × Travis Scott in Shy Pink. Cream tumbled leather upper, pink Swoosh, Cactus Jack hit on tongue. EU 40–48.5.",imgs:["images/WhatsApp Image 2026-05-11 at 9.37.54 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 9.37.54 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 9.37.54 AM.jpeg","images/WhatsApp Image 2026-05-11 at 9.37.53 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 9.37.53 AM.jpeg"]},
+  {id:57,name:"Adidas Adizero Evo SL",brand:"Adidas",batch:"UA",sku:"KI6927",sizes:"EU 36–48",cat:"ua-pairs",badge:"NEW",tags:["adidas","adizero","evo sl","running","grey","green","screaming green","lightstrike"],desc:"Grey / Screaming Green · UA Pair",longDesc:"UA Adidas Adizero Evo SL in Grey Three / Screaming Green. Lightweight ripstop upper, Lightstrike Pro midsole. EU 36–48.",imgs:["images/WhatsApp Image 2026-05-11 at 9.24.08 AM.jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM (3).jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 9.24.09 AM.jpeg"]},
+  {id:58,name:"On Cloud X 4",brand:"On Cloud",batch:"UA",sku:"3MF10752734",sizes:"EU 36–48",cat:"ua-pairs",badge:"NEW",tags:["on","on running","cloud x4","cloudtec","running","black","grey","chamber"],desc:"Black / Chamber Gray · UA Pair",longDesc:"UA On Cloud X 4 in Black / Chamber Gray. Knitted mesh upper, CloudTec phase midsole with signature pod cutouts. EU 36–48.",imgs:["images/WhatsApp Image 2026-05-11 at 8.10.46 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM.jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM (1).jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM (2).jpeg","images/WhatsApp Image 2026-05-11 at 8.10.47 AM (3).jpeg"]},
+  {id:18,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-600",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind 001","slides","red","crimson"],desc:"Crimson Red · UA Pair",longDesc:"UA Nike Mind 001 slides in bold Crimson Red. Chunky sculpted foam, perforated strap, embossed Swoosh. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.15.10 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.15.10 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.15.09 PM.jpeg"]},
+  {id:19,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-001",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind 001","slides","black","orange"],desc:"Black / Orange · UA Pair",longDesc:"UA Nike Mind 001 in stealthy Black with bold Orange outsole pods. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.29.37 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.29.37 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.29.36 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.29.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.29.35 PM.jpeg"]},
+  {id:20,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-300",sizes:"EU 36–48.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind 001","slides","teal","green","mineral"],desc:"Mineral Teal / Orange · UA Pair",longDesc:"UA Nike Mind 001 in Mineral Teal with vibrant Orange pods. EU 36–48.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.31.27 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.27 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.31.26 PM.jpeg"]},
+  {id:21,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-101",sizes:"EU 36–47",cat:"ua-pairs",badge:"HOT",tags:["nike","mind 001","slides","white","red"],desc:"White / Red · UA Pair",longDesc:"UA Nike Mind 001 in clean White with bold Red pods. EU 36–47.",imgs:["images/WhatsApp Image 2026-05-10 at 1.35.58 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.35.58 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.35.57 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.35.57 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.35.56 PM.jpeg"]},
+  {id:22,name:"NK Mind 001 × NOCTA",brand:"Nike × NOCTA",batch:"UA",sku:"HY5028-200",sizes:"EU 38–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","nocta","mind 001","drake","slides","black","blue"],desc:"Black / Blue · NOCTA Collab · UA Pair",longDesc:"UA Nike Mind 001 × NOCTA with three-star metal badge, blue outsole pods, and printed NOCTA insole. EU 38–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.38.02 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.38.02 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.38.00 PM.jpeg"]},
+  {id:23,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-001",sizes:"EU 36–45",cat:"ua-pairs",badge:"HOT",tags:["nike","mind 001","slides","burgundy","maroon","navy"],desc:"Burgundy / Navy · UA Pair",longDesc:"UA Nike Mind 001 in Burgundy-to-Red gradient with Navy pods. EU 36–45.",imgs:["images/WhatsApp Image 2026-05-10 at 1.40.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.40.43 PM.jpeg"]},
+  {id:24,name:"NK Mind 001",brand:"Nike",batch:"UA",sku:"HQ4307-400",sizes:"EU 36–47.5",cat:"ua-pairs",badge:"HOT",tags:["nike","mind 001","slides","navy","blue","gold"],desc:"Navy / Royal Blue / Gold · UA Pair",longDesc:"UA Nike Mind 001 in deep Navy with Royal Blue outsole and gold Swoosh. EU 36–47.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.42.45 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.42.45 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.42.44 PM.jpeg"]},
+  {id:25,name:"NK Mind 001 × Fragment Design",brand:"Nike × Fragment",batch:"UA",sku:"IQ8502-001",sizes:"EU 36–48.5",cat:"ua-pairs",badge:"HOT",tags:["nike","fragment","mind 001","slides","grey","blue","hiroshi"],desc:"Iron Grey / Blue · Fragment Collab · UA Pair",longDesc:"UA Nike Mind 001 × Fragment Design with FRAGMENT heel badge, blue pods, and branded insole. EU 36–48.5.",imgs:["images/WhatsApp Image 2026-05-10 at 1.45.18 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.45.18 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.45.18 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.45.19 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.45.19 PM (1).jpeg"]},
   {id:2,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","bathing ape","tee","black","grey plaid"],desc:"Black · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in black with signature grey plaid print. Premium heavyweight cotton. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.13.14 PM.jpeg"]},
   {id:3,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","white","grey plaid"],desc:"White · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in white with signature grey plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.13.04 PM.jpeg"]},
   {id:4,name:"BAPE Graphic Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["bape","tee","grey","gray","grey plaid"],desc:"Grey · Grey Plaid Print",longDesc:"A Bathing Ape graphic tee in grey with signature grey plaid print. S–XXL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.12.48 PM.jpeg"]},
@@ -610,14 +593,14 @@ const ITEMS = [
   {id:13,name:"Human Made Graphic Tee",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","humanmade","nigo","duck","tee","black"],desc:"Black · Duck Print",longDesc:"Human Made by NIGO in black with signature duck graphic. S–XL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.06.00 PM.jpeg"]},
   {id:14,name:"Human Made Graphic Tee",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","humanmade","nigo","duck","tee","white"],desc:"White · Duck Print",longDesc:"Human Made by NIGO in white with signature duck graphic. S–XL.",imgs:["images/WhatsApp Image 2026-05-09 at 3.05.45 PM.jpeg"]},
   {id:27,name:"Ami Paris Logo Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","logo","tee","cream","ivory"],desc:"Cream · AMI Front / PARIS Back Print",longDesc:"Ami Paris Logo Tee in cream — bold outline AMI chest print, PARIS back print, heart sleeve embroidery. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.51.45 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.51.45 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.51.44 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.51.45 PM.jpeg"]},
-  {id:42,name:"Ami Paris Originals Heritage Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","originals","heritage","since 2011","patch","tee","cream"],desc:"Cream · Originals By Ami Paris Since 2011 Patch",longDesc:"Ami Paris Originals Heritage Tee — woven centre-chest patch 'Originals By Ami Paris Since 2011'. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.58.51 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.58.55 PM.jpeg"]},
-  {id:26,name:"Ami De Coeur Crochet Patch Tee",brand:"Ami Paris",sku:"E21HJ028.7407150",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","crochet","patch","raglan","tee","navy","black","olive","cream"],desc:"Cream / Navy · Crochet Ami De Coeur Patch",longDesc:"Ami Paris 26SS Ami De Coeur Crochet Patch Tee — cream body with contrast raglan. Crochet heart logo patch. Organic cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"],colorVariants:[{label:"Navy",color:"#1b3a6b",desc:"Cream / Navy · Crochet Ami De Coeur Patch",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Cream / Black · Crochet Ami De Coeur Patch",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.48 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"]},{label:"Olive",color:"#6b7c3a",desc:"Cream / Olive · Crochet Ami De Coeur Patch",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"]}]},
-  {id:29,name:"Ami De Coeur Small Logo Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","ami de coeur","small logo","heart","tee","lavender","cream","navy","black","white"],desc:"Lavender · Small Ami De Coeur Logo Tee",longDesc:"Ami Paris De Coeur Small Logo Tee — embroidered heart logo on left chest. 13 colorways available. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.51 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"],colorVariants:[{label:"Lavender",color:"#c9b8e8",desc:"Lavender",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"]},{label:"Cream",color:"#f0e8d5",desc:"Cream",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (2).jpeg"]},{label:"Taupe",color:"#8c7b6b",desc:"Taupe",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (1).jpeg"]},{label:"Dark Brown",color:"#3b1a0f",desc:"Dark Brown",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM.jpeg"]},{label:"Navy",color:"#1b2a4a",desc:"Navy Blue",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (3).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (2).jpeg"]},{label:"Grey",color:"#b0b0b0",desc:"Grey Marl",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (1).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM.jpeg"]},{label:"Sky Blue",color:"#87ceeb",desc:"Sky Blue",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM (1).jpeg"]},{label:"Olive",color:"#6b7c3a",desc:"Olive Green",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM.jpeg"]},{label:"Dark Navy",color:"#0d1b2e",desc:"Dark Navy",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (2).jpeg"]},{label:"Mocha",color:"#9e8b76",desc:"Mocha",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.53 PM (1).jpeg"]},{label:"Caramel",color:"#c48a3f",desc:"Caramel",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.52 PM (1).jpeg"]}]},
-  {id:40,name:"Ami De Coeur Pixel Knit Tee",brand:"Ami Paris",sku:"E21HJ028.CY1250",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","pixel","knit","heart","tee","khaki","cream"],desc:"Khaki · Teal Pixel Knit Ami De Coeur",longDesc:"Ami Paris 26SS Pixel Knit Ami De Coeur Tee — pixelated knit-jacquard logo. Organic cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"],colorVariants:[{label:"Khaki",color:"#b5a06a",desc:"Khaki · Teal Logo",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"]},{label:"Cream",color:"#f0ebe0",desc:"Cream · Red Logo",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"]}]},
-  {id:87,name:"Represent Duke + Dexter Graphic Tee",brand:"Represent",cat:"streetwear",badge:"HOT",tags:["represent","represent tee","duke + dexter","graphic tee","vintage wash","streetwear","oversized tee","uk streetwear","washed black tee","represent clothing","luxury streetwear","casual wear","fashion tee","cotton tee","graphic shirt"],desc:"Vintage Black / Graphic Print · Represent",longDesc:"The Represent Duke + Dexter Graphic Tee features a washed vintage black finish combined with a bold front graphic inspired by retro automotive mirror artwork. The tee showcases the “REPRESENT” branding alongside “DUKE + DEXTER” text details, giving it a luxury streetwear aesthetic with a worn-in premium look. Made from heavyweight cotton fabric, it offers a relaxed oversized fit, soft texture, and durable everyday comfort. The faded wash and artistic front print make this piece a standout for fans of modern UK streetwear and high-end casual fashion.",imgs:["images/WhatsApp Image 2026-05-10 at 4.13.30 PM.jpeg","images/WhatsApp Image 2026-05-10 at 4.13.30 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 4.13.30 PM (1).jpeg"]},
+  {id:42,name:"Ami Paris Originals Heritage Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","originals","heritage","since 2011","patch","tee","cream"],desc:"Cream · Originals By Ami Paris Since 2011 Patch",longDesc:"Ami Paris Originals Heritage Tee — woven centre-chest patch Originals By Ami Paris Since 2011. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.58.51 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.58.52 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 1.58.55 PM.jpeg"]},
+  {id:26,name:"Ami De Coeur Crochet Patch Tee",brand:"Ami Paris",sku:"E21HJ028.7407150",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","crochet","patch","raglan","tee","navy","black","olive","cream"],desc:"Cream / Navy · Crochet Ami De Coeur Patch",longDesc:"Ami Paris 26SS Ami De Coeur Crochet Patch Tee — cream body with contrast raglan. Crochet heart logo patch. Organic cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM (2).jpeg"],colorVariants:[{label:"Navy",color:"#1b3a6b",desc:"Cream / Navy",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.48 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Cream / Black",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.48 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg"]},{label:"Olive",color:"#6b7c3a",desc:"Cream / Olive",imgs:["images/WhatsApp Image 2026-05-10 at 1.49.49 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.49.47 PM.jpeg"]}]},
+  {id:29,name:"Ami De Coeur Small Logo Tee",brand:"Ami Paris",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","ami de coeur","small logo","heart","tee","lavender","cream","navy","black","white"],desc:"Lavender · Small Ami De Coeur Logo Tee",longDesc:"Ami Paris De Coeur Small Logo Tee — embroidered heart logo on left chest. 13 colorways available. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.51 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"],colorVariants:[{label:"Lavender",color:"#c9b8e8",desc:"Lavender",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (3).jpeg"]},{label:"Cream",color:"#f0e8d5",desc:"Cream",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.56 PM (2).jpeg"]},{label:"Navy",color:"#1b2a4a",desc:"Navy Blue",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (3).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM (2).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.55 PM.jpeg"]},{label:"Olive",color:"#6b7c3a",desc:"Olive Green",imgs:["images/WhatsApp Image 2026-05-10 at 1.54.54 PM.jpeg"]}]},
+  {id:40,name:"Ami De Coeur Pixel Knit Tee",brand:"Ami Paris",sku:"E21HJ028.CY1250",cat:"streetwear",badge:"NEW",tags:["ami","ami paris","pixel","knit","heart","tee","khaki","cream"],desc:"Khaki · Teal Pixel Knit Ami De Coeur",longDesc:"Ami Paris 26SS Pixel Knit Ami De Coeur Tee — pixelated knit-jacquard logo. Organic cotton. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.39 PM.jpeg"],colorVariants:[{label:"Khaki",color:"#b5a06a",desc:"Khaki",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM.jpeg","images/WhatsApp Image 2026-05-10 at 1.56.35 PM.jpeg"]},{label:"Cream",color:"#f0ebe0",desc:"Cream",imgs:["images/WhatsApp Image 2026-05-10 at 1.56.36 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 1.56.38 PM (1).jpeg"]}]},
+  {id:88,name:"Represent Duke + Dexter Graphic Tee",brand:"Represent",cat:"streetwear",badge:"HOT",tags:["represent","duke + dexter","graphic tee","vintage wash","streetwear","oversized tee","uk streetwear"],desc:"Vintage Black / Graphic Print · Represent",longDesc:"The Represent Duke + Dexter Graphic Tee features a washed vintage black finish with bold front graphic inspired by retro automotive artwork.",imgs:["images/WhatsApp Image 2026-05-10 at 4.13.30 PM.jpeg","images/WhatsApp Image 2026-05-10 at 4.13.30 PM (2).jpeg","images/WhatsApp Image 2026-05-10 at 4.13.30 PM (1).jpeg"]},
   {id:43,name:"Supreme Est. 1994 Five Boroughs Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","est 1994","five boroughs","tee","black","white"],desc:"Black · Est. 1994 Five Boroughs Print",longDesc:"Supreme FW21 Est. 1994 Five Boroughs Tee. Classic wordmark with NYC borough names. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM (1).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.43.47 PM.jpeg"]}]},
   {id:44,name:"Supreme Grinch Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","grinch","christmas","graphic","tee","black","white"],desc:"Black · Grinch Graphic Tee",longDesc:"Supreme FW24 Grinch Tee. Embroidered Grinch in Santa hat with Supreme box logo. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM (1).jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.44.43 PM.jpeg"]}]},
-  {id:45,name:"Supreme × Tekken Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","tekken","gaming","kanji","graphic","tee","black","white"],desc:"Black · Supreme × Tekken FW22 Tee",longDesc:"Supreme FW22 × Tekken Tee. Chrome-style kanji graphic with 'Fall/Winter 2022' text. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.24 PM.jpeg"]}]},
+  {id:45,name:"Supreme × Tekken Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","tekken","gaming","kanji","graphic","tee","black","white"],desc:"Black · Supreme × Tekken FW22 Tee",longDesc:"Supreme FW22 × Tekken Tee. Chrome-style kanji graphic. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.23 PM.jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.46.24 PM.jpeg"]}]},
   {id:46,name:"Supreme × Thrasher Cross Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","thrasher","cross","skate","collab","tee","black","white"],desc:"Black · Supreme × Thrasher Cross Back",longDesc:"Supreme × Thrasher Cross Tee. Reversed Thrasher logo chest, large cross back print. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"],colorVariants:[{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.23 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.23 PM.jpeg"]},{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.33.22 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.33.22 PM.jpeg"]}]},
   {id:47,name:"Supreme Spiral Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","spiral","graphic","tee","black","white"],desc:"White · Supreme Spiral Word Back Print",longDesc:"Supreme SS21 Spiral Tee. Small box logo chest, large spiral word-collage back. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (3).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.35.53 PM (1).jpeg","images/WhatsApp Image 2026-05-10 at 4.35.53 PM.jpeg"]}]},
   {id:48,name:"Supreme Established 1994 Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","established","1994","new york","tee","black","white"],desc:"White · Supreme Established 1994 New York USA Tee",longDesc:"Supreme FW21 Established 1994 Tee. Bold SUPREME wordmark + New York USA text. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.37.28 PM.jpeg"]}]},
@@ -625,15 +608,15 @@ const ITEMS = [
   {id:50,name:"Supreme Emo Girl Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","emo","girl","anime","graphic","tee","black","white"],desc:"White · Supreme Emo Girl Graphic Tee",longDesc:"Supreme FW24 Emo Girl Tee. Embroidered anime-style girl portrait with Supreme script. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.42.03 PM.jpeg"]}]},
   {id:51,name:"Supreme × Wangfujing Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","wangfujing","abstract","art","collage","tee","black","white"],desc:"White · Wangfujing Abstract Art Tee",longDesc:"Supreme Wangfujing Tee. Abstract collage art graphic with botanical elements and mixed media. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.45 PM.jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.45 PM.jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (5).jpeg"]}]},
   {id:52,name:"Supreme Drugs Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","drugs","usa","flag","americana","tee","black","white"],desc:"White · DRUGS USA Flag Lettering Tee",longDesc:"Supreme Drugs Tee. Bold DRUGS text filled with American flag pattern. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (4).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (4).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (3).jpeg"]}]},
-  {id:53,name:"Supreme 1994 New York City Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","1994","new york city","illustrated","character","tee","black","white"],desc:"White · Supreme 1994 NYC Illustrated Tee",longDesc:"Supreme 1994 NYC Tee. Elaborate illustrated SUPREME 1994 lettering with hand-drawn characters. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (1).jpeg"]}]},
+  {id:53,name:"Supreme 1994 New York City Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","1994","new york city","illustrated","tee","black","white"],desc:"White · Supreme 1994 NYC Illustrated Tee",longDesc:"Supreme 1994 NYC Tee. Elaborate illustrated SUPREME 1994 lettering with hand-drawn characters. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (2).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM (1).jpeg"]}]},
   {id:54,name:"Supreme NYC Paris London Tokyo Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","nyc","paris","london","tokyo","cities","tee","black","white"],desc:"White · Supreme NYC Paris London Tokyo Tee",longDesc:"Supreme NYC Paris London Tokyo Tee. Clean SUPREME block print with city names. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM.jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.44 PM.jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (2).jpeg"]}]},
   {id:55,name:"Supreme Photo Logo Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","photo","logo","collage","tee","black","white"],desc:"White · Supreme Photo Collage Logo Tee",longDesc:"Supreme Photo Logo Tee. Large SUPREME lettering filled with collage photo print. S–XL.",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (1).jpeg"],colorVariants:[{label:"White",color:"#e0e0e0",desc:"White",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM (1).jpeg"]},{label:"Black",color:"#0a0a0a",desc:"Black",imgs:["images/WhatsApp Image 2026-05-10 at 4.32.43 PM.jpeg"]}]},
-  {id:73,name:"Supreme SS25 Bedroom Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss25","supreme bedroom tee","streetwear","graphic tee","supreme shirt","ss25 collection","skatewear","cotton tee","hypebeast","limited release","fashion","casual wear","supreme apparel","graphic clothing"],desc:"White / Multicolor · SS25",longDesc:"The Supreme SS25 Bedroom Tee is a graphic t-shirt from Supreme’s Spring/Summer 2025 lineup, featuring bold bedroom-inspired artwork combined with classic Supreme streetwear styling. Made from premium cotton fabric, the tee offers a soft feel, relaxed fit, and durable everyday comfort. The standout front graphic gives the piece a playful yet artistic aesthetic, making it a strong addition for collectors, skaters, and streetwear enthusiasts. As part of the SS25 collection, the Bedroom Tee reflects Supreme’s signature blend of contemporary art, youth culture, and limited-release fashion appeal.",imgs:["images/WhatsApp Image 2026-05-11 at 6.44.56 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.44.56 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.44.56 AM (1).jpeg"]}]},
-  {id:74,name:"Supreme SS19 Kings of New York",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss19","kings of new york","supreme tee","streetwear","graphic tee","new york streetwear","ss19 collection","supreme shirt","hypebeast","skatewear","cotton tee","limited release","fashion","casual wear"],desc:"Black / Multicolor · SS19",longDesc:"The Supreme SS19 Kings of New York Tee is a classic graphic tee from Supreme’s Spring/Summer 2019 collection, inspired by the iconic “Kings of New York” imagery and New York street culture. Constructed from premium cotton, the tee offers a comfortable regular fit with durable everyday wearability. The front graphic features bold artwork that pays tribute to the city’s legendary influence on fashion, music, and streetwear culture. Known for its clean design and collectible appeal, this piece remains a favorite among Supreme collectors and longtime streetwear fans.",imgs:["images/WhatsApp Image 2026-05-11 at 6.43.48 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.43.48 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.43.48 AM (1).jpeg"]}]},
-  {id:75,name:"Supreme FW24 Lollipop Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme fw24","supreme lollipop tee","fw24 collection","streetwear","graphic tee","supreme shirt","hypebeast","skatewear","cotton tee","limited release","fashion","casual wear","supreme apparel","fw24 tee","lollipop graphic"],desc:"Black / Red · FW24",longDesc:"The Supreme FW24 Lollipop Tee is a bold graphic t-shirt from Supreme’s Fall/Winter 2024 lineup, featuring an eye-catching lollipop artwork with edgy streetwear-inspired visuals. Made from premium all-cotton fabric, the tee delivers a soft feel, comfortable regular fit, and durable everyday wear. The vibrant front graphic combines playful candy imagery with Supreme’s signature rebellious aesthetic, making it one of the standout graphic tees from the FW24 season. Released during Week 8 of the collection, the Lollipop Tee quickly gained popularity among collectors and streetwear fans for its unique artwork and strong visual appeal.",imgs:["images/WhatsApp Image 2026-05-11 at 6.42.50 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.42.50 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.42.50 AM (1).jpeg"]}]},
-  {id:76,name:"Supreme SS25 Anatomy Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss25","supreme anatomy tee","anatomy tee","streetwear","graphic tee","supreme shirt","ss25 collection","weirdo dave","cotton tee","hypebeast","skatewear","limited release","fashion","casual wear","supreme apparel"],desc:"Black / Multicolor · SS25",longDesc:"The Supreme SS25 Anatomy Tee is a standout graphic t-shirt from Supreme’s Spring/Summer 2025 lineup, featuring bold anatomical-inspired artwork created by artist Weirdo Dave. Made from premium all-cotton fabric, the tee delivers a comfortable classic fit with durable everyday wearability. The detailed front graphic combines edgy medical-style visuals with Supreme’s signature streetwear aesthetic, making it one of the more eye-catching releases from Week 1 of the SS25 season. Available in multiple colorways, the Anatomy Tee quickly became popular among collectors and streetwear fans for its artistic design and strong visual impact.",imgs:["images/WhatsApp Image 2026-05-11 at 6.41.53 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.41.53 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.41.53 AM (1).jpeg"]}]},
-  {id:77,name:"Supreme SS24 Records Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss24","supreme records tee","records tee","streetwear","graphic tee","supreme shirt","ss24 collection","music inspired","skatewear","cotton tee","hypebeast","limited release","fashion","casual wear","supreme apparel"],desc:"White / Multicolor · SS24",longDesc:"The Supreme SS24 Records Tee is a graphic t-shirt from Supreme’s Spring/Summer 2024 collection, featuring music-inspired artwork with classic Supreme streetwear styling. Constructed from premium cotton fabric, the tee offers a soft feel, breathable comfort, and a relaxed everyday fit. The front graphic showcases a bold records-themed design that reflects Supreme’s long-standing connection to music, skate culture, and urban fashion. With its clean silhouette and standout artwork, the Records Tee became a popular release among collectors and fans of vintage-inspired streetwear aesthetics.",imgs:["images/WhatsApp Image 2026-05-11 at 6.40.40 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.40.40 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.40.40 AM (1).jpeg"]}]},
-  {id:78,name:"Supreme SS19 Cupid Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","supreme ss19","supreme cupid tee","cupid tee","streetwear","graphic tee","supreme shirt","ss19 collection","meissen cupid","skatewear","cotton tee","hypebeast","limited release","fashion","casual wear","supreme apparel","angel graphic"],desc:"White / Multicolor · SS19",longDesc:"The Supreme SS19 Cupid Tee is one of the most iconic graphic tees from Supreme’s Spring/Summer 2019 lineup, featuring a detailed image of the Supreme®/Meissen® porcelain cupid figurine printed on the front. Made from premium all-cotton fabric, the tee offers a soft feel, classic fit, and durable everyday comfort. The romantic-inspired artwork combined with Supreme’s signature streetwear aesthetic made the Cupid Tee an instant fan favorite during Week 6 of the SS19 season. Its collectible appeal, clean design, and strong resale popularity have helped solidify it as one of the standout Supreme tees from 2019.",imgs:["images/WhatsApp Image 2026-05-11 at 6.39.25 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.39.25 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.39.25 AM (1).jpeg"]}]},
+  {id:73,name:"Supreme SS25 Bedroom Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss25","bedroom tee","streetwear","graphic tee","hypebeast"],desc:"White / Multicolor · SS25",longDesc:"The Supreme SS25 Bedroom Tee is a graphic t-shirt featuring bold bedroom-inspired artwork combined with classic Supreme streetwear styling.",imgs:["images/WhatsApp Image 2026-05-11 at 6.44.56 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.44.56 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.44.56 AM (1).jpeg"]}]},
+  {id:74,name:"Supreme SS19 Kings of New York",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss19","kings of new york","streetwear","graphic tee","hypebeast"],desc:"Black / Multicolor · SS19",longDesc:"The Supreme SS19 Kings of New York Tee is a classic graphic tee inspired by the iconic Kings of New York imagery and New York street culture.",imgs:["images/WhatsApp Image 2026-05-11 at 6.43.48 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.43.48 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.43.48 AM (1).jpeg"]}]},
+  {id:75,name:"Supreme FW24 Lollipop Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","fw24","lollipop tee","streetwear","graphic tee","hypebeast"],desc:"Black / Red · FW24",longDesc:"The Supreme FW24 Lollipop Tee features eye-catching lollipop artwork with edgy streetwear-inspired visuals.",imgs:["images/WhatsApp Image 2026-05-11 at 6.42.50 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.42.50 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.42.50 AM (1).jpeg"]}]},
+  {id:76,name:"Supreme SS25 Anatomy Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss25","anatomy tee","streetwear","graphic tee","weirdo dave","hypebeast"],desc:"Black / Multicolor · SS25",longDesc:"The Supreme SS25 Anatomy Tee features bold anatomical-inspired artwork created by artist Weirdo Dave.",imgs:["images/WhatsApp Image 2026-05-11 at 6.41.53 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.41.53 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.41.53 AM (1).jpeg"]}]},
+  {id:77,name:"Supreme SS24 Records Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss24","records tee","streetwear","graphic tee","music","hypebeast"],desc:"White / Multicolor · SS24",longDesc:"The Supreme SS24 Records Tee features music-inspired artwork with classic Supreme streetwear styling.",imgs:["images/WhatsApp Image 2026-05-11 at 6.40.40 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.40.40 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.40.40 AM (1).jpeg"]}]},
+  {id:78,name:"Supreme SS19 Cupid Tee",brand:"Supreme",cat:"streetwear",badge:"HOT",tags:["supreme","ss19","cupid tee","streetwear","graphic tee","meissen","angel","hypebeast"],desc:"White / Multicolor · SS19",longDesc:"The Supreme SS19 Cupid Tee features the iconic Supreme/Meissen porcelain cupid figurine — one of the most iconic Supreme tees from 2019.",imgs:["images/WhatsApp Image 2026-05-11 at 6.39.25 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-11 at 6.39.25 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-11 at 6.39.25 AM (1).jpeg"]}]},
   {id:15,name:"Coming Soon",brand:"Luxury",cat:"luxury",badge:"NEW",tags:["luxury","coming soon"],desc:"More items dropping soon",longDesc:"Luxury items coming soon. DM us to ask about specific items.",imgs:[]},
   {id:16,name:"Coming Soon",brand:"Watches",cat:"watches",badge:"NEW",tags:["watch","watches","coming soon"],desc:"More items dropping soon",longDesc:"Watch collection coming soon. DM us about specific pieces.",imgs:[]},
   {id:30,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","hat","hollywood","cross","black"],desc:"All Black · CH Hollywood USA Patch",longDesc:"Chrome Hearts CH Hollywood USA trucker cap in all black. Embroidered CH patch, gothic script, dual crosses. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.57 PM.jpeg"]},
@@ -648,78 +631,53 @@ const ITEMS = [
   {id:39,name:"Chrome Hearts Trucker Cap",brand:"Chrome Hearts",sizes:"One Size",cat:"accessories",badge:"HOT",tags:["chrome hearts","trucker","cap","white","black"],desc:"White / Black · CH Hollywood USA Patch",longDesc:"Chrome Hearts cap in white with black mesh and brim. CH patch. Snapback.",imgs:["images/WhatsApp Image 2026-05-10 at 4.10.55 PM.jpeg"]}
 ];
 
-// ── STATE ──
-let currentCat = 'all', searchQ = '';
-const pickedSize  = {};
-const pickedColor = {};
+// STATE
+let currentCat='all', searchQ='';
+const pickedSize={}, pickedColor={};
 
-// ── SEARCH ──
-function fuzzy(q, item) {
-  if (!q) return true;
-  const words = q.toLowerCase().trim().split(/\s+/);
-  const hay = [item.name,item.brand,item.desc||'',item.batch||'',item.sku||'',...(item.tags||[])].join(' ').toLowerCase();
-  return words.every(w => hay.includes(w) || hay.split(/\s+/).some(t => lev(w,t) <= Math.floor(w.length/4)));
+// SEARCH
+function fuzzy(q,item){
+  if(!q)return true;
+  const words=q.toLowerCase().trim().split(/\s+/);
+  const hay=[item.name,item.brand,item.desc||'',item.batch||'',item.sku||'',...(item.tags||[])].join(' ').toLowerCase();
+  return words.every(w=>hay.includes(w)||hay.split(/\s+/).some(t=>lev(w,t)<=Math.floor(w.length/4)));
 }
 function lev(a,b){
-  if(!a.length)return b.length; if(!b.length)return a.length;
+  if(!a.length)return b.length;if(!b.length)return a.length;
   if(Math.abs(a.length-b.length)>3)return 99;
   const dp=Array.from({length:a.length+1},(_,i)=>Array.from({length:b.length+1},(_,j)=>i===0?j:j===0?i:0));
-  for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)
-    dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+  for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
   return dp[a.length][b.length];
 }
 
-// ── WA LINK ──
-function waLink(item, img, size, color) {
-  const base = window.location.href.split('#')[0];
-  const productUrl = `${base}#item-${item.id}`;
-  const p = [
-    `Hi Secret Shop! 👋`,
-    `I'm interested in: *${item.name}*${item.batch ? ` (${item.batch})` : ''}`,
-    item.desc ? item.desc : '',
-    item.sku ? `SKU: ${item.sku}` : '',
-    size  ? `Size: ${size}` : (item.sizes ? item.sizes : ''),
-    color ? `Color: ${color}` : '',
-    `🔗 Product: ${productUrl}`,
-    `Is it available?`
-  ].filter(Boolean).join('\n');
+// WA LINK
+function waLink(item,img,size,color){
+  const base=window.location.href.split('#')[0];
+  const url=`${base}#item-${item.id}`;
+  const p=[`Hi Secret Shop! 👋`,`I'm interested in: *${item.name}*${item.batch?` (${item.batch})`:''}`,item.desc||'',item.sku?`SKU: ${item.sku}`:'',size?`Size: ${size}`:(item.sizes||''),color?`Color: ${color}`:'',`🔗 Product: ${url}`,`Is it available?`].filter(Boolean).join('\n');
   return `https://wa.me/971563780062?text=${encodeURIComponent(p)}`;
 }
 
-// ── CARD BUILDER ──
-function card(item, delay) {
-  const isClo = CLOTHING.includes(item.cat);
-  const ci = pickedColor[item.id] || 0;
-  const cv = item.colorVariants?.[ci];
-  const imgs = cv ? cv.imgs : (item.imgs || []);
-  const desc = cv ? cv.desc : (item.desc || '');
-  const cover = imgs[0] || '';
-  const sizes = item.brand === 'A Bathing Ape' ? SIZES_BAPE : SIZES_DEFAULT;
-  const psz = pickedSize[item.id] || '';
-  const catLabel = {streetwear:'Streetwear','ua-pairs':'UA Pairs',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat] || item.cat;
-
-  const badgeHtml = item.badge
-    ? `<span class="badge ${item.badge==='HOT'?'hot':'new-badge'}">${item.badge}</span>` : '';
-
-  const imgHtml = cover
-    ? `<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.opacity=0"/>`
-    : `<div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>`;
-
-  const thumbsHtml = imgs.length > 1
-    ? `<div class="thumb-row">${imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${item.id},${i})"></div>`).join('')}</div>` : '';
-
-  const skuHtml = item.sku ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch ? `<p class="card-sku">${item.batch}</p>` : '');
-  const sizesHtml = item.sizes && !isClo ? `<p class="card-sizes">${item.sizes}</p>` : '';
-
-  const swatchHtml = item.colorVariants
-    ? `<div class="swatch-row"><span class="swatch-label">Color</span>${item.colorVariants.map((v,i)=>`<div class="sw${ci===i?' active':''}" style="background:${v.color}" title="${v.label}" onclick="cardColor(event,${item.id},${i})"></div>`).join('')}</div>` : '';
-
-  const sizePickerHtml = isClo
-    ? `<div class="size-row">${sizes.map(s=>`<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>` : '';
-
- return `<div class="card" data-id="${item.id}" id="item-${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
-    <div class="card-img" onclick="openLb(${item.id})">
-      ${imgHtml}${badgeHtml}${thumbsHtml}
+// CARD
+function card(item,delay){
+  const isClo=CLOTHING.includes(item.cat);
+  const ci=pickedColor[item.id]||0;
+  const cv=item.colorVariants?.[ci];
+  const imgs=cv?cv.imgs:(item.imgs||[]);
+  const desc=cv?cv.desc:(item.desc||'');
+  const cover=imgs[0]||'';
+  const sizes=item.brand==='A Bathing Ape'?SIZES_BAPE:SIZES_DEFAULT;
+  const psz=pickedSize[item.id]||'';
+  const catLabel={streetwear:'Streetwear','ua-pairs':'UA Pairs',luxury:'Luxury',watches:'Watches',accessories:'Accessories'}[item.cat]||item.cat;
+  const badgeHtml=item.badge?`<span class="badge ${item.badge==='HOT'?'hot':'new-badge'}">${item.badge}</span>`:'';
+  const imgHtml=cover?`<img src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.opacity=0"/>`:`<div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>`;
+  const thumbsHtml=imgs.length>1?`<div class="thumb-row">${imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${item.id},${i})"></div>`).join('')}</div>`:'';
+  const skuHtml=item.sku?`<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>`:(item.batch?`<p class="card-sku">${item.batch}</p>`:'');
+  const sizesHtml=item.sizes&&!isClo?`<p class="card-sizes">${item.sizes}</p>`:'';
+  const swatchHtml=item.colorVariants?`<div class="swatch-row"><span class="swatch-label">Color</span>${item.colorVariants.map((v,i)=>`<div class="sw${ci===i?' active':''}" style="background:${v.color}" title="${v.label}" onclick="cardColor(event,${item.id},${i})"></div>`).join('')}</div>`:'';
+  const sizePickerHtml=isClo?`<div class="size-row">${sizes.map(s=>`<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`:'';
+  return `<div class="card" data-id="${item.id}" id="item-${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
+    <div class="card-img" onclick="openPdp(${item.id})">${imgHtml}${badgeHtml}${thumbsHtml}
       <div class="card-wa-overlay" onclick="event.stopPropagation()">
         <a href="${waLink(item,cover,psz,cv?cv.label:'')}" target="_blank" id="cwa-${item.id}" style="display:flex;align-items:center;gap:6px;color:#fff;font-size:11px;font-weight:600;width:100%;justify-content:center;text-decoration:none">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
@@ -727,253 +685,159 @@ function card(item, delay) {
         </a>
       </div>
     </div>
-    <div class="card-body" onclick="openLb(${item.id})">
+    <div class="card-body" onclick="openPdp(${item.id})">
       <p class="card-label">${catLabel}</p>
       <p class="card-name">${item.name}</p>
-      ${skuHtml}
-      <p class="card-sub" id="csub-${item.id}">${item.brand}${desc?' · '+desc:''}</p>
+      ${skuHtml}<p class="card-sub" id="csub-${item.id}">${item.brand}${desc?' · '+desc:''}</p>
       ${sizesHtml}${swatchHtml}${sizePickerHtml}
       <span class="card-cta">View &amp; Inquire →</span>
     </div>
   </div>`;
 }
 
-function animate(container) {
-  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
-  requestAnimationFrame(()=>container.querySelectorAll('.card').forEach(c=>{
-    requestAnimationFrame(()=>c.classList.add('in'));
-    io.observe(c);
-  }));
+function animate(container){
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.05});
+  requestAnimationFrame(()=>container.querySelectorAll('.card').forEach(c=>{requestAnimationFrame(()=>c.classList.add('in'));io.observe(c);}));
 }
 
-// ── CARD COLOR ──
-function cardColor(e, id, idx) {
-  e.stopPropagation();
-  pickedColor[id] = idx;
-  const item = ITEMS.find(x=>x.id===id);
-  if (!item?.colorVariants) return;
-  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
-    const v = item.colorVariants[idx];
-    const img = cardEl.querySelector('.card-img > img');
-    if (img) img.src = v.imgs[0] || '';
-    const dots = cardEl.querySelector('.thumb-row');
-    if (dots) dots.innerHTML = v.imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${id},${i})"></div>`).join('');
-    const sub = cardEl.querySelector(`[id="csub-${id}"]`);
-    if (sub) sub.textContent = `${item.brand} · ${v.desc}`;
-    cardEl.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
-    const wa = cardEl.querySelector(`[id="cwa-${id}"]`);
-    if (wa) wa.href = waLink(item, v.imgs[0], pickedSize[id]||'', v.label);
+function cardColor(e,id,idx){
+  e.stopPropagation();pickedColor[id]=idx;
+  const item=ITEMS.find(x=>x.id===id);if(!item?.colorVariants)return;
+  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el=>{
+    const v=item.colorVariants[idx];
+    const img=el.querySelector('.card-img > img');if(img)img.src=v.imgs[0]||'';
+    const dots=el.querySelector('.thumb-row');if(dots)dots.innerHTML=v.imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${id},${i})"></div>`).join('');
+    const sub=el.querySelector(`[id="csub-${id}"]`);if(sub)sub.textContent=`${item.brand} · ${v.desc}`;
+    el.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
+    const wa=el.querySelector(`[id="cwa-${id}"]`);if(wa)wa.href=waLink(item,v.imgs[0],pickedSize[id]||'',v.label);
   });
 }
 
-// ── CARD SIZE ──
-function cardSize(e, id, size) {
-  e.stopPropagation();
-  pickedSize[id] = pickedSize[id]===size ? '' : size;
-  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
-    cardEl.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active', b.textContent===pickedSize[id]));
-    const item = ITEMS.find(x=>x.id===id);
-    const ci = pickedColor[id] || 0;
-    const cv = item?.colorVariants?.[ci];
-    const wa = cardEl.querySelector(`[id="cwa-${id}"]`);
-    if (wa && item) wa.href = waLink(item, cv?cv.imgs[0]:(item.imgs?.[0]||''), pickedSize[id], cv?.label||'');
+function cardSize(e,id,size){
+  e.stopPropagation();pickedSize[id]=pickedSize[id]===size?'':size;
+  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el=>{
+    el.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active',b.textContent===pickedSize[id]));
+    const item=ITEMS.find(x=>x.id===id);const ci=pickedColor[id]||0;const cv=item?.colorVariants?.[ci];
+    const wa=el.querySelector(`[id="cwa-${id}"]`);if(wa&&item)wa.href=waLink(item,cv?cv.imgs[0]:(item.imgs?.[0]||''),pickedSize[id],cv?.label||'');
   });
 }
 
-// ── CARD THUMB ──
-function cardThumb(e, id, idx) {
-  e.stopPropagation();
-  const item = ITEMS.find(x=>x.id===id);
-  if (!item) return;
-  const ci = pickedColor[id]||0;
-  const imgs = item.colorVariants?.[ci]?.imgs || item.imgs || [];
-  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(cardEl => {
-    const img = cardEl.querySelector('.card-img > img');
-    if (img && imgs[idx]) img.src = imgs[idx];
-    cardEl.querySelectorAll('.thumb-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+function cardThumb(e,id,idx){
+  e.stopPropagation();const item=ITEMS.find(x=>x.id===id);if(!item)return;
+  const ci=pickedColor[id]||0;const imgs=item.colorVariants?.[ci]?.imgs||item.imgs||[];
+  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el=>{
+    const img=el.querySelector('.card-img > img');if(img&&imgs[idx])img.src=imgs[idx];
+    el.querySelectorAll('.thumb-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
   });
 }
 
-// ── CAROUSEL: card width + gap ──
-const CARD_SLOT = 172;
+// CAROUSEL CONSTANTS
+const CARD_SLOT=172;
 
-// ── BUILD CAROUSEL HTML (no CSS animation — JS drives it) ──
-function buildCarousel(items) {
-  const tripled = [...items, ...items, ...items];
-  const cardsHtml = tripled.map((it, i) => card(it, i % items.length)).join('');
-
+// FEATURED CAROUSEL
+function buildCarousel(items){
+  const tripled=[...items,...items,...items];
   return `<div class="featured-section">
-    <div class="featured-head">
-      <span class="featured-title">Featured Picks</span>
-      <span class="featured-badge">🔥 HOT</span>
-    </div>
+    <div class="featured-head"><span class="featured-title">Featured Picks</span><span class="featured-badge">🔥 HOT</span></div>
     <div class="carousel-hint">Swipe or drag to browse</div>
     <div class="carousel-wrap">
       <div class="carousel-track-outer" id="feat-outer">
-        <div class="carousel-track" id="feat-track">
-          ${cardsHtml}
-        </div>
+        <div class="carousel-track" id="feat-track">${tripled.map((it,i)=>card(it,i%items.length)).join('')}</div>
       </div>
     </div>
   </div>`;
 }
 
-// ── INIT CAROUSEL: rAF loop + drag/touch ──
-function initCarousel() {
-  const outer = document.getElementById('feat-outer');
-  const track = document.getElementById('feat-track');
-  if (!outer || !track) return;
-
-  const featItems = FEATURED_IDS.map(id => ITEMS.find(x => x.id === id)).filter(Boolean);
-  const singleSetWidth = featItems.length * CARD_SLOT;
-  const speed = 38; // px/sec
-
-  let offset = 0;
-  let raf = null;
-  let lastTime = null;
-  let dragging = false;
-  let dragStartX = 0;
-  let dragStartOffset = 0;
-  let touchId = null;
-
-  function clamp(o) {
-    o = o % singleSetWidth;
-    if (o < 0) o += singleSetWidth;
-    return o;
-  }
-
-  function loop(ts) {
-    if (lastTime === null) lastTime = ts;
-    const dt = (ts - lastTime) / 1000;
-    lastTime = ts;
-    offset += speed * dt;
-    if (offset >= singleSetWidth) offset -= singleSetWidth;
-    track.style.transform = `translateX(${-offset}px)`;
-    raf = requestAnimationFrame(loop);
-  }
-
-  function startAnim() {
-    if (raf) return;
-    lastTime = null;
-    raf = requestAnimationFrame(loop);
-  }
-
-  function stopAnim() {
-    if (raf) { cancelAnimationFrame(raf); raf = null; }
-  }
-
-  // ── Mouse drag ──
-  outer.addEventListener('mousedown', e => {
-    stopAnim();
-    dragging = true;
-    dragStartX = e.clientX;
-    dragStartOffset = offset;
-    e.preventDefault();
-  });
-
-  window.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    offset = clamp(dragStartOffset + (dragStartX - e.clientX));
-    track.style.transform = `translateX(${-offset}px)`;
-  });
-
-  window.addEventListener('mouseup', () => {
-    if (!dragging) return;
-    dragging = false;
-    startAnim();
-  });
-
-  // ── Touch drag ──
-  outer.addEventListener('touchstart', e => {
-    if (touchId !== null) return;
-    const t = e.changedTouches[0];
-    touchId = t.identifier;
-    stopAnim();
-    dragging = true;
-    dragStartX = t.clientX;
-    dragStartOffset = offset;
-  }, { passive: true });
-
-  window.addEventListener('touchmove', e => {
-    if (!dragging) return;
-    let t = null;
-    for (let i = 0; i < e.changedTouches.length; i++) {
-      if (e.changedTouches[i].identifier === touchId) { t = e.changedTouches[i]; break; }
-    }
-    if (!t) return;
-    offset = clamp(dragStartOffset + (dragStartX - t.clientX));
-    track.style.transform = `translateX(${-offset}px)`;
-  }, { passive: true });
-
-  window.addEventListener('touchend', e => {
-    let found = false;
-    for (let i = 0; i < e.changedTouches.length; i++) {
-      if (e.changedTouches[i].identifier === touchId) { found = true; break; }
-    }
-    if (!found) return;
-    touchId = null;
-    dragging = false;
-    startAnim();
-  }, { passive: true });
-
-  // Make all carousel cards visible immediately
-  track.querySelectorAll('.card').forEach(c => c.classList.add('in'));
-
+function initCarousel(){
+  const outer=document.getElementById('feat-outer');
+  const track=document.getElementById('feat-track');
+  if(!outer||!track)return;
+  const featItems=FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
+  const singleSetWidth=featItems.length*CARD_SLOT;
+  const speed=38;
+  let offset=0,raf=null,lastTime=null,dragging=false,dragStartX=0,dragStartOffset=0,touchId=null;
+  function clamp(o){o=o%singleSetWidth;if(o<0)o+=singleSetWidth;return o;}
+  function loop(ts){if(lastTime===null)lastTime=ts;const dt=(ts-lastTime)/1000;lastTime=ts;offset+=speed*dt;if(offset>=singleSetWidth)offset-=singleSetWidth;track.style.transform=`translateX(${-offset}px)`;raf=requestAnimationFrame(loop);}
+  function startAnim(){if(raf)return;lastTime=null;raf=requestAnimationFrame(loop);}
+  function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  outer.addEventListener('mousedown',e=>{stopAnim();dragging=true;dragStartX=e.clientX;dragStartOffset=offset;e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;offset=clamp(dragStartOffset+(dragStartX-e.clientX));track.style.transform=`translateX(${-offset}px)`;});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;startAnim();});
+  outer.addEventListener('touchstart',e=>{if(touchId!==null)return;const t=e.changedTouches[0];touchId=t.identifier;stopAnim();dragging=true;dragStartX=t.clientX;dragStartOffset=offset;},{passive:true});
+  window.addEventListener('touchmove',e=>{if(!dragging)return;let t=null;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;}}if(!t)return;offset=clamp(dragStartOffset+(dragStartX-t.clientX));track.style.transform=`translateX(${-offset}px)`;},{passive:true});
+  window.addEventListener('touchend',e=>{let found=false;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}}if(!found)return;touchId=null;dragging=false;startAnim();},{passive:true});
+  track.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
   startAnim();
 }
 
-// ── BRAND / SECTION GROUPS ──
-const FEATURED_IDS = [58,56,1,18,22,25,26,57,30,11,46];
-const GROUPS = [
-  {key:'nike',      label:'Nike / Jordan',    brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'], max:6},
-  {key:'adidas', label:'Adidas', brands:['Adidas'], max:6},
-  {key:'On Cloud', label:'On Cloud', brands:['On Cloud'], max:6},
-  {key:'bape',      label:'A Bathing Ape',     brands:['A Bathing Ape'], max:6},
-  {key:'stussy', label:'Stussy', brands:['Stussy'], max:6},
-  {key:'humanmade', label:'Human Made',        brands:['Human Made'], max:4},
-  {key:'ami',       label:'Ami Paris',         brands:['Ami Paris'], max:6},
-  {key:'represent', label:'Represent', brands:['Represent'], max:6},
-  {key:'supreme',   label:'Supreme',           brands:['Supreme','Supreme × Thrasher'], max:8},
-  {key:'chrome',    label:'Chrome Hearts',     brands:['Chrome Hearts'], max:5},
-  {key:'vans', label:'Vans', brands:['Vans'], max:6},
+// SECTION CAROUSEL (e.g. Supreme)
+function initSectionCarousel(key,items){
+  const outer=document.getElementById(`sec-outer-${key}`);
+  const track=document.getElementById(`sec-track-${key}`);
+  if(!outer||!track)return;
+  const singleWidth=items.length*CARD_SLOT;
+  const speed=35;
+  let offset=0,raf=null,lastTime=null,dragging=false,dragStartX=0,dragStartOffset=0,touchId=null;
+  function clamp(o){o=o%singleWidth;if(o<0)o+=singleWidth;return o;}
+  function loop(ts){if(lastTime===null)lastTime=ts;const dt=(ts-lastTime)/1000;lastTime=ts;offset+=speed*dt;if(offset>=singleWidth)offset-=singleWidth;track.style.transform=`translateX(${-offset}px)`;raf=requestAnimationFrame(loop);}
+  function startAnim(){if(raf)return;lastTime=null;raf=requestAnimationFrame(loop);}
+  function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  outer.addEventListener('mousedown',e=>{stopAnim();dragging=true;dragStartX=e.clientX;dragStartOffset=offset;e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;offset=clamp(dragStartOffset+(dragStartX-e.clientX));track.style.transform=`translateX(${-offset}px)`;});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;startAnim();});
+  outer.addEventListener('touchstart',e=>{if(touchId!==null)return;const t=e.changedTouches[0];touchId=t.identifier;stopAnim();dragging=true;dragStartX=t.clientX;dragStartOffset=offset;},{passive:true});
+  window.addEventListener('touchmove',e=>{if(!dragging)return;let t=null;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;}}if(!t)return;offset=clamp(dragStartOffset+(dragStartX-t.clientX));track.style.transform=`translateX(${-offset}px)`;},{passive:true});
+  window.addEventListener('touchend',e=>{let found=false;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}}if(!found)return;touchId=null;dragging=false;startAnim();},{passive:true});
+  track.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
+  startAnim();
+}
+
+// GROUPS
+const FEATURED_IDS=[58,56,1,18,22,25,26,57,30,11,46];
+const GROUPS=[
+  {key:'nike',      label:'Nike / Jordan',  brands:['Jordan / Nike','Nike','Nike × NOCTA','Nike × Fragment'],max:6},
+  {key:'adidas',    label:'Adidas',         brands:['Adidas'],max:6},
+  {key:'oncloud',   label:'On Cloud',       brands:['On Cloud'],max:6},
+  {key:'bape',      label:'A Bathing Ape',  brands:['A Bathing Ape'],max:6},
+  {key:'humanmade', label:'Human Made',     brands:['Human Made'],max:4},
+  {key:'ami',       label:'Ami Paris',      brands:['Ami Paris'],max:6},
+  {key:'represent', label:'Represent',      brands:['Represent'],max:6},
+  {key:'supreme',   label:'Supreme',        brands:['Supreme','Supreme × Thrasher'],max:8,carousel:true},
+  {key:'chrome',    label:'Chrome Hearts',  brands:['Chrome Hearts'],max:5},
+  {key:'vans',      label:'Vans',           brands:['Vans'],max:6},
 ];
 
-// ── RENDER ──
-function render() {
-  const body   = document.getElementById('site-body');
-  const isSrch = searchQ.length > 0;
-  const isAll  = currentCat === 'all';
-  const catName = {all:'All Items','ua-pairs':'UA Pairs',streetwear:'Streetwear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'}[currentCat] || currentCat;
+// RENDER
+function render(){
+  const body=document.getElementById('site-body');
+  const isSrch=searchQ.length>0;
+  const isAll=currentCat==='all';
+  const catName={all:'All Items','ua-pairs':'UA Pairs',streetwear:'Streetwear',luxury:'Luxury Items',watches:'Watches',accessories:'Accessories'}[currentCat]||currentCat;
+  const visible=ITEMS.filter(item=>(currentCat==='all'||item.cat===currentCat)&&fuzzy(searchQ,item));
+  document.getElementById('toolbar-label').textContent=isSrch?`Results for "${searchQ}"`:catName;
+  document.getElementById('toolbar-count').textContent=` · ${visible.length} item${visible.length!==1?'s':''}`;
 
-  const visible = ITEMS.filter(item => (currentCat==='all'||item.cat===currentCat) && fuzzy(searchQ, item));
-  document.getElementById('toolbar-label').textContent = isSrch ? `Results for "${searchQ}"` : catName;
-  document.getElementById('toolbar-count').textContent = ` · ${visible.length} item${visible.length!==1?'s':''}`;
-
-  if (!visible.length) {
-    body.innerHTML = `<div class="section"><div class="grid-4"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;
+  if(!visible.length){
+    body.innerHTML=`<div class="section"><div class="search-grid"><div class="empty-state"><p>No items found</p><span>Try a different search or category</span></div></div></div>`;
     return;
   }
-
-  if (isSrch || !isAll) {
-    body.innerHTML = `<div class="section"><div class="search-grid">${visible.map((it,i)=>card(it,i)).join('')}</div></div>`;
-    animate(body);
-    return;
+  if(isSrch||!isAll){
+    body.innerHTML=`<div class="section"><div class="search-grid">${visible.map((it,i)=>card(it,i)).join('')}</div></div>`;
+    animate(body);return;
   }
 
-  let html = '';
+  let html='';
+  const featItems=FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
+  if(featItems.length)html+=buildCarousel(featItems);
 
-  // Featured carousel
-  const featItems = FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
-  if (featItems.length) {
-    html += buildCarousel(featItems);
-  }
-
-  // Brand groups
-  GROUPS.forEach((g, gi) => {
-    const items = visible.filter(it=>g.brands.includes(it.brand));
-    if (!items.length) return;
-    const preview = items.slice(0, g.max);
-    html += `<div class="section" id="bsec-${g.key}">
+  GROUPS.forEach((g,gi)=>{
+    const items=visible.filter(it=>g.brands.includes(it.brand));
+    if(!items.length)return;
+    const preview=items.slice(0,g.max);
+    const rowHtml=g.carousel
+      ?`<div class="carousel-wrap"><div class="carousel-track-outer" id="sec-outer-${g.key}"><div class="carousel-track" id="sec-track-${g.key}">${[...preview,...preview,...preview].map((it,i)=>card(it,i%preview.length)).join('')}</div></div></div>`
+      :`<div class="hscroll">${preview.map((it,i)=>card(it,gi*3+i)).join('')}</div>`;
+    html+=`<div class="section" id="bsec-${g.key}">
       <div class="section-head">
         <div style="display:flex;align-items:center;gap:8px">
           <span class="section-brand">${g.label}</span>
@@ -981,217 +845,202 @@ function render() {
         </div>
         <button class="section-see-all" onclick="openBrandPage('${g.key}')">See All →</button>
       </div>
-      <div class="hscroll" id="brow-${g.key}">${preview.map((it,i)=>card(it,gi*3+i)).join('')}</div>
+      ${g.carousel?'<div class="carousel-hint">Swipe or drag to browse</div>':''}
+      ${rowHtml}
     </div>`;
   });
 
-  // Other items
-  const grouped = GROUPS.flatMap(g=>g.brands);
-  const rest = visible.filter(it=>!grouped.includes(it.brand));
-  if (rest.length) {
-    html += `<div class="section"><div class="section-head"><span class="section-brand">Other Items</span><span class="section-meta">${rest.length} ITEMS</span></div><div class="hscroll">${rest.map((it,i)=>card(it,i)).join('')}</div></div>`;
-  }
+  const grouped=GROUPS.flatMap(g=>g.brands);
+  const rest=visible.filter(it=>!grouped.includes(it.brand));
+  if(rest.length)html+=`<div class="section"><div class="section-head"><span class="section-brand">Other Items</span><span class="section-meta">${rest.length} ITEMS</span></div><div class="hscroll">${rest.map((it,i)=>card(it,i)).join('')}</div></div>`;
 
-  body.innerHTML = html;
+  body.innerHTML=html;
   animate(body);
 
-  // Init the JS-driven carousel after DOM is ready
-  requestAnimationFrame(() => initCarousel());
+  requestAnimationFrame(()=>{
+    initCarousel();
+    GROUPS.filter(g=>g.carousel).forEach(g=>{
+      initSectionCarousel(g.key,ITEMS.filter(it=>g.brands.includes(it.brand)).slice(0,g.max));
+    });
+  });
 }
 
-// ── BRAND PAGE STATE ──
-let bpKey = null;
-let bpAllItems = [];
-let bpSearchQ = '';
-let bpST;
+// BRAND PAGE
+let bpKey=null,bpAllItems=[],bpSearchQ='',bpST;
 
-function bpRender() {
-  const grid = document.getElementById('bp-grid');
-  const filtered = bpAllItems.filter(it => fuzzy(bpSearchQ, it));
-  document.getElementById('bp-count').textContent = bpSearchQ
-    ? `${filtered.length} of ${bpAllItems.length} items`
-    : `${bpAllItems.length} item${bpAllItems.length!==1?'s':''}`;
-  if (!filtered.length) {
-    grid.innerHTML = `<div class="bp-empty"><p>No results for "${bpSearchQ}"</p><span>Try a different keyword</span></div>`;
-    return;
-  }
-  grid.innerHTML = filtered.map((it,i)=>card(it,i)).join('');
+function bpRender(){
+  const grid=document.getElementById('bp-grid');
+  const filtered=bpAllItems.filter(it=>fuzzy(bpSearchQ,it));
+  document.getElementById('bp-count').textContent=bpSearchQ?`${filtered.length} of ${bpAllItems.length} items`:`${bpAllItems.length} item${bpAllItems.length!==1?'s':''}`;
+  if(!filtered.length){grid.innerHTML=`<div class="bp-empty"><p>No results for "${bpSearchQ}"</p><span>Try a different keyword</span></div>`;return;}
+  grid.innerHTML=filtered.map((it,i)=>card(it,i)).join('');
   animate(grid);
 }
 
-function openBrandPage(key) {
-  const g = GROUPS.find(x=>x.key===key);
-  if (!g) return;
-  bpKey = key;
-  bpAllItems = ITEMS.filter(it=>g.brands.includes(it.brand));
-  bpSearchQ = '';
-  const bpInput = document.getElementById('bp-search-input');
-  const bpClear = document.getElementById('bp-search-clear');
-  bpInput.value = '';
-  bpClear.classList.remove('visible');
-  document.getElementById('bp-title').textContent = g.label;
-  const page = document.getElementById('brand-page');
-  page.classList.add('open');
-  document.body.style.overflow='hidden';
-  requestAnimationFrame(()=>{ page.scrollTop=0; bpRender(); });
+function openBrandPage(key){
+  const g=GROUPS.find(x=>x.key===key);if(!g)return;
+  bpKey=key;bpAllItems=ITEMS.filter(it=>g.brands.includes(it.brand));bpSearchQ='';
+  const bpInput=document.getElementById('bp-search-input');
+  const bpClear=document.getElementById('bp-search-clear');
+  bpInput.value='';bpClear.classList.remove('visible');
+  document.getElementById('bp-title').textContent=g.label;
+  const page=document.getElementById('brand-page');
+  page.classList.add('open');document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>{page.scrollTop=0;bpRender();});
   history.pushState({brandPage:key},'',`#brand-${key}`);
 }
 
-function closeBrandPage() {
+function closeBrandPage(){
   document.getElementById('brand-page').classList.remove('open');
-  document.body.style.overflow='';
-  bpKey = null; bpAllItems = []; bpSearchQ = '';
-  if(history.state?.brandPage) history.back();
+  document.body.style.overflow='';bpKey=null;bpAllItems=[];bpSearchQ='';
+  if(history.state?.brandPage)history.back();
 }
 
-const bpInput = document.getElementById('bp-search-input');
-const bpClear = document.getElementById('bp-search-clear');
-bpInput.addEventListener('input', () => {
-  clearTimeout(bpST);
-  bpST = setTimeout(() => {
-    bpSearchQ = bpInput.value.trim();
-    bpClear.classList.toggle('visible', bpSearchQ.length > 0);
-    bpRender();
-  }, 260);
-});
-bpInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') { clearTimeout(bpST); bpSearchQ = bpInput.value.trim(); bpClear.classList.toggle('visible', bpSearchQ.length > 0); bpRender(); }
-  if (e.key === 'Escape') { bpClear.click(); }
-});
-bpClear.addEventListener('click', () => {
-  bpInput.value = ''; bpSearchQ = ''; bpClear.classList.remove('visible'); bpInput.focus(); bpRender();
-});
-
+const bpInput=document.getElementById('bp-search-input');
+const bpClear=document.getElementById('bp-search-clear');
+bpInput.addEventListener('input',()=>{clearTimeout(bpST);bpST=setTimeout(()=>{bpSearchQ=bpInput.value.trim();bpClear.classList.toggle('visible',bpSearchQ.length>0);bpRender();},260);});
+bpInput.addEventListener('keydown',e=>{if(e.key==='Enter'){clearTimeout(bpST);bpSearchQ=bpInput.value.trim();bpClear.classList.toggle('visible',bpSearchQ.length>0);bpRender();}if(e.key==='Escape')bpClear.click();});
+bpClear.addEventListener('click',()=>{bpInput.value='';bpSearchQ='';bpClear.classList.remove('visible');bpInput.focus();bpRender();});
 window.addEventListener('popstate',e=>{
-  if(!e.state?.brandPage){
-    document.getElementById('brand-page').classList.remove('open');
-    document.body.style.overflow='';
-  }
+  if(!e.state?.brandPage&&!e.state?.pdp){document.getElementById('brand-page').classList.remove('open');document.body.style.overflow='';}
+  if(!e.state?.pdp){document.getElementById('pdp-overlay').classList.remove('open');document.body.style.overflow='';pdpItem=null;}
 });
 
-// ── CAT NAV ──
-function setcat(cat) {
-  currentCat = cat;
+// CAT NAV
+function setcat(cat){
+  currentCat=cat;
   document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
-  render();
-  document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});
+  render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',()=>setcat(b.dataset.cat)));
 
-// ── SEARCH ──
-const SI = document.getElementById('search-input');
-const CB = document.getElementById('clear-btn');
+// SEARCH
+const SI=document.getElementById('search-input');
+const CB=document.getElementById('clear-btn');
 let ST;
-SI.addEventListener('input',()=>{ clearTimeout(ST); ST=setTimeout(()=>{ searchQ=SI.value.trim(); CB.classList.toggle('visible',searchQ.length>0); render(); },320); });
-SI.addEventListener('keydown',e=>{ if(e.key==='Enter'){clearTimeout(ST);searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();if(searchQ.length>0){SI.blur();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});}} });
-CB.addEventListener('click',()=>{ SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render(); });
+SI.addEventListener('input',()=>{clearTimeout(ST);ST=setTimeout(()=>{searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();},320);});
+SI.addEventListener('keydown',e=>{if(e.key==='Enter'){clearTimeout(ST);searchQ=SI.value.trim();CB.classList.toggle('visible',searchQ.length>0);render();if(searchQ.length>0){SI.blur();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});}}});
+CB.addEventListener('click',()=>{SI.value='';searchQ='';CB.classList.remove('visible');SI.focus();render();});
 
-// ── LIGHTBOX ──
-let lbItem=null, lbIdx=0, lbSz='', lbCi=0;
-
-function openLb(id) {
-  lbItem = ITEMS.find(x=>x.id===id);
-  if (!lbItem) return;
-  lbIdx = 0; lbSz = pickedSize[id]||''; lbCi = pickedColor[id]||0;
-  paintLb();
-  document.getElementById('lb-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
+// LIGHTBOX
+let lbItem=null,lbIdx=0,lbSz='',lbCi=0;
+function openLb(id){lbItem=ITEMS.find(x=>x.id===id);if(!lbItem)return;lbIdx=0;lbSz=pickedSize[id]||'';lbCi=pickedColor[id]||0;paintLb();document.getElementById('lb-overlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lb-overlay').classList.remove('open');document.body.style.overflow='';}
+function paintLb(){
+  if(!lbItem)return;
+  const cv=lbItem.colorVariants?.[lbCi];const imgs=cv?cv.imgs:(lbItem.imgs||[]);const desc=cv?cv.desc:lbItem.desc;
+  document.getElementById('lb-img').src=imgs[lbIdx]||'';
+  document.getElementById('lb-name').textContent=lbItem.name+(lbItem.sku?' — '+lbItem.sku:'');
+  document.getElementById('lb-meta').textContent=[lbItem.batch,desc,lbItem.sizes&&!CLOTHING.includes(lbItem.cat)?lbItem.sizes:''].filter(Boolean).join(' · ');
+  const descEl=document.getElementById('lb-desc');if(lbItem.longDesc){descEl.textContent=lbItem.longDesc;descEl.style.display='';}else descEl.style.display='none';
+  document.getElementById('lb-dots').innerHTML=imgs.map((_,i)=>`<div class="lb-dot${i===lbIdx?' active':''}" onclick="lbGo(${i})"></div>`).join('');
+  document.getElementById('lb-prev').style.display=imgs.length>1?'flex':'none';
+  document.getElementById('lb-next').style.display=imgs.length>1?'flex':'none';
+  const csec=document.getElementById('lb-color-section');
+  if(lbItem.colorVariants){csec.style.display='';document.getElementById('lb-swatches').innerHTML=lbItem.colorVariants.map((v,i)=>`<div class="lb-sw${i===lbCi?' active':''}" style="background:${v.color}" title="${v.label}" onclick="lbColor(${i})"></div>`).join('');document.getElementById('lb-color-name').textContent=lbItem.colorVariants[lbCi].label;}else csec.style.display='none';
+  const ssec=document.getElementById('lb-size-section');
+  if(CLOTHING.includes(lbItem.cat)){ssec.style.display='';const szs=lbItem.brand==='A Bathing Ape'?SIZES_BAPE:SIZES_DEFAULT;document.getElementById('lb-sizes').innerHTML=szs.map(s=>`<button class="lb-sz${lbSz===s?' active':''}" onclick="lbSzPick('${s}')">${s}</button>`).join('');}else ssec.style.display='none';
+  document.getElementById('lb-wa').href=waLink(lbItem,imgs[lbIdx],lbSz,cv?.label||'');
 }
-function closeLb() {
-  document.getElementById('lb-overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-function paintLb() {
-  if (!lbItem) return;
-  const cv = lbItem.colorVariants?.[lbCi];
-  const imgs = cv ? cv.imgs : (lbItem.imgs||[]);
-  const desc = cv ? cv.desc : lbItem.desc;
-  document.getElementById('lb-img').src = imgs[lbIdx]||'';
-  document.getElementById('lb-name').textContent = lbItem.name + (lbItem.sku ? ' — '+lbItem.sku : '');
-  document.getElementById('lb-meta').textContent = [lbItem.batch, desc, lbItem.sizes&&!CLOTHING.includes(lbItem.cat)?lbItem.sizes:''].filter(Boolean).join(' · ');
-  const descEl = document.getElementById('lb-desc');
-  if (lbItem.longDesc) { descEl.textContent=lbItem.longDesc; descEl.style.display=''; }
-  else descEl.style.display='none';
-
-  document.getElementById('lb-dots').innerHTML = imgs.map((_,i)=>`<div class="lb-dot${i===lbIdx?' active':''}" onclick="lbGo(${i})"></div>`).join('');
-  document.getElementById('lb-prev').style.display = imgs.length>1?'flex':'none';
-  document.getElementById('lb-next').style.display = imgs.length>1?'flex':'none';
-
-  const csec = document.getElementById('lb-color-section');
-  if (lbItem.colorVariants) {
-    csec.style.display='';
-    document.getElementById('lb-swatches').innerHTML = lbItem.colorVariants.map((v,i)=>`<div class="lb-sw${i===lbCi?' active':''}" style="background:${v.color}" title="${v.label}" onclick="lbColor(${i})"></div>`).join('');
-    document.getElementById('lb-color-name').textContent = lbItem.colorVariants[lbCi].label;
-  } else csec.style.display='none';
-
-  const ssec = document.getElementById('lb-size-section');
-  if (CLOTHING.includes(lbItem.cat)) {
-    ssec.style.display='';
-    const szs = lbItem.brand==='A Bathing Ape' ? SIZES_BAPE : SIZES_DEFAULT;
-    document.getElementById('lb-sizes').innerHTML = szs.map(s=>`<button class="lb-sz${lbSz===s?' active':''}" onclick="lbSzPick('${s}')">${s}</button>`).join('');
-  } else ssec.style.display='none';
-
-  document.getElementById('lb-wa').href = waLink(lbItem, imgs[lbIdx], lbSz, cv?.label||'');
-}
-function lbGo(idx) {
-  const cv = lbItem?.colorVariants?.[lbCi];
-  const imgs = cv ? cv.imgs : (lbItem?.imgs||[]);
-  lbIdx = (idx+imgs.length)%imgs.length;
-  paintLb();
-}
-function lbColor(idx) {
-  lbCi=idx; lbIdx=0;
-  if (lbItem) pickedColor[lbItem.id]=idx;
-  paintLb();
-  if (lbItem) {
-    document.querySelectorAll(`.card[data-id="${lbItem.id}"]`).forEach(cardEl => {
-      cardEl.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx));
-    });
-  }
-}
-function lbSzPick(sz) {
-  lbSz = lbSz===sz?'':sz;
-  if (lbItem) pickedSize[lbItem.id]=lbSz;
-  document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));
-  const cv = lbItem?.colorVariants?.[lbCi];
-  document.getElementById('lb-wa').href = waLink(lbItem, cv?cv.imgs[0]:(lbItem?.imgs?.[0]||''), lbSz, cv?.label||'');
-  if (lbItem) {
-    document.querySelectorAll(`.card[data-id="${lbItem.id}"]`).forEach(cardEl => {
-      cardEl.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));
-    });
-  }
-}
-
+function lbGo(idx){const cv=lbItem?.colorVariants?.[lbCi];const imgs=cv?cv.imgs:(lbItem?.imgs||[]);lbIdx=(idx+imgs.length)%imgs.length;paintLb();}
+function lbColor(idx){lbCi=idx;lbIdx=0;if(lbItem)pickedColor[lbItem.id]=idx;paintLb();if(lbItem)document.querySelectorAll(`.card[data-id="${lbItem.id}"]`).forEach(el=>el.querySelectorAll('.sw').forEach((s,i)=>s.classList.toggle('active',i===idx)));}
+function lbSzPick(sz){lbSz=lbSz===sz?'':sz;if(lbItem)pickedSize[lbItem.id]=lbSz;document.querySelectorAll('.lb-sz').forEach(b=>b.classList.toggle('active',b.textContent===lbSz));const cv=lbItem?.colorVariants?.[lbCi];document.getElementById('lb-wa').href=waLink(lbItem,cv?cv.imgs[0]:(lbItem?.imgs?.[0]||''),lbSz,cv?.label||'');}
 document.getElementById('lb-prev').addEventListener('click',()=>lbGo(lbIdx-1));
 document.getElementById('lb-next').addEventListener('click',()=>lbGo(lbIdx+1));
 document.getElementById('lb-close').addEventListener('click',closeLb);
 document.getElementById('lb-overlay').addEventListener('click',e=>{if(e.target.id==='lb-overlay')closeLb();});
-document.addEventListener('keydown',e=>{
-  if(!lbItem)return;
-  if(e.key==='Escape')closeLb();
-  if(e.key==='ArrowLeft')lbGo(lbIdx-1);
-  if(e.key==='ArrowRight')lbGo(lbIdx+1);
-});
-
+document.addEventListener('keydown',e=>{if(!lbItem)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbGo(lbIdx-1);if(e.key==='ArrowRight')lbGo(lbIdx+1);});
 let tx=0,ty=0;
 document.querySelector('.lb-photo').addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY;},{passive:true});
-document.querySelector('.lb-photo').addEventListener('touchend',e=>{
-  const dx=e.changedTouches[0].screenX-tx, dy=e.changedTouches[0].screenY-ty;
-  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40) dx<0?lbGo(lbIdx+1):lbGo(lbIdx-1);
-},{passive:true});
+document.querySelector('.lb-photo').addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-tx,dy=e.changedTouches[0].screenY-ty;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40)dx<0?lbGo(lbIdx+1):lbGo(lbIdx-1);},{passive:true});
 
+// PRODUCT DETAIL PAGE
+let pdpItem=null,pdpImgIdx=0,pdpCi=0,pdpSz='';
+
+function openPdp(id){
+  const item=ITEMS.find(x=>x.id===id);if(!item)return;
+  pdpItem=item;pdpImgIdx=0;pdpCi=pickedColor[id]||0;pdpSz=pickedSize[id]||'';
+  paintPdp();
+  const overlay=document.getElementById('pdp-overlay');
+  overlay.classList.add('open');overlay.scrollTop=0;document.body.style.overflow='hidden';
+  history.pushState({pdp:id},'',`#pdp-${id}`);
+}
+
+function closePdp(){
+  document.getElementById('pdp-overlay').classList.remove('open');
+  document.body.style.overflow='';pdpItem=null;
+  if(history.state?.pdp)history.back();
+}
+
+function paintPdp(){
+  if(!pdpItem)return;
+  const item=pdpItem;
+  const cv=item.colorVariants?.[pdpCi];
+  const imgs=cv?cv.imgs:(item.imgs||[]);
+  const desc=cv?cv.desc:(item.desc||'');
+
+  document.getElementById('pdp-header-name').textContent=item.name;
+  document.getElementById('pdp-brand').textContent=item.brand;
+  document.getElementById('pdp-name').textContent=item.name;
+  document.getElementById('pdp-meta').textContent=[item.batch,item.sku,desc,item.sizes&&!CLOTHING.includes(item.cat)?item.sizes:''].filter(Boolean).join(' · ');
+  document.getElementById('pdp-desc').textContent=item.longDesc||item.desc||'';
+
+  document.getElementById('pdp-main-img').src=imgs[pdpImgIdx]||'';
+  document.getElementById('pdp-main-img').alt=item.name;
+
+  document.getElementById('pdp-thumbs').innerHTML=imgs.slice(0,6).map((src,i)=>
+    `<div class="pdp-thumb${i===pdpImgIdx?' active':''}" onclick="pdpThumb(${i})"><img src="${src}" alt="" loading="lazy"/></div>`
+  ).join('');
+
+  const csec=document.getElementById('pdp-color-section');
+  if(item.colorVariants){
+    csec.style.display='';
+    document.getElementById('pdp-swatches').innerHTML=item.colorVariants.map((v,i)=>
+      `<div class="pdp-sw${i===pdpCi?' active':''}" style="background:${v.color}" title="${v.label}" onclick="pdpColor(${i})"></div>`
+    ).join('');
+    document.getElementById('pdp-color-name').textContent=item.colorVariants[pdpCi].label;
+  }else csec.style.display='none';
+
+  const ssec=document.getElementById('pdp-size-section');
+  if(CLOTHING.includes(item.cat)){
+    ssec.style.display='';
+    const szs=item.brand==='A Bathing Ape'?SIZES_BAPE:SIZES_DEFAULT;
+    document.getElementById('pdp-sizes').innerHTML=szs.map(s=>
+      `<button class="pdp-sz${pdpSz===s?' active':''}" onclick="pdpSzPick('${s}')">${s}</button>`
+    ).join('');
+  }else ssec.style.display='none';
+
+  document.getElementById('pdp-wa').href=waLink(item,imgs[pdpImgIdx],pdpSz,cv?.label||'');
+
+  const related=ITEMS.filter(x=>x.id!==item.id&&(x.brand===item.brand||x.cat===item.cat)&&(x.imgs||[]).length>0).slice(0,6);
+  const relTitle=document.getElementById('pdp-related-title');
+  const relGrid=document.getElementById('pdp-related-grid');
+  if(related.length){
+    relTitle.textContent=`More from ${item.brand}`;
+    relGrid.innerHTML=related.map((it,i)=>card(it,i)).join('');
+    animate(relGrid);
+  }else{relTitle.textContent='';relGrid.innerHTML='';}
+}
+
+function pdpThumb(idx){
+  pdpImgIdx=idx;
+  const cv=pdpItem?.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem?.imgs||[]);
+  document.getElementById('pdp-main-img').src=imgs[idx]||'';
+  document.querySelectorAll('.pdp-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('pdp-wa').href=waLink(pdpItem,imgs[idx],pdpSz,cv?.label||'');
+}
+
+function pdpColor(idx){pdpCi=idx;pdpImgIdx=0;if(pdpItem)pickedColor[pdpItem.id]=idx;paintPdp();}
+
+function pdpSzPick(sz){
+  pdpSz=pdpSz===sz?'':sz;if(pdpItem)pickedSize[pdpItem.id]=pdpSz;
+  document.querySelectorAll('.pdp-sz').forEach(b=>b.classList.toggle('active',b.textContent===pdpSz));
+  const cv=pdpItem?.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem?.imgs||[]);
+  document.getElementById('pdp-wa').href=waLink(pdpItem,imgs[pdpImgIdx],pdpSz,cv?.label||'');
+}
+
+// INIT
 render();
-
-window.addEventListener('load', () => {
-  const hash = window.location.hash;
-  if (hash && hash.startsWith('#item-')) {
-    const id = parseInt(hash.replace('#item-', ''));
-    const item = ITEMS.find(x => x.id === id);
-    if (item) {
-      openLb(id);
-    }
-  }
-});
 </script>
 </body>
 </html>
