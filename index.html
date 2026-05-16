@@ -382,6 +382,35 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
 <!-- MAIN -->
 <main class="site-body" id="site-body" role="main"></main>
 
+<!-- ABOUT US SECTION -->
+<section id="about-us" style="background:#fff;border-top:1px solid #e8e8e8;padding:2.5rem 1.5rem 3rem">
+  <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#999;margin-bottom:10px">Abu Dhabi · UAE</p>
+  <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-1px;margin-bottom:1rem;line-height:1.15">About Secret Shop</h2>
+  <p style="font-size:13.5px;color:#555;line-height:1.85;max-width:600px;margin-bottom:2rem">We're a trusted streetwear and sneaker destination based in Abu Dhabi, UAE 🇦🇪. We specialise in UA pairs, premium streetwear, and luxury accessories — sourcing the most sought-after pieces from brands like Jordan, BAPE, Supreme, Ami Paris, Chrome Hearts, and more. Every item is carefully verified before it reaches you. Order by WhatsApp, pay with Tabby, and meet us locally.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:2rem">
+    <div style="background:#f7f7f7;border-radius:12px;padding:1.25rem 1rem">
+      <p style="font-size:1.6rem;font-weight:700;letter-spacing:-1px;margin-bottom:4px">9.4K</p>
+      <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase">Facebook Followers</p>
+    </div>
+    <div style="background:#f7f7f7;border-radius:12px;padding:1.25rem 1rem">
+      <p style="font-size:1.6rem;font-weight:700;letter-spacing:-1px;margin-bottom:4px">UA Pairs</p>
+      <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase">Sneaker Specialists</p>
+    </div>
+    <div style="background:#f7f7f7;border-radius:12px;padding:1.25rem 1rem">
+      <p style="font-size:1.6rem;font-weight:700;letter-spacing:-1px;margin-bottom:4px">Tabby</p>
+      <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase">Pay in 4 · Interest-Free</p>
+    </div>
+    <div style="background:#f7f7f7;border-radius:12px;padding:1.25rem 1rem">
+      <p style="font-size:1.6rem;font-weight:700;letter-spacing:-1px;margin-bottom:4px">DM Us</p>
+      <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase">WhatsApp Orders Only</p>
+    </div>
+  </div>
+  <a href="https://wa.me/971563780062?text=Hi%20Secret%20Shop!%20Tell%20me%20more%20about%20your%20store." target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:13px 22px;border-radius:10px;text-decoration:none">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+    Chat with us on WhatsApp
+  </a>
+</section>
+
 <!-- INFO GRID -->
 <div class="info-grid">
   <div class="info-cell">
@@ -1038,6 +1067,29 @@ function pdpSzPick(sz){
   const cv=pdpItem?.colorVariants?.[pdpCi];const imgs=cv?cv.imgs:(pdpItem?.imgs||[]);
   document.getElementById('pdp-wa').href=waLink(pdpItem,imgs[pdpImgIdx],pdpSz,cv?.label||'');
 }
+
+// PDP swipe gesture
+(function(){
+  let tx=0,ty=0;
+  const overlay=document.getElementById('pdp-overlay');
+  overlay.addEventListener('touchstart',e=>{
+    const t=e.changedTouches[0];
+    tx=t.screenX;ty=t.screenY;
+  },{passive:true});
+  overlay.addEventListener('touchend',e=>{
+    const t=e.changedTouches[0];
+    const dx=t.screenX-tx;
+    const dy=t.screenY-ty;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
+      if(!pdpItem)return;
+      const cv=pdpItem.colorVariants?.[pdpCi];
+      const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
+      if(imgs.length<2)return;
+      const next=(pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length;
+      pdpThumb(next);
+    }
+  },{passive:true});
+})();
 
 // INIT
 render();
