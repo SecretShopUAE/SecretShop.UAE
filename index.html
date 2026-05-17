@@ -933,25 +933,24 @@ function buildCarousel(items){
   </div>`;
 }
 
-function initCarousel(){
-  const outer=document.getElementById('feat-outer');
-  const track=document.getElementById('feat-track');
-  if(!outer||!track)return;
-  const featItems=FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
-  const singleSetWidth=featItems.length*CARD_SLOT;
-  const speed=38;
-  let offset=0,raf=null,lastTime=null,dragging=false,dragStartX=0,dragStartOffset=0,touchId=null;
-  function clamp(o){o=o%singleSetWidth;if(o<0)o+=singleSetWidth;return o;}
-  function loop(ts){if(lastTime===null)lastTime=ts;const dt=(ts-lastTime)/1000;lastTime=ts;offset+=speed*dt;if(offset>=singleSetWidth)offset-=singleSetWidth;track.style.transform=`translateX(${-offset}px)`;raf=requestAnimationFrame(loop);}
-  function startAnim(){if(raf)return;lastTime=null;raf=requestAnimationFrame(loop);}
-  function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}}
-  outer.addEventListener('mousedown',e=>{stopAnim();dragging=true;dragStartX=e.clientX;dragStartOffset=offset;e.preventDefault();});
-  window.addEventListener('mousemove',e=>{if(!dragging)return;offset=clamp(dragStartOffset+(dragStartX-e.clientX));track.style.transform=`translateX(${-offset}px)`;});
-  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;startAnim();});
-  outer.addEventListener('touchstart',e=>{if(touchId!==null)return;const t=e.changedTouches[0];touchId=t.identifier;stopAnim();dragging=true;dragStartX=t.clientX;dragStartOffset=offset;},{passive:true});
-  window.addEventListener('touchmove',e=>{if(!dragging)return;let t=null;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;}}if(!t)return;offset=clamp(dragStartOffset+(dragStartX-t.clientX));track.style.transform=`translateX(${-offset}px)`;},{passive:true});
-  window.addEventListener('touchend',e=>{let found=false;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}}if(!found)return;touchId=null;dragging=false;startAnim();},{passive:true});
-  track.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
+function initSectionCarousel(key, items) {
+  const outer = document.getElementById(`sec-outer-${key}`);
+  const track = document.getElementById(`sec-track-${key}`);
+  if (!outer || !track) return;
+  const singleSetWidth = items.length * CARD_SLOT;
+  const speed = 38;
+  let offset = 0, raf = null, lastTime = null, dragging = false, dragStartX = 0, dragStartOffset = 0, touchId = null;
+  function clamp(o) { o = o % singleSetWidth; if (o < 0) o += singleSetWidth; return o; }
+  function loop(ts) { if (lastTime === null) lastTime = ts; const dt = (ts - lastTime) / 1000; lastTime = ts; offset += speed * dt; if (offset >= singleSetWidth) offset -= singleSetWidth; track.style.transform = `translateX(${-offset}px)`; raf = requestAnimationFrame(loop); }
+  function startAnim() { if (raf) return; lastTime = null; raf = requestAnimationFrame(loop); }
+  function stopAnim() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+  outer.addEventListener('mousedown', e => { stopAnim(); dragging = true; dragStartX = e.clientX; dragStartOffset = offset; e.preventDefault(); });
+  window.addEventListener('mousemove', e => { if (!dragging) return; offset = clamp(dragStartOffset + (dragStartX - e.clientX)); track.style.transform = `translateX(${-offset}px)`; });
+  window.addEventListener('mouseup', () => { if (!dragging) return; dragging = false; startAnim(); });
+  outer.addEventListener('touchstart', e => { if (touchId !== null) return; const t = e.changedTouches[0]; touchId = t.identifier; stopAnim(); dragging = true; dragStartX = t.clientX; dragStartOffset = offset; }, { passive: true });
+  window.addEventListener('touchmove', e => { if (!dragging) return; let t = null; for (let i = 0; i < e.changedTouches.length; i++) { if (e.changedTouches[i].identifier === touchId) { t = e.changedTouches[i]; break; } } if (!t) return; offset = clamp(dragStartOffset + (dragStartX - t.clientX)); track.style.transform = `translateX(${-offset}px)`; }, { passive: true });
+  window.addEventListener('touchend', e => { let found = false; for (let i = 0; i < e.changedTouches.length; i++) { if (e.changedTouches[i].identifier === touchId) { found = true; break; } } if (!found) return; touchId = null; dragging = false; startAnim(); }, { passive: true });
+  track.querySelectorAll('.card').forEach(c => c.classList.add('in'));
   startAnim();
 }
 
