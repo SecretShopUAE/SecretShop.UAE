@@ -353,7 +353,34 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
   padding-bottom:1rem;
+  scroll-behavior:smooth;
 }
+.pdp-related-wrap{
+  position:relative;
+}
+.pdp-related-arr{
+  position:absolute;
+  top:50%;
+  transform:translateY(-60%);
+  z-index:10;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.18);
+  color:#fff;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  transition:background 0.2s,transform 0.15s;
+  flex-shrink:0;
+}
+.pdp-related-arr:hover{background:rgba(255,255,255,0.22);transform:translateY(-60%) scale(1.08);}
+.pdp-related-arr.left{left:-14px;}
+.pdp-related-arr.right{right:-14px;}
 .pdp-related-scroll::-webkit-scrollbar{display:none}
 .pdp-rel-card{
   flex:0 0 180px;
@@ -632,10 +659,14 @@ footer{background:var(--text);color:#fff;padding:2.5rem 1.5rem;display:grid;grid
       </a>
     </div>
     <!-- RELATED — full width below both columns -->
-    <div class="pdp-related-section" id="pdp-related-section" style="display:none">
-      <p class="pdp-related-title" id="pdp-related-title">Related Products</p>
-      <div class="pdp-related-scroll" id="pdp-related-grid"></div>
-    </div>
+   <div class="pdp-related-section" id="pdp-related-section" style="display:none">
+  <p class="pdp-related-title" id="pdp-related-title">Related Products</p>
+  <div class="pdp-related-wrap">
+    <button class="pdp-related-arr left" onclick="relScroll(-1)">&#8249;</button>
+    <div class="pdp-related-scroll" id="pdp-related-grid"></div>
+    <button class="pdp-related-arr right" onclick="relScroll(1)">&#8250;</button>
+  </div>
+</div>
     <!-- About block -->
     <div style="grid-column:1/-1;background:#0d0d0d;color:#fff;border-radius:16px;padding:2rem 1.5rem;margin-top:0.5rem;position:relative;overflow:hidden;border:1px solid #1a1a1a">
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,200,83,0.08) 0%,transparent 65%);pointer-events:none"></div>
@@ -933,11 +964,48 @@ function buildCarousel(items){
   </div>`;
 }
 
-function initSectionCarousel(key, items) {
-  const outer = document.getElementById(`sec-outer-${key}`);
-  const track = document.getElementById(`sec-track-${key}`);
-  if (!outer || !track) return;
-  const singleSetWidth = items.length * CARD_SLOT;
+function initCarousel(){
+  const outer=document.getElementById('feat-outer');
+  const track=document.getElementById('feat-track');
+  if(!outer||!track)return;
+  const items=FEATURED_IDS.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);
+  const singleSetWidth=items.length*CARD_SLOT;
+  const speed=38;
+  let offset=0,raf=null,lastTime=null,dragging=false,dragStartX=0,dragStartOffset=0,touchId=null;
+  function clamp(o){o=o%singleSetWidth;if(o<0)o+=singleSetWidth;return o;}
+  function loop(ts){if(lastTime===null)lastTime=ts;const dt=(ts-lastTime)/1000;lastTime=ts;offset+=speed*dt;if(offset>=singleSetWidth)offset-=singleSetWidth;track.style.transform=`translateX(${-offset}px)`;raf=requestAnimationFrame(loop);}
+  function startAnim(){if(raf)return;lastTime=null;raf=requestAnimationFrame(loop);}
+  function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  outer.addEventListener('mousedown',e=>{stopAnim();dragging=true;dragStartX=e.clientX;dragStartOffset=offset;e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;offset=clamp(dragStartOffset+(dragStartX-e.clientX));track.style.transform=`translateX(${-offset}px)`;});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;startAnim();});
+  outer.addEventListener('touchstart',e=>{if(touchId!==null)return;const t=e.changedTouches[0];touchId=t.identifier;stopAnim();dragging=true;dragStartX=t.clientX;dragStartOffset=offset;},{passive:true});
+  window.addEventListener('touchmove',e=>{if(!dragging)return;let t=null;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;}}if(!t)return;offset=clamp(dragStartOffset+(dragStartX-t.clientX));track.style.transform=`translateX(${-offset}px)`;},{passive:true});
+  window.addEventListener('touchend',e=>{let found=false;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}}if(!found)return;touchId=null;dragging=false;startAnim();},{passive:true});
+  track.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
+  startAnim();
+}
+
+function initSectionCarousel(key,items){
+  const outer=document.getElementById(`sec-outer-${key}`);
+  const track=document.getElementById(`sec-track-${key}`);
+  if(!outer||!track)return;
+  const singleSetWidth=items.length*CARD_SLOT;
+  const speed=38;
+  let offset=0,raf=null,lastTime=null,dragging=false,dragStartX=0,dragStartOffset=0,touchId=null;
+  function clamp(o){o=o%singleSetWidth;if(o<0)o+=singleSetWidth;return o;}
+  function loop(ts){if(lastTime===null)lastTime=ts;const dt=(ts-lastTime)/1000;lastTime=ts;offset+=speed*dt;if(offset>=singleSetWidth)offset-=singleSetWidth;track.style.transform=`translateX(${-offset}px)`;raf=requestAnimationFrame(loop);}
+  function startAnim(){if(raf)return;lastTime=null;raf=requestAnimationFrame(loop);}
+  function stopAnim(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  outer.addEventListener('mousedown',e=>{stopAnim();dragging=true;dragStartX=e.clientX;dragStartOffset=offset;e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;offset=clamp(dragStartOffset+(dragStartX-e.clientX));track.style.transform=`translateX(${-offset}px)`;});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;startAnim();});
+  outer.addEventListener('touchstart',e=>{if(touchId!==null)return;const t=e.changedTouches[0];touchId=t.identifier;stopAnim();dragging=true;dragStartX=t.clientX;dragStartOffset=offset;},{passive:true});
+  window.addEventListener('touchmove',e=>{if(!dragging)return;let t=null;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;}}if(!t)return;offset=clamp(dragStartOffset+(dragStartX-t.clientX));track.style.transform=`translateX(${-offset}px)`;},{passive:true});
+  window.addEventListener('touchend',e=>{let found=false;for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}}if(!found)return;touchId=null;dragging=false;startAnim();},{passive:true});
+  track.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
+  startAnim();
+}
   const speed = 38;
   let offset = 0, raf = null, lastTime = null, dragging = false, dragStartX = 0, dragStartOffset = 0, touchId = null;
   function clamp(o) { o = o % singleSetWidth; if (o < 0) o += singleSetWidth; return o; }
@@ -1267,6 +1335,11 @@ window.addEventListener('load',()=>{
   }
 });
 
+function relScroll(dir){
+  const el=document.getElementById('pdp-related-grid');
+  if(el)el.scrollBy({left:dir*380,behavior:'smooth'});
+}
+  
 render();
 </script>
 </body>
