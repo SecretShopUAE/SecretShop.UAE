@@ -732,7 +732,8 @@ function card(item,delay){
   const thumbsHtml=imgs.length>1?`<div class="thumb-row">${imgs.map((_,i)=>`<div class="thumb-dot${i===0?' active':''}" onclick="cardThumb(event,${item.id},${i})"></div>`).join('')}</div>`:'';
   const skuHtml=item.sku?`<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>`:(item.batch?`<p class="card-sku">${item.batch}</p>`:'');
   const sizesHtml=item.sizes&&!isClo?`<p class="card-sizes">${item.sizes}</p>`:'';
-  const swatchHtml=item.colorVariants?`<div class="swatch-row"><span class="swatch-label">Color</span>${item.colorVariants.map((v,i)=>`<div class="sw${ci===i?' active':''}" style="background:${v.color}" title="${v.label}" onclick="cardColor(event,${item.id},${i})"></div>`).join('')}</div>`:'';
+  const activeColorLabel=item.colorVariants?.[ci]?.desc||item.colorVariants?.[ci]?.label||'';
+  const swatchHtml=item.colorVariants?`<div class="swatch-row"><span class="swatch-label">Color</span>${item.colorVariants.map((v,i)=>`<div class="sw${ci===i?' active':''}" style="background:${v.color}" title="${v.label}" onclick="cardColor(event,${item.id},${i})"></div>`).join('')}<span class="swatch-selected-label" id="scl-${item.id}" style="font-family:var(--mono);font-size:9px;color:var(--text-2);letter-spacing:0.5px;margin-left:4px">${activeColorLabel}</span></div>`:'';
   const sizePickerHtml=isClo?`<div class="size-row">${sizes.map(s=>`<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>`:'';
   const isLiked=likedItems.has(item.id);
   return `<div class="card" data-id="${item.id}" id="item-${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" tabindex="0" role="listitem" aria-label="${item.name}">
@@ -788,7 +789,7 @@ function cardSize(e,id,size){
   document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el=>{
     el.querySelectorAll('.sz-chip').forEach(b=>b.classList.toggle('active',b.textContent===pickedSize[id]));
     const item=ITEMS.find(x=>x.id===id);const ci=pickedColor[id]||0;const cv=item?.colorVariants?.[ci];
-    const wa=el.querySelector(`[id="cwa-${id}"]`);if(wa&&item)wa.href=waLink(item,cv?cv.imgs[0]:(item.imgs?.[0]||''),pickedSize[id],cv?.label||'');
+    const scl=el.querySelector(`[id="scl-${id}"]`);if(scl)scl.textContent=v.desc||v.label||'';
   });
 }
 function cardThumb(e,id,idx){
