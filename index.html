@@ -1684,6 +1684,44 @@
       color: #000 !important;
     }
 
+    /* CHANGE 1 — shake + flash CSS */
+    .pdp-wa.shake {
+      animation: pdp-shake 0.4s ease;
+    }
+    @keyframes pdp-shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+    .pdp-sz.required-flash {
+      border-color: #ff4444 !important;
+      background: rgba(255, 68, 68, 0.15) !important;
+      animation: flash-required 0.5s ease;
+    }
+    .pdp-sw.required-flash-swatch {
+      outline-color: #ff4444 !important;
+      animation: flash-required 0.5s ease;
+    }
+    @keyframes flash-required {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .pdp-required-msg {
+      display: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ff4444;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .pdp-required-msg.visible {
+      display: block;
+    }
+
     .pdp-wa {
       display: flex;
       align-items: center;
@@ -3209,6 +3247,8 @@
           <p class="pdp-sec-label">Select Size</p>
           <div class="pdp-sizes" id="pdp-sizes"></div>
         </div>
+        <!-- CHANGE 2 — required message element added above the WA button -->
+        <p class="pdp-required-msg" id="pdp-required-msg"></p>
         <a class="pdp-wa" id="pdp-wa" href="#" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" />
@@ -3283,6 +3323,7 @@
     const SIZES_BAPE = ['S', 'M', 'L', 'XL', 'XXL'];
     const CARD_SLOT = 232;
 
+    // Only 4 items — add your full list here
     const ITEMS = [
       {id:622,name:"Stüssy Winged Head Tee White",brand:"Stüssy",cat:"streetwear",badge:"HOT",tags:["stussy","winged head","white tee","streetwear","graphic tee","abu dhabi","secret shop","menswear","skate culture"],desc:"White · Stüssy Graphic Tee",longDesc:"The Stüssy Winged Head Tee features iconic brand artwork on a crisp white cotton base, perfect for elevating your daily streetwear rotation.",imgs:["images/WhatsApp Image 2026-05-09 at 9.31.46 PM.jpeg"]},
   {id:623,name:"A Bathing Ape x Dragon Ball Z Baby Milo Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["a bathing ape","bape","dragon ball z","baby milo","streetwear","graphic tee","abu dhabi","streetwear uae","bape x dbz"],desc:"White / Black · Baby Milo Graphic",longDesc:"This iconic A Bathing Ape collaboration features the legendary Baby Milo character reimagined with classic Dragon Ball Z aesthetic elements.",imgs:["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"],colorVariants:[{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"]},{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"]}]},
@@ -3937,7 +3978,6 @@
       return words.every(w => hay.includes(w));
     }
 
-    // CHANGE 2a: Updated waLink — uses ?item=ID, puts URL on its own line
     function waLink(item, img, size, color) {
       const base = window.location.href.split('?')[0].split('#')[0];
       const url = `${base}?item=${item.id}`;
@@ -4222,7 +4262,6 @@
         document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
         render(); return;
       }
-      // CHANGE 1b: blur keyboard after delayed search triggers
       headerST = setTimeout(() => {
         searchQ = headerSearchInput.value.trim();
         currentCat = 'all';
@@ -4237,7 +4276,6 @@
         }
       }, 1500);
     });
-    // CHANGE 1a: blur keyboard on Enter key search
     headerSearchInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
         clearTimeout(headerST);
@@ -4330,6 +4368,9 @@
         ).join('');
       } else ssec.style.display = 'none';
       document.getElementById('pdp-wa').href = waLink(item, imgs[pdpImgIdx], pdpSz, cv?.label || '');
+      // Clear any previous required message when re-painting
+      const msgEl = document.getElementById('pdp-required-msg');
+      if (msgEl) { msgEl.textContent = ''; msgEl.classList.remove('visible'); }
       const related = ITEMS.filter(x => x.id !== item.id && (x.brand === item.brand || x.cat === item.cat) && (x.imgs || []).length > 0).slice(0, 12);
       const relSection = document.getElementById('pdp-related-section');
       const relGrid = document.getElementById('pdp-related-grid');
@@ -4370,6 +4411,63 @@
         if (e.key === 'Escape') closePdp();
       }
     });
+
+    // CHANGE 3 — WhatsApp button click interceptor (validates size + color before allowing)
+    document.getElementById('pdp-wa').addEventListener('click', function(e) {
+      if (!pdpItem) return;
+
+      const needsSize = CLOTHING.includes(pdpItem.cat);
+      const needsColor = !!(pdpItem.colorVariants && pdpItem.colorVariants.length > 1);
+      const missingSize = needsSize && !pdpSz;
+      const missingColor = needsColor && pdpCi === null;
+
+      const msgEl = document.getElementById('pdp-required-msg');
+      const waBtn = document.getElementById('pdp-wa');
+
+      if (missingSize || missingColor) {
+        e.preventDefault();
+
+        // Build message
+        const parts = [];
+        if (missingColor) parts.push('a color');
+        if (missingSize) parts.push('a size');
+        msgEl.textContent = `⚠ Please select ${parts.join(' and ')} before ordering`;
+        msgEl.classList.add('visible');
+
+        // Shake the button
+        waBtn.classList.remove('shake');
+        void waBtn.offsetWidth;
+        waBtn.classList.add('shake');
+        setTimeout(() => waBtn.classList.remove('shake'), 500);
+
+        // Flash the unpicked size buttons red
+        if (missingSize) {
+          document.querySelectorAll('.pdp-sz').forEach(btn => {
+            btn.classList.add('required-flash');
+            setTimeout(() => btn.classList.remove('required-flash'), 600);
+          });
+          document.getElementById('pdp-size-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Flash the unpicked swatches
+        if (missingColor) {
+          document.querySelectorAll('.pdp-sw').forEach(sw => {
+            sw.classList.add('required-flash-swatch');
+            setTimeout(() => sw.classList.remove('required-flash-swatch'), 600);
+          });
+          if (!missingSize) {
+            document.getElementById('pdp-color-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+
+        return;
+      }
+
+      // All good — clear message and allow through
+      msgEl.textContent = '';
+      msgEl.classList.remove('visible');
+    });
+
     (function () {
       let tx = 0, moved = false;
       const overlay = document.getElementById('pdp-overlay');
@@ -4402,7 +4500,7 @@
       if (!el.dataset.dragBound) { el.dataset.dragBound = '1'; initHscrollDrag(el); }
     });
 
-    // CHANGE 2b: Auto-open item from WhatsApp link (?item=ID)
+    // Auto-open item from WhatsApp link (?item=ID)
     (function() {
       const params = new URLSearchParams(window.location.search);
       const itemId = params.get('item');
