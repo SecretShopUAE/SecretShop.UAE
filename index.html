@@ -2676,37 +2676,132 @@
       }
 
       /* PDP mobile */
+      /* PDP mobile — FIXED: proper image box, not full-screen banner */
       .pdp-body {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-        padding: 14px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 12px !important;
+        width: 100% !important;
+      }
+
+      .pdp-gallery {
+        width: 100% !important;
+        gap: 8px !important;
+      }
+
+      .pdp-main-img {
+        width: 100% !important;
+        aspect-ratio: 1/1 !important;
+        height: auto !important;
+        max-height: 320px !important;
+        border-radius: 10px !important;
+      }
+
+      .pdp-main-img img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+
+      .pdp-arr {
+        display: none !important;
+      }
+
+      .pdp-thumbs {
+        gap: 6px !important;
+        margin-top: 6px !important;
+      }
+
+      .pdp-thumb {
+        width: 48px !important;
+        height: 48px !important;
+      }
+
+      .pdp-info {
+        width: 100% !important;
       }
 
       .pdp-name {
-        font-size: 22px !important;
+        font-size: 20px !important;
+        letter-spacing: -0.5px !important;
+      }
+
+      .pdp-meta {
+        font-size: 11px !important;
+      }
+
+      .pdp-desc {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+      }
+
+      .pdp-sizes {
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+      }
+
+      .pdp-sz {
+        font-size: 11px !important;
+        padding: 7px 10px !important;
+      }
+
+      .pdp-sw {
+        width: 26px !important;
+        height: 26px !important;
       }
 
       .pdp-header {
-        padding: 10px 14px !important;
+        padding: 10px 12px !important;
+        gap: 10px !important;
+      }
+
+      .pdp-header-name {
+        font-size: 14px !important;
       }
 
       .pdp-wa {
-        font-size: 10px !important;
-        padding: 13px !important;
-        margin-top: 14px !important;
+        font-size: 11px !important;
+        padding: 14px !important;
+        margin-top: 16px !important;
+        border-radius: 6px !important;
       }
 
       .pdp-related-title {
         font-size: 14px !important;
       }
 
+      .pdp-related-section {
+        width: 100% !important;
+        padding-top: 1rem !important;
+      }
+
       .pdp-rel-card {
-        width: 160px !important;
-        min-width: 160px !important;
+        width: 150px !important;
+        min-width: 150px !important;
+      }
+
+      .pdp-rel-img {
+        aspect-ratio: 1/1 !important;
+      }
+
+      .pdp-rel-body {
+        padding: 8px 10px !important;
+      }
+
+      .pdp-rel-name {
+        font-size: 11px !important;
+      }
+
+      .pdp-rel-btn {
+        font-size: 9px !important;
+        padding: 8px !important;
       }
 
       .pdp-about {
-        padding: 14px !important;
+        padding: 12px !important;
+        border-radius: 8px !important;
       }
 
       .pdp-about-title {
@@ -2716,11 +2811,12 @@
       .pdp-about-btns {
         flex-direction: column !important;
         gap: 8px !important;
+        width: 100% !important;
       }
 
-      .pdp-thumb {
-        width: 52px !important;
-        height: 52px !important;
+      .pdp-about-btns a {
+        justify-content: center !important;
+        text-align: center !important;
       }
 
       /* BRAND PAGE mobile */
