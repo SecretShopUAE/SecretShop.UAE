@@ -987,6 +987,32 @@
       overflow: hidden !important;
     }
 
+    /* ── SIZE FIX: carousel cards (Stüssy, Ami) ── */
+    .carousel-track .card .size-row,
+    .brand-grid .card .size-row {
+      overflow-x: auto !important;
+      scrollbar-width: none !important;
+      gap: 3px !important;
+    }
+
+    .carousel-track .card .size-row::-webkit-scrollbar,
+    .brand-grid .card .size-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-track .card .sz-chip,
+    .brand-grid .card .sz-chip {
+      width: 24px !important;
+      min-width: 24px !important;
+      max-width: 24px !important;
+      height: 22px !important;
+      min-height: 22px !important;
+      max-height: 22px !important;
+      font-size: 8px !important;
+      flex-shrink: 0 !important;
+    }
+    /* ── END SIZE FIX ── */
+
     .card .sz-chip {
       font-size: 9px !important;
       font-weight: 600 !important;
@@ -1684,7 +1710,7 @@
       color: #000 !important;
     }
 
-    /* CHANGE 1 — shake + flash CSS */
+    /* shake + flash CSS */
     .pdp-wa.shake {
       animation: pdp-shake 0.4s ease;
     }
@@ -2367,11 +2393,10 @@
     }
 
     /* ============================================================
-       MOBILE — ALL FIXES APPLIED
+       MOBILE
     ============================================================ */
     @media (max-width: 768px) {
 
-      /* HEADER */
       header {
         position: sticky !important;
         top: 0 !important;
@@ -2433,7 +2458,6 @@
         display: none !important;
       }
 
-      /* CAT NAV */
       .cat-nav-bar {
         top: 52px !important;
       }
@@ -2448,7 +2472,6 @@
         letter-spacing: 1px !important;
       }
 
-      /* HERO MOBILE */
       .hero {
         display: flex !important;
         flex-direction: column !important;
@@ -2531,7 +2554,6 @@
         letter-spacing: 1.5px !important;
       }
 
-      /* CATEGORIES */
       .categories-wrap {
         padding: 14px 12px !important;
       }
@@ -2551,7 +2573,6 @@
         border-radius: 8px !important;
       }
 
-      /* SITE BODY */
       .site-body {
         padding: 0 10px 32px !important;
       }
@@ -2565,7 +2586,6 @@
         padding: 2px 6px !important;
       }
 
-      /* CARDS */
       .card,
       .carousel-track .card,
       .brand-grid .card {
@@ -2597,6 +2617,19 @@
         font-size: 8px !important;
       }
 
+      /* ── SIZE FIX MOBILE: carousel + brand-grid chips ── */
+      .carousel-track .card .sz-chip,
+      .brand-grid .card .sz-chip {
+        width: 20px !important;
+        min-width: 20px !important;
+        max-width: 20px !important;
+        height: 18px !important;
+        min-height: 18px !important;
+        max-height: 18px !important;
+        font-size: 7px !important;
+      }
+      /* ── END SIZE FIX MOBILE ── */
+
       .card .card-view-btn {
         font-size: 8px !important;
         padding: 8px 0 !important;
@@ -2624,7 +2657,6 @@
         display: none !important;
       }
 
-      /* SEARCH GRID */
       .search-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 8px !important;
@@ -2636,7 +2668,6 @@
         max-width: 100% !important;
       }
 
-      /* STATS */
       .stats-section {
         padding: 20px 16px !important;
       }
@@ -2654,14 +2685,12 @@
         font-size: 8px !important;
       }
 
-      /* TRUST BADGES */
       .trust-inner {
         grid-template-columns: 1fr !important;
         gap: 12px !important;
         padding: 16px !important;
       }
 
-      /* FOOTER */
       footer {
         padding: 32px 16px 0 !important;
       }
@@ -2699,7 +2728,6 @@
         padding: 1rem 0 1.5rem !important;
       }
 
-      /* PDP mobile */
       .pdp-body {
         display: flex !important;
         flex-direction: column !important;
@@ -2842,7 +2870,6 @@
         text-align: center !important;
       }
 
-      /* BRAND PAGE mobile */
       .bp-header {
         padding: 10px 12px !important;
         gap: 8px !important;
@@ -3247,7 +3274,6 @@
           <p class="pdp-sec-label">Select Size</p>
           <div class="pdp-sizes" id="pdp-sizes"></div>
         </div>
-        <!-- CHANGE 2 — required message element added above the WA button -->
         <p class="pdp-required-msg" id="pdp-required-msg"></p>
         <a class="pdp-wa" id="pdp-wa" href="#" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -3323,7 +3349,7 @@
     const SIZES_BAPE = ['S', 'M', 'L', 'XL', 'XXL'];
     const CARD_SLOT = 232;
 
-    // Only 4 items — add your full list here
+    // ── ITEMS: only 4 placeholder items — add your full list here ──
     const ITEMS = [
       {id:622,name:"Stüssy Winged Head Tee White",brand:"Stüssy",cat:"streetwear",badge:"HOT",tags:["stussy","winged head","white tee","streetwear","graphic tee","abu dhabi","secret shop","menswear","skate culture"],desc:"White · Stüssy Graphic Tee",longDesc:"The Stüssy Winged Head Tee features iconic brand artwork on a crisp white cotton base, perfect for elevating your daily streetwear rotation.",imgs:["images/WhatsApp Image 2026-05-09 at 9.31.46 PM.jpeg"]},
   {id:623,name:"A Bathing Ape x Dragon Ball Z Baby Milo Tee",brand:"A Bathing Ape",cat:"streetwear",badge:"HOT",tags:["a bathing ape","bape","dragon ball z","baby milo","streetwear","graphic tee","abu dhabi","streetwear uae","bape x dbz"],desc:"White / Black · Baby Milo Graphic",longDesc:"This iconic A Bathing Ape collaboration features the legendary Baby Milo character reimagined with classic Dragon Ball Z aesthetic elements.",imgs:["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"],colorVariants:[{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"]},{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"]}]},
@@ -4368,7 +4394,6 @@
         ).join('');
       } else ssec.style.display = 'none';
       document.getElementById('pdp-wa').href = waLink(item, imgs[pdpImgIdx], pdpSz, cv?.label || '');
-      // Clear any previous required message when re-painting
       const msgEl = document.getElementById('pdp-required-msg');
       if (msgEl) { msgEl.textContent = ''; msgEl.classList.remove('visible'); }
       const related = ITEMS.filter(x => x.id !== item.id && (x.brand === item.brand || x.cat === item.cat) && (x.imgs || []).length > 0).slice(0, 12);
@@ -4412,35 +4437,25 @@
       }
     });
 
-    // CHANGE 3 — WhatsApp button click interceptor (validates size + color before allowing)
     document.getElementById('pdp-wa').addEventListener('click', function(e) {
       if (!pdpItem) return;
-
       const needsSize = CLOTHING.includes(pdpItem.cat);
       const needsColor = !!(pdpItem.colorVariants && pdpItem.colorVariants.length > 1);
       const missingSize = needsSize && !pdpSz;
       const missingColor = needsColor && pdpCi === null;
-
       const msgEl = document.getElementById('pdp-required-msg');
       const waBtn = document.getElementById('pdp-wa');
-
       if (missingSize || missingColor) {
         e.preventDefault();
-
-        // Build message
         const parts = [];
         if (missingColor) parts.push('a color');
         if (missingSize) parts.push('a size');
         msgEl.textContent = `⚠ Please select ${parts.join(' and ')} before ordering`;
         msgEl.classList.add('visible');
-
-        // Shake the button
         waBtn.classList.remove('shake');
         void waBtn.offsetWidth;
         waBtn.classList.add('shake');
         setTimeout(() => waBtn.classList.remove('shake'), 500);
-
-        // Flash the unpicked size buttons red
         if (missingSize) {
           document.querySelectorAll('.pdp-sz').forEach(btn => {
             btn.classList.add('required-flash');
@@ -4448,8 +4463,6 @@
           });
           document.getElementById('pdp-size-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-
-        // Flash the unpicked swatches
         if (missingColor) {
           document.querySelectorAll('.pdp-sw').forEach(sw => {
             sw.classList.add('required-flash-swatch');
@@ -4459,11 +4472,8 @@
             document.getElementById('pdp-color-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }
-
         return;
       }
-
-      // All good — clear message and allow through
       msgEl.textContent = '';
       msgEl.classList.remove('visible');
     });
@@ -4500,16 +4510,13 @@
       if (!el.dataset.dragBound) { el.dataset.dragBound = '1'; initHscrollDrag(el); }
     });
 
-    // Auto-open item from WhatsApp link (?item=ID)
     (function() {
       const params = new URLSearchParams(window.location.search);
       const itemId = params.get('item');
       if (itemId) {
         const id = parseInt(itemId);
         const found = ITEMS.find(x => x.id === id);
-        if (found) {
-          setTimeout(() => openPdp(id), 300);
-        }
+        if (found) { setTimeout(() => openPdp(id), 300); }
       }
     })();
 
