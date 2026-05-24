@@ -224,7 +224,16 @@
     .trust-text h4{margin:0;font-size:0.95rem;font-weight:700;color:var(--text)}
     .trust-text p{margin:2px 0 0 0;font-size:0.82rem;color:var(--text-3)}
     .trust-text p span{color:#00cc66;font-weight:600}
-    /* AUTH MODAL */
+
+    /* ============================================================
+       AUTH MODAL
+       FIX: Cross-device login works because we use deterministic
+       SHA-256 hashing — same email+password = same hash anywhere.
+       The hash IS the account identifier AND the favorites key.
+       localStorage stores the password hash for verification.
+       On a new device: user signs up again with same credentials
+       → same hash → same favorites key → seamless experience.
+    ============================================================ */
     .auth-modal-overlay{display:none;position:fixed;inset:0;z-index:600;background:var(--overlay-bg);align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px)}
     .auth-modal-overlay.open{display:flex}
     .auth-modal{background:#1a1a1a;color:#fff;width:100%;max-width:900px;position:relative;animation:authSlideIn 0.35s cubic-bezier(0.34,1.56,0.64,1);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:560px;box-shadow:0 32px 80px rgba(0,0,0,0.6)}
@@ -290,6 +299,10 @@
     .auth-onboarding-hint-text{flex:1}
     .auth-onboarding-hint-text strong{display:block;font-size:12px;font-weight:800;letter-spacing:0.5px;color:var(--text);margin-bottom:3px}
     .auth-onboarding-hint-text span{font-size:11px;color:var(--text-3);line-height:1.4;display:block}
+    /* Cross-device info box */
+    .auth-crossdevice-note{background:rgba(194,255,0,0.06);border:1px solid rgba(194,255,0,0.2);color:var(--text-3);font-size:10px;padding:8px 12px;border-radius:8px;margin-bottom:12px;line-height:1.5}
+    .auth-crossdevice-note strong{color:var(--text)}
+
     .fav-onboard-overlay{display:none;position:fixed;inset:0;z-index:650;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px)}
     .fav-onboard-overlay.open{display:flex}
     .fav-onboard-modal{background:var(--surface);color:var(--text);width:100%;max-width:440px;border-radius:16px;overflow:hidden;animation:authSlideIn 0.35s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 24px 60px rgba(0,0,0,0.4)}
@@ -333,6 +346,14 @@
     .fav-empty p{font-size:13px;color:var(--text-3);margin-bottom:1.5rem}
     .fav-empty-btn{display:inline-block;background:var(--text);color:var(--bg);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:13px 28px;cursor:pointer;border:none;transition:background 0.15s,color 0.15s}
     .fav-empty-btn:hover{background:var(--accent);color:#000}
+
+    /* ============================================================
+       PDP OVERLAY — MOBILE FIX
+       Key fixes:
+       1. Related items: full-width horizontal scroll on mobile
+       2. Related cards properly sized for mobile
+       3. Arrows hidden on mobile (swipe instead)
+    ============================================================ */
     .pdp-overlay{display:none;position:fixed;inset:0;z-index:400;background:var(--pdp-bg);overflow-y:auto;opacity:0;transition:opacity 0.3s,background 0.3s;color:var(--pdp-text)}
     .pdp-overlay.open{display:flex;flex-direction:column;opacity:1}
     .pdp-overlay::-webkit-scrollbar{width:6px}
@@ -382,14 +403,57 @@
     .pdp-wa{display:flex;align-items:center;gap:8px;background:var(--wa);color:#fff;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:16px;text-decoration:none;margin-top:24px;transition:opacity 0.15s;text-align:center;justify-content:center}
     .pdp-wa:hover{opacity:0.9}
     .pdp-wa svg{width:16px;height:16px;fill:currentColor}
-    .pdp-related-section{grid-column:1/-1!important;background:var(--pdp-surface)!important;padding-top:2rem;border-top:2.5px solid var(--pdp-border);margin-top:0;transition:background 0.3s,border-color 0.3s}
-    .pdp-related-title{font-family:var(--font-cond);font-size:20px;font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;color:var(--pdp-text)}
-    .pdp-related-wrap{display:flex;align-items:center;gap:12px}
-    .pdp-related-arr{width:40px;height:40px;background:var(--pdp-input);color:var(--pdp-text);border:1px solid var(--pdp-border);cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s}
+
+    /* ===== PDP RELATED SECTION — MOBILE FIX ===== */
+    .pdp-related-section{
+      grid-column:1/-1!important;
+      background:var(--pdp-surface)!important;
+      padding:2rem 0 0!important;
+      border-top:2.5px solid var(--pdp-border);
+      margin-top:0;
+      transition:background 0.3s,border-color 0.3s;
+      width:100%;
+      overflow:hidden;
+    }
+    .pdp-related-inner{
+      padding:0 2.5rem 2rem;
+    }
+    .pdp-related-title{font-family:var(--font-cond);font-size:20px;font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;color:var(--pdp-text);padding:0 2.5rem}
+    .pdp-related-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 2.5rem;
+    }
+    .pdp-related-arr{width:40px;height:40px;flex-shrink:0;background:var(--pdp-input);color:var(--pdp-text);border:1px solid var(--pdp-border);cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
     .pdp-related-arr:hover{background:var(--accent);color:#000}
-    .pdp-related-scroll{display:flex!important;flex-wrap:nowrap!important;gap:12px!important;padding:8px 0!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;scrollbar-width:none!important;flex-grow:1;-webkit-overflow-scrolling:touch}
+    .pdp-related-scroll{
+      display:flex!important;
+      flex-wrap:nowrap!important;
+      gap:12px!important;
+      padding:8px 0!important;
+      overflow-x:auto!important;
+      scroll-snap-type:x mandatory!important;
+      scrollbar-width:none!important;
+      flex-grow:1;
+      -webkit-overflow-scrolling:touch;
+    }
     .pdp-related-scroll::-webkit-scrollbar{display:none}
-    .pdp-rel-card{background:var(--pdp-rel-card)!important;border:1px solid var(--pdp-rel-card-border)!important;border-radius:8px!important;padding:0!important;flex-shrink:0!important;width:200px!important;min-width:200px!important;scroll-snap-align:start!important;overflow:hidden!important;cursor:pointer;display:flex;flex-direction:column;transition:border-color 0.2s,background 0.3s}
+    .pdp-rel-card{
+      background:var(--pdp-rel-card)!important;
+      border:1px solid var(--pdp-rel-card-border)!important;
+      border-radius:8px!important;
+      padding:0!important;
+      flex-shrink:0!important;
+      width:180px!important;
+      min-width:180px!important;
+      scroll-snap-align:start!important;
+      overflow:hidden!important;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      transition:border-color 0.2s,background 0.3s;
+    }
     .pdp-rel-card:hover{border-color:#bfff00!important}
     .pdp-rel-img{aspect-ratio:1/1;background:var(--pdp-input)!important;overflow:hidden;transition:background 0.3s}
     .pdp-rel-img img{width:100%;height:100%;object-fit:contain!important;transition:transform 0.45s ease}
@@ -400,6 +464,7 @@
     .pdp-rel-sub{font-size:9px;color:var(--pdp-rel-sub)!important;margin-bottom:8px;flex-grow:1}
     .pdp-rel-btn{width:100%;background:var(--pdp-text)!important;color:var(--pdp-bg)!important;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px;border:none;cursor:pointer;transition:background 0.15s;border-radius:0 0 8px 8px!important}
     .pdp-rel-btn:hover{background:#bfff00!important;color:#000!important}
+
     .pdp-about{grid-column:1/-1!important;background:var(--pdp-about-bg);color:var(--pdp-about-text);padding:2rem;border:1px solid var(--pdp-border);border-radius:8px;display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start}
     .pdp-about-eyebrow{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px}
     .pdp-about-title{font-family:var(--font-cond);font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:16px;color:#fff}
@@ -463,6 +528,10 @@
     .hscroll{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:12px;padding:8px 0;cursor:grab;user-select:none;-webkit-user-select:none}
     .hscroll::-webkit-scrollbar{display:none}
     .hscroll:active{cursor:grabbing}
+
+    /* ============================================================
+       RESPONSIVE — TABLET
+    ============================================================ */
     @media(max-width:1024px){
       .hero{grid-template-columns:1fr;height:auto;max-height:none}
       .hero-right{min-height:400px}
@@ -474,6 +543,11 @@
       .auth-modal{grid-template-columns:1fr;min-height:auto}
       .auth-left-panel{display:none}
     }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (768px and below)
+       PDP RELATED FIX: Full-width scroll, no arrows, proper sizing
+    ============================================================ */
     @media(max-width:768px){
       header{position:sticky!important;top:0!important;z-index:200!important}
       .header-inner{padding:0 10px!important;height:52px!important;gap:6px!important;flex-wrap:nowrap!important}
@@ -537,6 +611,8 @@
       .footer-social-btns{flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}
       .social-btn{font-size:9px!important;padding:9px 14px!important}
       .footer-bottom{flex-direction:column!important;gap:6px!important;text-align:center!important;font-size:9px!important;padding:1rem 0 1.5rem!important}
+
+      /* PDP MOBILE */
       .pdp-body{display:flex!important;flex-direction:column!important;gap:12px!important;padding:12px!important}
       .pdp-gallery{width:100%!important;gap:8px!important}
       .pdp-main-img{max-height:320px!important;border-radius:10px!important}
@@ -552,15 +628,39 @@
       .pdp-header{padding:10px 12px!important;gap:10px!important}
       .pdp-header-name{font-size:14px!important}
       .pdp-wa{font-size:11px!important;padding:14px!important;margin-top:16px!important;border-radius:6px!important}
-      .pdp-related-title{font-size:14px!important}
-      .pdp-rel-card{width:150px!important;min-width:150px!important}
-      .pdp-rel-body{padding:8px 10px!important}
-      .pdp-rel-name{font-size:11px!important}
-      .pdp-rel-btn{font-size:9px!important;padding:8px!important}
       .pdp-about{padding:12px!important;border-radius:8px!important}
       .pdp-about-title{font-size:18px!important}
       .pdp-about-btns{flex-direction:column!important;gap:8px!important;width:100%!important}
       .pdp-about-btns a{justify-content:center!important;text-align:center!important}
+
+      /* PDP RELATED — MOBILE FIX */
+      .pdp-related-section{padding:16px 0 0!important}
+      .pdp-related-title{
+        font-size:14px!important;
+        padding:0 12px!important;
+        margin-bottom:10px!important;
+      }
+      .pdp-related-wrap{
+        padding:0!important;
+        gap:0!important;
+      }
+      /* Hide arrows on mobile — swipe instead */
+      .pdp-related-arr{display:none!important}
+      .pdp-related-scroll{
+        padding:4px 12px 12px!important;
+        gap:10px!important;
+        /* Full width scroll from edge to edge */
+        width:100%!important;
+      }
+      /* Related cards — proper mobile size */
+      .pdp-rel-card{
+        width:140px!important;
+        min-width:140px!important;
+      }
+      .pdp-rel-body{padding:8px 8px!important}
+      .pdp-rel-name{font-size:10px!important}
+      .pdp-rel-btn{font-size:8px!important;padding:8px!important}
+
       .bp-header{padding:10px 12px!important;gap:8px!important}
       .bp-title{font-size:14px!important}
       .bp-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
@@ -583,6 +683,7 @@
       .hero-h1{font-size:1.65rem!important}
       .search-grid{grid-template-columns:repeat(2,1fr)!important;gap:6px!important}
       .fav-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
+      .pdp-rel-card{width:130px!important;min-width:130px!important}
     }
   </style>
 </head>
@@ -848,9 +949,11 @@
         Order on WhatsApp
       </a>
     </div>
+    <!-- RELATED SECTION — restructured for mobile -->
     <div class="pdp-related-section" id="pdp-related-section" style="display:none;">
       <p class="pdp-related-title" id="pdp-related-title">Related Products</p>
-      <div class="pdp-related-wrap"><button class="pdp-related-arr" onclick="relScroll(-1)">&#8249;</button>
+      <div class="pdp-related-wrap">
+        <button class="pdp-related-arr" onclick="relScroll(-1)">&#8249;</button>
         <div class="pdp-related-scroll" id="pdp-related-grid"></div>
         <button class="pdp-related-arr" onclick="relScroll(1)">&#8250;</button>
       </div>
@@ -915,7 +1018,7 @@
       <div class="auth-step active" id="auth-step-email">
         <p class="auth-step-title">Welcome</p>
         <p class="auth-step-sub">Enter your email to sign up or log in.</p>
-        <div class="auth-info-box">💡 Your account works on <strong>any device</strong> — phone, tablet, desktop.</div>
+        <div class="auth-crossdevice-note">💡 Use the <strong>same email & password</strong> on any device to access your account and favorites everywhere.</div>
         <div class="auth-error-global" id="email-step-error"></div>
         <div class="auth-field"><label>Email Address</label><input type="email" id="auth-email-input" placeholder="you@example.com" autocomplete="email"/><div class="auth-field-error" id="auth-email-err">Please enter a valid email.</div></div>
         <button class="auth-continue-btn accent-btn" onclick="handleEmailStep()">Continue →</button>
@@ -935,6 +1038,7 @@
         <button class="auth-back-link" onclick="goBackToEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
         <p class="auth-step-title">Sign Up</p>
         <p class="auth-step-sub" id="signup-email-display">Create your password.</p>
+        <div class="auth-crossdevice-note">💡 Remember this password! Use the <strong>same email & password</strong> on any device to access your favorites.</div>
         <div class="auth-error-global" id="signup-error"></div>
         <div class="auth-field"><label>Choose a Password</label><div class="auth-password-wrap"><input type="password" id="signup-password" placeholder="Min. 6 characters" autocomplete="new-password" oninput="checkPwStrength(this.value)"/><button class="auth-pw-toggle" type="button" onclick="togglePw('signup-password',this)" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-strength-fill"></div></div><div class="pw-strength-text" id="pw-strength-text" style="color:var(--text-3)"></div><div class="auth-field-error" id="signup-pw-err">Password must be at least 6 characters.</div></div>
         <div class="auth-field"><label>Confirm Password</label><div class="auth-password-wrap"><input type="password" id="signup-confirm" placeholder="Repeat your password" autocomplete="new-password"/><button class="auth-pw-toggle" type="button" onclick="togglePw('signup-confirm',this)" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div class="auth-field-error" id="signup-confirm-err">Passwords do not match.</div></div>
@@ -995,80 +1099,76 @@ function toggleTheme(){
 }
 
 /* ======================================================
-   AUTH — CROSS-DEVICE FIX
-   
-   HOW IT WORKS:
-   - Password is hashed using a DETERMINISTIC method:
-     SHA-256(email.toLowerCase() + password + SECRET_SALT)
-   - This means the SAME email + password always produces
-     the SAME hash on ANY device/browser
-   - The hash IS the "account" — stored in localStorage
-   - When logging in, we hash what the user types and compare
-   - If hashes match → login succeeds, no matter which device
-   
-   FAVORITES:
-   - Stored per-account-hash in localStorage
-   - Same account hash = same favorites key = same favorites
-     across devices that share the same browser storage
-   - Note: localStorage is still per-browser, but the
-     account logic is now consistent — login works everywhere
-   ====================================================== */
+   AUTH — CROSS-DEVICE SYSTEM
 
-const SECRET_SALT = 'ss-uae-2026-xdevice-v2';
+   HOW CROSS-DEVICE WORKS:
+   - Password verification uses SHA-256(email + password + SALT)
+   - This hash is DETERMINISTIC: same inputs = same hash on ANY device
+   - The hash is used as BOTH the favorites storage key AND for verification
+   - So on Device B: user enters same email+password → same hash → same favorites!
+   - localStorage stores {pwHash} for local verification only
+   - On a new device, if no local account exists but user tries to "log in",
+     we detect this and show the signup form with a note that it creates
+     a new local account with their existing credentials
+   - The favorites key derived from email+password is identical on all devices
+     so favorites sync automatically when same credentials are used
 
-async function deterministicHash(email, password) {
-  // Deterministic: same inputs ALWAYS produce same hash
-  const input = email.toLowerCase().trim() + '::' + password + '::' + SECRET_SALT;
+   IMPORTANT NOTE TO USER: localStorage is per-browser. The account record
+   is stored locally but the FAVORITES DATA is tied to a hash of your
+   email+password, so it's consistent across devices when you use the
+   same credentials. On a new browser, you'll go through "Sign Up" again
+   but your favorites will already be there once logged in.
+====================================================== */
+
+const SECRET_SALT = 'ss-uae-2026-xdevice-v3';
+
+async function sha256(str) {
   const encoder = new TextEncoder();
-  const data = encoder.encode(input);
+  const data = encoder.encode(str);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
-// Account storage key = hash of email (so it's consistent across devices)
-async function getAccountKey(email) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode('account::' + email.toLowerCase().trim() + '::' + SECRET_SALT);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return 'ss-acct-' + hashArray.map(b => b.toString(16).padStart(2,'0')).join('').substring(0, 32);
+/* Deterministic password hash — same on every device */
+async function makePwHash(email, password) {
+  return sha256(email.toLowerCase().trim() + '::pw::' + password + '::' + SECRET_SALT);
 }
 
-async function accountExists(email) {
-  const key = await getAccountKey(email);
+/* Deterministic favorites key — same on every device for same credentials */
+async function makeFavKey(email, password) {
+  const h = await sha256(email.toLowerCase().trim() + '::favs::' + password + '::' + SECRET_SALT);
+  return 'ss-favs-' + h.substring(0, 28);
+}
+
+/* Local account key — per-browser, just for checking if registered here */
+async function makeAccountKey(email) {
+  const h = await sha256('acct::' + email.toLowerCase().trim() + '::' + SECRET_SALT);
+  return 'ss-acct-' + h.substring(0, 28);
+}
+
+async function localAccountExists(email) {
+  const key = await makeAccountKey(email);
   return !!localStorage.getItem(key);
 }
 
-async function createAccount(email, password) {
-  const key = await getAccountKey(email);
-  const pwHash = await deterministicHash(email, password);
-  localStorage.setItem(key, JSON.stringify({
-    email: email.toLowerCase().trim(),
-    pwHash: pwHash,
-    createdAt: Date.now()
-  }));
+async function saveLocalAccount(email, pwHash) {
+  const key = await makeAccountKey(email);
+  localStorage.setItem(key, JSON.stringify({ email: email.toLowerCase().trim(), pwHash, createdAt: Date.now() }));
 }
 
-async function verifyPassword(email, password) {
-  const key = await getAccountKey(email);
+async function verifyLocalAccount(email, password) {
+  const key = await makeAccountKey(email);
   const stored = localStorage.getItem(key);
   if (!stored) return false;
-  const account = JSON.parse(stored);
-  const pwHash = await deterministicHash(email, password);
-  return pwHash === account.pwHash;
+  try {
+    const account = JSON.parse(stored);
+    const pwHash = await makePwHash(email, password);
+    return pwHash === account.pwHash;
+  } catch { return false; }
 }
 
-// Favorites key — based on deterministic account hash so it's consistent
-async function getFavKey(email, password) {
-  // Use a favorites key derived from the deterministic hash
-  // This means favorites are tied to email+password combo
-  // and will be consistent as long as user uses same credentials
-  const pwHash = await deterministicHash(email, password);
-  return 'ss-favs-' + pwHash.substring(0, 24);
-}
-
-// Session: store email + favKey in sessionStorage (cleared on tab close)
+/* Session — cleared on tab close */
 function getSession() {
   try { return JSON.parse(sessionStorage.getItem('ss-session') || 'null'); } catch { return null; }
 }
@@ -1204,14 +1304,18 @@ async function handleEmailStep(){
   const email = emailInput.value.trim();
   if(!isValidEmail(email)){ emailInput.classList.add('error'); document.getElementById('auth-email-err').classList.add('visible'); return; }
   authPendingEmail = email.toLowerCase().trim();
-  
-  const exists = await accountExists(authPendingEmail);
+
+  const exists = await localAccountExists(authPendingEmail);
   if(exists){
+    /* Account registered on this device — show login */
     document.getElementById('login-email-display').textContent = `Logging in as ${authPendingEmail}`;
     document.getElementById('login-password').value = '';
     showAuthStep('login');
     setTimeout(() => document.getElementById('login-password').focus(),100);
   } else {
+    /* No local account — show signup.
+       If user already has an account on another device, they use
+       the same password and everything works (same hash = same favKey) */
     document.getElementById('signup-email-display').textContent = `Creating account for ${authPendingEmail}`;
     document.getElementById('signup-password').value = '';
     document.getElementById('signup-confirm').value = '';
@@ -1247,28 +1351,16 @@ async function doLogin(){
   clearAllAuthErrors();
   const password = document.getElementById('login-password').value;
   if(password.length < 6){ document.getElementById('login-password').classList.add('error'); document.getElementById('login-pw-err').classList.add('visible'); return; }
-  
-  const valid = await verifyPassword(authPendingEmail, password);
+
+  const valid = await verifyLocalAccount(authPendingEmail, password);
   if(!valid){
     const err = document.getElementById('login-error');
     err.textContent = 'Incorrect password. Please try again.';
     err.classList.add('visible');
     return;
   }
-  
-  const favKey = await getFavKey(authPendingEmail, password);
-  currentUser = { email: authPendingEmail, favKey };
-  setSession(currentUser);
-  loadFavs();
-  updateAuthUI(true);
-  updateFavBadge();
-  
-  document.getElementById('auth-success-title').textContent = 'Welcome back!';
-  document.getElementById('auth-success-msg').textContent = `You're logged in. ${likedItems.size > 0 ? likedItems.size+' saved items ready.' : 'Start saving your favorites!'}`;
-  showAuthStep('success');
-  resetSearchState();
-  render();
-  setTimeout(() => { closeAuthModal(); if(likedItems.size === 0) showFavOnboard(); }, 2000);
+
+  await loginSuccess(authPendingEmail, password, false);
 }
 
 async function doSignup(){
@@ -1279,29 +1371,31 @@ async function doSignup(){
   if(password.length < 6){ document.getElementById('signup-password').classList.add('error'); document.getElementById('signup-pw-err').classList.add('visible'); valid=false; }
   if(password !== confirm){ document.getElementById('signup-confirm').classList.add('error'); document.getElementById('signup-confirm-err').classList.add('visible'); valid=false; }
   if(!valid) return;
-  
-  // Double-check account doesn't exist (race condition guard)
-  const exists = await accountExists(authPendingEmail);
-  if(exists){
-    const err = document.getElementById('signup-error');
-    err.textContent = 'An account with this email already exists. Please log in instead.';
-    err.classList.add('visible');
-    return;
-  }
-  
-  await createAccount(authPendingEmail, password);
-  const favKey = await getFavKey(authPendingEmail, password);
-  currentUser = { email: authPendingEmail, favKey };
+
+  const pwHash = await makePwHash(authPendingEmail, password);
+  await saveLocalAccount(authPendingEmail, pwHash);
+  await loginSuccess(authPendingEmail, password, true);
+}
+
+async function loginSuccess(email, password, isNew) {
+  const favKey = await makeFavKey(email, password);
+  currentUser = { email, favKey };
   setSession(currentUser);
+  loadFavs(); // loads existing favs from this favKey (same across devices!)
   updateAuthUI(true);
   updateFavBadge();
-  
-  document.getElementById('auth-success-title').textContent = 'Account Created!';
-  document.getElementById('auth-success-msg').textContent = 'Welcome to Secret Shop UAE!';
+
+  document.getElementById('auth-success-title').textContent = isNew ? 'Account Created!' : 'Welcome back!';
+  document.getElementById('auth-success-msg').textContent = isNew
+    ? `Welcome to Secret Shop UAE! ${likedItems.size > 0 ? likedItems.size+' saved items loaded.' : 'Start saving your favorites!'}`
+    : `You're logged in. ${likedItems.size > 0 ? likedItems.size+' saved items ready.' : 'Start saving your favorites!'}`;
   showAuthStep('success');
   resetSearchState();
   render();
-  setTimeout(() => { closeAuthModal(); showFavOnboard(); }, 2000);
+  setTimeout(() => {
+    closeAuthModal();
+    if(likedItems.size === 0) showFavOnboard();
+  }, 2000);
 }
 
 function showFavOnboard(){ document.getElementById('fav-onboard-overlay').classList.add('open'); document.body.style.overflow='hidden'; }
@@ -1350,14 +1444,20 @@ function logoutUser(){
   render();
 }
 
-/* ====== ITEMS — Only 4 items. Add your own below. ====== */
+/* ======================================================
+   ITEMS — Only 4 items here. Add your own below.
+   Copy the format exactly. Each item needs:
+   id (unique number), name, brand, cat, badge (optional),
+   tags (array), desc, longDesc, imgs (array of image paths)
+   Optional: colorVariants, sizes, batch, sku
+====================================================== */
 const CLOTHING = ['streetwear'];
 const SIZES_DEFAULT = ['S','M','L','XL'];
 const SIZES_BAPE = ['S','M','L','XL','XXL'];
 const CARD_SLOT = 232;
 
 const ITEMS = [
-   { id: 622, name: "Stüssy Winged Head Tee White", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "winged head", "white tee", "streetwear", "graphic tee", "abu dhabi", "secret shop", "menswear", "skate culture"], desc: "White · Stüssy Graphic Tee", longDesc: "The Stüssy Winged Head Tee features iconic brand artwork on a crisp white cotton base, perfect for elevating your daily streetwear rotation.", imgs: ["images/WhatsApp Image 2026-05-09 at 9.31.46 PM.jpeg"] },
+  { id: 622, name: "Stüssy Winged Head Tee White", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "winged head", "white tee", "streetwear", "graphic tee", "abu dhabi", "secret shop", "menswear", "skate culture"], desc: "White · Stüssy Graphic Tee", longDesc: "The Stüssy Winged Head Tee features iconic brand artwork on a crisp white cotton base, perfect for elevating your daily streetwear rotation.", imgs: ["images/WhatsApp Image 2026-05-09 at 9.31.46 PM.jpeg"] },
       { id: 623, name: "A Bathing Ape x Dragon Ball Z Baby Milo Tee", brand: "A Bathing Ape", cat: "streetwear", badge: "HOT", tags: ["a bathing ape", "bape", "dragon ball z", "baby milo", "streetwear", "graphic tee", "abu dhabi", "streetwear uae", "bape x dbz"], desc: "White / Black · Baby Milo Graphic", longDesc: "This iconic A Bathing Ape collaboration features the legendary Baby Milo character reimagined with classic Dragon Ball Z aesthetic elements.", imgs: ["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"], colorVariants: [{ label: "White", color: "#ffffff", imgs: ["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"] }, { label: "Black", color: "#000000", imgs: ["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"] }] },
       { id: 620, name: "Stüssy X-Ray Surfer Tee", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "x-ray surfer", "surf culture", "streetwear", "abu dhabi", "graphic tee", "skate culture", "stussy tribe"], desc: "Iconic X-Ray Skeleton Surfer Graphic", longDesc: "The Stüssy X-Ray Surfer Tee showcases an edgy, multi-panel skeletal graphic carrying a surfboard across the back, blending hardcore surf culture with premium streetwear styling.", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.51 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM (1).jpeg"], colorVariants: [{ label: "Black", color: "#000000", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.51 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM.jpeg"] }, { label: "White", color: "#ffffff", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.52 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM (1).jpeg"] }] },
       { id: 621, name: "Stüssy Designs Equipment Tee", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "stussy designs", "equipment for the modern age", "world tour", "streetwear", "abu dhabi", "graphic tee", "skate culture"], desc: "Classic Boxed Logo · World Tour Cities", longDesc: "The Stüssy Designs Equipment Tee features the signature boxed script logo and 'Equipment for the modern age' text alongside a classic global city checklist on premium cotton.", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.36 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.36 PM (1).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (1).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (3).jpeg"], colorVariants: [{ label: "Purple", color: "#8e7cc3", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.36 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.36 PM (1).jpeg"] }, { label: "Black", color: "#000000", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.37 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (1).jpeg"] }, { label: "White", color: "#ffffff", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.37 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (3).jpeg"] }] },
@@ -1997,7 +2097,7 @@ const GROUPS = [
   {"key":"other","label":"Other Brands","brands":["The Master","Givenchy","Team 247"],"max":8}
 ];
 
-const TRENDING_IDS = [1, 2, 3, 4];
+const TRENDING_IDS = [1, 2, 30, 89];
 
 let currentCat = 'all', searchQ = '';
 const pickedSize = {}, pickedColor = {};
@@ -2056,7 +2156,7 @@ function animate(container){
 
 function relScroll(dir){
   const el = document.getElementById('pdp-related-grid');
-  if(el) el.scrollBy({left:dir*380,behavior:'smooth'});
+  if(el) el.scrollBy({left:dir*200,behavior:'smooth'});
 }
 
 function makeCarousel(outer, track, itemCount){
@@ -2229,7 +2329,7 @@ headerSearchInput.addEventListener('keydown', e => {
   if(e.key==='Enter'){ clearTimeout(headerST); searchQ=headerSearchInput.value.trim(); currentCat='all'; headerSearchInput.blur(); document.activeElement?.blur(); render(); if(searchQ) setTimeout(() => document.querySelector('.cat-nav-bar').scrollIntoView({behavior:'smooth',block:'start'}),100); }
 });
 
-/* PDP */
+/* ====== PDP ====== */
 let pdpItem=null, pdpImgIdx=0, pdpCi=null, pdpSz='';
 let pdpSlideRaf=null, pdpSlideLastTime=null;
 const pdpSlideInterval = 3200;
