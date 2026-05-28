@@ -100,7 +100,8 @@
     .cat-nav-count{margin-left:auto;font-size:10px;font-weight:600;color:var(--text-3);padding:0 0 0 16px;white-space:nowrap;flex-shrink:0}
     .hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;max-height:760px}
     .hero-left{background:var(--surface);display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 4.5rem;transition:background 0.3s}
-    .hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:1.75rem;display:flex;align-items:center;gap:10px}
+    /* CHANGE 1 & 3: Eyebrow font size */
+    .hero-eyebrow{font-size:clamp(1rem,2vw,1.4rem);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-2);margin-bottom:1.75rem;display:flex;align-items:center;gap:10px}
     .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--accent);display:inline-block;flex-shrink:0}
     .hero-h1{font-family:var(--font-cond);font-size:clamp(4rem,6vw,6.5rem);font-weight:900;line-height:0.9;letter-spacing:-2px;text-transform:uppercase;margin-bottom:1.75rem}
     .hero-h1 .line-green{color:var(--accent)}
@@ -117,10 +118,12 @@
     .hero-badge-title{font-family:var(--font-cond);font-size:1.75rem;font-weight:900;letter-spacing:-0.5px;line-height:1;text-transform:uppercase;color:#000}
     .hero-badge-sub{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.5);margin-top:3px}
     .hero-bg-text{position:absolute;bottom:-1rem;right:-1rem;font-family:var(--font-cond);font-size:16rem;font-weight:900;color:rgba(0,0,0,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-6px}
+    /* CHANGE 4/5/6: Categories */
     .categories-wrap{padding:3.5rem 2.5rem;max-width:1500px;margin:0 auto}
     .sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem}
     .sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
     .sec-title{font-family:var(--font-cond);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:900;text-transform:uppercase;letter-spacing:0.05em;line-height:1;color:var(--text);display:inline-block}
+    /* CHANGE 6D: 7 items grid - use repeat(4,1fr) on desktop */
     .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
     .cat-card{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;background:#ddd}
     .cat-card-img{width:100%;height:100%;object-fit:cover;transition:transform 0.55s ease;display:block}
@@ -130,6 +133,14 @@
     .cat-card-name{font-family:var(--font-cond);font-size:18px;font-weight:900;text-transform:uppercase;color:#fff;letter-spacing:-0.3px;line-height:1.1}
     .cat-card-sub{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:3px}
     .site-body{max-width:1500px;margin:0 auto;padding:0 2.5rem 5rem}
+    /* CHANGE 2: Share Shop banner */
+    .share-shop-banner{display:flex;align-items:center;justify-content:center;gap:14px;background:linear-gradient(135deg,#000 0%,#111 100%);border:2px solid var(--accent);padding:1.25rem 2rem;margin-bottom:2rem;cursor:pointer;transition:opacity 0.2s;position:relative;overflow:hidden}
+    .share-shop-banner::after{content:'↗';position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:48px;color:rgba(194,255,0,0.08);pointer-events:none}
+    .share-shop-banner:hover{opacity:0.9}
+    .share-shop-banner-icon{width:42px;height:42px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .share-shop-banner-icon svg{width:20px;height:20px;stroke:#000;fill:none;stroke-width:2}
+    .share-shop-banner-text strong{display:block;font-family:var(--font-cond);font-size:20px;font-weight:900;text-transform:uppercase;color:#fff;letter-spacing:-0.3px}
+    .share-shop-banner-text span{font-size:11px;color:rgba(255,255,255,0.5)}
     .brand-section{margin-bottom:3rem}
     .brand-sec-hdr{display:flex;align-items:center;justify-content:space-between;border-top:2.5px solid var(--text);padding:1.25rem 0;margin-bottom:0}
     .brand-sec-left{display:flex;align-items:center;gap:12px}
@@ -224,16 +235,24 @@
     .trust-text h4{margin:0;font-size:0.95rem;font-weight:700;color:var(--text)}
     .trust-text p{margin:2px 0 0 0;font-size:0.82rem;color:var(--text-3)}
     .trust-text p span{color:#00cc66;font-weight:600}
-
-    /* ============================================================
-       AUTH MODAL
-       FIX: Cross-device login works because we use deterministic
-       SHA-256 hashing — same email+password = same hash anywhere.
-       The hash IS the account identifier AND the favorites key.
-       localStorage stores the password hash for verification.
-       On a new device: user signs up again with same credentials
-       → same hash → same favorites key → seamless experience.
-    ============================================================ */
+    /* CHANGE 2: Share Modal */
+    .share-modal-overlay{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px)}
+    .share-modal-overlay.open{display:flex}
+    .share-modal{background:var(--modal-bg);color:var(--modal-text);width:100%;max-width:460px;border-radius:16px;overflow:hidden;animation:authSlideIn 0.3s ease;box-shadow:0 24px 60px rgba(0,0,0,0.4);position:relative}
+    .share-modal-header{background:#000;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .share-modal-header h2{font-family:var(--font-cond);font-size:1.5rem;font-weight:900;text-transform:uppercase;color:#fff;margin:0;letter-spacing:-0.3px}
+    .share-modal-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s}
+    .share-modal-close:hover{background:rgba(255,255,255,0.2)}
+    .share-modal-body{padding:1.5rem 2rem 2rem}
+    .share-modal-url{background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text-3);word-break:break-all;margin-bottom:1.25rem;font-family:monospace}
+    .share-modal-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .share-modal-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:10px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:opacity 0.15s;border:none;font-family:var(--font)}
+    .share-modal-btn:hover{opacity:0.85}
+    .share-modal-btn.wa{background:var(--wa);color:#fff}
+    .share-modal-btn.fb{background:#1877f2;color:#fff}
+    .share-modal-btn.copy{background:var(--text);color:var(--bg);grid-column:1/-1}
+    .share-modal-btn.copy.copied{background:var(--accent);color:#000}
+    /* AUTH MODAL */
     .auth-modal-overlay{display:none;position:fixed;inset:0;z-index:600;background:var(--overlay-bg);align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px)}
     .auth-modal-overlay.open{display:flex}
     .auth-modal{background:#1a1a1a;color:#fff;width:100%;max-width:900px;position:relative;animation:authSlideIn 0.35s cubic-bezier(0.34,1.56,0.64,1);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:560px;box-shadow:0 32px 80px rgba(0,0,0,0.6)}
@@ -299,10 +318,8 @@
     .auth-onboarding-hint-text{flex:1}
     .auth-onboarding-hint-text strong{display:block;font-size:12px;font-weight:800;letter-spacing:0.5px;color:var(--text);margin-bottom:3px}
     .auth-onboarding-hint-text span{font-size:11px;color:var(--text-3);line-height:1.4;display:block}
-    /* Cross-device info box */
     .auth-crossdevice-note{background:rgba(194,255,0,0.06);border:1px solid rgba(194,255,0,0.2);color:var(--text-3);font-size:10px;padding:8px 12px;border-radius:8px;margin-bottom:12px;line-height:1.5}
     .auth-crossdevice-note strong{color:var(--text)}
-
     .fav-onboard-overlay{display:none;position:fixed;inset:0;z-index:650;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px)}
     .fav-onboard-overlay.open{display:flex}
     .fav-onboard-modal{background:var(--surface);color:var(--text);width:100%;max-width:440px;border-radius:16px;overflow:hidden;animation:authSlideIn 0.35s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 24px 60px rgba(0,0,0,0.4)}
@@ -346,14 +363,6 @@
     .fav-empty p{font-size:13px;color:var(--text-3);margin-bottom:1.5rem}
     .fav-empty-btn{display:inline-block;background:var(--text);color:var(--bg);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:13px 28px;cursor:pointer;border:none;transition:background 0.15s,color 0.15s}
     .fav-empty-btn:hover{background:var(--accent);color:#000}
-
-    /* ============================================================
-       PDP OVERLAY — MOBILE FIX
-       Key fixes:
-       1. Related items: full-width horizontal scroll on mobile
-       2. Related cards properly sized for mobile
-       3. Arrows hidden on mobile (swipe instead)
-    ============================================================ */
     .pdp-overlay{display:none;position:fixed;inset:0;z-index:400;background:var(--pdp-bg);overflow-y:auto;opacity:0;transition:opacity 0.3s,background 0.3s;color:var(--pdp-text)}
     .pdp-overlay.open{display:flex;flex-direction:column;opacity:1}
     .pdp-overlay::-webkit-scrollbar{width:6px}
@@ -403,57 +412,19 @@
     .pdp-wa{display:flex;align-items:center;gap:8px;background:var(--wa);color:#fff;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:16px;text-decoration:none;margin-top:24px;transition:opacity 0.15s;text-align:center;justify-content:center}
     .pdp-wa:hover{opacity:0.9}
     .pdp-wa svg{width:16px;height:16px;fill:currentColor}
-
-    /* ===== PDP RELATED SECTION — MOBILE FIX ===== */
-    .pdp-related-section{
-      grid-column:1/-1!important;
-      background:var(--pdp-surface)!important;
-      padding:2rem 0 0!important;
-      border-top:2.5px solid var(--pdp-border);
-      margin-top:0;
-      transition:background 0.3s,border-color 0.3s;
-      width:100%;
-      overflow:hidden;
-    }
-    .pdp-related-inner{
-      padding:0 2.5rem 2rem;
-    }
+    /* CHANGE 2B: PDP Share Button */
+    .pdp-share-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--pdp-text);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:13px 16px;margin-top:10px;border:2px solid var(--pdp-border);cursor:pointer;transition:all 0.15s;font-family:var(--font);width:100%}
+    .pdp-share-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .pdp-share-btn svg{width:14px;height:14px;stroke:currentColor;fill:none}
+    .pdp-related-section{grid-column:1/-1!important;background:var(--pdp-surface)!important;padding:2rem 0 0!important;border-top:2.5px solid var(--pdp-border);margin-top:0;transition:background 0.3s,border-color 0.3s;width:100%;overflow:hidden}
+    .pdp-related-inner{padding:0 2.5rem 2rem}
     .pdp-related-title{font-family:var(--font-cond);font-size:20px;font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;color:var(--pdp-text);padding:0 2.5rem}
-    .pdp-related-wrap{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 2.5rem;
-    }
+    .pdp-related-wrap{display:flex;align-items:center;gap:12px;padding:0 2.5rem}
     .pdp-related-arr{width:40px;height:40px;flex-shrink:0;background:var(--pdp-input);color:var(--pdp-text);border:1px solid var(--pdp-border);cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
     .pdp-related-arr:hover{background:var(--accent);color:#000}
-    .pdp-related-scroll{
-      display:flex!important;
-      flex-wrap:nowrap!important;
-      gap:12px!important;
-      padding:8px 0!important;
-      overflow-x:auto!important;
-      scroll-snap-type:x mandatory!important;
-      scrollbar-width:none!important;
-      flex-grow:1;
-      -webkit-overflow-scrolling:touch;
-    }
+    .pdp-related-scroll{display:flex!important;flex-wrap:nowrap!important;gap:12px!important;padding:8px 0!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;scrollbar-width:none!important;flex-grow:1;-webkit-overflow-scrolling:touch}
     .pdp-related-scroll::-webkit-scrollbar{display:none}
-    .pdp-rel-card{
-      background:var(--pdp-rel-card)!important;
-      border:1px solid var(--pdp-rel-card-border)!important;
-      border-radius:8px!important;
-      padding:0!important;
-      flex-shrink:0!important;
-      width:180px!important;
-      min-width:180px!important;
-      scroll-snap-align:start!important;
-      overflow:hidden!important;
-      cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      transition:border-color 0.2s,background 0.3s;
-    }
+    .pdp-rel-card{background:var(--pdp-rel-card)!important;border:1px solid var(--pdp-rel-card-border)!important;border-radius:8px!important;padding:0!important;flex-shrink:0!important;width:180px!important;min-width:180px!important;scroll-snap-align:start!important;overflow:hidden!important;cursor:pointer;display:flex;flex-direction:column;transition:border-color 0.2s,background 0.3s}
     .pdp-rel-card:hover{border-color:#bfff00!important}
     .pdp-rel-img{aspect-ratio:1/1;background:var(--pdp-input)!important;overflow:hidden;transition:background 0.3s}
     .pdp-rel-img img{width:100%;height:100%;object-fit:contain!important;transition:transform 0.45s ease}
@@ -464,7 +435,6 @@
     .pdp-rel-sub{font-size:9px;color:var(--pdp-rel-sub)!important;margin-bottom:8px;flex-grow:1}
     .pdp-rel-btn{width:100%;background:var(--pdp-text)!important;color:var(--pdp-bg)!important;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:10px;border:none;cursor:pointer;transition:background 0.15s;border-radius:0 0 8px 8px!important}
     .pdp-rel-btn:hover{background:#bfff00!important;color:#000!important}
-
     .pdp-about{grid-column:1/-1!important;background:var(--pdp-about-bg);color:var(--pdp-about-text);padding:2rem;border:1px solid var(--pdp-border);border-radius:8px;display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start}
     .pdp-about-eyebrow{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px}
     .pdp-about-title{font-family:var(--font-cond);font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:16px;color:#fff}
@@ -528,13 +498,11 @@
     .hscroll{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:12px;padding:8px 0;cursor:grab;user-select:none;-webkit-user-select:none}
     .hscroll::-webkit-scrollbar{display:none}
     .hscroll:active{cursor:grabbing}
-
-    /* ============================================================
-       RESPONSIVE — TABLET
-    ============================================================ */
+    /* RESPONSIVE */
     @media(max-width:1024px){
       .hero{grid-template-columns:1fr;height:auto;max-height:none}
       .hero-right{min-height:400px}
+      /* CHANGE 5/6: cat grid responsive - 3 cols on tablet for 7 items */
       .cat-grid,.search-grid,.bp-grid{grid-template-columns:repeat(3,1fr)}
       .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
       .pdp-body{grid-template-columns:1fr!important}
@@ -543,11 +511,6 @@
       .auth-modal{grid-template-columns:1fr;min-height:auto}
       .auth-left-panel{display:none}
     }
-
-    /* ============================================================
-       RESPONSIVE — MOBILE (768px and below)
-       PDP RELATED FIX: Full-width scroll, no arrows, proper sizing
-    ============================================================ */
     @media(max-width:768px){
       header{position:sticky!important;top:0!important;z-index:200!important}
       .header-inner{padding:0 10px!important;height:52px!important;gap:6px!important;flex-wrap:nowrap!important}
@@ -574,7 +537,8 @@
       .hero-bg-text{display:none!important}
       .hero-badge{transform:scale(0.6)!important;transform-origin:bottom left!important;bottom:1rem!important;left:1rem!important}
       .hero-left{order:2!important;padding:16px 16px 20px!important;text-align:center!important;align-items:center!important}
-      .hero-eyebrow{font-size:9px!important;margin-bottom:6px!important}
+      /* CHANGE 1/3 mobile eyebrow */
+      .hero-eyebrow{font-size:clamp(0.75rem,3vw,1rem)!important;margin-bottom:6px!important}
       .hero-h1{font-size:2rem!important;letter-spacing:-1px!important;margin-bottom:8px!important;line-height:0.95!important}
       .hero-desc{font-size:12px!important;line-height:1.5!important;margin-bottom:12px!important;max-width:100%!important}
       .hero-btns{flex-direction:row!important;gap:8px!important;width:100%!important}
@@ -583,6 +547,8 @@
       .sec-title{font-size:1.3rem!important}
       .cat-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
       .cat-card{height:120px!important;aspect-ratio:unset!important;border-radius:8px!important}
+      .share-shop-banner{padding:1rem 1rem!important}
+      .share-shop-banner-text strong{font-size:16px!important}
       .site-body{padding:0 10px 32px!important}
       .brand-sec-name{font-size:14px!important}
       .brand-sec-count{font-size:8px!important;padding:2px 6px!important}
@@ -611,8 +577,6 @@
       .footer-social-btns{flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}
       .social-btn{font-size:9px!important;padding:9px 14px!important}
       .footer-bottom{flex-direction:column!important;gap:6px!important;text-align:center!important;font-size:9px!important;padding:1rem 0 1.5rem!important}
-
-      /* PDP MOBILE */
       .pdp-body{display:flex!important;flex-direction:column!important;gap:12px!important;padding:12px!important}
       .pdp-gallery{width:100%!important;gap:8px!important}
       .pdp-main-img{max-height:320px!important;border-radius:10px!important}
@@ -628,39 +592,20 @@
       .pdp-header{padding:10px 12px!important;gap:10px!important}
       .pdp-header-name{font-size:14px!important}
       .pdp-wa{font-size:11px!important;padding:14px!important;margin-top:16px!important;border-radius:6px!important}
+      .pdp-share-btn{font-size:10px!important;padding:11px!important}
       .pdp-about{padding:12px!important;border-radius:8px!important}
       .pdp-about-title{font-size:18px!important}
       .pdp-about-btns{flex-direction:column!important;gap:8px!important;width:100%!important}
       .pdp-about-btns a{justify-content:center!important;text-align:center!important}
-
-      /* PDP RELATED — MOBILE FIX */
       .pdp-related-section{padding:16px 0 0!important}
-      .pdp-related-title{
-        font-size:14px!important;
-        padding:0 12px!important;
-        margin-bottom:10px!important;
-      }
-      .pdp-related-wrap{
-        padding:0!important;
-        gap:0!important;
-      }
-      /* Hide arrows on mobile — swipe instead */
+      .pdp-related-title{font-size:14px!important;padding:0 12px!important;margin-bottom:10px!important}
+      .pdp-related-wrap{padding:0!important;gap:0!important}
       .pdp-related-arr{display:none!important}
-      .pdp-related-scroll{
-        padding:4px 12px 12px!important;
-        gap:10px!important;
-        /* Full width scroll from edge to edge */
-        width:100%!important;
-      }
-      /* Related cards — proper mobile size */
-      .pdp-rel-card{
-        width:140px!important;
-        min-width:140px!important;
-      }
+      .pdp-related-scroll{padding:4px 12px 12px!important;gap:10px!important;width:100%!important}
+      .pdp-rel-card{width:140px!important;min-width:140px!important}
       .pdp-rel-body{padding:8px 8px!important}
       .pdp-rel-name{font-size:10px!important}
       .pdp-rel-btn{font-size:8px!important;padding:8px!important}
-
       .bp-header{padding:10px 12px!important;gap:8px!important}
       .bp-title{font-size:14px!important}
       .bp-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
@@ -676,6 +621,9 @@
       .auth-right-panel{padding:1.5rem!important}
       .fav-onboard-modal{max-width:100%!important;margin:0 8px!important}
       .home-fav-banner{padding:1rem 1rem!important}
+      .share-modal{max-width:100%!important;margin:0 8px!important}
+      .share-modal-btns{grid-template-columns:1fr!important}
+      .share-modal-btn.copy{grid-column:auto!important}
     }
     @media(max-width:380px){
       .card,.carousel-track .card,.brand-grid .card{width:136px!important;min-width:136px!important;max-width:136px!important}
@@ -694,13 +642,19 @@
     <div class="ticker-item"><span class="dot">•</span>🔥 HYPE ITEMS</div>
     <div class="ticker-item"><span class="dot">•</span>UA PAIRS &amp; STREETWEAR</div>
     <div class="ticker-item"><span class="dot">•</span>ABU DHABI UAE 🇦🇪</div>
-    <div class="ticker-item"><span class="dot">•</span>SECURE HAND-DELIVERY</div>
+    <div class="ticker-item"><span class="dot">•</span>OPEN TO WALK IN</div>
     <div class="ticker-item"><span class="dot">•</span>DM TO ORDER</div>
     <div class="ticker-item"><span class="dot">•</span>LUXURY ACCESSORIES</div>
     <div class="ticker-item"><span class="dot">•</span>🔥 HYPE ITEMS</div>
     <div class="ticker-item"><span class="dot">•</span>UA PAIRS &amp; STREETWEAR</div>
     <div class="ticker-item"><span class="dot">•</span>ABU DHABI UAE 🇦🇪</div>
     <div class="ticker-item"><span class="dot">•</span>AVAILABLE AT UAE</div>
+    <div class="ticker-item"><span class="dot">•</span>DM TO ORDER</div>
+    <div class="ticker-item"><span class="dot">•</span>LUXURY ACCESSORIES</div>
+    <div class="ticker-item"><span class="dot">•</span>🔥 HYPE ITEMS</div>
+    <div class="ticker-item"><span class="dot">•</span>UA PAIRS &amp; STREETWEAR</div>
+    <div class="ticker-item"><span class="dot">•</span>ABU DHABI UAE 🇦🇪</div>
+    <div class="ticker-item"><span class="dot">•</span>OPEN TO WALK IN</div>
     <div class="ticker-item"><span class="dot">•</span>DM TO ORDER</div>
     <div class="ticker-item"><span class="dot">•</span>LUXURY ACCESSORIES</div>
   </div>
@@ -715,6 +669,9 @@
       <div class="nav-link active" data-cat="all">All Items</div>
       <div class="nav-link" data-cat="ua-pairs">UA Pairs</div>
       <div class="nav-link" data-cat="streetwear">Streetwear</div>
+      <div class="nav-link" data-cat="pants">Pants</div>
+      <div class="nav-link" data-cat="shorts">Shorts</div>
+      <div class="nav-link" data-cat="bags">Bags</div>
       <div class="nav-link" data-cat="accessories">Accessories</div>
     </nav>
     <div class="header-right">
@@ -740,6 +697,11 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             My Favorites <span id="fav-count-badge" style="background:var(--accent);color:#000;padding:1px 6px;font-size:9px;font-weight:800;margin-left:4px;border-radius:4px;"></span>
           </button>
+          <!-- CHANGE 2C: Share Shop in dropdown -->
+          <button class="user-dropdown-item" onclick="openShareModal(window.location.href.split('?')[0].split('#')[0],'Share Secret Shop UAE');document.getElementById('user-dropdown').classList.remove('open')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share Shop
+          </button>
           <button class="user-dropdown-item danger" onclick="logoutUser()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
             Log Out
@@ -755,6 +717,9 @@
     <button class="cat-btn active" data-cat="all">All Items</button>
     <button class="cat-btn" data-cat="ua-pairs">UA Pairs</button>
     <button class="cat-btn" data-cat="streetwear">Streetwear</button>
+    <button class="cat-btn" data-cat="pants">Pants</button>
+    <button class="cat-btn" data-cat="shorts">Shorts</button>
+    <button class="cat-btn" data-cat="bags">Bags</button>
     <button class="cat-btn" data-cat="luxury">Luxury</button>
     <button class="cat-btn" data-cat="watches">Watches</button>
     <button class="cat-btn" data-cat="accessories">Accessories</button>
@@ -764,7 +729,8 @@
 
 <section class="hero" id="hero-section">
   <div class="hero-left">
-    <p class="hero-eyebrow">Welcome to Secret Shop</p>
+    <!-- CHANGE 1: Updated eyebrow text -->
+    <p class="hero-eyebrow">Welcome to Secret Shop UAE</p>
     <h1 class="hero-h1">Premium <span class="line-green">Hype</span> Items</h1>
     <p class="hero-desc">Discover exclusive UA pairs, premium streetwear, and luxury accessories. Sourcing the most sought-after pieces from top brands. Available all over the UAE.</p>
     <div class="hero-btns">
@@ -784,6 +750,7 @@
   </div>
 </section>
 
+<!-- CHANGE 4/5/6: Updated Categories section with 7 items, image support -->
 <section class="categories-wrap" id="cat-section">
   <div class="sec-header">
     <div>
@@ -792,25 +759,44 @@
     </div>
   </div>
   <div class="cat-grid">
+    <!-- CHANGE 5: img tag with onerror SVG fallback -->
     <div class="cat-card" onclick="setcat('ua-pairs')">
-      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" class="cat-card-img"><rect width="400" height="500" fill="#d4a574"/><rect x="80" y="150" width="240" height="200" fill="#8b7355"/></svg>
+      <img src="images/cat-ua-pairs.jpg" alt="UA Pairs" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#d4a574\'/><rect x=\'80\' y=\'150\' width=\'240\' height=\'200\' fill=\'#8b7355\'/></svg>'"/>
       <div class="cat-card-overlay"></div>
       <div class="cat-card-body"><p class="cat-card-name">UA Pairs</p><p class="cat-card-sub">Premium Sneakers</p></div>
     </div>
     <div class="cat-card" onclick="setcat('streetwear')">
-      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" class="cat-card-img"><rect width="400" height="500" fill="#2c3e50"/><rect x="60" y="100" width="280" height="300" fill="#34495e"/></svg>
+      <img src="images/cat-streetwear.jpg" alt="Streetwear" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#2c3e50\'/><rect x=\'60\' y=\'100\' width=\'280\' height=\'300\' fill=\'#34495e\'/></svg>'"/>
       <div class="cat-card-overlay"></div>
       <div class="cat-card-body"><p class="cat-card-name">Streetwear</p><p class="cat-card-sub">Graphic Tees &amp; More</p></div>
     </div>
     <div class="cat-card" onclick="setcat('accessories')">
-      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" class="cat-card-img"><rect width="400" height="500" fill="#c2ff00"/><circle cx="200" cy="250" r="80" fill="#000"/></svg>
+      <img src="images/cat-accessories.jpg" alt="Accessories" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#c2ff00\'/><circle cx=\'200\' cy=\'250\' r=\'80\' fill=\'#000\'/></svg>'"/>
       <div class="cat-card-overlay"></div>
       <div class="cat-card-body"><p class="cat-card-name">Accessories</p><p class="cat-card-sub">Caps &amp; Hats</p></div>
     </div>
     <div class="cat-card" onclick="setcat('luxury')">
-      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" class="cat-card-img"><rect width="400" height="500" fill="#1a1a1a"/><polygon points="200,50 350,150 350,450 50,450 50,150" fill="#333"/></svg>
+      <img src="images/cat-luxury.jpg" alt="Luxury" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#1a1a1a\'/><polygon points=\'200,50 350,150 350,450 50,450 50,150\' fill=\'#333\'/></svg>'"/>
       <div class="cat-card-overlay"></div>
       <div class="cat-card-body"><p class="cat-card-name">Luxury</p><p class="cat-card-sub">Premium Brands</p></div>
+    </div>
+    <!-- CHANGE 4/5: Pants card -->
+    <div class="cat-card" onclick="setcat('pants')">
+      <img src="images/cat-pants.jpg" alt="Pants" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#3d3d3d\'/><rect x=\'60\' y=\'80\' width=\'120\' height=\'320\' fill=\'#555\'/><rect x=\'220\' y=\'80\' width=\'120\' height=\'320\' fill=\'#555\'/><rect x=\'60\' y=\'60\' width=\'280\' height=\'60\' fill=\'#666\'/></svg>'"/>
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-body"><p class="cat-card-name">Pants</p><p class="cat-card-sub">Trousers &amp; Joggers</p></div>
+    </div>
+    <!-- CHANGE 4/5: Shorts card -->
+    <div class="cat-card" onclick="setcat('shorts')">
+      <img src="images/cat-shorts.jpg" alt="Shorts" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#1a3a4a\'/><rect x=\'60\' y=\'80\' width=\'120\' height=\'200\' fill=\'#2a5a6a\'/><rect x=\'220\' y=\'80\' width=\'120\' height=\'200\' fill=\'#2a5a6a\'/><rect x=\'60\' y=\'60\' width=\'280\' height=\'60\' fill=\'#3a6a7a\'/></svg>'"/>
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-body"><p class="cat-card-name">Shorts</p><p class="cat-card-sub">Athletic &amp; Casual</p></div>
+    </div>
+    <!-- CHANGE 6: Bags card -->
+    <div class="cat-card" onclick="setcat('bags')">
+      <img src="images/cat-bags.jpg" alt="Bags" class="cat-card-img" onerror="this.outerHTML='<svg viewBox=\'0 0 400 500\' xmlns=\'http://www.w3.org/2000/svg\' class=\'cat-card-img\'><rect width=\'400\' height=\'500\' fill=\'#6b4226\'/><rect x=\'80\' y=\'160\' width=\'240\' height=\'200\' rx=\'20\' fill=\'#8b5e3c\'/><rect x=\'140\' y=\'100\' width=\'120\' height=\'80\' rx=\'10\' fill=\'none\' stroke=\'#8b5e3c\' stroke-width=\'12\'/><rect x=\'180\' y=\'240\' width=\'40\' height=\'40\' rx=\'5\' fill=\'#c2ff00\'/></svg>'"/>
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-body"><p class="cat-card-name">Bags</p><p class="cat-card-sub">Backpacks &amp; Totes</p></div>
     </div>
   </div>
 </section>
@@ -848,6 +834,17 @@
     </div>
   </div>
 
+  <!-- CHANGE 2B: Share Shop banner above brand sections -->
+  <div class="share-shop-banner" onclick="openShareModal(window.location.href.split('?')[0].split('#')[0],'Share Secret Shop UAE')" role="button" tabindex="0">
+    <div class="share-shop-banner-icon">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </div>
+    <div class="share-shop-banner-text">
+      <strong>Share Secret Shop UAE</strong>
+      <span>Spread the hype — share with your friends</span>
+    </div>
+  </div>
+
   <div id="brand-sections-body"></div>
 </div>
 
@@ -855,7 +852,7 @@
   <div class="stats-inner">
     <div><div class="stat-num">1000+</div><div class="stat-label">Items in Stock</div></div>
     <div><div class="stat-num">24/7</div><div class="stat-label">Always Open</div></div>
-    <div><div class="stat-num">100%</div><div class="stat-label">Authentic Quality</div></div>
+    <div><div class="stat-num">OPEN</div><div class="stat-label">To Walk In</div></div>
     <div><div class="stat-num">UAE</div><div class="stat-label">Available in UAE</div></div>
   </div>
 </section>
@@ -887,9 +884,13 @@
     </div>
     <div>
       <p class="footer-col-title">Categories</p>
+      <!-- CHANGE 4: Pants, Shorts, Bags in footer -->
       <div class="footer-col-links">
         <a onclick="setcat('ua-pairs')">UA Pairs</a>
         <a onclick="setcat('streetwear')">Streetwear</a>
+        <a onclick="setcat('pants')">Pants</a>
+        <a onclick="setcat('shorts')">Shorts</a>
+        <a onclick="setcat('bags')">Bags</a>
         <a onclick="setcat('luxury')">Luxury Items</a>
         <a onclick="setcat('watches')">Watches</a>
         <a onclick="setcat('accessories')">Accessories</a>
@@ -944,12 +945,17 @@
         <div class="pdp-sizes" id="pdp-sizes"></div>
       </div>
       <p class="pdp-required-msg" id="pdp-required-msg"></p>
+      <!-- CHANGE 2A: WhatsApp button with deep link -->
       <a class="pdp-wa" id="pdp-wa" href="#" target="_blank">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
         Order on WhatsApp
       </a>
+      <!-- CHANGE 2A: Share Item button below WA button -->
+      <button class="pdp-share-btn" id="pdp-share-btn" onclick="pdpShareItem()">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share Item
+      </button>
     </div>
-    <!-- RELATED SECTION — restructured for mobile -->
     <div class="pdp-related-section" id="pdp-related-section" style="display:none;">
       <p class="pdp-related-title" id="pdp-related-title">Related Products</p>
       <div class="pdp-related-wrap">
@@ -1014,7 +1020,6 @@
     </div>
     <div class="auth-right-panel">
       <button class="auth-modal-close" onclick="closeAuthModal()">✕</button>
-      <!-- STEP: EMAIL -->
       <div class="auth-step active" id="auth-step-email">
         <p class="auth-step-title">Welcome</p>
         <p class="auth-step-sub">Enter your email to sign up or log in.</p>
@@ -1023,7 +1028,6 @@
         <div class="auth-field"><label>Email Address</label><input type="email" id="auth-email-input" placeholder="you@example.com" autocomplete="email"/><div class="auth-field-error" id="auth-email-err">Please enter a valid email.</div></div>
         <button class="auth-continue-btn accent-btn" onclick="handleEmailStep()">Continue →</button>
       </div>
-      <!-- STEP: LOGIN -->
       <div class="auth-step" id="auth-step-login">
         <button class="auth-back-link" onclick="goBackToEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
         <p class="auth-step-title">Log In</p>
@@ -1033,7 +1037,6 @@
         <button class="auth-continue-btn accent-btn" onclick="doLogin()">Log In →</button>
         <div class="auth-change-link">Use a different email? <button onclick="goBackToEmail()">Change</button></div>
       </div>
-      <!-- STEP: SIGNUP -->
       <div class="auth-step" id="auth-step-signup">
         <button class="auth-back-link" onclick="goBackToEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
         <p class="auth-step-title">Sign Up</p>
@@ -1045,7 +1048,6 @@
         <button class="auth-continue-btn accent-btn" onclick="doSignup()">Create Account →</button>
         <div class="auth-change-link">Use a different email? <button onclick="goBackToEmail()">Change</button></div>
       </div>
-      <!-- STEP: SUCCESS -->
       <div class="auth-step" id="auth-step-success">
         <div class="auth-success">
           <div class="auth-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -1061,7 +1063,7 @@
   </div>
 </div>
 
-<!-- FAVORITES ONBOARDING MODAL -->
+<!-- FAVORITES ONBOARDING -->
 <div class="fav-onboard-overlay" id="fav-onboard-overlay">
   <div class="fav-onboard-modal">
     <div class="fav-onboard-header">
@@ -1076,6 +1078,33 @@
       </div>
       <button class="fav-onboard-cta" onclick="closeFavOnboard(true)">Start Browsing →</button>
       <button class="fav-onboard-skip" onclick="closeFavOnboard(false)">Skip for now</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE 2: Share Modal -->
+<div class="share-modal-overlay" id="share-modal-overlay">
+  <div class="share-modal">
+    <div class="share-modal-header">
+      <h2 id="share-modal-title">Share</h2>
+      <button class="share-modal-close" onclick="closeShareModal()">✕</button>
+    </div>
+    <div class="share-modal-body">
+      <div class="share-modal-url" id="share-modal-url"></div>
+      <div class="share-modal-btns">
+        <a id="share-wa-btn" class="share-modal-btn wa" href="#" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
+          WhatsApp
+        </a>
+        <a id="share-fb-btn" class="share-modal-btn fb" href="#" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <button class="share-modal-btn copy" id="share-copy-btn" onclick="copyShareLink()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Link
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -1098,30 +1127,57 @@ function toggleTheme(){
   localStorage.setItem('ss-theme', next);
 }
 
-/* ======================================================
-   AUTH — CROSS-DEVICE SYSTEM
+/* ====== SHARE MODAL (CHANGE 2) ====== */
+let shareCurrentUrl = '';
+function openShareModal(url, title) {
+  shareCurrentUrl = url;
+  document.getElementById('share-modal-title').textContent = title || 'Share';
+  document.getElementById('share-modal-url').textContent = url;
+  const waText = encodeURIComponent('Check out Secret Shop UAE — Abu Dhabi\'s top hype destination! 🔥\n' + url);
+  document.getElementById('share-wa-btn').href = 'https://wa.me/?text=' + waText;
+  document.getElementById('share-fb-btn').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+  const copyBtn = document.getElementById('share-copy-btn');
+  copyBtn.classList.remove('copied');
+  copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Link';
+  document.getElementById('share-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeShareModal(){
+  document.getElementById('share-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('share-modal-overlay').addEventListener('click', function(e){ if(e.target === this) closeShareModal(); });
+function copyShareLink(){
+  navigator.clipboard.writeText(shareCurrentUrl).then(() => {
+    const btn = document.getElementById('share-copy-btn');
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Link';
+    }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = shareCurrentUrl;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('share-copy-btn');
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Link'; }, 2000);
+  });
+}
+function pdpShareItem(){
+  if(!pdpItem) return;
+  const base = window.location.href.split('?')[0].split('#')[0];
+  const url = base + '?item=' + pdpItem.id;
+  openShareModal(url, 'Share: ' + pdpItem.name);
+}
 
-   HOW CROSS-DEVICE WORKS:
-   - Password verification uses SHA-256(email + password + SALT)
-   - This hash is DETERMINISTIC: same inputs = same hash on ANY device
-   - The hash is used as BOTH the favorites storage key AND for verification
-   - So on Device B: user enters same email+password → same hash → same favorites!
-   - localStorage stores {pwHash} for local verification only
-   - On a new device, if no local account exists but user tries to "log in",
-     we detect this and show the signup form with a note that it creates
-     a new local account with their existing credentials
-   - The favorites key derived from email+password is identical on all devices
-     so favorites sync automatically when same credentials are used
-
-   IMPORTANT NOTE TO USER: localStorage is per-browser. The account record
-   is stored locally but the FAVORITES DATA is tied to a hash of your
-   email+password, so it's consistent across devices when you use the
-   same credentials. On a new browser, you'll go through "Sign Up" again
-   but your favorites will already be there once logged in.
-====================================================== */
-
+/* ====== AUTH ====== */
 const SECRET_SALT = 'ss-uae-2026-xdevice-v3';
-
 async function sha256(str) {
   const encoder = new TextEncoder();
   const data = encoder.encode(str);
@@ -1129,335 +1185,55 @@ async function sha256(str) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
 }
-
-/* Deterministic password hash — same on every device */
-async function makePwHash(email, password) {
-  return sha256(email.toLowerCase().trim() + '::pw::' + password + '::' + SECRET_SALT);
-}
-
-/* Deterministic favorites key — same on every device for same credentials */
-async function makeFavKey(email, password) {
-  const h = await sha256(email.toLowerCase().trim() + '::favs::' + password + '::' + SECRET_SALT);
-  return 'ss-favs-' + h.substring(0, 28);
-}
-
-/* Local account key — per-browser, just for checking if registered here */
-async function makeAccountKey(email) {
-  const h = await sha256('acct::' + email.toLowerCase().trim() + '::' + SECRET_SALT);
-  return 'ss-acct-' + h.substring(0, 28);
-}
-
-async function localAccountExists(email) {
-  const key = await makeAccountKey(email);
-  return !!localStorage.getItem(key);
-}
-
-async function saveLocalAccount(email, pwHash) {
-  const key = await makeAccountKey(email);
-  localStorage.setItem(key, JSON.stringify({ email: email.toLowerCase().trim(), pwHash, createdAt: Date.now() }));
-}
-
-async function verifyLocalAccount(email, password) {
-  const key = await makeAccountKey(email);
-  const stored = localStorage.getItem(key);
-  if (!stored) return false;
-  try {
-    const account = JSON.parse(stored);
-    const pwHash = await makePwHash(email, password);
-    return pwHash === account.pwHash;
-  } catch { return false; }
-}
-
-/* Session — cleared on tab close */
-function getSession() {
-  try { return JSON.parse(sessionStorage.getItem('ss-session') || 'null'); } catch { return null; }
-}
-function setSession(data) {
-  if (data) sessionStorage.setItem('ss-session', JSON.stringify(data));
-  else sessionStorage.removeItem('ss-session');
-}
-
-let currentUser = null; // { email, favKey }
+async function makePwHash(email, password) { return sha256(email.toLowerCase().trim() + '::pw::' + password + '::' + SECRET_SALT); }
+async function makeFavKey(email, password) { const h = await sha256(email.toLowerCase().trim() + '::favs::' + password + '::' + SECRET_SALT); return 'ss-favs-' + h.substring(0, 28); }
+async function makeAccountKey(email) { const h = await sha256('acct::' + email.toLowerCase().trim() + '::' + SECRET_SALT); return 'ss-acct-' + h.substring(0, 28); }
+async function localAccountExists(email) { const key = await makeAccountKey(email); return !!localStorage.getItem(key); }
+async function saveLocalAccount(email, pwHash) { const key = await makeAccountKey(email); localStorage.setItem(key, JSON.stringify({ email: email.toLowerCase().trim(), pwHash, createdAt: Date.now() })); }
+async function verifyLocalAccount(email, password) { const key = await makeAccountKey(email); const stored = localStorage.getItem(key); if (!stored) return false; try { const account = JSON.parse(stored); const pwHash = await makePwHash(email, password); return pwHash === account.pwHash; } catch { return false; } }
+function getSession() { try { return JSON.parse(sessionStorage.getItem('ss-session') || 'null'); } catch { return null; } }
+function setSession(data) { if (data) sessionStorage.setItem('ss-session', JSON.stringify(data)); else sessionStorage.removeItem('ss-session'); }
+let currentUser = null;
 let authPendingEmail = '';
 const likedItems = new Set();
-
-function loadFavs() {
-  if (!currentUser) return;
-  try {
-    const stored = localStorage.getItem(currentUser.favKey);
-    const favs = stored ? JSON.parse(stored) : [];
-    favs.forEach(id => likedItems.add(id));
-  } catch(e) {}
-}
-
-function saveFavs() {
-  if (!currentUser) return;
-  localStorage.setItem(currentUser.favKey, JSON.stringify([...likedItems]));
-}
-
-function resetSearchState(){
-  searchQ = ''; currentCat = 'all';
-  const si = document.getElementById('header-search-input');
-  if(si) si.value = '';
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
-}
-
-async function initSession(){
-  const sess = getSession();
-  if (sess && sess.email && sess.favKey) {
-    currentUser = sess;
-    loadFavs();
-    updateAuthUI(true);
-  } else {
-    updateAuthUI(false);
-  }
-  updateFavBadge();
-  updateHomeFavSection();
-}
-
-function updateAuthUI(loggedIn){
-  const btn = document.getElementById('auth-header-btn');
-  const label = document.getElementById('auth-btn-label');
-  if(loggedIn && currentUser){
-    btn.classList.add('logged-in');
-    const username = currentUser.email.split('@')[0];
-    label.textContent = username.length > 10 ? username.substring(0,8)+'…' : username;
-    document.getElementById('dropdown-email').textContent = currentUser.email;
-    document.getElementById('dropdown-name').textContent = username;
-  } else {
-    btn.classList.remove('logged-in');
-    label.textContent = 'Log In';
-  }
-}
-
-function updateFavBadge(){
-  const badge = document.getElementById('fav-count-badge');
-  if(badge) badge.textContent = likedItems.size > 0 ? likedItems.size : '';
-}
-
-function updateHomeFavSection(){
-  const section = document.getElementById('home-fav-section');
-  const isAll = currentCat === 'all' && !searchQ;
-  if(!currentUser || !isAll){ section.classList.remove('visible'); return; }
-  const favIds = [...likedItems];
-  const countEl = document.getElementById('home-fav-count');
-  const subtitleEl = document.getElementById('home-fav-subtitle');
-  const grid = document.getElementById('home-fav-grid');
-  if(!favIds.length){
-    section.classList.add('visible');
-    countEl.textContent = '0 ITEMS';
-    subtitleEl.textContent = 'Tap the ♥ on any item to save it here.';
-    grid.innerHTML = `<div style="padding:1.5rem 0;font-size:13px;color:var(--text-3)">No saved items yet — heart anything you like!</div>`;
-    return;
-  }
-  const favItems = favIds.map(id => ITEMS.find(x => x.id === id)).filter(Boolean);
-  countEl.textContent = `${favItems.length} ITEMS`;
-  subtitleEl.textContent = `${favItems.length} item${favItems.length !== 1 ? 's' : ''} saved`;
-  grid.innerHTML = favItems.slice(0,8).map((it,i) => card(it,i)).join('');
-  section.classList.add('visible');
-  requestAnimationFrame(() => grid.querySelectorAll('.card').forEach(c => c.classList.add('in')));
-  initHscrollDrag(grid);
-}
-
-function handleAuthClick(){
-  if(currentUser){
-    const dd = document.getElementById('user-dropdown');
-    dd.classList.toggle('open');
-  } else {
-    openAuthModal();
-  }
-}
-
-document.addEventListener('click', function(e){
-  if(!e.target.closest('.user-menu-wrap')) document.getElementById('user-dropdown')?.classList.remove('open');
-});
-
-function openAuthModal(){
-  document.getElementById('auth-modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  showAuthStep('email');
-  clearAllAuthErrors();
-  document.getElementById('auth-email-input').value = '';
-  authPendingEmail = '';
-  setTimeout(() => document.getElementById('auth-email-input').focus(), 100);
-}
-function closeAuthModal(){
-  document.getElementById('auth-modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function loadFavs() { if (!currentUser) return; try { const stored = localStorage.getItem(currentUser.favKey); const favs = stored ? JSON.parse(stored) : []; favs.forEach(id => likedItems.add(id)); } catch(e) {} }
+function saveFavs() { if (!currentUser) return; localStorage.setItem(currentUser.favKey, JSON.stringify([...likedItems])); }
+function resetSearchState(){ searchQ = ''; currentCat = 'all'; const si = document.getElementById('header-search-input'); if(si) si.value = ''; document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all')); }
+async function initSession(){ const sess = getSession(); if (sess && sess.email && sess.favKey) { currentUser = sess; loadFavs(); updateAuthUI(true); } else { updateAuthUI(false); } updateFavBadge(); updateHomeFavSection(); }
+function updateAuthUI(loggedIn){ const btn = document.getElementById('auth-header-btn'); const label = document.getElementById('auth-btn-label'); if(loggedIn && currentUser){ btn.classList.add('logged-in'); const username = currentUser.email.split('@')[0]; label.textContent = username.length > 10 ? username.substring(0,8)+'…' : username; document.getElementById('dropdown-email').textContent = currentUser.email; document.getElementById('dropdown-name').textContent = username; } else { btn.classList.remove('logged-in'); label.textContent = 'Log In'; } }
+function updateFavBadge(){ const badge = document.getElementById('fav-count-badge'); if(badge) badge.textContent = likedItems.size > 0 ? likedItems.size : ''; }
+function updateHomeFavSection(){ const section = document.getElementById('home-fav-section'); const isAll = currentCat === 'all' && !searchQ; if(!currentUser || !isAll){ section.classList.remove('visible'); return; } const favIds = [...likedItems]; const countEl = document.getElementById('home-fav-count'); const subtitleEl = document.getElementById('home-fav-subtitle'); const grid = document.getElementById('home-fav-grid'); if(!favIds.length){ section.classList.add('visible'); countEl.textContent = '0 ITEMS'; subtitleEl.textContent = 'Tap the ♥ on any item to save it here.'; grid.innerHTML = `<div style="padding:1.5rem 0;font-size:13px;color:var(--text-3)">No saved items yet — heart anything you like!</div>`; return; } const favItems = favIds.map(id => ITEMS.find(x => x.id === id)).filter(Boolean); countEl.textContent = `${favItems.length} ITEMS`; subtitleEl.textContent = `${favItems.length} item${favItems.length !== 1 ? 's' : ''} saved`; grid.innerHTML = favItems.slice(0,8).map((it,i) => card(it,i)).join(''); section.classList.add('visible'); requestAnimationFrame(() => grid.querySelectorAll('.card').forEach(c => c.classList.add('in'))); initHscrollDrag(grid); }
+function handleAuthClick(){ if(currentUser){ const dd = document.getElementById('user-dropdown'); dd.classList.toggle('open'); } else { openAuthModal(); } }
+document.addEventListener('click', function(e){ if(!e.target.closest('.user-menu-wrap')) document.getElementById('user-dropdown')?.classList.remove('open'); });
+function openAuthModal(){ document.getElementById('auth-modal-overlay').classList.add('open'); document.body.style.overflow = 'hidden'; showAuthStep('email'); clearAllAuthErrors(); document.getElementById('auth-email-input').value = ''; authPendingEmail = ''; setTimeout(() => document.getElementById('auth-email-input').focus(), 100); }
+function closeAuthModal(){ document.getElementById('auth-modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
 document.getElementById('auth-modal-overlay').addEventListener('click', function(e){ if(e.target === this) closeAuthModal(); });
-function showAuthStep(step){
-  document.querySelectorAll('.auth-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('auth-step-'+step).classList.add('active');
-}
+function showAuthStep(step){ document.querySelectorAll('.auth-step').forEach(s => s.classList.remove('active')); document.getElementById('auth-step-'+step).classList.add('active'); }
 function goBackToEmail(){ clearAllAuthErrors(); showAuthStep('email'); setTimeout(() => document.getElementById('auth-email-input').focus(),100); }
-function clearAllAuthErrors(){
-  document.querySelectorAll('.auth-error-global').forEach(el => { el.textContent=''; el.classList.remove('visible'); });
-  document.querySelectorAll('.auth-field-error').forEach(el => el.classList.remove('visible'));
-  document.querySelectorAll('.auth-field input').forEach(el => el.classList.remove('error'));
-}
+function clearAllAuthErrors(){ document.querySelectorAll('.auth-error-global').forEach(el => { el.textContent=''; el.classList.remove('visible'); }); document.querySelectorAll('.auth-field-error').forEach(el => el.classList.remove('visible')); document.querySelectorAll('.auth-field input').forEach(el => el.classList.remove('error')); }
 function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()); }
-
-async function handleEmailStep(){
-  clearAllAuthErrors();
-  const emailInput = document.getElementById('auth-email-input');
-  const email = emailInput.value.trim();
-  if(!isValidEmail(email)){ emailInput.classList.add('error'); document.getElementById('auth-email-err').classList.add('visible'); return; }
-  authPendingEmail = email.toLowerCase().trim();
-
-  const exists = await localAccountExists(authPendingEmail);
-  if(exists){
-    /* Account registered on this device — show login */
-    document.getElementById('login-email-display').textContent = `Logging in as ${authPendingEmail}`;
-    document.getElementById('login-password').value = '';
-    showAuthStep('login');
-    setTimeout(() => document.getElementById('login-password').focus(),100);
-  } else {
-    /* No local account — show signup.
-       If user already has an account on another device, they use
-       the same password and everything works (same hash = same favKey) */
-    document.getElementById('signup-email-display').textContent = `Creating account for ${authPendingEmail}`;
-    document.getElementById('signup-password').value = '';
-    document.getElementById('signup-confirm').value = '';
-    showAuthStep('signup');
-    setTimeout(() => document.getElementById('signup-password').focus(),100);
-  }
-}
-
-function togglePw(inputId, btn){
-  const input = document.getElementById(inputId);
-  const isText = input.type === 'text';
-  input.type = isText ? 'password' : 'text';
-  btn.querySelector('svg').style.opacity = isText ? '1' : '0.4';
-}
-
-function checkPwStrength(pw){
-  const fill = document.getElementById('pw-strength-fill');
-  const text = document.getElementById('pw-strength-text');
-  if(!fill || !text) return;
-  let score = 0;
-  if(pw.length >= 6) score++;
-  if(pw.length >= 10) score++;
-  if(/[A-Z]/.test(pw)) score++;
-  if(/[0-9]/.test(pw)) score++;
-  if(/[^A-Za-z0-9]/.test(pw)) score++;
-  const levels = [{w:'0%',c:'transparent',t:''},{w:'25%',c:'#e53935',t:'Weak'},{w:'50%',c:'#ff9800',t:'Fair'},{w:'75%',c:'#2196f3',t:'Good'},{w:'100%',c:'#4caf50',t:'Strong'},{w:'100%',c:'#4caf50',t:'Strong'}];
-  const l = levels[score]||levels[0];
-  fill.style.width=l.w; fill.style.background=l.c;
-  text.textContent=l.t; text.style.color=l.c;
-}
-
-async function doLogin(){
-  clearAllAuthErrors();
-  const password = document.getElementById('login-password').value;
-  if(password.length < 6){ document.getElementById('login-password').classList.add('error'); document.getElementById('login-pw-err').classList.add('visible'); return; }
-
-  const valid = await verifyLocalAccount(authPendingEmail, password);
-  if(!valid){
-    const err = document.getElementById('login-error');
-    err.textContent = 'Incorrect password. Please try again.';
-    err.classList.add('visible');
-    return;
-  }
-
-  await loginSuccess(authPendingEmail, password, false);
-}
-
-async function doSignup(){
-  clearAllAuthErrors();
-  const password = document.getElementById('signup-password').value;
-  const confirm = document.getElementById('signup-confirm').value;
-  let valid = true;
-  if(password.length < 6){ document.getElementById('signup-password').classList.add('error'); document.getElementById('signup-pw-err').classList.add('visible'); valid=false; }
-  if(password !== confirm){ document.getElementById('signup-confirm').classList.add('error'); document.getElementById('signup-confirm-err').classList.add('visible'); valid=false; }
-  if(!valid) return;
-
-  const pwHash = await makePwHash(authPendingEmail, password);
-  await saveLocalAccount(authPendingEmail, pwHash);
-  await loginSuccess(authPendingEmail, password, true);
-}
-
-async function loginSuccess(email, password, isNew) {
-  const favKey = await makeFavKey(email, password);
-  currentUser = { email, favKey };
-  setSession(currentUser);
-  loadFavs(); // loads existing favs from this favKey (same across devices!)
-  updateAuthUI(true);
-  updateFavBadge();
-
-  document.getElementById('auth-success-title').textContent = isNew ? 'Account Created!' : 'Welcome back!';
-  document.getElementById('auth-success-msg').textContent = isNew
-    ? `Welcome to Secret Shop UAE! ${likedItems.size > 0 ? likedItems.size+' saved items loaded.' : 'Start saving your favorites!'}`
-    : `You're logged in. ${likedItems.size > 0 ? likedItems.size+' saved items ready.' : 'Start saving your favorites!'}`;
-  showAuthStep('success');
-  resetSearchState();
-  render();
-  setTimeout(() => {
-    closeAuthModal();
-    if(likedItems.size === 0) showFavOnboard();
-  }, 2000);
-}
-
+async function handleEmailStep(){ clearAllAuthErrors(); const emailInput = document.getElementById('auth-email-input'); const email = emailInput.value.trim(); if(!isValidEmail(email)){ emailInput.classList.add('error'); document.getElementById('auth-email-err').classList.add('visible'); return; } authPendingEmail = email.toLowerCase().trim(); const exists = await localAccountExists(authPendingEmail); if(exists){ document.getElementById('login-email-display').textContent = `Logging in as ${authPendingEmail}`; document.getElementById('login-password').value = ''; showAuthStep('login'); setTimeout(() => document.getElementById('login-password').focus(),100); } else { document.getElementById('signup-email-display').textContent = `Creating account for ${authPendingEmail}`; document.getElementById('signup-password').value = ''; document.getElementById('signup-confirm').value = ''; showAuthStep('signup'); setTimeout(() => document.getElementById('signup-password').focus(),100); } }
+function togglePw(inputId, btn){ const input = document.getElementById(inputId); const isText = input.type === 'text'; input.type = isText ? 'password' : 'text'; btn.querySelector('svg').style.opacity = isText ? '1' : '0.4'; }
+function checkPwStrength(pw){ const fill = document.getElementById('pw-strength-fill'); const text = document.getElementById('pw-strength-text'); if(!fill || !text) return; let score = 0; if(pw.length >= 6) score++; if(pw.length >= 10) score++; if(/[A-Z]/.test(pw)) score++; if(/[0-9]/.test(pw)) score++; if(/[^A-Za-z0-9]/.test(pw)) score++; const levels = [{w:'0%',c:'transparent',t:''},{w:'25%',c:'#e53935',t:'Weak'},{w:'50%',c:'#ff9800',t:'Fair'},{w:'75%',c:'#2196f3',t:'Good'},{w:'100%',c:'#4caf50',t:'Strong'},{w:'100%',c:'#4caf50',t:'Strong'}]; const l = levels[score]||levels[0]; fill.style.width=l.w; fill.style.background=l.c; text.textContent=l.t; text.style.color=l.c; }
+async function doLogin(){ clearAllAuthErrors(); const password = document.getElementById('login-password').value; if(password.length < 6){ document.getElementById('login-password').classList.add('error'); document.getElementById('login-pw-err').classList.add('visible'); return; } const valid = await verifyLocalAccount(authPendingEmail, password); if(!valid){ const err = document.getElementById('login-error'); err.textContent = 'Incorrect password. Please try again.'; err.classList.add('visible'); return; } await loginSuccess(authPendingEmail, password, false); }
+async function doSignup(){ clearAllAuthErrors(); const password = document.getElementById('signup-password').value; const confirm = document.getElementById('signup-confirm').value; let valid = true; if(password.length < 6){ document.getElementById('signup-password').classList.add('error'); document.getElementById('signup-pw-err').classList.add('visible'); valid=false; } if(password !== confirm){ document.getElementById('signup-confirm').classList.add('error'); document.getElementById('signup-confirm-err').classList.add('visible'); valid=false; } if(!valid) return; const pwHash = await makePwHash(authPendingEmail, password); await saveLocalAccount(authPendingEmail, pwHash); await loginSuccess(authPendingEmail, password, true); }
+async function loginSuccess(email, password, isNew) { const favKey = await makeFavKey(email, password); currentUser = { email, favKey }; setSession(currentUser); loadFavs(); updateAuthUI(true); updateFavBadge(); document.getElementById('auth-success-title').textContent = isNew ? 'Account Created!' : 'Welcome back!'; document.getElementById('auth-success-msg').textContent = isNew ? `Welcome to Secret Shop UAE! ${likedItems.size > 0 ? likedItems.size+' saved items loaded.' : 'Start saving your favorites!'}` : `You're logged in. ${likedItems.size > 0 ? likedItems.size+' saved items ready.' : 'Start saving your favorites!'}`; showAuthStep('success'); resetSearchState(); render(); setTimeout(() => { closeAuthModal(); if(likedItems.size === 0) showFavOnboard(); }, 2000); }
 function showFavOnboard(){ document.getElementById('fav-onboard-overlay').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeFavOnboard(browse){ document.getElementById('fav-onboard-overlay').classList.remove('open'); document.body.style.overflow=''; if(browse){ setTimeout(() => { const body=document.getElementById('site-body'); if(body) body.scrollIntoView({behavior:'smooth',block:'start'}); },200); } }
-
-function toggleHeart(e, id){
-  e.stopPropagation();
-  if(!currentUser){ openAuthModal(); return; }
-  const btn = e.currentTarget;
-  if(likedItems.has(id)){ likedItems.delete(id); btn.classList.remove('liked'); }
-  else { likedItems.add(id); btn.classList.add('liked'); btn.style.transform='scale(1.35)'; setTimeout(() => btn.style.transform='',220); }
-  saveFavs();
-  updateFavBadge();
-  document.querySelectorAll(`.card-heart[data-item-id="${id}"]`).forEach(b => b.classList.toggle('liked', likedItems.has(id)));
-  updateHomeFavSection();
-}
-
-function openFavPage(){
-  document.getElementById('user-dropdown').classList.remove('open');
-  if(!currentUser){ openAuthModal(); return; }
-  renderFavPage();
-  document.getElementById('fav-page').classList.add('open');
-  document.body.style.overflow='hidden';
-  history.pushState({favPage:true},'','#favorites');
-}
+function toggleHeart(e, id){ e.stopPropagation(); if(!currentUser){ openAuthModal(); return; } const btn = e.currentTarget; if(likedItems.has(id)){ likedItems.delete(id); btn.classList.remove('liked'); } else { likedItems.add(id); btn.classList.add('liked'); btn.style.transform='scale(1.35)'; setTimeout(() => btn.style.transform='',220); } saveFavs(); updateFavBadge(); document.querySelectorAll(`.card-heart[data-item-id="${id}"]`).forEach(b => b.classList.toggle('liked', likedItems.has(id))); updateHomeFavSection(); }
+function openFavPage(){ document.getElementById('user-dropdown').classList.remove('open'); if(!currentUser){ openAuthModal(); return; } renderFavPage(); document.getElementById('fav-page').classList.add('open'); document.body.style.overflow='hidden'; history.pushState({favPage:true},'','#favorites'); }
 function closeFavPage(){ document.getElementById('fav-page').classList.remove('open'); document.body.style.overflow=''; if(history.state?.favPage) history.back(); }
+function renderFavPage(){ const favIds = [...likedItems]; const count = favIds.length; document.getElementById('fav-page-count').textContent = count > 0 ? `${count} ITEMS` : ''; const wrap = document.getElementById('fav-grid-wrap'); if(!count){ wrap.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>No favorites yet</h3><p>Heart any item to save it here.</p><button class="fav-empty-btn" onclick="closeFavPage()">Browse Items</button></div>`; return; } const favItems = favIds.map(id => ITEMS.find(x => x.id === id)).filter(Boolean); wrap.innerHTML = `<div class="fav-grid">${favItems.map((it,i) => card(it,i)).join('')}</div>`; requestAnimationFrame(() => wrap.querySelectorAll('.card').forEach(c => c.classList.add('in'))); }
+function logoutUser(){ currentUser=null; setSession(null); likedItems.clear(); updateAuthUI(false); updateFavBadge(); document.getElementById('user-dropdown').classList.remove('open'); render(); }
 
-function renderFavPage(){
-  const favIds = [...likedItems];
-  const count = favIds.length;
-  document.getElementById('fav-page-count').textContent = count > 0 ? `${count} ITEMS` : '';
-  const wrap = document.getElementById('fav-grid-wrap');
-  if(!count){
-    wrap.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>No favorites yet</h3><p>Heart any item to save it here.</p><button class="fav-empty-btn" onclick="closeFavPage()">Browse Items</button></div>`;
-    return;
-  }
-  const favItems = favIds.map(id => ITEMS.find(x => x.id === id)).filter(Boolean);
-  wrap.innerHTML = `<div class="fav-grid">${favItems.map((it,i) => card(it,i)).join('')}</div>`;
-  requestAnimationFrame(() => wrap.querySelectorAll('.card').forEach(c => c.classList.add('in')));
-}
-
-function logoutUser(){
-  currentUser=null; setSession(null); likedItems.clear();
-  updateAuthUI(false); updateFavBadge();
-  document.getElementById('user-dropdown').classList.remove('open');
-  render();
-}
-
-/* ======================================================
-   ITEMS — Only 4 items here. Add your own below.
-   Copy the format exactly. Each item needs:
-   id (unique number), name, brand, cat, badge (optional),
-   tags (array), desc, longDesc, imgs (array of image paths)
-   Optional: colorVariants, sizes, batch, sku
-====================================================== */
-const CLOTHING = ['streetwear'];
+/* ====== ITEMS — FINAL 4 (CHANGE: TRIM) ====== */
+const CLOTHING = ['streetwear','pants','shorts'];
 const SIZES_DEFAULT = ['S','M','L','XL'];
 const SIZES_BAPE = ['S','M','L','XL','XXL'];
 const CARD_SLOT = 232;
 
 const ITEMS = [
-  { id: 622, name: "Stüssy Winged Head Tee White", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "winged head", "white tee", "streetwear", "graphic tee", "abu dhabi", "secret shop", "menswear", "skate culture"], desc: "White · Stüssy Graphic Tee", longDesc: "The Stüssy Winged Head Tee features iconic brand artwork on a crisp white cotton base, perfect for elevating your daily streetwear rotation.", imgs: ["images/WhatsApp Image 2026-05-09 at 9.31.46 PM.jpeg"] },
+   { id: 622, name: "Stüssy Winged Head Tee White", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "winged head", "white tee", "streetwear", "graphic tee", "abu dhabi", "secret shop", "menswear", "skate culture"], desc: "White · Stüssy Graphic Tee", longDesc: "The Stüssy Winged Head Tee features iconic brand artwork on a crisp white cotton base, perfect for elevating your daily streetwear rotation.", imgs: ["images/WhatsApp Image 2026-05-09 at 9.31.46 PM.jpeg"] },
       { id: 623, name: "A Bathing Ape x Dragon Ball Z Baby Milo Tee", brand: "A Bathing Ape", cat: "streetwear", badge: "HOT", tags: ["a bathing ape", "bape", "dragon ball z", "baby milo", "streetwear", "graphic tee", "abu dhabi", "streetwear uae", "bape x dbz"], desc: "White / Black · Baby Milo Graphic", longDesc: "This iconic A Bathing Ape collaboration features the legendary Baby Milo character reimagined with classic Dragon Ball Z aesthetic elements.", imgs: ["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"], colorVariants: [{ label: "White", color: "#ffffff", imgs: ["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"] }, { label: "Black", color: "#000000", imgs: ["images/WhatsApp Image 2026-05-09 at 9.02.33 PM.jpeg"] }] },
       { id: 620, name: "Stüssy X-Ray Surfer Tee", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "x-ray surfer", "surf culture", "streetwear", "abu dhabi", "graphic tee", "skate culture", "stussy tribe"], desc: "Iconic X-Ray Skeleton Surfer Graphic", longDesc: "The Stüssy X-Ray Surfer Tee showcases an edgy, multi-panel skeletal graphic carrying a surfboard across the back, blending hardcore surf culture with premium streetwear styling.", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.51 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM (1).jpeg"], colorVariants: [{ label: "Black", color: "#000000", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.51 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM.jpeg"] }, { label: "White", color: "#ffffff", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.52 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.52 PM (1).jpeg"] }] },
       { id: 621, name: "Stüssy Designs Equipment Tee", brand: "Stüssy", cat: "streetwear", badge: "HOT", tags: ["stussy", "stussy designs", "equipment for the modern age", "world tour", "streetwear", "abu dhabi", "graphic tee", "skate culture"], desc: "Classic Boxed Logo · World Tour Cities", longDesc: "The Stüssy Designs Equipment Tee features the signature boxed script logo and 'Equipment for the modern age' text alongside a classic global city checklist on premium cotton.", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.36 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.36 PM (1).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (1).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (3).jpeg"], colorVariants: [{ label: "Purple", color: "#8e7cc3", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.36 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.36 PM (1).jpeg"] }, { label: "Black", color: "#000000", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.37 PM.jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (1).jpeg"] }, { label: "White", color: "#ffffff", imgs: ["images/WhatsApp Image 2026-05-09 at 8.44.37 PM (2).jpeg", "images/WhatsApp Image 2026-05-09 at 8.44.37 PM (3).jpeg"] }] },
@@ -2102,16 +1878,12 @@ const TRENDING_IDS = [1, 2, 30, 89];
 let currentCat = 'all', searchQ = '';
 const pickedSize = {}, pickedColor = {};
 
-function fuzzy(q, item){
-  if(!q) return true;
-  const words = q.toLowerCase().trim().split(/\s+/);
-  const hay = [item.name,item.brand,item.desc||'',item.batch||'',item.sku||'',...(item.tags||[])].join(' ').toLowerCase();
-  return words.every(w => hay.includes(w));
-}
+function fuzzy(q, item){ if(!q) return true; const words = q.toLowerCase().trim().split(/\s+/); const hay = [item.name,item.brand,item.desc||'',item.batch||'',item.sku||'',...(item.tags||[])].join(' ').toLowerCase(); return words.every(w => hay.includes(w)); }
+
+function itemDeepLink(itemId){ const base = window.location.href.split('?')[0].split('#')[0]; return base + '?item=' + itemId; }
 
 function waLink(item, img, size, color){
-  const base = window.location.href.split('?')[0].split('#')[0];
-  const url = `${base}?item=${item.id}`;
+  const url = itemDeepLink(item.id);
   const p = [`Hi Secret Shop! 👋`,`I'm interested in: *${item.name}*${item.batch?` (${item.batch})`:''}`,item.desc||'',item.sku?`SKU: ${item.sku}`:'',size?`Size: ${size}`:(item.sizes||''),color?`Color: ${color}`:'','',`🔗 View Item:`,url,'',`Is it available?`].filter(s => s !== undefined).join('\n');
   return `https://wa.me/971563780062?text=${encodeURIComponent(p)}`;
 }
@@ -2126,378 +1898,70 @@ function card(item, delay){
   const sizes = (item.brand === 'A Bathing Ape' || item.brand === 'BAPE') ? SIZES_BAPE : SIZES_DEFAULT;
   const psz = pickedSize[item.id] || '';
   const badgeHtml = item.badge ? `<span class="badge ${item.badge==='HOT'?'hot':'new-badge'}">${item.badge}</span>` : '';
-  const imgHtml = cover
-    ? `<img class="card-img-el" src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.opacity=0"/>`
-    : `<div class="card-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>`;
+  const imgHtml = cover ? `<img class="card-img-el" src="${cover}" alt="${item.name}" loading="lazy" onerror="this.style.opacity=0"/>` : `<div class="card-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>`;
   const skuHtml = item.sku ? `<p class="card-sku">${item.batch?item.batch+' · ':''}${item.sku}</p>` : (item.batch ? `<p class="card-sku">${item.batch}</p>` : '');
   const sizesHtml = item.sizes && !isClo ? `<p class="card-sku">${item.sizes}</p>` : '';
   const sizePickerHtml = isClo ? `<div class="size-row">${sizes.map(s => `<button class="sz-chip${psz===s?' active':''}" onclick="cardSize(event,${item.id},'${s}')">${s}</button>`).join('')}</div>` : '';
   const isLiked = likedItems.has(item.id);
   return `<div class="card" data-id="${item.id}" id="item-${item.id}" style="transition-delay:${Math.min(delay,20)*0.04}s" onclick="openPdp(${item.id})" tabindex="0" role="listitem">
-  <div class="card-img">
-    ${imgHtml}${badgeHtml}
-    <button class="card-heart${isLiked?' liked':''}" data-item-id="${item.id}" onclick="toggleHeart(event,${item.id})" aria-label="Save">
-      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    </button>
-  </div>
-  <div class="card-body">
-    <p class="card-brand-lbl">${item.brand}</p>
-    <p class="card-name">${item.name}</p>
-    <p class="card-sub" id="csub-${item.id}">${desc}</p>
-    ${skuHtml}${sizesHtml}${sizePickerHtml}
-    <button class="card-view-btn" onclick="event.stopPropagation();openPdp(${item.id})">View Item</button>
-  </div>
+  <div class="card-img">${imgHtml}${badgeHtml}<button class="card-heart${isLiked?' liked':''}" data-item-id="${item.id}" onclick="toggleHeart(event,${item.id})" aria-label="Save"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+  <div class="card-body"><p class="card-brand-lbl">${item.brand}</p><p class="card-name">${item.name}</p><p class="card-sub" id="csub-${item.id}">${desc}</p>${skuHtml}${sizesHtml}${sizePickerHtml}<button class="card-view-btn" onclick="event.stopPropagation();openPdp(${item.id})">View Item</button></div>
 </div>`;
 }
 
-function animate(container){
-  requestAnimationFrame(() => container.querySelectorAll('.card').forEach(c => requestAnimationFrame(() => c.classList.add('in'))));
-}
+function animate(container){ requestAnimationFrame(() => container.querySelectorAll('.card').forEach(c => requestAnimationFrame(() => c.classList.add('in')))); }
 
-function relScroll(dir){
-  const el = document.getElementById('pdp-related-grid');
-  if(el) el.scrollBy({left:dir*200,behavior:'smooth'});
-}
+function relScroll(dir){ const el = document.getElementById('pdp-related-grid'); if(el) el.scrollBy({left:dir*200,behavior:'smooth'}); }
 
-function makeCarousel(outer, track, itemCount){
-  if(!outer || !track || itemCount < 1) return;
-  const singleSetWidth = itemCount * CARD_SLOT;
-  const speed = 38;
-  let offset=0, raf=null, lastTime=null, dragging=false, dragStartX=0, dragStartOffset=0, touchId=null;
-  function clamp(o){ o = o % singleSetWidth; if(o < 0) o += singleSetWidth; return o; }
-  function loop(ts){ if(lastTime===null) lastTime=ts; const dt=(ts-lastTime)/1000; lastTime=ts; offset+=speed*dt; if(offset>=singleSetWidth) offset-=singleSetWidth; track.style.transform=`translateX(${-offset}px)`; raf=requestAnimationFrame(loop); }
-  function startAnim(){ if(raf) return; lastTime=null; raf=requestAnimationFrame(loop); }
-  function stopAnim(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
-  outer.addEventListener('mousedown', e => { stopAnim(); dragging=true; dragStartX=e.clientX; dragStartOffset=offset; e.preventDefault(); });
-  window.addEventListener('mousemove', e => { if(!dragging) return; offset=clamp(dragStartOffset+(dragStartX-e.clientX)); track.style.transform=`translateX(${-offset}px)`; });
-  window.addEventListener('mouseup', () => { if(!dragging) return; dragging=false; startAnim(); });
-  outer.addEventListener('touchstart', e => { if(touchId!==null) return; const t=e.changedTouches[0]; touchId=t.identifier; stopAnim(); dragging=true; dragStartX=t.clientX; dragStartOffset=offset; },{passive:true});
-  window.addEventListener('touchmove', e => { if(!dragging) return; let t=null; for(let i=0;i<e.changedTouches.length;i++){ if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;} } if(!t) return; offset=clamp(dragStartOffset+(dragStartX-t.clientX)); track.style.transform=`translateX(${-offset}px)`; },{passive:true});
-  window.addEventListener('touchend', e => { let found=false; for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}} if(!found) return; touchId=null; dragging=false; startAnim(); },{passive:true});
-  track.querySelectorAll('.card').forEach(c => c.classList.add('in'));
-  startAnim();
-}
+function makeCarousel(outer, track, itemCount){ if(!outer || !track || itemCount < 1) return; const singleSetWidth = itemCount * CARD_SLOT; const speed = 38; let offset=0, raf=null, lastTime=null, dragging=false, dragStartX=0, dragStartOffset=0, touchId=null; function clamp(o){ o = o % singleSetWidth; if(o < 0) o += singleSetWidth; return o; } function loop(ts){ if(lastTime===null) lastTime=ts; const dt=(ts-lastTime)/1000; lastTime=ts; offset+=speed*dt; if(offset>=singleSetWidth) offset-=singleSetWidth; track.style.transform=`translateX(${-offset}px)`; raf=requestAnimationFrame(loop); } function startAnim(){ if(raf) return; lastTime=null; raf=requestAnimationFrame(loop); } function stopAnim(){ if(raf){ cancelAnimationFrame(raf); raf=null; } } outer.addEventListener('mousedown', e => { stopAnim(); dragging=true; dragStartX=e.clientX; dragStartOffset=offset; e.preventDefault(); }); window.addEventListener('mousemove', e => { if(!dragging) return; offset=clamp(dragStartOffset+(dragStartX-e.clientX)); track.style.transform=`translateX(${-offset}px)`; }); window.addEventListener('mouseup', () => { if(!dragging) return; dragging=false; startAnim(); }); outer.addEventListener('touchstart', e => { if(touchId!==null) return; const t=e.changedTouches[0]; touchId=t.identifier; stopAnim(); dragging=true; dragStartX=t.clientX; dragStartOffset=offset; },{passive:true}); window.addEventListener('touchmove', e => { if(!dragging) return; let t=null; for(let i=0;i<e.changedTouches.length;i++){ if(e.changedTouches[i].identifier===touchId){t=e.changedTouches[i];break;} } if(!t) return; offset=clamp(dragStartOffset+(dragStartX-t.clientX)); track.style.transform=`translateX(${-offset}px)`; },{passive:true}); window.addEventListener('touchend', e => { let found=false; for(let i=0;i<e.changedTouches.length;i++){if(e.changedTouches[i].identifier===touchId){found=true;break;}} if(!found) return; touchId=null; dragging=false; startAnim(); },{passive:true}); track.querySelectorAll('.card').forEach(c => c.classList.add('in')); startAnim(); }
 
-function cardSize(e, id, size){
-  e.stopPropagation(); pickedSize[id] = pickedSize[id]===size ? '' : size;
-  document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el => {
-    el.querySelectorAll('.sz-chip').forEach(b => b.classList.toggle('active', b.textContent===pickedSize[id]));
-  });
-}
+function cardSize(e, id, size){ e.stopPropagation(); pickedSize[id] = pickedSize[id]===size ? '' : size; document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el => { el.querySelectorAll('.sz-chip').forEach(b => b.classList.toggle('active', b.textContent===pickedSize[id])); }); }
 
-function buildTrending(){
-  const track = document.getElementById('trending-grid');
-  const outer = document.getElementById('trending-carousel-outer');
-  if(!track || !outer) return;
-  const items = TRENDING_IDS.map(id => ITEMS.find(x => x.id === id)).filter(Boolean);
-  if(!items.length){ track.innerHTML=''; return; }
-  const tripled = [...items,...items,...items];
-  track.innerHTML = tripled.map(it => {
-    const cover = (it.imgs||[])[0]||'';
-    const badgeHtml = it.badge ? `<span class="trending-badge" style="background:${it.badge==='HOT'?'var(--accent)':'#000'};color:${it.badge==='HOT'?'#000':'var(--accent)'}">${it.badge}</span>` : '';
-    return `<div class="trending-card" onclick="openPdp(${it.id})">
-  <div class="trending-img">${cover?`<img class="trending-img-el" src="${cover}" alt="${it.name}" loading="lazy" onerror="this.style.opacity=0"/>`:''} ${badgeHtml}</div>
-  <div class="trending-card-body"><p class="trending-card-brand">${it.brand}</p><p class="trending-card-name">${it.name}</p><p class="trending-card-sub">${it.desc||''}</p><button class="trending-card-btn" onclick="event.stopPropagation();openPdp(${it.id})">View Item</button></div>
-</div>`;
-  }).join('');
-  makeCarousel(outer, track, items.length);
-}
+function buildTrending(){ const track = document.getElementById('trending-grid'); const outer = document.getElementById('trending-carousel-outer'); if(!track || !outer) return; const items = TRENDING_IDS.map(id => ITEMS.find(x => x.id === id)).filter(Boolean); if(!items.length){ track.innerHTML=''; return; } const tripled = [...items,...items,...items]; track.innerHTML = tripled.map(it => { const cover = (it.imgs||[])[0]||''; const badgeHtml = it.badge ? `<span class="trending-badge" style="background:${it.badge==='HOT'?'var(--accent)':'#000'};color:${it.badge==='HOT'?'#000':'var(--accent)'}">${it.badge}</span>` : ''; return `<div class="trending-card" onclick="openPdp(${it.id})"><div class="trending-img">${cover?`<img class="trending-img-el" src="${cover}" alt="${it.name}" loading="lazy" onerror="this.style.opacity=0"/>`:''} ${badgeHtml}</div><div class="trending-card-body"><p class="trending-card-brand">${it.brand}</p><p class="trending-card-name">${it.name}</p><p class="trending-card-sub">${it.desc||''}</p><button class="trending-card-btn" onclick="event.stopPropagation();openPdp(${it.id})">View Item</button></div></div>`; }).join(''); makeCarousel(outer, track, items.length); }
 
-function render(){
-  const brandBody = document.getElementById('brand-sections-body');
-  const isSrch = searchQ.length > 0;
-  const isAll = currentCat === 'all' && !isSrch;
-  const heroSec = document.getElementById('hero-section');
-  const catSec = document.getElementById('cat-section');
-  const trendSec = document.getElementById('trending-section');
-  const homeFavSec = document.getElementById('home-fav-section');
-  if(heroSec) heroSec.style.display = isAll ? 'grid' : 'none';
-  if(catSec) catSec.style.display = isAll ? 'block' : 'none';
-  if(trendSec) trendSec.style.display = isAll ? 'block' : 'none';
-  const catName = {'all':'All Items','ua-pairs':'UA Pairs','streetwear':'Streetwear','luxury':'Luxury Items','watches':'Watches','accessories':'Accessories'}[currentCat]||currentCat;
-  const visible = ITEMS.filter(item => (currentCat==='all'||item.cat===currentCat) && fuzzy(searchQ,item));
-  document.getElementById('cat-nav-count').textContent = `${visible.length} items`;
-  if(isAll && currentUser) updateHomeFavSection();
-  else if(homeFavSec) homeFavSec.classList.remove('visible');
-  if(!brandBody) return;
-  if(!visible.length){ brandBody.innerHTML=`<div class="search-sec"><div class="search-sec-hdr"><span class="search-sec-title">No Results</span></div><div class="search-grid"><div class="empty-state"><h3>Nothing found</h3><p>Try a different search or browse a category</p></div></div></div>`; return; }
-  if(isSrch){ brandBody.innerHTML=`<div class="search-sec"><div class="search-sec-hdr"><span class="search-sec-title">Results for "${searchQ}"</span></div><div class="search-grid">${visible.map((it,i) => card(it,i)).join('')}</div></div>`; animate(brandBody); return; }
-  if(!isAll){
-    const backBtnHtml = `<div class="back-btn-wrap"><button class="back-btn" onclick="resetHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> BACK</button></div>`;
-    brandBody.innerHTML = backBtnHtml + `<div class="search-sec"><div class="search-sec-hdr"><span class="search-sec-title">${catName}</span></div><div class="search-grid">${visible.map((it,i) => card(it,i)).join('')}</div></div>`;
-    animate(brandBody); return;
-  }
-  const CAROUSEL_GROUPS = ['ami'];
-  let html = '';
-  GROUPS.forEach(g => {
-    const items = visible.filter(it => g.brands.includes(it.brand));
-    if(!items.length) return;
-    const preview = items.slice(0,g.max);
-    let rowHtml;
-    if(CAROUSEL_GROUPS.includes(g.key)){
-      const tripled = [...preview,...preview,...preview];
-      rowHtml = `<div class="carousel-hint-row"><span class="carousel-hint-dot"></span>Swipe or drag to browse</div>
-<div class="carousel-track-outer" id="sec-outer-${g.key}">
-  <div class="carousel-track" id="sec-track-${g.key}">${tripled.map((it,i) => card(it,i%preview.length)).join('')}</div>
-</div>`;
-    } else {
-      rowHtml = `<div class="row-wrapper">
-  <button class="nav-btn prev-btn" onclick="scrollRow('sec-grid-${g.key}',-1)" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-  <div class="brand-grid" id="sec-grid-${g.key}">${preview.map((it,i) => card(it,i)).join('')}</div>
-  <button class="nav-btn next-btn" onclick="scrollRow('sec-grid-${g.key}',1)" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
-</div>`;
-    }
-    html += `<div class="brand-section">
-  <div class="brand-sec-hdr">
-    <div class="brand-sec-left"><span class="brand-sec-name">${g.label}</span><span class="brand-sec-count">${items.length} ITEMS</span></div>
-    <button class="brand-sec-see" onclick="openBrandPage('${g.key}')">See All →</button>
-  </div>
-  ${rowHtml}
-</div>`;
-  });
-  brandBody.innerHTML = html;
-  animate(brandBody);
-  requestAnimationFrame(() => {
-    CAROUSEL_GROUPS.forEach(key => {
-      const g = GROUPS.find(x => x.key===key); if(!g) return;
-      const items = visible.filter(it => g.brands.includes(it.brand)).slice(0,g.max);
-      makeCarousel(document.getElementById(`sec-outer-${key}`), document.getElementById(`sec-track-${key}`), items.length);
-    });
-    document.querySelectorAll('.brand-grid').forEach(el => { if(!el.dataset.dragBound){ el.dataset.dragBound='1'; initHscrollDrag(el); } });
-  });
-}
+function render(){ const brandBody = document.getElementById('brand-sections-body'); const isSrch = searchQ.length > 0; const isAll = currentCat === 'all' && !isSrch; const heroSec = document.getElementById('hero-section'); const catSec = document.getElementById('cat-section'); const trendSec = document.getElementById('trending-section'); const homeFavSec = document.getElementById('home-fav-section'); const shareBanner = document.querySelector('.share-shop-banner'); if(heroSec) heroSec.style.display = isAll ? 'grid' : 'none'; if(catSec) catSec.style.display = isAll ? 'block' : 'none'; if(trendSec) trendSec.style.display = isAll ? 'block' : 'none'; if(shareBanner) shareBanner.style.display = isAll ? 'flex' : 'none'; const catName = {'all':'All Items','ua-pairs':'UA Pairs','streetwear':'Streetwear','luxury':'Luxury Items','watches':'Watches','accessories':'Accessories','pants':'Pants','shorts':'Shorts','bags':'Bags'}[currentCat]||currentCat; const visible = ITEMS.filter(item => (currentCat==='all'||item.cat===currentCat) && fuzzy(searchQ,item)); document.getElementById('cat-nav-count').textContent = `${visible.length} items`; if(isAll && currentUser) updateHomeFavSection(); else if(homeFavSec) homeFavSec.classList.remove('visible'); if(!brandBody) return; if(!visible.length){ brandBody.innerHTML=`<div class="search-sec"><div class="search-sec-hdr"><span class="search-sec-title">No Results</span></div><div class="search-grid"><div class="empty-state"><h3>Nothing found</h3><p>Try a different search or browse a category</p></div></div></div>`; return; } if(isSrch){ brandBody.innerHTML=`<div class="search-sec"><div class="search-sec-hdr"><span class="search-sec-title">Results for "${searchQ}"</span></div><div class="search-grid">${visible.map((it,i) => card(it,i)).join('')}</div></div>`; animate(brandBody); return; } if(!isAll){ const backBtnHtml = `<div class="back-btn-wrap"><button class="back-btn" onclick="resetHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> BACK</button></div>`; brandBody.innerHTML = backBtnHtml + `<div class="search-sec"><div class="search-sec-hdr"><span class="search-sec-title">${catName}</span></div><div class="search-grid">${visible.map((it,i) => card(it,i)).join('')}</div></div>`; animate(brandBody); return; } const CAROUSEL_GROUPS = ['ami']; let html = ''; GROUPS.forEach(g => { const items = visible.filter(it => g.brands.includes(it.brand)); if(!items.length) return; const preview = items.slice(0,g.max); let rowHtml; if(CAROUSEL_GROUPS.includes(g.key)){ const tripled = [...preview,...preview,...preview]; rowHtml = `<div class="carousel-hint-row"><span class="carousel-hint-dot"></span>Swipe or drag to browse</div><div class="carousel-track-outer" id="sec-outer-${g.key}"><div class="carousel-track" id="sec-track-${g.key}">${tripled.map((it,i) => card(it,i%preview.length)).join('')}</div></div>`; } else { rowHtml = `<div class="row-wrapper"><button class="nav-btn prev-btn" onclick="scrollRow('sec-grid-${g.key}',-1)" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button><div class="brand-grid" id="sec-grid-${g.key}">${preview.map((it,i) => card(it,i)).join('')}</div><button class="nav-btn next-btn" onclick="scrollRow('sec-grid-${g.key}',1)" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></div>`; } html += `<div class="brand-section"><div class="brand-sec-hdr"><div class="brand-sec-left"><span class="brand-sec-name">${g.label}</span><span class="brand-sec-count">${items.length} ITEMS</span></div><button class="brand-sec-see" onclick="openBrandPage('${g.key}')">See All →</button></div>${rowHtml}</div>`; }); brandBody.innerHTML = html; animate(brandBody); requestAnimationFrame(() => { CAROUSEL_GROUPS.forEach(key => { const g = GROUPS.find(x => x.key===key); if(!g) return; const items = visible.filter(it => g.brands.includes(it.brand)).slice(0,g.max); makeCarousel(document.getElementById(`sec-outer-${key}`), document.getElementById(`sec-track-${key}`), items.length); }); document.querySelectorAll('.brand-grid').forEach(el => { if(!el.dataset.dragBound){ el.dataset.dragBound='1'; initHscrollDrag(el); } }); }); }
 
 function scrollRow(id, dir){ const el=document.getElementById(id); if(!el) return; el.scrollBy({left:dir*(220+12)*2,behavior:'smooth'}); }
 
 let bpKey=null, bpAllItems=[], bpSearchQ='', bpST;
-function bpRender(){
-  const grid = document.getElementById('bp-grid');
-  const filtered = bpAllItems.filter(it => fuzzy(bpSearchQ,it));
-  document.getElementById('bp-count').textContent = bpSearchQ ? `${filtered.length} of ${bpAllItems.length}` : `${bpAllItems.length} items`;
-  if(!filtered.length){ grid.innerHTML=`<div class="bp-empty"><p>No results</p><span>Try a different keyword</span></div>`; return; }
-  grid.innerHTML = filtered.map((it,i) => card(it,i)).join('');
-  animate(grid);
-}
-
-function openBrandPage(key){
-  const g = GROUPS.find(x => x.key===key); if(!g) return;
-  bpKey=key; bpAllItems=ITEMS.filter(it => g.brands.includes(it.brand)); bpSearchQ='';
-  const bpInput = document.getElementById('bp-search-input');
-  bpInput.value=''; document.getElementById('bp-search-clear').classList.remove('visible');
-  document.getElementById('bp-title').textContent=g.label;
-  const page = document.getElementById('brand-page');
-  page.classList.add('open'); document.body.style.overflow='hidden';
-  requestAnimationFrame(() => { page.scrollTop=0; bpRender(); });
-  history.pushState({brandPage:key},'',`#brand-${key}`);
-}
+function bpRender(){ const grid = document.getElementById('bp-grid'); const filtered = bpAllItems.filter(it => fuzzy(bpSearchQ,it)); document.getElementById('bp-count').textContent = bpSearchQ ? `${filtered.length} of ${bpAllItems.length}` : `${bpAllItems.length} items`; if(!filtered.length){ grid.innerHTML=`<div class="bp-empty"><p>No results</p><span>Try a different keyword</span></div>`; return; } grid.innerHTML = filtered.map((it,i) => card(it,i)).join(''); animate(grid); }
+function openBrandPage(key){ const g = GROUPS.find(x => x.key===key); if(!g) return; bpKey=key; bpAllItems=ITEMS.filter(it => g.brands.includes(it.brand)); bpSearchQ=''; const bpInput = document.getElementById('bp-search-input'); bpInput.value=''; document.getElementById('bp-search-clear').classList.remove('visible'); document.getElementById('bp-title').textContent=g.label; const page = document.getElementById('brand-page'); page.classList.add('open'); document.body.style.overflow='hidden'; requestAnimationFrame(() => { page.scrollTop=0; bpRender(); }); history.pushState({brandPage:key},'',`#brand-${key}`); }
 function closeBrandPage(){ document.getElementById('brand-page').classList.remove('open'); document.body.style.overflow=''; bpKey=null; if(history.state?.brandPage) history.back(); }
-
 const bpInput = document.getElementById('bp-search-input');
 const bpClear = document.getElementById('bp-search-clear');
-bpInput.addEventListener('input', () => {
-  clearTimeout(bpST);
-  bpST = setTimeout(() => { bpSearchQ=bpInput.value.trim(); bpClear.classList.toggle('visible',bpSearchQ.length>0); bpRender(); },260);
-});
+bpInput.addEventListener('input', () => { clearTimeout(bpST); bpST = setTimeout(() => { bpSearchQ=bpInput.value.trim(); bpClear.classList.toggle('visible',bpSearchQ.length>0); bpRender(); },260); });
 bpClear.addEventListener('click', () => { bpInput.value=''; bpSearchQ=''; bpClear.classList.remove('visible'); bpInput.focus(); bpRender(); });
 
-window.addEventListener('popstate', e => {
-  if(!e.state?.brandPage){ document.getElementById('brand-page').classList.remove('open'); document.body.style.overflow=''; }
-  if(!e.state?.pdp){ document.getElementById('pdp-overlay').classList.remove('open'); document.body.style.overflow=''; pdpItem=null; }
-  if(!e.state?.favPage){ document.getElementById('fav-page').classList.remove('open'); document.body.style.overflow=''; }
-});
+window.addEventListener('popstate', e => { if(!e.state?.brandPage){ document.getElementById('brand-page').classList.remove('open'); document.body.style.overflow=''; } if(!e.state?.pdp){ document.getElementById('pdp-overlay').classList.remove('open'); document.body.style.overflow=''; pdpItem=null; } if(!e.state?.favPage){ document.getElementById('fav-page').classList.remove('open'); document.body.style.overflow=''; } });
 
 function resetHome(){ currentCat='all'; searchQ=''; document.getElementById('header-search-input').value=''; document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active',b.dataset.cat==='all')); render(); }
 function setcat(cat){ currentCat=cat; searchQ=''; document.querySelectorAll('.cat-btn,.nav-link').forEach(b => b.classList.toggle('active',b.dataset.cat===cat)); render(); document.querySelector('.cat-nav-bar').scrollIntoView({behavior:'smooth',block:'start'}); }
-
 document.querySelectorAll('.cat-btn,.nav-link').forEach(b => b.addEventListener('click', () => setcat(b.dataset.cat)));
 
 const headerSearchInput = document.getElementById('header-search-input');
 let headerST;
-headerSearchInput.addEventListener('input', () => {
-  clearTimeout(headerST);
-  const val = headerSearchInput.value.trim();
-  if(!val){ searchQ=''; currentCat='all'; document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active',b.dataset.cat==='all')); render(); return; }
-  headerST = setTimeout(() => {
-    searchQ=headerSearchInput.value.trim(); currentCat='all';
-    headerSearchInput.blur(); document.activeElement?.blur();
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active',b.dataset.cat==='all'));
-    render();
-    if(searchQ) setTimeout(() => document.querySelector('.cat-nav-bar').scrollIntoView({behavior:'smooth',block:'start'}),100);
-  },1500);
-});
-headerSearchInput.addEventListener('keydown', e => {
-  if(e.key==='Enter'){ clearTimeout(headerST); searchQ=headerSearchInput.value.trim(); currentCat='all'; headerSearchInput.blur(); document.activeElement?.blur(); render(); if(searchQ) setTimeout(() => document.querySelector('.cat-nav-bar').scrollIntoView({behavior:'smooth',block:'start'}),100); }
-});
+headerSearchInput.addEventListener('input', () => { clearTimeout(headerST); const val = headerSearchInput.value.trim(); if(!val){ searchQ=''; currentCat='all'; document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active',b.dataset.cat==='all')); render(); return; } headerST = setTimeout(() => { searchQ=headerSearchInput.value.trim(); currentCat='all'; headerSearchInput.blur(); document.activeElement?.blur(); document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active',b.dataset.cat==='all')); render(); if(searchQ) setTimeout(() => document.querySelector('.cat-nav-bar').scrollIntoView({behavior:'smooth',block:'start'}),100); },1500); });
+headerSearchInput.addEventListener('keydown', e => { if(e.key==='Enter'){ clearTimeout(headerST); searchQ=headerSearchInput.value.trim(); currentCat='all'; headerSearchInput.blur(); document.activeElement?.blur(); render(); if(searchQ) setTimeout(() => document.querySelector('.cat-nav-bar').scrollIntoView({behavior:'smooth',block:'start'}),100); } });
 
 /* ====== PDP ====== */
 let pdpItem=null, pdpImgIdx=0, pdpCi=null, pdpSz='';
 let pdpSlideRaf=null, pdpSlideLastTime=null;
 const pdpSlideInterval = 3200;
-
 function pdpSlideStart(){ pdpSlideStop(); pdpSlideLastTime=null; function tick(ts){ if(!pdpItem){pdpSlideStop();return;} if(pdpSlideLastTime===null) pdpSlideLastTime=ts; if(ts-pdpSlideLastTime>=pdpSlideInterval){ pdpSlideLastTime=ts; const cv=pdpItem.colorVariants?.[pdpCi]; const imgs=cv?cv.imgs:(pdpItem.imgs||[]); if(imgs.length>1) pdpThumb((pdpImgIdx+1)%imgs.length); } pdpSlideRaf=requestAnimationFrame(tick); } pdpSlideRaf=requestAnimationFrame(tick); }
 function pdpSlideStop(){ if(pdpSlideRaf){cancelAnimationFrame(pdpSlideRaf);pdpSlideRaf=null;} }
 function pdpSlideReset(){ pdpSlideLastTime=null; }
-
-function openPdp(id){
-  const item = ITEMS.find(x => x.id===id); if(!item) return;
-  pdpItem=item; pdpImgIdx=0;
-  pdpCi = item.colorVariants ? null : 0;
-  pdpSz = pickedSize[id] || '';
-  paintPdp();
-  const overlay = document.getElementById('pdp-overlay');
-  overlay.classList.add('open'); overlay.scrollTop=0; document.body.style.overflow='hidden';
-  history.pushState({pdp:id},'',`#pdp-${id}`);
-  setTimeout(pdpSlideStart,400);
-}
+function openPdp(id){ const item = ITEMS.find(x => x.id===id); if(!item) return; pdpItem=item; pdpImgIdx=0; pdpCi = item.colorVariants ? null : 0; pdpSz = pickedSize[id] || ''; paintPdp(); const overlay = document.getElementById('pdp-overlay'); overlay.classList.add('open'); overlay.scrollTop=0; document.body.style.overflow='hidden'; history.pushState({pdp:id},'',`#pdp-${id}`); setTimeout(pdpSlideStart,400); }
 function closePdp(){ pdpSlideStop(); document.getElementById('pdp-overlay').classList.remove('open'); document.body.style.overflow=''; pdpItem=null; if(history.state?.pdp) history.back(); }
-
-function paintPdp(){
-  if(!pdpItem) return;
-  const item = pdpItem;
-  const cv = (item.colorVariants && pdpCi !== null) ? item.colorVariants[pdpCi] : null;
-  const imgs = cv ? cv.imgs : (item.imgs || []);
-  const desc = cv ? (cv.desc || cv.label || item.desc || '') : (item.desc || '');
-  document.getElementById('pdp-header-name').textContent = item.name;
-  document.getElementById('pdp-brand').textContent = item.brand;
-  document.getElementById('pdp-name').textContent = item.name;
-  document.getElementById('pdp-meta').textContent = [item.batch,item.sku,desc,item.sizes&&!CLOTHING.includes(item.cat)?item.sizes:''].filter(Boolean).join(' · ');
-  document.getElementById('pdp-desc').textContent = item.longDesc || item.desc || '';
-  document.getElementById('pdp-main-img').src = imgs[pdpImgIdx] || '';
-  document.getElementById('pdp-arr-prev').style.display = imgs.length > 1 ? 'flex' : 'none';
-  document.getElementById('pdp-arr-next').style.display = imgs.length > 1 ? 'flex' : 'none';
-  document.getElementById('pdp-thumbs').innerHTML = imgs.slice(0,6).map((src,i) => `<div class="pdp-thumb${i===pdpImgIdx?' active':''}" onclick="pdpThumb(${i})"><img src="${src}" loading="lazy"/></div>`).join('');
-  const csec = document.getElementById('pdp-color-section');
-  if(item.colorVariants){
-    csec.style.display='';
-    const colorNameEl = document.getElementById('pdp-color-name');
-    colorNameEl.textContent = pdpCi !== null ? item.colorVariants[pdpCi].label : 'Pick a color';
-    document.getElementById('pdp-swatches').innerHTML = item.colorVariants.map((v,i) =>
-      `<div class="pdp-sw${pdpCi===i?' active':''}" style="background:${v.color}" data-label="${v.label}" title="${v.label}" onclick="pdpColor(${i})"></div>`
-    ).join('');
-  } else csec.style.display='none';
-  const ssec = document.getElementById('pdp-size-section');
-  if(CLOTHING.includes(item.cat)){
-    ssec.style.display='';
-    const szs = (item.brand==='A Bathing Ape'||item.brand==='BAPE') ? SIZES_BAPE : SIZES_DEFAULT;
-    document.getElementById('pdp-sizes').innerHTML = szs.map(s =>
-      `<button class="pdp-sz${pdpSz===s?' active':''}" onclick="pdpSzPick('${s}')">${s}</button>`
-    ).join('');
-  } else ssec.style.display='none';
-  document.getElementById('pdp-wa').href = waLink(item, imgs[pdpImgIdx], pdpSz, cv?.label||'');
-  const msgEl = document.getElementById('pdp-required-msg');
-  if(msgEl){ msgEl.textContent=''; msgEl.classList.remove('visible'); }
-  const related = ITEMS.filter(x => x.id!==item.id && (x.brand===item.brand||x.cat===item.cat) && (x.imgs||[]).length>0).slice(0,12);
-  const relSection = document.getElementById('pdp-related-section');
-  const relGrid = document.getElementById('pdp-related-grid');
-  if(related.length){
-    relSection.style.display='';
-    relGrid.innerHTML = related.map(it => {
-      const rci = pickedColor[it.id]||0; const rcv=it.colorVariants?.[rci]; const rimgs=rcv?rcv.imgs:(it.imgs||[]);
-      const rcover=rimgs[0]||''; const rdesc=rcv?(rcv.desc||rcv.label||it.desc||''):(it.desc||'');
-      return `<div class="pdp-rel-card" onclick="openPdp(${it.id})"><div class="pdp-rel-img"><img src="${rcover}" alt="${it.name}" loading="lazy" onerror="this.style.opacity=0"/></div><div class="pdp-rel-body"><p class="pdp-rel-brand">${it.brand}</p><p class="pdp-rel-name">${it.name}</p><p class="pdp-rel-sub">${rdesc||it.batch||''}</p><button class="pdp-rel-btn">View Item</button></div></div>`;
-    }).join('');
-  } else relSection.style.display='none';
-}
-
-function pdpThumb(idx){
-  const cv = (pdpItem?.colorVariants && pdpCi!==null) ? pdpItem.colorVariants[pdpCi] : null;
-  const imgs = cv ? cv.imgs : (pdpItem?.imgs||[]);
-  pdpImgIdx = (idx+imgs.length)%imgs.length;
-  document.getElementById('pdp-main-img').src = imgs[pdpImgIdx]||'';
-  document.querySelectorAll('.pdp-thumb').forEach((t,i) => t.classList.toggle('active',i===pdpImgIdx));
-  document.getElementById('pdp-wa').href = waLink(pdpItem, imgs[pdpImgIdx], pdpSz, cv?.label||'');
-}
-
-function pdpColor(idx){
-  pdpCi=idx; pdpImgIdx=0;
-  if(pdpItem) pickedColor[pdpItem.id]=idx;
-  paintPdp();
-}
-
-function pdpSzPick(sz){
-  pdpSz = pdpSz===sz ? '' : sz;
-  if(pdpItem) pickedSize[pdpItem.id]=pdpSz;
-  document.querySelectorAll('.pdp-sz').forEach(b => b.classList.toggle('active',b.textContent===pdpSz));
-  const cv = (pdpItem?.colorVariants && pdpCi!==null) ? pdpItem.colorVariants[pdpCi] : null;
-  const imgs = cv ? cv.imgs : (pdpItem?.imgs||[]);
-  document.getElementById('pdp-wa').href = waLink(pdpItem, imgs[pdpImgIdx], pdpSz, cv?.label||'');
-}
-
-document.getElementById('pdp-arr-prev').addEventListener('click', () => {
-  if(!pdpItem) return;
-  const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null;
-  const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
-  if(imgs.length<2) return; pdpSlideReset(); pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length);
-});
-document.getElementById('pdp-arr-next').addEventListener('click', () => {
-  if(!pdpItem) return;
-  const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null;
-  const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
-  if(imgs.length<2) return; pdpSlideReset(); pdpThumb((pdpImgIdx+1)%imgs.length);
-});
-
-document.addEventListener('keydown', e => {
-  const overlay = document.getElementById('pdp-overlay');
-  if(overlay.classList.contains('open') && pdpItem){
-    const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null;
-    const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
-    if(imgs.length>1){
-      if(e.key==='ArrowLeft'){ pdpSlideReset(); pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length); }
-      if(e.key==='ArrowRight'){ pdpSlideReset(); pdpThumb((pdpImgIdx+1)%imgs.length); }
-    }
-    if(e.key==='Escape') closePdp();
-  }
-});
-
-(function(){
-  let tx=0, moved=false;
-  const overlay = document.getElementById('pdp-overlay');
-  overlay.addEventListener('touchstart', e => { tx=e.changedTouches[0].screenX; moved=false; },{passive:true});
-  overlay.addEventListener('touchmove', () => { moved=true; },{passive:true});
-  overlay.addEventListener('touchend', e => {
-    if(!pdpItem||!moved) return;
-    const dx=e.changedTouches[0].screenX-tx;
-    if(Math.abs(dx)>45){
-      const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null;
-      const imgs=cv?cv.imgs:(pdpItem.imgs||[]);
-      if(imgs.length<2) return; pdpSlideReset(); pdpThumb((pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length);
-    }
-  },{passive:true});
-})();
-
-function initHscrollDrag(el){
-  if(el.dataset.dragBound) return;
-  el.dataset.dragBound='1';
-  let isDown=false, startX=0, scrollLeft=0;
-  el.addEventListener('mousedown', function(e){ if(e.target.closest('button,a,.pdp-sw,.sz-chip,.card-heart')) return; isDown=true; startX=e.pageX-el.offsetLeft; scrollLeft=el.scrollLeft; e.preventDefault(); });
-  window.addEventListener('mousemove', function(e){ if(!isDown) return; const x=e.pageX-el.offsetLeft; el.scrollLeft=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,scrollLeft-(x-startX)*1.2)); });
-  window.addEventListener('mouseup', function(){ if(!isDown) return; isDown=false; });
-  el.addEventListener('dragstart', e => e.preventDefault());
-}
-
-document.getElementById('pdp-wa').addEventListener('click', function(e){
-  if(!pdpItem) return;
-  const needsSize = CLOTHING.includes(pdpItem.cat);
-  const needsColor = !!(pdpItem.colorVariants && pdpItem.colorVariants.length > 1);
-  const missingSize = needsSize && !pdpSz;
-  const missingColor = needsColor && pdpCi === null;
-  const msgEl = document.getElementById('pdp-required-msg');
-  const waBtn = document.getElementById('pdp-wa');
-  if(missingSize || missingColor){
-    e.preventDefault();
-    const parts = [];
-    if(missingColor) parts.push('a color');
-    if(missingSize) parts.push('a size');
-    msgEl.textContent = `⚠ Please select ${parts.join(' and ')} before ordering`;
-    msgEl.classList.add('visible');
-    waBtn.classList.remove('shake'); void waBtn.offsetWidth; waBtn.classList.add('shake');
-    setTimeout(() => waBtn.classList.remove('shake'),500);
-    if(missingSize){ document.querySelectorAll('.pdp-sz').forEach(btn => { btn.classList.add('required-flash'); setTimeout(() => btn.classList.remove('required-flash'),600); }); document.getElementById('pdp-size-section')?.scrollIntoView({behavior:'smooth',block:'center'}); }
-    if(missingColor){ document.querySelectorAll('.pdp-sw').forEach(sw => { sw.classList.add('required-flash-swatch'); setTimeout(() => sw.classList.remove('required-flash-swatch'),600); }); if(!missingSize) document.getElementById('pdp-color-section')?.scrollIntoView({behavior:'smooth',block:'center'}); }
-    return;
-  }
-  msgEl.textContent=''; msgEl.classList.remove('visible');
-});
+function paintPdp(){ if(!pdpItem) return; const item = pdpItem; const cv = (item.colorVariants && pdpCi !== null) ? item.colorVariants[pdpCi] : null; const imgs = cv ? cv.imgs : (item.imgs || []); const desc = cv ? (cv.desc || cv.label || item.desc || '') : (item.desc || ''); document.getElementById('pdp-header-name').textContent = item.name; document.getElementById('pdp-brand').textContent = item.brand; document.getElementById('pdp-name').textContent = item.name; document.getElementById('pdp-meta').textContent = [item.batch,item.sku,desc,item.sizes&&!CLOTHING.includes(item.cat)?item.sizes:''].filter(Boolean).join(' · '); document.getElementById('pdp-desc').textContent = item.longDesc || item.desc || ''; document.getElementById('pdp-main-img').src = imgs[pdpImgIdx] || ''; document.getElementById('pdp-arr-prev').style.display = imgs.length > 1 ? 'flex' : 'none'; document.getElementById('pdp-arr-next').style.display = imgs.length > 1 ? 'flex' : 'none'; document.getElementById('pdp-thumbs').innerHTML = imgs.slice(0,6).map((src,i) => `<div class="pdp-thumb${i===pdpImgIdx?' active':''}" onclick="pdpThumb(${i})"><img src="${src}" loading="lazy"/></div>`).join(''); const csec = document.getElementById('pdp-color-section'); if(item.colorVariants){ csec.style.display=''; const colorNameEl = document.getElementById('pdp-color-name'); colorNameEl.textContent = pdpCi !== null ? item.colorVariants[pdpCi].label : 'Pick a color'; document.getElementById('pdp-swatches').innerHTML = item.colorVariants.map((v,i) => `<div class="pdp-sw${pdpCi===i?' active':''}" style="background:${v.color}" data-label="${v.label}" title="${v.label}" onclick="pdpColor(${i})"></div>`).join(''); } else csec.style.display='none'; const ssec = document.getElementById('pdp-size-section'); if(CLOTHING.includes(item.cat)){ ssec.style.display=''; const szs = (item.brand==='A Bathing Ape'||item.brand==='BAPE') ? SIZES_BAPE : SIZES_DEFAULT; document.getElementById('pdp-sizes').innerHTML = szs.map(s => `<button class="pdp-sz${pdpSz===s?' active':''}" onclick="pdpSzPick('${s}')">${s}</button>`).join(''); } else ssec.style.display='none'; document.getElementById('pdp-wa').href = waLink(item, imgs[pdpImgIdx], pdpSz, cv?.label||''); const msgEl = document.getElementById('pdp-required-msg'); if(msgEl){ msgEl.textContent=''; msgEl.classList.remove('visible'); } const related = ITEMS.filter(x => x.id!==item.id && (x.brand===item.brand||x.cat===item.cat) && (x.imgs||[]).length>0).slice(0,12); const relSection = document.getElementById('pdp-related-section'); const relGrid = document.getElementById('pdp-related-grid'); if(related.length){ relSection.style.display=''; relGrid.innerHTML = related.map(it => { const rci = pickedColor[it.id]||0; const rcv=it.colorVariants?.[rci]; const rimgs=rcv?rcv.imgs:(it.imgs||[]); const rcover=rimgs[0]||''; const rdesc=rcv?(rcv.desc||rcv.label||it.desc||''):(it.desc||''); return `<div class="pdp-rel-card" onclick="openPdp(${it.id})"><div class="pdp-rel-img"><img src="${rcover}" alt="${it.name}" loading="lazy" onerror="this.style.opacity=0"/></div><div class="pdp-rel-body"><p class="pdp-rel-brand">${it.brand}</p><p class="pdp-rel-name">${it.name}</p><p class="pdp-rel-sub">${rdesc||it.batch||''}</p><button class="pdp-rel-btn">View Item</button></div></div>`; }).join(''); } else relSection.style.display='none'; }
+function pdpThumb(idx){ const cv = (pdpItem?.colorVariants && pdpCi!==null) ? pdpItem.colorVariants[pdpCi] : null; const imgs = cv ? cv.imgs : (pdpItem?.imgs||[]); pdpImgIdx = (idx+imgs.length)%imgs.length; document.getElementById('pdp-main-img').src = imgs[pdpImgIdx]||''; document.querySelectorAll('.pdp-thumb').forEach((t,i) => t.classList.toggle('active',i===pdpImgIdx)); document.getElementById('pdp-wa').href = waLink(pdpItem, imgs[pdpImgIdx], pdpSz, cv?.label||''); }
+function pdpColor(idx){ pdpCi=idx; pdpImgIdx=0; if(pdpItem) pickedColor[pdpItem.id]=idx; paintPdp(); }
+function pdpSzPick(sz){ pdpSz = pdpSz===sz ? '' : sz; if(pdpItem) pickedSize[pdpItem.id]=pdpSz; document.querySelectorAll('.pdp-sz').forEach(b => b.classList.toggle('active',b.textContent===pdpSz)); const cv = (pdpItem?.colorVariants && pdpCi!==null) ? pdpItem.colorVariants[pdpCi] : null; const imgs = cv ? cv.imgs : (pdpItem?.imgs||[]); document.getElementById('pdp-wa').href = waLink(pdpItem, imgs[pdpImgIdx], pdpSz, cv?.label||''); }
+document.getElementById('pdp-arr-prev').addEventListener('click', () => { if(!pdpItem) return; const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null; const imgs=cv?cv.imgs:(pdpItem.imgs||[]); if(imgs.length<2) return; pdpSlideReset(); pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length); });
+document.getElementById('pdp-arr-next').addEventListener('click', () => { if(!pdpItem) return; const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null; const imgs=cv?cv.imgs:(pdpItem.imgs||[]); if(imgs.length<2) return; pdpSlideReset(); pdpThumb((pdpImgIdx+1)%imgs.length); });
+document.addEventListener('keydown', e => { const overlay = document.getElementById('pdp-overlay'); if(overlay.classList.contains('open') && pdpItem){ const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null; const imgs=cv?cv.imgs:(pdpItem.imgs||[]); if(imgs.length>1){ if(e.key==='ArrowLeft'){ pdpSlideReset(); pdpThumb((pdpImgIdx-1+imgs.length)%imgs.length); } if(e.key==='ArrowRight'){ pdpSlideReset(); pdpThumb((pdpImgIdx+1)%imgs.length); } } if(e.key==='Escape') closePdp(); } });
+(function(){ let tx=0, moved=false; const overlay = document.getElementById('pdp-overlay'); overlay.addEventListener('touchstart', e => { tx=e.changedTouches[0].screenX; moved=false; },{passive:true}); overlay.addEventListener('touchmove', () => { moved=true; },{passive:true}); overlay.addEventListener('touchend', e => { if(!pdpItem||!moved) return; const dx=e.changedTouches[0].screenX-tx; if(Math.abs(dx)>45){ const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null; const imgs=cv?cv.imgs:(pdpItem.imgs||[]); if(imgs.length<2) return; pdpSlideReset(); pdpThumb((pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length); } },{passive:true}); })();
+function initHscrollDrag(el){ if(el.dataset.dragBound) return; el.dataset.dragBound='1'; let isDown=false, startX=0, scrollLeft=0; el.addEventListener('mousedown', function(e){ if(e.target.closest('button,a,.pdp-sw,.sz-chip,.card-heart')) return; isDown=true; startX=e.pageX-el.offsetLeft; scrollLeft=el.scrollLeft; e.preventDefault(); }); window.addEventListener('mousemove', function(e){ if(!isDown) return; const x=e.pageX-el.offsetLeft; el.scrollLeft=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,scrollLeft-(x-startX)*1.2)); }); window.addEventListener('mouseup', function(){ if(!isDown) return; isDown=false; }); el.addEventListener('dragstart', e => e.preventDefault()); }
+document.getElementById('pdp-wa').addEventListener('click', function(e){ if(!pdpItem) return; const needsSize = CLOTHING.includes(pdpItem.cat); const needsColor = !!(pdpItem.colorVariants && pdpItem.colorVariants.length > 1); const missingSize = needsSize && !pdpSz; const missingColor = needsColor && pdpCi === null; const msgEl = document.getElementById('pdp-required-msg'); const waBtn = document.getElementById('pdp-wa'); if(missingSize || missingColor){ e.preventDefault(); const parts = []; if(missingColor) parts.push('a color'); if(missingSize) parts.push('a size'); msgEl.textContent = `⚠ Please select ${parts.join(' and ')} before ordering`; msgEl.classList.add('visible'); waBtn.classList.remove('shake'); void waBtn.offsetWidth; waBtn.classList.add('shake'); setTimeout(() => waBtn.classList.remove('shake'),500); if(missingSize){ document.querySelectorAll('.pdp-sz').forEach(btn => { btn.classList.add('required-flash'); setTimeout(() => btn.classList.remove('required-flash'),600); }); document.getElementById('pdp-size-section')?.scrollIntoView({behavior:'smooth',block:'center'}); } if(missingColor){ document.querySelectorAll('.pdp-sw').forEach(sw => { sw.classList.add('required-flash-swatch'); setTimeout(() => sw.classList.remove('required-flash-swatch'),600); }); if(!missingSize) document.getElementById('pdp-color-section')?.scrollIntoView({behavior:'smooth',block:'center'}); } return; } msgEl.textContent=''; msgEl.classList.remove('visible'); });
 
 document.getElementById('auth-email-input').addEventListener('keydown', e => { if(e.key==='Enter') handleEmailStep(); });
 document.getElementById('login-password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
@@ -2505,11 +1969,7 @@ document.getElementById('signup-confirm').addEventListener('keydown', e => { if(
 document.getElementById('signup-password').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('signup-confirm').focus(); });
 
 /* Deep link */
-(function(){
-  const params = new URLSearchParams(window.location.search);
-  const itemId = params.get('item');
-  if(itemId){ const id=parseInt(itemId); const found=ITEMS.find(x => x.id===id); if(found) setTimeout(() => openPdp(id),300); }
-})();
+(function(){ const params = new URLSearchParams(window.location.search); const itemId = params.get('item'); if(itemId){ const id=parseInt(itemId); const found=ITEMS.find(x => x.id===id); if(found) setTimeout(() => openPdp(id),300); } })();
 
 /* INIT */
 initSession();
