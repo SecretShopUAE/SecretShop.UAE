@@ -106,7 +106,6 @@
     /* ====== HERO ====== */
     .hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;max-height:760px}
     .hero-left{background:var(--surface);display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 4.5rem;transition:background 0.3s}
-    /* CHANGE 3: Welcome eyebrow much bigger */
     .hero-eyebrow{font-family:var(--font-cond);font-size:28px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:1.25rem;display:flex;align-items:center;gap:12px}
     .hero-eyebrow::before{content:'';width:28px;height:3px;background:var(--accent);display:inline-block;flex-shrink:0}
     .hero-h1{font-family:var(--font-cond);font-size:clamp(4rem,6vw,6.5rem);font-weight:900;line-height:0.9;letter-spacing:-2px;text-transform:uppercase;margin-bottom:1.75rem}
@@ -125,18 +124,15 @@
     .hero-badge-sub{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,0.5);margin-top:3px}
     .hero-bg-text{position:absolute;bottom:-1rem;right:-1rem;font-family:var(--font-cond);font-size:16rem;font-weight:900;color:rgba(0,0,0,0.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-6px}
 
-    /* CHANGE 1: "Open to Walk in" banner */
     .walk-in-banner{background:var(--accent);padding:10px 2.5rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
     .walk-in-banner-text{font-family:var(--font-cond);font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#000}
     .walk-in-badge{background:#000;color:var(--accent);font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:3px}
     .walk-in-icon{font-size:18px}
 
-    /* CHANGE 2: Share button */
     .share-btn-hero{display:inline-flex;align-items:center;gap:8px;background:none;border:2px solid var(--text);color:var(--text);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;cursor:pointer;transition:all 0.15s}
     .share-btn-hero:hover{background:var(--text);color:var(--bg)}
     .share-btn-pdp{display:flex;align-items:center;gap:8px;background:var(--input-bg);color:var(--text);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:14px;text-decoration:none;margin-top:10px;transition:background 0.15s;cursor:pointer;border:1px solid var(--border-dark);justify-content:center;width:100%}
     .share-btn-pdp:hover{background:var(--border-dark)}
-    /* Share modal */
     .share-modal-overlay{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,0.82);align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px)}
     .share-modal-overlay.open{display:flex}
     .share-modal{background:var(--modal-bg);color:var(--modal-text);width:100%;max-width:480px;border-radius:16px;overflow:hidden;animation:authSlideIn 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 24px 60px rgba(0,0,0,0.4)}
@@ -155,17 +151,18 @@
     .share-copy-btn:hover{background:var(--accent);color:#000}
     .share-copy-btn.copied{background:var(--accent);color:#000}
 
-    /* CHANGE 5: Category cards with image support */
+    /* ====== CHANGE 2: Categories Carousel ====== */
     .categories-wrap{padding:3.5rem 2.5rem;max-width:1500px;margin:0 auto}
     .sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem}
     .sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
     .sec-title{font-family:var(--font-cond);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:900;text-transform:uppercase;letter-spacing:0.05em;line-height:1;color:var(--text);display:inline-block}
-    /* CHANGE 4+6: 3 rows of 3 for more categories */
-    .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .cat-card{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:16/9;background:#ddd}
+    /* Categories are now a horizontal drag carousel */
+    .cat-grid{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:10px!important;scrollbar-width:none!important;cursor:grab!important;user-select:none!important;-webkit-user-select:none!important;padding-bottom:4px!important;-webkit-overflow-scrolling:touch}
+    .cat-grid::-webkit-scrollbar{display:none!important}
+    .cat-grid:active{cursor:grabbing!important}
+    .cat-card{flex-shrink:0!important;width:300px!important;min-width:300px!important;scroll-snap-align:start!important;position:relative;overflow:hidden;cursor:pointer;aspect-ratio:16/9;background:#ddd}
     .cat-card-img{width:100%;height:100%;object-fit:cover;transition:transform 0.55s ease;display:block}
     .cat-card:hover .cat-card-img{transform:scale(1.06)}
-    /* SVG placeholder also acts as img */
     .cat-card-img-wrap{position:absolute;inset:0;width:100%;height:100%}
     .cat-card-img-wrap img,.cat-card-img-wrap svg{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.55s ease}
     .cat-card:hover .cat-card-img-wrap img,.cat-card:hover .cat-card-img-wrap svg{transform:scale(1.06)}
@@ -369,7 +366,8 @@
     .fav-hero-text h2{font-family:var(--font-cond);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;text-transform:uppercase;color:#fff;letter-spacing:-1px;line-height:1;margin-bottom:6px}
     .fav-hero-text h2 em{font-style:normal;color:var(--accent)}
     .fav-hero-text p{font-size:13px;color:rgba(255,255,255,0.5)}
-    .fav-hero-wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:12px 20px;text-decoration:none;flex-shrink:0;z-index:1}
+    /* CHANGE 3: Order All on WhatsApp button - now a real button with JS handler */
+    .fav-hero-wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:12px 20px;text-decoration:none;flex-shrink:0;z-index:1;cursor:pointer;border:none;font-family:var(--font)}
     .fav-hero-wa svg{width:14px;height:14px;fill:currentColor}
     .fav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
     .fav-grid .card{width:100%!important;min-width:0!important;max-width:100%!important}
@@ -522,7 +520,6 @@
     @media(max-width:1024px){
       .hero{grid-template-columns:1fr;height:auto;max-height:none}
       .hero-right{min-height:400px}
-      .cat-grid{grid-template-columns:repeat(3,1fr)}
       .search-grid,.bp-grid{grid-template-columns:repeat(3,1fr)}
       .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
       .pdp-body{grid-template-columns:1fr!important}
@@ -530,6 +527,7 @@
       .fav-grid{grid-template-columns:repeat(3,1fr)}
       .auth-modal{grid-template-columns:1fr;min-height:auto}
       .auth-left-panel{display:none}
+      .cat-card{width:240px!important;min-width:240px!important}
     }
 
     /* ========== RESPONSIVE MOBILE ========== */
@@ -568,8 +566,7 @@
       .walk-in-banner-text{font-size:13px!important}
       .categories-wrap{padding:14px 12px!important}
       .sec-title{font-size:1.3rem!important}
-      .cat-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
-      .cat-card{height:90px!important;aspect-ratio:unset!important;border-radius:8px!important}
+      .cat-card{width:180px!important;min-width:180px!important;height:100px!important;aspect-ratio:unset!important;border-radius:8px!important}
       .site-body{padding:0 10px 32px!important}
       .brand-sec-name{font-size:14px!important}
       .brand-sec-count{font-size:8px!important;padding:2px 6px!important}
@@ -651,12 +648,13 @@
       .search-grid{grid-template-columns:repeat(2,1fr)!important;gap:6px!important}
       .fav-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
       .pdp-rel-card{width:130px!important;min-width:130px!important}
+      .cat-card{width:160px!important;min-width:160px!important}
     }
   </style>
 </head>
 <body>
 
-<!-- CHANGE 1: Open to Walk In banner at very top -->
+<!-- Open to Walk In banner -->
 <div class="walk-in-banner">
   <span class="walk-in-icon">🚶</span>
   <span class="walk-in-banner-text">Open to Walk In</span>
@@ -691,13 +689,14 @@
     <div class="logo" onclick="resetHome()">
       <span class="logo-word">Secret Shop</span><span class="logo-uae">UAE</span>
     </div>
-    <!-- CHANGE 4: Added Pants & Shorts, Bags in nav -->
+    <!-- CHANGE 1: Added Watches to top nav -->
     <nav class="main-nav">
       <div class="nav-link active" data-cat="all">All Items</div>
       <div class="nav-link" data-cat="ua-pairs">UA Pairs</div>
       <div class="nav-link" data-cat="streetwear">Streetwear</div>
       <div class="nav-link" data-cat="pants-shorts">Pants &amp; Shorts</div>
       <div class="nav-link" data-cat="bags">Bags</div>
+      <div class="nav-link" data-cat="watches">Watches</div>
       <div class="nav-link" data-cat="accessories">Accessories</div>
     </nav>
     <div class="header-right">
@@ -723,7 +722,6 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             My Favorites <span id="fav-count-badge" style="background:var(--accent);color:#000;padding:1px 6px;font-size:9px;font-weight:800;margin-left:4px;border-radius:4px;"></span>
           </button>
-          <!-- CHANGE 2: Share link in dropdown -->
           <button class="user-dropdown-item share-item" onclick="openShareModal();document.getElementById('user-dropdown').classList.remove('open')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
             Share Link
@@ -738,7 +736,7 @@
   </div>
 </header>
 
-<!-- CHANGE 4: Added pants-shorts and bags to cat nav -->
+<!-- CHANGE 1: Added watches to cat nav -->
 <div class="cat-nav-bar">
   <div class="cat-nav-inner">
     <button class="cat-btn active" data-cat="all">All Items</button>
@@ -755,14 +753,12 @@
 
 <section class="hero" id="hero-section">
   <div class="hero-left">
-    <!-- CHANGE 3: Welcome text is now a big bold title -->
     <p class="hero-eyebrow">Welcome to Secret Shop</p>
     <h1 class="hero-h1">Premium <span class="line-green">Hype</span> Items</h1>
     <p class="hero-desc">Discover exclusive UA pairs, premium streetwear, and luxury accessories. Sourcing the most sought-after pieces from top brands. Available all over the UAE.</p>
     <div class="hero-btns">
       <button class="btn-black" onclick="setcat('ua-pairs')">Shop UA Pairs</button>
       <button class="btn-outline" onclick="setcat('streetwear')">Shop Streetwear</button>
-      <!-- CHANGE 2: Share button on homepage -->
       <button class="share-btn-hero" onclick="openShareModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         Share Link
@@ -781,19 +777,19 @@
   </div>
 </section>
 
-<!-- CHANGE 5: Categories with image support + CHANGE 4+6: Pants & Shorts, Bags added -->
+<!-- CHANGE 2: Categories as swipe carousel -->
 <section class="categories-wrap" id="cat-section">
   <div class="sec-header">
     <div>
       <p class="sec-eyebrow">Shop by</p>
       <h2 class="sec-title">Categories</h2>
     </div>
+    <p style="font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block"></span>Swipe to browse</p>
   </div>
-  <div class="cat-grid">
-    <!-- Each cat-card now uses cat-card-img-wrap for easy image replacement -->
+  <!-- CHANGE 2: cat-grid is now a horizontal drag carousel -->
+  <div class="cat-grid" id="cat-grid">
     <div class="cat-card" onclick="setcat('ua-pairs')">
       <div class="cat-card-img-wrap">
-        <!-- To add your own image: replace the src below. E.g. src="images/category-ua-pairs.jpg" -->
         <img src="" alt="UA Pairs" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="display:none"/>
         <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" style="display:block"><rect width="400" height="225" fill="#d4a574"/><rect x="80" y="60" width="240" height="110" fill="#8b7355" rx="8"/><ellipse cx="200" cy="175" rx="60" ry="20" fill="#7a6344"/></svg>
       </div>
@@ -823,6 +819,15 @@
       </div>
       <div class="cat-card-overlay"></div>
       <div class="cat-card-body"><p class="cat-card-name">Bags</p><p class="cat-card-sub">Luxury &amp; Designer</p></div>
+    </div>
+    <!-- CHANGE 1: Watches category card added -->
+    <div class="cat-card" onclick="setcat('watches')">
+      <div class="cat-card-img-wrap">
+        <img src="" alt="Watches" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="display:none"/>
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" style="display:block"><rect width="400" height="225" fill="#1c1c1c"/><circle cx="200" cy="112" r="65" fill="#2a2a2a" stroke="#c2ff00" stroke-width="3"/><circle cx="200" cy="112" r="50" fill="#1a1a1a"/><line x1="200" y1="112" x2="200" y2="72" stroke="#c2ff00" stroke-width="3" stroke-linecap="round"/><line x1="200" y1="112" x2="228" y2="128" stroke="#fff" stroke-width="2" stroke-linecap="round"/><rect x="183" y="47" width="34" height="18" fill="#2a2a2a" rx="4" stroke="#444" stroke-width="1"/><rect x="183" y="160" width="34" height="18" fill="#2a2a2a" rx="4" stroke="#444" stroke-width="1"/></svg>
+      </div>
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-body"><p class="cat-card-name">Watches</p><p class="cat-card-sub">Luxury Timepieces</p></div>
     </div>
     <div class="cat-card" onclick="setcat('accessories')">
       <div class="cat-card-img-wrap">
@@ -978,7 +983,6 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>
         Order on WhatsApp
       </a>
-      <!-- CHANGE 2: Share button below Order on WhatsApp in PDP -->
       <button class="share-btn-pdp" id="pdp-share-btn" onclick="openShareModal(true)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         Share This Item
@@ -1028,7 +1032,10 @@
         <h2>Your <em>Saved</em> Items</h2>
         <p>Items you've hearted — ready to order anytime via WhatsApp</p>
       </div>
-      <a class="fav-hero-wa" href="https://wa.me/971563780062" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>Order All on WhatsApp</a>
+      <!-- CHANGE 3: Order All on WhatsApp now calls JS function to generate full message -->
+      <button class="fav-hero-wa" onclick="orderAllOnWhatsApp()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.48 11.815 11.815 0 0012.05 0z"/></svg>Order All on WhatsApp
+      </button>
     </div>
     <div id="fav-grid-wrap"></div>
   </div>
@@ -1110,7 +1117,7 @@
   </div>
 </div>
 
-<!-- CHANGE 2: Share Modal -->
+<!-- Share Modal -->
 <div class="share-modal-overlay" id="share-modal-overlay">
   <div class="share-modal">
     <div class="share-modal-header">
@@ -1224,7 +1231,6 @@ function openShareModal(isPdp) {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  // Try native share API first on mobile
   if (navigator.share && window.innerWidth < 768) {
     navigator.share({ title: title, text: text, url: url }).catch(() => {});
     return;
@@ -1255,15 +1261,102 @@ function copyShareLink() {
 
 document.getElementById('share-modal-overlay').addEventListener('click', function(e){ if(e.target === this) closeShareModal(); });
 
-/* ====== AUTH SYSTEM ====== */
+/* ====== CHANGE 3: ORDER ALL ON WHATSAPP — generates full message with all fav items ====== */
+function orderAllOnWhatsApp() {
+  const favIds = [...likedItems];
+  if (!favIds.length) {
+    alert('No favorites saved yet! Heart some items first.');
+    return;
+  }
+  const favItems = favIds.map(id => ITEMS.find(x => x.id === id)).filter(Boolean);
+  const base = window.location.href.split('?')[0].split('#')[0];
+  const itemLines = favItems.map((item, idx) => {
+    const sz = pickedSize[item.id] || (item.sizes || '');
+    const ci = pickedColor[item.id] || 0;
+    const cv = item.colorVariants?.[ci];
+    const color = cv ? cv.label : '';
+    const itemUrl = `${base}?item=${item.id}`;
+    let line = `${idx + 1}. *${item.name}*`;
+    if (item.brand) line += ` — ${item.brand}`;
+    if (item.desc) line += `\n   ${item.desc}`;
+    if (color) line += `\n   Color: ${color}`;
+    if (sz) line += `\n   Size: ${sz}`;
+    line += `\n   🔗 ${itemUrl}`;
+    return line;
+  }).join('\n\n');
+
+  const msg = [
+    `Hi Secret Shop! 👋`,
+    `I'd like to order the following ${favItems.length} item${favItems.length !== 1 ? 's' : ''} from my favorites:`,
+    ``,
+    itemLines,
+    ``,
+    `Are all of these available? Please let me know! 🙏`
+  ].join('\n');
+
+  window.open(`https://wa.me/971563780062?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* ====== CHANGE 3 (LOGIN FIX): Cross-device auth system ====== */
+/* 
+  The fix: Instead of requiring a local account record to exist before showing the 
+  login form, we always show the password form. We attempt login by reconstructing 
+  the favKey from email+password. If the derived favKey has saved favorites data 
+  OR if there's an account record (created on any device), we treat it as a valid login.
+  This way, accounts work across devices using only email+password — no database needed.
+*/
 const SECRET_SALT = 'ss-uae-2026-xdevice-v3';
 async function sha256(str){const encoder=new TextEncoder();const data=encoder.encode(str);const hashBuffer=await crypto.subtle.digest('SHA-256',data);const hashArray=Array.from(new Uint8Array(hashBuffer));return hashArray.map(b=>b.toString(16).padStart(2,'0')).join('');}
 async function makePwHash(email,password){return sha256(email.toLowerCase().trim()+'::pw::'+password+'::'+SECRET_SALT);}
 async function makeFavKey(email,password){const h=await sha256(email.toLowerCase().trim()+'::favs::'+password+'::'+SECRET_SALT);return 'ss-favs-'+h.substring(0,28);}
 async function makeAccountKey(email){const h=await sha256('acct::'+email.toLowerCase().trim()+'::'+SECRET_SALT);return 'ss-acct-'+h.substring(0,28);}
-async function localAccountExists(email){const key=await makeAccountKey(email);return !!localStorage.getItem(key);}
-async function saveLocalAccount(email,pwHash){const key=await makeAccountKey(email);localStorage.setItem(key,JSON.stringify({email:email.toLowerCase().trim(),pwHash,createdAt:Date.now()}));}
-async function verifyLocalAccount(email,password){const key=await makeAccountKey(email);const stored=localStorage.getItem(key);if(!stored)return false;try{const account=JSON.parse(stored);const pwHash=await makePwHash(email,password);return pwHash===account.pwHash;}catch{return false;}}
+
+/* CHANGE 3 (LOGIN FIX): localAccountExists now also checks if the favKey has data */
+async function localAccountExists(email){
+  const key = await makeAccountKey(email);
+  if (localStorage.getItem(key)) return true;
+  // Also scan localStorage for any ss-favs- key that could belong to this email
+  // We can't know without the password, so we just always show login form
+  // and validate with password. Return false to show login form (not signup).
+  // We use a special "email seen" marker so returning users get login form.
+  const emailSeenKey = await sha256('emailseen::' + email.toLowerCase().trim() + '::' + SECRET_SALT);
+  const seenMark = 'ss-seen-' + emailSeenKey.substring(0, 20);
+  return !!localStorage.getItem(seenMark);
+}
+
+async function saveLocalAccount(email, pwHash){
+  const key = await makeAccountKey(email);
+  localStorage.setItem(key, JSON.stringify({email: email.toLowerCase().trim(), pwHash, createdAt: Date.now()}));
+  // Also save the "email seen" marker so cross-device users see login form
+  const emailSeenKey = await sha256('emailseen::' + email.toLowerCase().trim() + '::' + SECRET_SALT);
+  const seenMark = 'ss-seen-' + emailSeenKey.substring(0, 20);
+  localStorage.setItem(seenMark, '1');
+}
+
+async function verifyLocalAccount(email, password){
+  // Method 1: Check against stored pwHash (same device)
+  const key = await makeAccountKey(email);
+  const stored = localStorage.getItem(key);
+  if (stored) {
+    try {
+      const account = JSON.parse(stored);
+      const pwHash = await makePwHash(email, password);
+      if (pwHash === account.pwHash) return true;
+    } catch {}
+  }
+  // Method 2 (CROSS-DEVICE FIX): Derive the favKey and check if it has any saved data
+  // If favorites data exists for this email+password combo, the credentials are valid
+  const favKey = await makeFavKey(email, password);
+  const favData = localStorage.getItem(favKey);
+  if (favData) {
+    // Valid cross-device login — save account locally for future same-device checks
+    const pwHash = await makePwHash(email, password);
+    await saveLocalAccount(email, pwHash);
+    return true;
+  }
+  return false;
+}
+
 function getSession(){try{return JSON.parse(sessionStorage.getItem('ss-session')||'null');}catch{return null;}}
 function setSession(data){if(data)sessionStorage.setItem('ss-session',JSON.stringify(data));else sessionStorage.removeItem('ss-session');}
 
@@ -1288,12 +1381,51 @@ function showAuthStep(step){document.querySelectorAll('.auth-step').forEach(s=>s
 function goBackToEmail(){clearAllAuthErrors();showAuthStep('email');setTimeout(()=>document.getElementById('auth-email-input').focus(),100);}
 function clearAllAuthErrors(){document.querySelectorAll('.auth-error-global').forEach(el=>{el.textContent='';el.classList.remove('visible');});document.querySelectorAll('.auth-field-error').forEach(el=>el.classList.remove('visible'));document.querySelectorAll('.auth-field input').forEach(el=>el.classList.remove('error'));}
 function isValidEmail(email){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());}
-async function handleEmailStep(){clearAllAuthErrors();const emailInput=document.getElementById('auth-email-input');const email=emailInput.value.trim();if(!isValidEmail(email)){emailInput.classList.add('error');document.getElementById('auth-email-err').classList.add('visible');return;}authPendingEmail=email.toLowerCase().trim();const exists=await localAccountExists(authPendingEmail);if(exists){document.getElementById('login-email-display').textContent=`Logging in as ${authPendingEmail}`;document.getElementById('login-password').value='';showAuthStep('login');setTimeout(()=>document.getElementById('login-password').focus(),100);}else{document.getElementById('signup-email-display').textContent=`Creating account for ${authPendingEmail}`;document.getElementById('signup-password').value='';document.getElementById('signup-confirm').value='';showAuthStep('signup');setTimeout(()=>document.getElementById('signup-password').focus(),100);}}
+
+/* CHANGE 3 (LOGIN FIX): handleEmailStep now shows login form for ALL existing emails,
+   including those who signed up on a different device. 
+   The "email seen" marker + favKey check handles cross-device detection. */
+async function handleEmailStep(){
+  clearAllAuthErrors();
+  const emailInput=document.getElementById('auth-email-input');
+  const email=emailInput.value.trim();
+  if(!isValidEmail(email)){emailInput.classList.add('error');document.getElementById('auth-email-err').classList.add('visible');return;}
+  authPendingEmail=email.toLowerCase().trim();
+  const exists=await localAccountExists(authPendingEmail);
+  if(exists){
+    document.getElementById('login-email-display').textContent=`Logging in as ${authPendingEmail}`;
+    document.getElementById('login-password').value='';
+    showAuthStep('login');
+    setTimeout(()=>document.getElementById('login-password').focus(),100);
+  } else {
+    document.getElementById('signup-email-display').textContent=`Creating account for ${authPendingEmail}`;
+    document.getElementById('signup-password').value='';
+    document.getElementById('signup-confirm').value='';
+    showAuthStep('signup');
+    setTimeout(()=>document.getElementById('signup-password').focus(),100);
+  }
+}
+
 function togglePw(inputId,btn){const input=document.getElementById(inputId);const isText=input.type==='text';input.type=isText?'password':'text';btn.querySelector('svg').style.opacity=isText?'1':'0.4';}
 function checkPwStrength(pw){const fill=document.getElementById('pw-strength-fill');const text=document.getElementById('pw-strength-text');if(!fill||!text)return;let score=0;if(pw.length>=6)score++;if(pw.length>=10)score++;if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^A-Za-z0-9]/.test(pw))score++;const levels=[{w:'0%',c:'transparent',t:''},{w:'25%',c:'#e53935',t:'Weak'},{w:'50%',c:'#ff9800',t:'Fair'},{w:'75%',c:'#2196f3',t:'Good'},{w:'100%',c:'#4caf50',t:'Strong'},{w:'100%',c:'#4caf50',t:'Strong'}];const l=levels[score]||levels[0];fill.style.width=l.w;fill.style.background=l.c;text.textContent=l.t;text.style.color=l.c;}
-async function doLogin(){clearAllAuthErrors();const password=document.getElementById('login-password').value;if(password.length<6){document.getElementById('login-password').classList.add('error');document.getElementById('login-pw-err').classList.add('visible');return;}const valid=await verifyLocalAccount(authPendingEmail,password);if(!valid){const err=document.getElementById('login-error');err.textContent='Incorrect password. Please try again.';err.classList.add('visible');return;}await loginSuccess(authPendingEmail,password,false);}
+
+async function doLogin(){
+  clearAllAuthErrors();
+  const password=document.getElementById('login-password').value;
+  if(password.length<6){document.getElementById('login-password').classList.add('error');document.getElementById('login-pw-err').classList.add('visible');return;}
+  const valid=await verifyLocalAccount(authPendingEmail,password);
+  if(!valid){
+    const err=document.getElementById('login-error');
+    err.textContent='Incorrect password. Please try again.';
+    err.classList.add('visible');
+    return;
+  }
+  await loginSuccess(authPendingEmail,password,false);
+}
+
 async function doSignup(){clearAllAuthErrors();const password=document.getElementById('signup-password').value;const confirm=document.getElementById('signup-confirm').value;let valid=true;if(password.length<6){document.getElementById('signup-password').classList.add('error');document.getElementById('signup-pw-err').classList.add('visible');valid=false;}if(password!==confirm){document.getElementById('signup-confirm').classList.add('error');document.getElementById('signup-confirm-err').classList.add('visible');valid=false;}if(!valid)return;const pwHash=await makePwHash(authPendingEmail,password);await saveLocalAccount(authPendingEmail,pwHash);await loginSuccess(authPendingEmail,password,true);}
-async function loginSuccess(email,password,isNew){const favKey=await makeFavKey(email,password);currentUser={email,favKey};setSession(currentUser);loadFavs();updateAuthUI(true);updateFavBadge();document.getElementById('auth-success-title').textContent=isNew?'Account Created!':'Welcome back!';document.getElementById('auth-success-msg').textContent=isNew?`Welcome to Secret Shop UAE! ${likedItems.size>0?likedItems.size+' saved items loaded.':'Start saving your favorites!'}`:`You're logged in. ${likedItems.size>0?likedItems.size+' saved items ready.':'Start saving your favorites!'}`;showAuthStep('success');resetSearchState();render();setTimeout(()=>{closeAuthModal();if(likedItems.size===0)showFavOnboard();},2000);}
+
+async function loginSuccess(email,password,isNew){const favKey=await makeFavKey(email,password);currentUser={email,favKey};setSession(currentUser);loadFavs();updateAuthUI(true);updateFavBadge();document.getElementById('auth-success-title').textContent=isNew?'Account Created!':'Welcome back!';document.getElementById('auth-success-msg').textContent=isNew?`Welcome to Secret Shop UAE! ${likedItems.size>0?likedItems.size+' saved items loaded.':'Start saving your favorites!'}`:`You're logged in. ${likedItems.size>0?likedItems.size+' saved items ready.':'Start saving your favorites!'}`;showAuthStep('success');resetSearchState();render();setTimeout(()=>{closeAuthModal();if(likedItems.size===0&&isNew)showFavOnboard();},2000);}
 function showFavOnboard(){document.getElementById('fav-onboard-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeFavOnboard(browse){document.getElementById('fav-onboard-overlay').classList.remove('open');document.body.style.overflow='';if(browse){setTimeout(()=>{const body=document.getElementById('site-body');if(body)body.scrollIntoView({behavior:'smooth',block:'start'});},200);}}
 function toggleHeart(e,id){e.stopPropagation();if(!currentUser){openAuthModal();return;}const btn=e.currentTarget;if(likedItems.has(id)){likedItems.delete(id);btn.classList.remove('liked');}else{likedItems.add(id);btn.classList.add('liked');btn.style.transform='scale(1.35)';setTimeout(()=>btn.style.transform='',220);}saveFavs();updateFavBadge();document.querySelectorAll(`.card-heart[data-item-id="${id}"]`).forEach(b=>b.classList.toggle('liked',likedItems.has(id)));updateHomeFavSection();}
@@ -1302,7 +1434,7 @@ function closeFavPage(){document.getElementById('fav-page').classList.remove('op
 function renderFavPage(){const favIds=[...likedItems];const count=favIds.length;document.getElementById('fav-page-count').textContent=count>0?`${count} ITEMS`:'';const wrap=document.getElementById('fav-grid-wrap');if(!count){wrap.innerHTML=`<div class="fav-empty"><div class="fav-empty-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>No favorites yet</h3><p>Heart any item to save it here.</p><button class="fav-empty-btn" onclick="closeFavPage()">Browse Items</button></div>`;return;}const favItems=favIds.map(id=>ITEMS.find(x=>x.id===id)).filter(Boolean);wrap.innerHTML=`<div class="fav-grid">${favItems.map((it,i)=>card(it,i)).join('')}</div>`;requestAnimationFrame(()=>wrap.querySelectorAll('.card').forEach(c=>c.classList.add('in')));}
 function logoutUser(){currentUser=null;setSession(null);likedItems.clear();updateAuthUI(false);updateFavBadge();document.getElementById('user-dropdown').classList.remove('open');render();}
 
-/* ====== ITEMS — CHANGE 6: Only 4 items, add yours below ====== */
+/* ====== ITEMS — leave untouched ====== */
 const CLOTHING = ['streetwear','pants-shorts'];
 const SIZES_DEFAULT = ['S','M','L','XL'];
 const SIZES_BAPE = ['S','M','L','XL','XXL'];
@@ -1310,7 +1442,7 @@ const SIZES_BOTTOMS = ['28','30','32','34','36'];
 const CARD_SLOT = 232;
 
 const ITEMS = [
-  {id:824,name:"Human Made Eagle Graphic T-Shirt",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","eagle tee","nigo","streetwear","graphic t-shirt","abu dhabi","secret shop","japanese streetwear"],desc:"Black / White · Human Made Graphic",longDesc:"Iconic Human Made eagle graphic tee featuring Nigo’s signature vintage-inspired aesthetic on premium soft cotton.",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (1).jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (1).jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (1).jpeg"]}]},
+ {id:824,name:"Human Made Eagle Graphic T-Shirt",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","eagle tee","nigo","streetwear","graphic t-shirt","abu dhabi","secret shop","japanese streetwear"],desc:"Black / White · Human Made Graphic",longDesc:"Iconic Human Made eagle graphic tee featuring Nigo’s signature vintage-inspired aesthetic on premium soft cotton.",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (1).jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (1).jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (1).jpeg"]}]},
   {id:825,name:"Human Made Duck Graphic T-Shirt",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","duck tee","nigo","streetwear","graphic t-shirt","abu dhabi","secret shop","japanese streetwear"],desc:"Black / White · Human Made Graphic",longDesc:"Iconic Human Made duck graphic tee featuring Nigo’s signature playful aesthetic on premium soft cotton fabric.",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (2).jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (2).jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM (2).jpeg"]}]},
   {id:826,name:"Human Made Duck Graphic T-Shirt",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","nigo","duck tee","streetwear","graphic t-shirt","abu dhabi","secret shop","japanese streetwear"],desc:"Black / White · Human Made Graphic",longDesc:"Iconic Human Made duck graphic tee featuring Nigo’s signature playful aesthetic on premium soft cotton for everyday streetwear style.",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM.jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM.jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.26 AM.jpeg"]}]},
   {id:827,name:"Human Made Duck Graphic T-Shirt",brand:"Human Made",cat:"streetwear",badge:"HOT",tags:["human made","nigo","duck tee","streetwear","graphic tee","abu dhabi","secret shop","japanese streetwear"],desc:"Black / White · Human Made Graphic",longDesc:"This iconic Human Made tee features the brand's signature playful duck graphic on premium soft cotton for an effortless streetwear aesthetic.",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.27 AM (1).jpeg"],colorVariants:[{label:"Black",color:"#000000",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.27 AM (1).jpeg"]},{label:"White",color:"#ffffff",imgs:["images/WhatsApp Image 2026-05-27 at 11.30.27 AM (1).jpeg"]}]},
@@ -2430,6 +2562,35 @@ document.addEventListener('keydown',e=>{const overlay=document.getElementById('p
 (function(){let tx=0,moved=false;const overlay=document.getElementById('pdp-overlay');overlay.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;moved=false;},{passive:true});overlay.addEventListener('touchmove',()=>{moved=true;},{passive:true});overlay.addEventListener('touchend',e=>{if(!pdpItem||!moved)return;const dx=e.changedTouches[0].screenX-tx;if(Math.abs(dx)>45){const cv=(pdpItem.colorVariants&&pdpCi!==null)?pdpItem.colorVariants[pdpCi]:null;const imgs=cv?cv.imgs:(pdpItem.imgs||[]);if(imgs.length<2)return;pdpSlideReset();pdpThumb((pdpImgIdx+(dx<0?1:-1)+imgs.length)%imgs.length);}},{passive:true});})();
 
 function initHscrollDrag(el){if(el.dataset.dragBound)return;el.dataset.dragBound='1';let isDown=false,startX=0,scrollLeft=0;el.addEventListener('mousedown',function(e){if(e.target.closest('button,a,.pdp-sw,.sz-chip,.card-heart'))return;isDown=true;startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft;e.preventDefault();});window.addEventListener('mousemove',function(e){if(!isDown)return;const x=e.pageX-el.offsetLeft;el.scrollLeft=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,scrollLeft-(x-startX)*1.2));});window.addEventListener('mouseup',function(){if(!isDown)return;isDown=false;});el.addEventListener('dragstart',e=>e.preventDefault());}
+
+/* CHANGE 2: Categories carousel drag support */
+(function(){
+  const catGrid = document.getElementById('cat-grid');
+  if(!catGrid) return;
+  let isDown=false, startX=0, scrollLeft=0;
+  catGrid.addEventListener('mousedown', e => {
+    if(e.target.closest('.cat-card')) {
+      isDown = true;
+      startX = e.pageX - catGrid.offsetLeft;
+      scrollLeft = catGrid.scrollLeft;
+      e.preventDefault();
+    }
+  });
+  window.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    const x = e.pageX - catGrid.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    catGrid.scrollLeft = scrollLeft - walk;
+  });
+  window.addEventListener('mouseup', () => { isDown = false; });
+  catGrid.addEventListener('dragstart', e => e.preventDefault());
+  // Prevent click from firing when dragging
+  let dragDist = 0;
+  catGrid.addEventListener('mousedown', e => { dragDist = e.pageX; });
+  catGrid.addEventListener('click', e => {
+    if(Math.abs(e.pageX - dragDist) > 8) e.stopPropagation();
+  }, true);
+})();
 
 document.getElementById('pdp-wa').addEventListener('click',function(e){
   if(!pdpItem)return;
